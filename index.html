@@ -1,345 +1,305 @@
-
-<!DOCTYPE html><html lang="de">
+<!DOCTYPE html>
+<html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ArtStyle Studio</title>  <style>
+
+  <title>ArtStyle Studio – Dirk Eckert</title>
+
+  <style>
     * {
       box-sizing: border-box;
     }
 
     body {
       margin: 0;
-      min-height: 100vh;
-      font-family: Arial, sans-serif;
-      background: #0b0b12;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #090b12;
       color: white;
     }
 
     header {
-      padding: 28px 20px 20px;
       text-align: center;
-      background: linear-gradient(135deg, #1c1033, #111827);
-      border-bottom: 1px solid #303040;
+      padding: 50px 20px 35px;
+      background: linear-gradient(135deg, #16002b, #111827, #31004f);
+      border-bottom: 1px solid #36324a;
     }
 
     .logo {
-      font-size: 48px;
-      margin-bottom: 8px;
+      font-size: 55px;
+      margin-bottom: 10px;
     }
 
     h1 {
       margin: 0;
-      font-size: 30px;
+      font-size: 42px;
+    }
+
+    .name {
+      color: #d8b4fe;
+      font-size: 20px;
+      margin-top: 12px;
+      font-weight: bold;
     }
 
     .subtitle {
       color: #a9a9c0;
-      margin-top: 8px;
+      margin-top: 15px;
+      font-size: 18px;
     }
 
     main {
-      max-width: 700px;
+      max-width: 1000px;
       margin: auto;
-      padding: 20px;
+      padding: 25px 18px 60px;
     }
 
     .hero {
-      background: linear-gradient(135deg, #6d28d9, #db2777);
-      border-radius: 24px;
-      padding: 24px;
-      margin-bottom: 24px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+      background: linear-gradient(135deg, #5b087c, #9d004f);
+      border-radius: 28px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.45);
     }
 
     .hero h2 {
       margin-top: 0;
+      font-size: 30px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .section-title {
+      font-size: 26px;
+      margin: 35px 0 18px;
+      color: #f5f3ff;
     }
 
     .categories {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
     }
 
     .card {
-      background: #151520;
-      border: 1px solid #29293a;
-      border-radius: 20px;
-      padding: 18px;
+      background: #121520;
+      border: 1px solid #303547;
+      border-radius: 22px;
+      padding: 22px;
+      min-height: 190px;
       cursor: pointer;
-      transition: 0.2s;
+      transition: 0.25s;
     }
 
-    .card:hover,
-    .card.active {
-      transform: scale(1.02);
-      border-color: #ec4899;
-      box-shadow: 0 0 20px rgba(236,72,153,0.2);
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: #c084fc;
+      box-shadow: 0 10px 30px rgba(192,132,252,0.18);
     }
 
     .icon {
-      font-size: 34px;
-      margin-bottom: 10px;
+      font-size: 42px;
+      margin-bottom: 14px;
     }
 
     .card h3 {
-      margin: 0 0 6px;
-      font-size: 17px;
+      margin: 0 0 10px;
+      font-size: 21px;
     }
 
     .card p {
       margin: 0;
-      color: #a8a8b8;
-      font-size: 13px;
-    }
-
-    .prompt-box {
-      margin-top: 28px;
-      background: #151520;
-      border-radius: 20px;
-      padding: 20px;
-      border: 1px solid #29293a;
-    }
-
-    .prompt-box h2 {
-      margin-top: 0;
-    }
-
-    label {
-      display: block;
-      margin-top: 16px;
-      margin-bottom: 8px;
-      font-weight: bold;
-      color: #ddd;
-    }
-
-    textarea,
-    select {
-      width: 100%;
-      padding: 14px;
-      border-radius: 14px;
-      border: 1px solid #44445a;
-      background: #0d0d15;
-      color: white;
-      font-size: 15px;
-    }
-
-    textarea {
-      min-height: 140px;
-      resize: vertical;
-    }
-
-    .options {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    button {
-      width: 100%;
-      margin-top: 16px;
-      padding: 16px;
-      border: none;
-      border-radius: 14px;
-      background: linear-gradient(90deg, #7c3aed, #ec4899);
-      color: white;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .copy-btn {
-      background: #252536;
-      margin-top: 10px;
-    }
-
-    #output {
-      display: none;
-      margin-top: 18px;
-      padding: 16px;
-      background: #0d0d15;
-      border-radius: 14px;
-      border: 1px solid #44445a;
-      white-space: pre-wrap;
-      color: #ddd;
+      color: #a9a9c0;
       line-height: 1.5;
     }
 
-    .selected-style {
-      margin-top: 14px;
-      padding: 12px;
-      border-radius: 12px;
-      background: #0d0d15;
-      color: #c4b5fd;
-      text-align: center;
+    .adult-note {
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: 18px;
+      background: #1a1020;
+      border: 1px solid #7c2d5b;
+      color: #e9c3da;
+      line-height: 1.5;
     }
 
     footer {
       text-align: center;
-      padding: 30px;
-      color: #777;
-      font-size: 12px;
+      padding: 30px 15px;
+      color: #77788a;
+      border-top: 1px solid #242836;
     }
 
-    @media (max-width: 500px) {
-      .categories,
-      .options {
-        grid-template-columns: 1fr;
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 32px;
+      }
+
+      .hero h2 {
+        font-size: 25px;
+      }
+
+      header {
+        padding: 35px 15px 28px;
       }
     }
-  </style></head><body><header>
+  </style>
+</head>
+
+<body>
+
+<header>
   <div class="logo">🎨✨</div>
+
   <h1>ArtStyle Studio</h1>
-  <div class="subtitle">Create • Explore • Transform</div>
-</header><main>  <section class="hero">
-    <h2>✨ Dein kreatives Prompt Studio</h2>
+
+  <div class="name">Dirk Eckert</div>
+
+  <div class="subtitle">
+    Dein persönliches Creative Prompt Studio
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <h2>✨ Willkommen in deinem Prompt Studio</h2>
+
     <p>
-      Wähle einen Stil, beschreibe deine Bildidee und erstelle einen
-      detaillierten Prompt für deine kreative Bildgenerierung.
+      Erstelle kreative und detaillierte Bild-Prompts für ChatGPT.
+      Wähle Kunststile, Portraits, Landschaften, Kleidung,
+      Körperhaltungen und viele weitere kreative Bereiche.
     </p>
-  </section>  <div class="categories"><div class="card" onclick="selectStyle('Surreal & Fantasy', this)">
-  <div class="icon">🌀</div>
-  <h3>Surreal & Fantasy</h3>
-  <p>Traumwelten, surreale Landschaften und fantastische Szenen.</p>
-</div>
+  </section>
 
-<div class="card" onclick="selectStyle('Portrait Art', this)">
-  <div class="icon">🧑‍🎨</div>
-  <h3>Portrait Art</h3>
-  <p>Künstlerische Gesichter, Beauty und charakterstarke Portraits.</p>
-</div>
+  <h2 class="section-title">🎨 Deine kreativen Bereiche</h2>
 
-<div class="card" onclick="selectStyle('Architecture & Worlds', this)">
-  <div class="icon">🏛️</div>
-  <h3>Architecture & Worlds</h3>
-  <p>Surreale Städte, Gebäude und fantastische Welten.</p>
-</div>
+  <div class="categories">
 
-<div class="card" onclick="selectStyle('Nature & Miniature Worlds', this)">
-  <div class="icon">🌿</div>
-  <h3>Nature Worlds</h3>
-  <p>Miniatur-Landschaften, Wälder und magische Natur.</p>
-</div>
+    <div class="card">
+      <div class="icon">👩</div>
+      <h3>Portrait Frau</h3>
+      <p>
+        Auswahl von Haaren, Haarfarben, Schminke,
+        Gesichtsausdruck und Körperhaltung.
+      </p>
+    </div>
 
-<div class="card" onclick="selectStyle('Abstract Texture Art', this)">
-  <div class="icon">🎭</div>
-  <h3>Abstract Texture</h3>
-  <p>Skulpturale Formen, Farben und dreidimensionale Texturen.</p>
-</div>
+    <div class="card">
+      <div class="icon">👨</div>
+      <h3>Portrait Mann</h3>
+      <p>
+        Männerportraits mit Frisuren, Bart,
+        Kleidung und verschiedenen Posen.
+      </p>
+    </div>
 
-<div class="card" onclick="selectStyle('Style Mixer', this)">
-  <div class="icon">🔥</div>
-  <h3>Style Mixer</h3>
-  <p>Kombiniere verschiedene Kunststile miteinander.</p>
-</div>
+    <div class="card">
+      <div class="icon">💇</div>
+      <h3>Haare & Styling</h3>
+      <p>
+        Frisuren, Haarfarben, Make-up,
+        Beauty-Styles und kreative Looks.
+      </p>
+    </div>
 
-  </div>  <section class="prompt-box"><h2>✍️ Prompt Generator</h2>
+    <div class="card">
+      <div class="icon">🧍</div>
+      <h3>Posen</h3>
+      <p>
+        Verschiedene erlaubte Körperhaltungen
+        und professionelle Bild-Posen.
+      </p>
+    </div>
 
-<div class="selected-style" id="selectedStyle">
-  🎨 Aktueller Stil: Creative Art
-</div>
+    <div class="card">
+      <div class="icon">👗</div>
+      <h3>Kleidung & Fashion</h3>
+      <p>
+        Elegante Kleidung, Casual Looks,
+        Fashion, Business und kreative Outfits.
+      </p>
+    </div>
 
-<label for="idea">💡 Deine Bildidee</label>
-<textarea id="idea"
-  placeholder="Beschreibe hier deine Bildidee..."></textarea>
+    <div class="card">
+      <div class="icon">🗾</div>
+      <h3>Japan Landschaften</h3>
+      <p>
+        Kyoto, Berge, Tempel, Bambuswälder,
+        Städte und japanische Traumlandschaften.
+      </p>
+    </div>
 
-<div class="options">
+    <div class="card">
+      <div class="icon">🌌</div>
+      <h3>Surreal & Fantasy</h3>
+      <p>
+        Fantastische Welten, surreale Szenen
+        und außergewöhnliche Bildideen.
+      </p>
+    </div>
 
-  <div>
-    <label for="ratio">📐 Seitenverhältnis</label>
-    <select id="ratio">
-      <option value="9:16">9:16 – Hochformat</option>
-      <option value="16:9">16:9 – Breitbild</option>
-      <option value="1:1">1:1 – Quadrat</option>
-      <option value="4:5">4:5 – Portrait</option>
-      <option value="3:4">3:4 – Klassisch</option>
-    </select>
+    <div class="card">
+      <div class="icon">🖼️</div>
+      <h3>KI Kunststile</h3>
+      <p>
+        Verschiedene kreative Stile und
+        Prompt-Richtungen für ChatGPT.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="icon">📸</div>
+      <h3>Fotorealismus</h3>
+      <p>
+        Kamera, Objektiv, Licht,
+        Hautstruktur und professionelle Fotografie.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🎬</div>
+      <h3>Cinematic</h3>
+      <p>
+        Filmische Szenen, dramatisches Licht
+        und professionelle Kino-Atmosphäre.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🧠</div>
+      <h3>Master Prompt Studio</h3>
+      <p>
+        Kombiniere alle Elemente zu einem
+        detaillierten und individuellen Master Prompt.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🔞</div>
+      <h3>18+ Bereich</h3>
+      <p>
+        Ein separater Bereich für kreative,
+        altersgerechte Inhalte im erlaubten Rahmen.
+      </p>
+    </div>
+
   </div>
 
-  <div>
-    <label for="quality">✨ Qualität & Look</label>
-    <select id="quality">
-      <option value="Ultra Photorealistic">Ultra Photorealistic</option>
-      <option value="Cinematic">Cinematic</option>
-      <option value="Ultra Detailed">Ultra Detailed</option>
-      <option value="Editorial Photography">Editorial Photography</option>
-      <option value="Fine Art">Fine Art</option>
-      <option value="Digital Artwork">Digital Artwork</option>
-    </select>
+  <div class="adult-note">
+    🔞 <strong>Hinweis:</strong> Der 18+-Bereich wird später separat
+    aufgebaut und berücksichtigt die jeweils erlaubten Inhalte und
+    Regeln der verwendeten KI-Plattform.
   </div>
 
-</div>
+</main>
 
-<button onclick="createPrompt()">✨ PROMPT ERSTELLEN</button>
+<footer>
+  © 2026 Dirk Eckert – ArtStyle Studio
+</footer>
 
-<div id="output"></div>
-
-<button id="copyButton" class="copy-btn"
-  onclick="copyPrompt()" style="display:none;">
-  📋 PROMPT KOPIEREN
-</button>
-
-  </section></main><footer>
-  ArtStyle Studio © 2026
-</footer><script>
-
-let selectedStyle = "Creative Art";
-
-function selectStyle(style, element) {
-
-  selectedStyle = style;
-
-  document.querySelectorAll(".card").forEach(card => {
-    card.classList.remove("active");
-  });
-
-  element.classList.add("active");
-
-  document.getElementById("selectedStyle").textContent =
-    "🎨 Aktueller Stil: " + style;
-
-}
-
-function createPrompt() {
-
-  const idea = document.getElementById("idea").value.trim();
-  const ratio = document.getElementById("ratio").value;
-  const quality = document.getElementById("quality").value;
-
-  if (!idea) {
-    alert("Bitte zuerst deine Bildidee eingeben.");
-    return;
-  }
-
-  const prompt =
-    "STYLE: " + selectedStyle + "\n\n" +
-    "CONCEPT: " + idea + "\n\n" +
-    "VISUAL STYLE: " + quality + "\n" +
-    "ASPECT RATIO: " + ratio + "\n\n" +
-    "Create a highly detailed and visually compelling composition. " +
-    "Professional composition, cinematic lighting, realistic textures, " +
-    "atmospheric depth, strong visual storytelling, refined details, " +
-    "high quality, carefully balanced composition.";
-
-  const output = document.getElementById("output");
-
-  output.style.display = "block";
-  output.textContent = prompt;
-
-  document.getElementById("copyButton").style.display = "block";
-
-}
-
-function copyPrompt() {
-
-  const prompt = document.getElementById("output").textContent;
-
-  navigator.clipboard.writeText(prompt).then(() => {
-    alert("✅ Prompt wurde in die Zwischenablage kopiert!");
-  });
-
-}
-
-</script></body>
+</body>
 </html>

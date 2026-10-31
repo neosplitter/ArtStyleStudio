@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ArtStyle Studio</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: #0b0b12;
+      color: white;
+    }
+
+    header {
+      padding: 28px 20px 20px;
+      text-align: center;
+      background: linear-gradient(135deg, #1c1033, #111827);
+      border-bottom: 1px solid #303040;
+    }
+
+    .logo {
+      font-size: 48px;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 30px;
+    }
+
+    .subtitle {
+      color: #a9a9c0;
+      margin-top: 8px;
+    }
+
+    main {
+      max-width: 700px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #6d28d9, #db2777);
+      border-radius: 24px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+    }
+
+    .hero h2 {
+      margin-top: 0;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .card {
+      background: #151520;
+      border: 1px solid #29293a;
+      border-radius: 20px;
+      padding: 18px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .card:hover {
+      transform: scale(1.02);
+      border-color: #8b5cf6;
+    }
+
+    .icon {
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
+
+    .card h3 {
+      margin: 0 0 6px;
+      font-size: 17px;
+    }
+
+    .card p {
+      margin: 0;
+      color: #a8a8b8;
+      font-size: 13px;
+    }
+
+    .prompt-box {
+      margin-top: 24px;
+      background: #151520;
+      border-radius: 20px;
+      padding: 18px;
+      border: 1px solid #29293a;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 140px;
+      margin-top: 12px;
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid #44445a;
+      background: #0d0d15;
+      color: white;
+      font-size: 15px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 12px;
+      padding: 16px;
+      border: none;
+      border-radius: 14px;
+      background: linear-gradient(90deg, #7c3aed, #ec4899);
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    #output {
+      display: none;
+      margin-top: 16px;
+      padding: 16px;
+      background: #0d0d15;
+      border-radius: 14px;
+      border: 1px solid #44445a;
+      white-space: pre-wrap;
+      color: #ddd;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #777;
+      font-size: 12px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">🎨✨</div>
+  <h1>ArtStyle Studio</h1>
+  <div class="subtitle">Create • Explore • Transform</div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <h2>✨ Dein kreatives Prompt Studio</h2>
+    <p>
+      Entdecke außergewöhnliche Kunststile und verwandle deine Ideen
+      in detaillierte kreative Bild-Prompts.
+    </p>
+  </section>
+
+  <div class="categories">
+
+    <div class="card" onclick="selectStyle('Surreal & Fantasy')">
+      <div class="icon">🌀</div>
+      <h3>Surreal & Fantasy</h3>
+      <p>Traumwelten, surreale Landschaften und fantastische Szenen.</p>
+    </div>
+
+    <div class="card" onclick="selectStyle('Portrait Art')">
+      <div class="icon">🧑‍🎨</div>
+      <h3>Portrait Art</h3>
+      <p>Künstlerische Gesichter, Fantasy-Portraits und Beauty-Art.</p>
+    </div>
+
+    <div class="card" onclick="selectStyle('Architecture & Worlds')">
+      <div class="icon">🏛️</div>
+      <h3>Architecture & Worlds</h3>
+      <p>Surreale Städte, Gebäude und unmögliche Welten.</p>
+    </div>
+
+    <div class="card" onclick="selectStyle('Nature & Miniature Worlds')">
+      <div class="icon">🌿</div>
+      <h3>Nature Worlds</h3>
+      <p>Miniatur-Landschaften, Wälder und magische Natur.</p>
+    </div>
+
+    <div class="card" onclick="selectStyle('Abstract Texture Art')">
+      <div class="icon">🎭</div>
+      <h3>Abstract Texture</h3>
+      <p>Skulpturale Formen, Farben und dreidimensionale Texturen.</p>
+    </div>
+
+    <div class="card" onclick="selectStyle('Style Mixer')">
+      <div class="icon">🔥</div>
+      <h3>Style Mixer</h3>
+      <p>Kombiniere mehrere Kunststile miteinander.</p>
+    </div>
+
+  </div>
+
+  <section class="prompt-box">
+    <h2>✍️ Prompt Creator</h2>
+
+    <textarea id="idea"
+      placeholder="Beschreibe hier deine Bildidee..."></textarea>
+
+    <button onclick="createPrompt()">✨ Prompt erstellen</button>
+
+    <div id="output"></div>
+  </section>
+
+</main>
+
+<footer>
+  ArtStyle Studio © 2026
+</footer>
+
+<script>
+
+let selectedStyle = "Creative Art";
+
+function selectStyle(style) {
+  selectedStyle = style;
+  alert("Stil ausgewählt: " + style);
+}
+
+function createPrompt() {
+
+  const idea = document.getElementById("idea").value;
+
+  if (!idea.trim()) {
+    alert("Bitte zuerst eine Bildidee eingeben.");
+    return;
+  }
+
+  const prompt =
+    "STYLE: " + selectedStyle + "\n\n" +
+    "CONCEPT: " + idea + "\n\n" +
+    "Create a highly detailed artistic composition with cinematic lighting, " +
+    "strong visual storytelling, rich textures, atmospheric depth, " +
+    "professional composition, ultra-detailed artwork, high quality.";
+
+  const output = document.getElementById("output");
+
+  output.style.display = "block";
+  output.textContent = prompt;
+}
+
+</script>
+
+</body>
+</html>

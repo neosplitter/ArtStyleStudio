@@ -1,0 +1,271 @@
+<!DOCTYPE html><html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Portrait Frau – ArtStyle Studio | Dirk Eckert</title><style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #090b12;
+    color: #ffffff;
+}
+
+header {
+    text-align: center;
+    padding: 35px 20px;
+    background: linear-gradient(135deg, #16002b, #111827, #310041);
+    border-bottom: 1px solid #5b2a70;
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+}
+
+h1 {
+    margin: 0;
+    font-size: 38px;
+}
+
+.name {
+    color: #d8b4fe;
+    font-size: 20px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.subtitle {
+    color: #a9a9c0;
+    margin-top: 15px;
+}
+
+main {
+    max-width: 900px;
+    margin: auto;
+    padding: 25px 18px 60px;
+}
+
+.hero {
+    background: linear-gradient(135deg, #4c0068, #85002f);
+    border-radius: 24px;
+    padding: 28px;
+    margin-bottom: 25px;
+}
+
+.hero h2 {
+    margin-top: 0;
+    font-size: 30px;
+}
+
+.section {
+    background: #151520;
+    border: 1px solid #303040;
+    border-radius: 20px;
+    padding: 22px;
+    margin-bottom: 20px;
+}
+
+.section h3 {
+    margin-top: 0;
+    color: #e9d5ff;
+}
+
+.options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+button {
+    background: #20202e;
+    color: white;
+    border: 1px solid #4a4a60;
+    border-radius: 14px;
+    padding: 15px 10px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+button:hover,
+button.active {
+    background: linear-gradient(135deg, #7c3aed, #db2777);
+    border-color: #d8b4fe;
+}
+
+.create-button {
+    width: 100%;
+    background: linear-gradient(135deg, #7c3aed, #db2777);
+    font-size: 20px;
+    font-weight: bold;
+    padding: 18px;
+    margin-top: 10px;
+}
+
+.result {
+    margin-top: 25px;
+    background: #101018;
+    border: 1px solid #7c3aed;
+    border-radius: 18px;
+    padding: 20px;
+}
+
+textarea {
+    width: 100%;
+    min-height: 220px;
+    background: #08080d;
+    color: white;
+    border: 1px solid #4a4a60;
+    border-radius: 12px;
+    padding: 15px;
+    font-size: 15px;
+    margin-top: 12px;
+}
+
+.back {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #d8b4fe;
+    text-decoration: none;
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 30px;
+    }
+
+    .options {
+        grid-template-columns: 1fr;
+    }
+}
+</style></head><body><header>
+    <a href="index.html">
+        <div style="font-size:45px;">🎨✨</div>
+        <h1>ArtStyle Studio</h1>
+    </a><div class="name">Dirk Eckert</div>
+
+<div class="subtitle">
+    Portrait Prompt Studio – Frau
+</div>
+
+</header><main><a class="back" href="index.html">← Zurück zum Prompt Studio</a>
+
+<div class="hero">
+    <h2>👩 Portrait Frau</h2><p>
+    Wähle Schritt für Schritt Frisur, Haarfarbe, Make-up,
+    Körperhaltung und Kleidung aus. Anschließend erstellt
+    das Studio einen detaillierten Prompt für ChatGPT.
+</p>
+
+</div><div class="section">
+    <h3>💇 Frisur auswählen</h3><div class="options" id="hairStyle">
+    <button data-value="kurzem Pixie Cut">Kurzer Pixie Cut</button>
+    <button data-value="kurzem Bob">Kurzer Bob</button>
+    <button data-value="langen glatten Haaren">Lange glatte Haare</button>
+    <button data-value="langen lockigen Haaren">Lange Locken</button>
+    <button data-value="eleganter Hochsteckfrisur">Hochsteckfrisur</button>
+    <button data-value="Pferdeschwanz">Pferdeschwanz</button>
+</div>
+
+</div><div class="section">
+    <h3>🎨 Haarfarbe auswählen</h3><div class="options" id="hairColor">
+    <button data-value="platinblonden Haaren">Platinblond</button>
+    <button data-value="blonden Haaren">Blond</button>
+    <button data-value="braunen Haaren">Braun</button>
+    <button data-value="schwarzen Haaren">Schwarz</button>
+    <button data-value="roten Haaren">Rot</button>
+    <button data-value="pastellfarbenen Haaren">Fantasy / Pastell</button>
+</div>
+
+</div><div class="section">
+    <h3>💄 Make-up auswählen</h3><div class="options" id="makeup">
+    <button data-value="natürlichem dezentem Make-up">Natürlich</button>
+    <button data-value="elegantem Abend-Make-up">Abend-Make-up</button>
+    <button data-value="dramatischem Smokey-Eye-Make-up">Smokey Eyes</button>
+    <button data-value="glamourösem Beauty-Make-up">Glamour</button>
+    <button data-value="minimalistischem No-Make-up-Look">No-Make-up Look</button>
+    <button data-value="kreativem künstlerischem Make-up">Künstlerisch</button>
+</div>
+
+</div><div class="section">
+    <h3>🧍 Körperhaltung auswählen</h3><div class="options" id="pose">
+    <button data-value="elegant stehend und direkt in die Kamera blickend">Elegant stehend</button>
+    <button data-value="sitzend in einer entspannten natürlichen Pose">Sitzend</button>
+    <button data-value="leicht seitlich stehend mit Blick zur Kamera">Seitliche Pose</button>
+    <button data-value="selbstbewusst mit einer Hand an der Hüfte">Selbstbewusst</button>
+    <button data-value="natürlich gehend in einer dynamischen Pose">Gehend</button>
+    <button data-value="entspannt mit natürlicher Körperhaltung">Natürlich</button>
+</div>
+
+</div><div class="section">
+    <h3>👗 Kleidung auswählen</h3><div class="options" id="clothing">
+    <button data-value="einem eleganten schwarzen Kleid">Elegantes Kleid</button>
+    <button data-value="einem modernen Business-Outfit">Business</button>
+    <button data-value="einem stilvollen Casual-Chic-Outfit">Casual Chic</button>
+    <button data-value="einem glamourösen Abendkleid">Abendkleid</button>
+    <button data-value="einem modernen Fashion-Outfit">High Fashion</button>
+    <button data-value="einem stilvollen klassischen Outfit">Klassisch</button>
+</div>
+
+</div><div class="section">
+    <h3>📸 Bildstil auswählen</h3><div class="options" id="style">
+    <button data-value="ultra-realistische professionelle Fotografie">Ultra-realistisch</button>
+    <button data-value="cinematische Fotografie mit dramatischem Licht">Cinematic</button>
+    <button data-value="High-Fashion-Editorial-Fotografie">Vogue / Fashion</button>
+    <button data-value="professionelle Beauty-Fotografie">Beauty</button>
+    <button data-value="künstlerische Fine-Art-Fotografie">Fine Art</button>
+    <button data-value="moderne luxuriöse Studiofotografie">Luxury Studio</button>
+</div>
+
+</div><button class="create-button" onclick="createPrompt()">
+✨ MEINEN PROMPT ERSTELLEN
+</button><div class="result">
+    <h3>📝 Dein ChatGPT Prompt</h3><textarea id="promptResult" readonly>
+
+Wähle oben deine Optionen aus und drücke anschließend „MEINEN PROMPT ERSTELLEN“.
+</textarea>
+
+</div></main><script>
+let selections = {
+    hairStyle: "",
+    hairColor: "",
+    makeup: "",
+    pose: "",
+    clothing: "",
+    style: ""
+};
+
+document.querySelectorAll(".options button").forEach(button => {
+    button.addEventListener("click", function() {
+
+        const group = this.parentElement.id;
+
+        this.parentElement
+            .querySelectorAll("button")
+            .forEach(btn => btn.classList.remove("active"));
+
+        this.classList.add("active");
+
+        selections[group] = this.dataset.value;
+    });
+});
+
+function createPrompt() {
+
+    const missing = Object.values(selections).some(value => value === "");
+
+    if (missing) {
+        document.getElementById("promptResult").value =
+        "Bitte wähle zuerst in allen Bereichen eine Option aus.";
+        return;
+    }
+
+    const prompt =
+`Ultra-detailed professional portrait of an adult woman with ${selections.hairStyle} and ${selections.hairColor}, wearing ${selections.makeup}, ${selections.pose}, dressed in ${selections.clothing}. Style: ${selections.style}. Natural realistic facial features, realistic skin texture, visible pores, authentic details, balanced proportions, professional composition, detailed lighting, high-resolution photography, sharp focus, realistic colors, photorealistic, highly detailed, no artificial plastic skin, no watermark, no text.`;
+
+    document.getElementById("promptResult").value = prompt;
+}
+</script></body>
+</html>

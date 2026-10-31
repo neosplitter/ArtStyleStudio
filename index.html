@@ -1,28 +1,42 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>ArtStyle Studio – Dirk Eckert</title>
+  <title>ArtStyle Studio - Dirk Eckert</title>
 
   <style>
     * {
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
       background: #090b12;
-      color: white;
+      color: #ffffff;
     }
+
+    /* =========================
+       HEADER
+    ========================= */
 
     header {
       text-align: center;
       padding: 50px 20px 35px;
-      background: linear-gradient(135deg, #16002b, #111827, #31004f);
-      border-bottom: 1px solid #36324a;
+      background: linear-gradient(
+        135deg,
+        #16002b,
+        #111827,
+        #31004f
+      );
+      border-bottom: 1px solid #4a2a5f;
     }
 
     .logo {
@@ -37,7 +51,7 @@
 
     .name {
       color: #d8b4fe;
-      font-size: 20px;
+      font-size: 22px;
       margin-top: 12px;
       font-weight: bold;
     }
@@ -48,56 +62,84 @@
       font-size: 18px;
     }
 
+    /* =========================
+       HAUPTBEREICH
+    ========================= */
+
     main {
-      max-width: 1000px;
+      max-width: 1100px;
       margin: auto;
-      padding: 25px 18px 60px;
+      padding: 30px 18px 70px;
     }
 
+    /* =========================
+       WILLKOMMEN
+    ========================= */
+
     .hero {
-      background: linear-gradient(135deg, #5b087c, #9d004f);
+      background: linear-gradient(
+        135deg,
+        #5b087c,
+        #55002d,
+        #8b002c
+      );
       border-radius: 28px;
-      padding: 30px;
-      margin-bottom: 30px;
+      padding: 32px;
+      margin-bottom: 35px;
       box-shadow: 0 12px 40px rgba(0,0,0,0.45);
     }
 
     .hero h2 {
       margin-top: 0;
-      font-size: 30px;
+      font-size: 34px;
     }
 
     .hero p {
-      font-size: 18px;
+      font-size: 20px;
       line-height: 1.6;
+      margin-bottom: 0;
     }
 
+    /* =========================
+       SEKTION
+    ========================= */
+
     .section-title {
-      font-size: 26px;
-      margin: 35px 0 18px;
-      color: #f5f3ff;
+      font-size: 28px;
+      margin: 30px 0 20px;
     }
+
+    /* =========================
+       KATEGORIEN
+    ========================= */
 
     .categories {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
     }
 
     .card {
-      background: #121520;
-      border: 1px solid #303547;
+      background: #11131d;
+      border: 1px solid #36394a;
       border-radius: 22px;
       padding: 22px;
-      min-height: 190px;
-      cursor: pointer;
+      min-height: 230px;
       transition: 0.25s;
+      cursor: pointer;
     }
 
     .card:hover {
       transform: translateY(-5px);
-      border-color: #c084fc;
-      box-shadow: 0 10px 30px rgba(192,132,252,0.18);
+      border-color: #b86cff;
+      box-shadow: 0 10px 30px rgba(120,40,180,0.25);
+    }
+
+    .card-link {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+      height: 100%;
     }
 
     .icon {
@@ -106,200 +148,487 @@
     }
 
     .card h3 {
-      margin: 0 0 10px;
-      font-size: 21px;
+      margin: 0 0 12px;
+      font-size: 24px;
     }
 
     .card p {
       margin: 0;
-      color: #a9a9c0;
+      color: #aeb0c0;
       line-height: 1.5;
+      font-size: 17px;
     }
 
-    .adult-note {
-      margin-top: 18px;
-      padding: 18px;
-      border-radius: 18px;
-      background: #1a1020;
-      border: 1px solid #7c2d5b;
-      color: #e9c3da;
-      line-height: 1.5;
-    }
+    /* =========================
+       FOOTER
+    ========================= */
 
     footer {
       text-align: center;
       padding: 30px 15px;
-      color: #77788a;
-      border-top: 1px solid #242836;
+      color: #8f91a5;
+      border-top: 1px solid #252838;
+      background: #0b0d14;
     }
 
-    @media (max-width: 600px) {
+    /* =========================
+       TABLET
+    ========================= */
+
+    @media (max-width: 850px) {
+
+      .categories {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+    }
+
+    /* =========================
+       SMARTPHONE
+    ========================= */
+
+    @media (max-width: 550px) {
+
+      header {
+        padding: 35px 18px 28px;
+      }
+
+      .logo {
+        font-size: 48px;
+      }
+
       h1 {
-        font-size: 32px;
+        font-size: 34px;
+      }
+
+      .subtitle {
+        font-size: 17px;
+      }
+
+      .hero {
+        padding: 25px;
       }
 
       .hero h2 {
-        font-size: 25px;
+        font-size: 30px;
       }
 
-      header {
-        padding: 35px 15px 28px;
+      .hero p {
+        font-size: 18px;
       }
+
+      .categories {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+      }
+
+      .card {
+        padding: 18px;
+        min-height: 220px;
+      }
+
+      .card h3 {
+        font-size: 21px;
+      }
+
+      .card p {
+        font-size: 16px;
+      }
+
+      .icon {
+        font-size: 38px;
+      }
+
     }
+
   </style>
 </head>
 
 <body>
 
-<header>
-  <div class="logo">🎨✨</div>
+  <!-- =========================
+       HEADER
+  ========================= -->
 
-  <h1>ArtStyle Studio</h1>
+  <header>
 
-  <div class="name">Dirk Eckert</div>
+    <div class="logo">🎨✨</div>
 
-  <div class="subtitle">
-    Dein persönliches Creative Prompt Studio
-  </div>
-</header>
+    <h1>ArtStyle Studio</h1>
 
-<main>
+    <div class="name">Dirk Eckert</div>
 
-  <section class="hero">
-    <h2>✨ Willkommen in deinem Prompt Studio</h2>
-
-    <p>
-      Erstelle kreative und detaillierte Bild-Prompts für ChatGPT.
-      Wähle Kunststile, Portraits, Landschaften, Kleidung,
-      Körperhaltungen und viele weitere kreative Bereiche.
-    </p>
-  </section>
-
-  <h2 class="section-title">🎨 Deine kreativen Bereiche</h2>
-
-  <div class="categories">
-
-    <div class="card">
-      <div class="icon">👩</div>
-      <h3>Portrait Frau</h3>
-      <p>
-        Auswahl von Haaren, Haarfarben, Schminke,
-        Gesichtsausdruck und Körperhaltung.
-      </p>
+    <div class="subtitle">
+      Dein persönliches Creative Prompt Studio
     </div>
 
-    <div class="card">
-      <div class="icon">👨</div>
-      <h3>Portrait Mann</h3>
+  </header>
+
+
+  <!-- =========================
+       HAUPTINHALT
+  ========================= -->
+
+  <main>
+
+
+    <!-- WILLKOMMEN -->
+
+    <section class="hero">
+
+      <h2>✨ Willkommen in deinem Prompt Studio</h2>
+
       <p>
-        Männerportraits mit Frisuren, Bart,
-        Kleidung und verschiedenen Posen.
+        Erstelle kreative und detaillierte Bild-Prompts für ChatGPT.
+        Wähle Kunststile, Portraits, Landschaften, Kleidung,
+        Körperhaltungen und viele weitere kreative Bereiche.
       </p>
+
+    </section>
+
+
+    <!-- ÜBERSCHRIFT -->
+
+    <h2 class="section-title">
+      🎨 Deine kreativen Bereiche
+    </h2>
+
+
+    <!-- =========================
+         KATEGORIEN
+    ========================= -->
+
+    <div class="categories">
+
+
+      <!-- 1 PORTRAIT FRAU -->
+
+      <div class="card">
+
+        <a href="portrait-frau.html" class="card-link">
+
+          <div class="icon">👩</div>
+
+          <h3>Portrait Frau</h3>
+
+          <p>
+            Erstelle detaillierte Portrait-Prompts.
+            Wähle Frisur, Haarfarbe, Make-up,
+            Gesichtsausdruck, Körperhaltung und Kleidung.
+          </p>
+
+        </a>
+
+      </div>
+
+
+      <!-- 2 PORTRAIT MANN -->
+
+      <div class="card">
+
+        <div class="icon">👨</div>
+
+        <h3>Portrait Mann</h3>
+
+        <p>
+          Männerportraits mit Frisuren, Bart,
+          Gesichtsausdruck, Kleidung
+          und verschiedenen Körperhaltungen.
+        </p>
+
+      </div>
+
+
+      <!-- 3 JAPAN -->
+
+      <div class="card">
+
+        <div class="icon">🗾</div>
+
+        <h3>Japan Landschaften</h3>
+
+        <p>
+          Kyoto, Tokio, Fuji, Tempel,
+          Bambuswälder, Schreine,
+          Berge und traditionelle Landschaften.
+        </p>
+
+      </div>
+
+
+      <!-- 4 MIDJOURNEY STILE -->
+
+      <div class="card">
+
+        <div class="icon">🎭</div>
+
+        <h3>KI Kunststile</h3>
+
+        <p>
+          Verschiedene kreative Stilrichtungen
+          und Midjourney-inspirierte
+          Prompt-Stile für ChatGPT.
+        </p>
+
+      </div>
+
+
+      <!-- 5 FOTOREALISMUS -->
+
+      <div class="card">
+
+        <div class="icon">📸</div>
+
+        <h3>Fotorealismus</h3>
+
+        <p>
+          Kamera, Objektiv, Licht,
+          Hautstruktur und professionelle
+          Fotografie-Prompts.
+        </p>
+
+      </div>
+
+
+      <!-- 6 SURREAL -->
+
+      <div class="card">
+
+        <div class="icon">🌀</div>
+
+        <h3>Surreal & Fantasy</h3>
+
+        <p>
+          Fantastische Welten,
+          surreale Szenen und
+          außergewöhnliche Bildideen.
+        </p>
+
+      </div>
+
+
+      <!-- 7 MODE -->
+
+      <div class="card">
+
+        <div class="icon">👗</div>
+
+        <h3>Fashion & Kleidung</h3>
+
+        <p>
+          Elegante Mode, Business,
+          Casual Chic, Abendmode,
+          High Fashion und kreative Outfits.
+        </p>
+
+      </div>
+
+
+      <!-- 8 BEAUTY -->
+
+      <div class="card">
+
+        <div class="icon">💄</div>
+
+        <h3>Beauty & Make-up</h3>
+
+        <p>
+          Natürliches Make-up,
+          Glamour, Beauty-Fotografie,
+          Lippen, Augen und Hautdetails.
+        </p>
+
+      </div>
+
+
+      <!-- 9 FRISUREN -->
+
+      <div class="card">
+
+        <div class="icon">💇</div>
+
+        <h3>Frisuren & Haare</h3>
+
+        <p>
+          Kurze Haare, Pixie Cut,
+          Bob, lange Haare,
+          Haarfarben und kreative Stylings.
+        </p>
+
+      </div>
+
+
+      <!-- 10 KÖRPERHALTUNG -->
+
+      <div class="card">
+
+        <div class="icon">🧍</div>
+
+        <h3>Körperhaltungen</h3>
+
+        <p>
+          Stehend, sitzend, gehend,
+          Portrait-Posen und natürliche
+          sowie kreative Körperhaltungen.
+        </p>
+
+      </div>
+
+
+      <!-- 11 ERLAUBTE POSEN -->
+
+      <div class="card">
+
+        <div class="icon">🤸</div>
+
+        <h3>Posen & Kleidung</h3>
+
+        <p>
+          Verschiedene kreative,
+          ästhetische und für ChatGPT
+          geeignete Posen mit passender Kleidung.
+        </p>
+
+      </div>
+
+
+      <!-- 12 EROTIK / ÄSTHETIK -->
+
+      <div class="card">
+
+        <div class="icon">🔥</div>
+
+        <h3>Sinnliche Ästhetik</h3>
+
+        <p>
+          Stilvolle, erwachsene und ästhetische
+          Bildideen mit eleganter,
+          glamouröser und sinnlicher Atmosphäre.
+        </p>
+
+      </div>
+
+
+      <!-- 13 CINEMATIC -->
+
+      <div class="card">
+
+        <div class="icon">🎬</div>
+
+        <h3>Cinematic</h3>
+
+        <p>
+          Filmische Szenen,
+          dramatisches Licht,
+          Kino-Look und
+          professionelle Bildkomposition.
+        </p>
+
+      </div>
+
+
+      <!-- 14 FANTASY CHARAKTERE -->
+
+      <div class="card">
+
+        <div class="icon">🧙</div>
+
+        <h3>Fantasy Charaktere</h3>
+
+        <p>
+          Magische Figuren,
+          Krieger, Könige,
+          mystische Charaktere
+          und fantastische Welten.
+        </p>
+
+      </div>
+
+
+      <!-- 15 NATUR -->
+
+      <div class="card">
+
+        <div class="icon">🏔️</div>
+
+        <h3>Natur & Landschaft</h3>
+
+        <p>
+          Berge, Seen, Wälder,
+          Sonnenuntergänge,
+          Wasserfälle und spektakuläre Natur.
+        </p>
+
+      </div>
+
+
+      <!-- 16 ARCHITEKTUR -->
+
+      <div class="card">
+
+        <div class="icon">🏛️</div>
+
+        <h3>Architektur</h3>
+
+        <p>
+          Moderne Gebäude,
+          futuristische Städte,
+          historische Architektur
+          und außergewöhnliche Orte.
+        </p>
+
+      </div>
+
+
+      <!-- 17 MASTER PROMPT -->
+
+      <div class="card">
+
+        <div class="icon">✨</div>
+
+        <h3>Master Prompt Studio</h3>
+
+        <p>
+          Kombiniere alle Elemente zu
+          einem detaillierten,
+          professionellen Master Prompt
+          für die Bildgenerierung.
+        </p>
+
+      </div>
+
+
+      <!-- 18 EIGENE IDEE -->
+
+      <div class="card">
+
+        <div class="icon">🚀</div>
+
+        <h3>Eigene kreative Idee</h3>
+
+        <p>
+          Beschreibe deine eigene Idee
+          und entwickle daraus einen
+          individuellen kreativen Bild-Prompt.
+        </p>
+
+      </div>
+
+
     </div>
 
-    <div class="card">
-      <div class="icon">💇</div>
-      <h3>Haare & Styling</h3>
-      <p>
-        Frisuren, Haarfarben, Make-up,
-        Beauty-Styles und kreative Looks.
-      </p>
-    </div>
 
-    <div class="card">
-      <div class="icon">🧍</div>
-      <h3>Posen</h3>
-      <p>
-        Verschiedene erlaubte Körperhaltungen
-        und professionelle Bild-Posen.
-      </p>
-    </div>
+  </main>
 
-    <div class="card">
-      <div class="icon">👗</div>
-      <h3>Kleidung & Fashion</h3>
-      <p>
-        Elegante Kleidung, Casual Looks,
-        Fashion, Business und kreative Outfits.
-      </p>
-    </div>
 
-    <div class="card">
-      <div class="icon">🗾</div>
-      <h3>Japan Landschaften</h3>
-      <p>
-        Kyoto, Berge, Tempel, Bambuswälder,
-        Städte und japanische Traumlandschaften.
-      </p>
-    </div>
+  <!-- FOOTER -->
 
-    <div class="card">
-      <div class="icon">🌌</div>
-      <h3>Surreal & Fantasy</h3>
-      <p>
-        Fantastische Welten, surreale Szenen
-        und außergewöhnliche Bildideen.
-      </p>
-    </div>
+  <footer>
 
-    <div class="card">
-      <div class="icon">🖼️</div>
-      <h3>KI Kunststile</h3>
-      <p>
-        Verschiedene kreative Stile und
-        Prompt-Richtungen für ChatGPT.
-      </p>
-    </div>
+    © 2026 Dirk Eckert – ArtStyle Studio ✨
 
-    <div class="card">
-      <div class="icon">📸</div>
-      <h3>Fotorealismus</h3>
-      <p>
-        Kamera, Objektiv, Licht,
-        Hautstruktur und professionelle Fotografie.
-      </p>
-    </div>
+  </footer>
 
-    <div class="card">
-      <div class="icon">🎬</div>
-      <h3>Cinematic</h3>
-      <p>
-        Filmische Szenen, dramatisches Licht
-        und professionelle Kino-Atmosphäre.
-      </p>
-    </div>
-
-    <div class="card">
-      <div class="icon">🧠</div>
-      <h3>Master Prompt Studio</h3>
-      <p>
-        Kombiniere alle Elemente zu einem
-        detaillierten und individuellen Master Prompt.
-      </p>
-    </div>
-
-    <div class="card">
-      <div class="icon">🔞</div>
-      <h3>18+ Bereich</h3>
-      <p>
-        Ein separater Bereich für kreative,
-        altersgerechte Inhalte im erlaubten Rahmen.
-      </p>
-    </div>
-
-  </div>
-
-  <div class="adult-note">
-    🔞 <strong>Hinweis:</strong> Der 18+-Bereich wird später separat
-    aufgebaut und berücksichtigt die jeweils erlaubten Inhalte und
-    Regeln der verwendeten KI-Plattform.
-  </div>
-
-</main>
-
-<footer>
-  © 2026 Dirk Eckert – ArtStyle Studio
-</footer>
 
 </body>
 </html>

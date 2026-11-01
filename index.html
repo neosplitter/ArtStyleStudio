@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -9,338 +8,332 @@
 
 <style>
 
-:root {
-  --bg: #080a10;
-  --panel: #121621;
-  --panel2: #1a1f2d;
-  --border: #353d52;
-  --purple: #8b5cf6;
-  --pink: #ec4899;
-  --green: #22c55e;
-  --text: #ffffff;
-  --muted: #aab2c4;
-}
-
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  min-height: 100vh;
-  font-family: Arial, Helvetica, sans-serif;
-  color: var(--text);
-  background:
-    radial-gradient(circle at top, #24113d 0%, #080a10 45%);
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at top left, #25003d, transparent 35%),
+        radial-gradient(circle at top right, #001b3d, transparent 35%),
+        #090812;
+    color: white;
+    min-height: 100vh;
 }
 
+/* =========================
+   HEADER
+========================= */
+
 header {
-  text-align: center;
-  padding: 32px 15px;
-  background: rgba(10, 10, 18, .9);
-  border-bottom: 1px solid var(--border);
+    text-align: center;
+    padding: 45px 20px 35px;
+    background: linear-gradient(135deg, #16002b, #071126, #31004f);
+    border-bottom: 2px solid #7b2cff;
 }
 
 .logo {
-  font-size: 50px;
+    font-size: 55px;
+    margin-bottom: 10px;
 }
 
 h1 {
-  margin: 8px 0 5px;
-  font-size: 34px;
+    margin: 0;
+    font-size: 42px;
 }
 
-.owner {
-  font-size: 21px;
-  font-weight: bold;
-  color: #d8b4fe;
+.name {
+    color: #c18cff;
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 12px;
 }
 
 .subtitle {
-  margin-top: 10px;
-  color: var(--muted);
+    color: #b8b3c9;
+    font-size: 18px;
+    margin-top: 15px;
 }
 
+/* =========================
+   CONTENT
+========================= */
+
 main {
-  max-width: 1250px;
-  margin: auto;
-  padding: 20px 15px 80px;
+    max-width: 1050px;
+    margin: auto;
+    padding: 25px 18px 120px;
 }
 
 .hero {
-  background: linear-gradient(135deg, #6d28d9, #be185d);
-  border-radius: 24px;
-  padding: 25px;
-  margin-bottom: 25px;
-  box-shadow: 0 15px 50px rgba(0,0,0,.35);
+    background: linear-gradient(135deg, #5b087c, #9d004f);
+    border-radius: 28px;
+    padding: 30px;
+    margin-bottom: 35px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.45);
 }
 
 .hero h2 {
-  margin-top: 0;
+    margin-top: 0;
+    font-size: 32px;
 }
 
 .hero p {
-  line-height: 1.6;
-  margin-bottom: 0;
+    font-size: 19px;
+    line-height: 1.6;
+    color: #f0eafa;
 }
 
 .section-title {
-  margin: 32px 0 15px;
+    font-size: 30px;
+    margin: 35px 0 20px;
 }
 
-/* ===============================
-   KATEGORIEN
-================================ */
+/* =========================
+   CATEGORY CARDS
+========================= */
 
-.category-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
+.categories {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
 }
 
-.category-btn {
-  background: var(--panel);
-  border: 2px solid var(--border);
-  border-radius: 18px;
-  padding: 15px 8px;
-  color: white;
-  cursor: pointer;
-  transition: .2s;
-  font-size: 14px;
+.card {
+    background: #353846;
+    border: 3px solid #62677b;
+    border-radius: 30px;
+    padding: 24px 15px;
+    text-align: center;
+    cursor: pointer;
+    min-height: 165px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: 0.2s;
+    user-select: none;
 }
 
-.category-btn:hover {
-  border-color: var(--purple);
-  transform: translateY(-2px);
+.card:hover,
+.card:active {
+    transform: scale(1.03);
+    border-color: #b779ff;
 }
 
-.category-btn.active {
-  border-color: var(--green);
-  background: #12251a;
+.card.selected {
+    background: #294437;
+    border-color: #22b455;
 }
 
-.category-icon {
-  display: block;
-  font-size: 28px;
-  margin-bottom: 5px;
+.card.danger {
+    background: linear-gradient(135deg, #421020, #65142c);
+    border-color: #d13b62;
 }
 
-/* ===============================
-   AUSWAHLSEKTION
-================================ */
-
-.selection-section {
-  margin-bottom: 20px;
-  padding: 18px;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 22px;
+.card.danger.selected {
+    border-color: #ff5d88;
+    background: #5b1930;
 }
 
-.selection-section h2 {
-  margin-top: 0;
-  font-size: 20px;
-  color: #d8b4fe;
+.icon {
+    font-size: 46px;
+    margin-bottom: 14px;
 }
 
-.preview-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
+.card h3 {
+    margin: 0;
+    font-size: 23px;
 }
 
-/* ===============================
-   VORSCHAU KARTEN
-================================ */
-
-.preview-card {
-  position: relative;
-  overflow: hidden;
-  min-height: 165px;
-  border-radius: 16px;
-  border: 3px solid transparent;
-  background: var(--panel2);
-  cursor: pointer;
-  transition: .2s;
+.card small {
+    margin-top: 8px;
+    color: #d0ccda;
 }
 
-.preview-card:hover {
-  transform: translateY(-3px);
+/* =========================
+   MODAL
+========================= */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    background: rgba(0,0,0,0.85);
+    padding: 25px 15px;
 }
 
-.preview-card.active {
-  border-color: var(--green);
-  box-shadow: 0 0 18px rgba(34,197,94,.35);
+.modal-content {
+    background: #171923;
+    border: 2px solid #6e7285;
+    border-radius: 25px;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 25px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.7);
 }
 
-.preview-image {
-  height: 115px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 55px;
-  background:
-    linear-gradient(135deg, #35205c, #171b29);
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
 }
 
-.preview-label {
-  padding: 10px 6px;
-  text-align: center;
-  font-size: 13px;
-  font-weight: bold;
+.modal-header h2 {
+    margin: 0;
 }
 
-.checkmark {
-  position: absolute;
-  top: 7px;
-  right: 7px;
-  display: none;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  align-items: center;
-  justify-content: center;
-  background: var(--green);
-  font-weight: bold;
+.close {
+    font-size: 36px;
+    cursor: pointer;
+    color: #ff8fa8;
 }
 
-.preview-card.active .checkmark {
-  display: flex;
+.options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 25px;
 }
 
-/* ===============================
-   MEINE AUSWAHL
-================================ */
-
-.summary {
-  margin-top: 25px;
-  padding: 20px;
-  border-radius: 22px;
-  background: var(--panel);
-  border: 1px solid var(--border);
+.option {
+    background: #292c38;
+    border: 2px solid #555a6d;
+    border-radius: 20px;
+    padding: 18px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 17px;
+    transition: 0.2s;
 }
 
-.summary h2 {
-  margin-top: 0;
+.option:hover {
+    border-color: #b779ff;
+    background: #35394a;
 }
 
-.summary-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 9px;
+.option.active {
+    background: #254c39;
+    border-color: #25c45c;
 }
 
-.summary-item {
-  background: #252c3e;
-  border: 1px solid #46506a;
-  border-radius: 20px;
-  padding: 9px 13px;
-  font-size: 13px;
+.option-preview {
+    font-size: 34px;
+    display: block;
+    margin-bottom: 8px;
 }
 
-/* ===============================
-   PROMPT
-================================ */
+/* =========================
+   PROMPT BOX
+========================= */
 
-.prompt-area {
-  margin-top: 25px;
-  padding: 20px;
-  border-radius: 22px;
-  background: var(--panel);
-  border: 1px solid var(--border);
+.prompt-box {
+    margin-top: 45px;
+    background: #151722;
+    border: 2px solid #7b2cff;
+    border-radius: 25px;
+    padding: 25px;
 }
 
-textarea {
-  width: 100%;
-  min-height: 110px;
-  padding: 14px;
-  border-radius: 14px;
-  border: 1px solid #475069;
-  background: #090b12;
-  color: white;
-  font-size: 15px;
-  resize: vertical;
+.prompt-box h2 {
+    margin-top: 0;
 }
 
-.generate-btn {
-  width: 100%;
-  margin-top: 14px;
-  padding: 18px;
-  border: none;
-  border-radius: 15px;
-  background: linear-gradient(135deg, var(--purple), var(--pink));
-  color: white;
-  font-size: 17px;
-  font-weight: bold;
-  cursor: pointer;
+#promptOutput {
+    width: 100%;
+    min-height: 250px;
+    background: #090a10;
+    color: #f5f2ff;
+    border: 1px solid #555;
+    border-radius: 15px;
+    padding: 18px;
+    font-size: 16px;
+    line-height: 1.5;
+    resize: vertical;
+}
+
+.buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+button {
+    border: none;
+    border-radius: 14px;
+    padding: 15px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .copy-btn {
-  display: none;
-  width: 100%;
-  margin-top: 10px;
-  padding: 15px;
-  border: none;
-  border-radius: 14px;
-  background: #263044;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
+    background: linear-gradient(135deg, #7b2cff, #c0008b);
+    color: white;
 }
 
-.output {
-  display: none;
-  margin-top: 18px;
-  padding: 18px;
-  border-radius: 15px;
-  background: #090b12;
-  border: 1px solid #48526b;
-  white-space: pre-wrap;
-  line-height: 1.6;
-  color: #e4e7ee;
+.clear-btn {
+    background: #454957;
+    color: white;
 }
 
-footer {
-  padding: 30px;
-  text-align: center;
-  color: #80899c;
-  font-size: 13px;
+.generate-btn {
+    background: linear-gradient(135deg, #008f55, #00b878);
+    color: white;
 }
 
-/* ===============================
-   HANDY
-================================ */
+/* =========================
+   STATUS
+========================= */
 
-@media(max-width: 900px) {
-
-  .category-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .preview-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
+.status {
+    margin-top: 15px;
+    color: #aaa;
+    font-size: 14px;
 }
 
-@media(max-width: 600px) {
+/* =========================
+   MOBILE
+========================= */
 
-  h1 {
-    font-size: 29px;
-  }
+@media (max-width: 600px) {
 
-  .category-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+    h1 {
+        font-size: 34px;
+    }
 
-  .preview-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+    .logo {
+        font-size: 48px;
+    }
 
-  .preview-image {
-    height: 105px;
-    font-size: 48px;
-  }
+    .categories {
+        gap: 14px;
+    }
+
+    .card {
+        min-height: 150px;
+        padding: 18px 8px;
+    }
+
+    .card h3 {
+        font-size: 19px;
+    }
+
+    .icon {
+        font-size: 40px;
+    }
+
+    .options {
+        grid-template-columns: 1fr;
+    }
 
 }
 
@@ -350,12 +343,17 @@ footer {
 <body>
 
 <header>
-  <div class="logo">🎨✨</div>
-  <h1>ArtStyle Studio</h1>
-  <div class="owner">Dirk Eckert</div>
-  <div class="subtitle">
-    Kombiniere Bildideen zu deinem persönlichen Master Prompt
-  </div>
+
+    <div class="logo">🎨✨</div>
+
+    <h1>ArtStyle Studio</h1>
+
+    <div class="name">Dirk Eckert</div>
+
+    <div class="subtitle">
+        Dein persönliches Creative Prompt Studio
+    </div>
+
 </header>
 
 
@@ -363,14 +361,14 @@ footer {
 
 <section class="hero">
 
-<h2>✨ Dein Kombi Prompt Studio</h2>
+    <h2>✨ Willkommen in deinem Prompt Studio</h2>
 
-<p>
-Wähle beliebig viele Bereiche aus und kombiniere Person, Haare,
-Make-up, Kleidung, Strumpfhose, Schuhe, Pose, Landschaft,
-Japan, Bildstil, Kamera und Beleuchtung zu einem gemeinsamen
-professionellen Prompt.
-</p>
+    <p>
+        Wähle verschiedene Bereiche aus und kombiniere sie zu einem
+        detaillierten Bild-Prompt. Du kannst Person, Frisur, Haarfarbe,
+        Make-up, Kleidung, Strumpfhose, Schuhe, Pose, Landschaft und
+        Bildstil miteinander verbinden.
+    </p>
 
 </section>
 
@@ -378,1066 +376,550 @@ professionellen Prompt.
 <h2 class="section-title">🎛️ 1. Bereiche auswählen</h2>
 
 
-<div class="category-grid">
+<div class="categories">
 
-<button class="category-btn" onclick="toggleCategory('person',this)">
-<span class="category-icon">👤</span>
-Person
-</button>
+    <div class="card" id="card-person" onclick="openCategory('person')">
+        <div class="icon">👤</div>
+        <h3>Person</h3>
+        <small>Frau oder Mann</small>
+    </div>
 
-<button class="category-btn" onclick="toggleCategory('hair',this)">
-<span class="category-icon">💇</span>
-Frisur
-</button>
+    <div class="card" id="card-hairstyle" onclick="openCategory('hairstyle')">
+        <div class="icon">💇</div>
+        <h3>Frisur</h3>
+        <small>Verschiedene Frisuren</small>
+    </div>
 
-<button class="category-btn" onclick="toggleCategory('haircolor',this)">
-<span class="category-icon">🎨</span>
-Haarfarbe
-</button>
+    <div class="card" id="card-haircolor" onclick="openCategory('haircolor')">
+        <div class="icon">🎨</div>
+        <h3>Haarfarbe</h3>
+        <small>Farbe auswählen</small>
+    </div>
 
-<button class="category-btn" onclick="toggleCategory('makeup',this)">
-<span class="category-icon">💄</span>
-Make-up
-</button>
+    <div class="card" id="card-makeup" onclick="openCategory('makeup')">
+        <div class="icon">💄</div>
+        <h3>Make-up</h3>
+        <small>Natürlich bis Glamour</small>
+    </div>
 
-<button class="category-btn" onclick="toggleCategory('clothing',this)">
-<span class="category-icon">👗</span>
-Kleidung
-</button>
+    <div class="card" id="card-clothing" onclick="openCategory('clothing')">
+        <div class="icon">👗</div>
+        <h3>Kleidung</h3>
+        <small>Outfits kombinieren</small>
+    </div>
 
-<button class="category-btn" onclick="toggleCategory('tights',this)">
-<span class="category-icon">🧦</span>
-Strumpfhose
-</button>
+    <div class="card" id="card-tights" onclick="openCategory('tights')">
+        <div class="icon">🧦</div>
+        <h3>Strumpfhose</h3>
+        <small>Nylon & verschiedene DEN</small>
+    </div>
 
-<button class="category-btn" onclick="toggleCategory('shoes',this)">
-<span class="category-icon">👠</span>
-Schuhe
-</button>
+    <div class="card" id="card-shoes" onclick="openCategory('shoes')">
+        <div class="icon">👠</div>
+        <h3>Schuhe</h3>
+        <small>High Heels & mehr</small>
+    </div>
 
-<button class="category-btn" onclick="toggleCategory('pose',this)">
-<span class="category-icon">🧍</span>
-Pose
-</button>
+    <div class="card" id="card-pose" onclick="openCategory('pose')">
+        <div class="icon">🧍</div>
+        <h3>Pose</h3>
+        <small>Körperhaltung auswählen</small>
+    </div>
 
-<button class="category-btn" onclick="toggleCategory('japan',this)">
-<span class="category-icon">🗾</span>
-Japan
-</button>
+    <div class="card" id="card-japan" onclick="openCategory('japan')">
+        <div class="icon">🗾</div>
+        <h3>Japan</h3>
+        <small>Japanische Orte & Szenen</small>
+    </div>
 
-<button class="category-btn" onclick="toggleCategory('landscape',this)">
-<span class="category-icon">🏔️</span>
-Landschaft
-</button>
+    <div class="card" id="card-landscape" onclick="openCategory('landscape')">
+        <div class="icon">🏔️</div>
+        <h3>Landschaft</h3>
+        <small>Orte & Hintergründe</small>
+    </div>
 
-<button class="category-btn" onclick="toggleCategory('style',this)">
-<span class="category-icon">🎭</span>
-Bildstil
-</button>
+    <div class="card" id="card-style" onclick="openCategory('style')">
+        <div class="icon">🖼️</div>
+        <h3>Bildstil</h3>
+        <small>Fotorealismus & Kunststile</small>
+    </div>
 
-<button class="category-btn" onclick="toggleCategory('camera',this)">
-<span class="category-icon">📸</span>
-Kamera
-</button>
+    <div class="card" id="card-camera" onclick="openCategory('camera')">
+        <div class="icon">📷</div>
+        <h3>Kamera</h3>
+        <small>Kamera & Objektiv</small>
+    </div>
 
-<button class="category-btn" onclick="toggleCategory('light',this)">
-<span class="category-icon">💡</span>
-Licht
-</button>
-
-<button class="category-btn" onclick="toggleCategory('ratio',this)">
-<span class="category-icon">📐</span>
-Format
-</button>
-
-</div>
-
-
-<h2 class="section-title">🖼️ 2. Auswahl treffen</h2>
-
-<div id="selectionArea">
-
-<div class="selection-section">
-
-<p style="color:#aab2c4">
-Wähle oben einen oder mehrere Bereiche aus.
-Hier erscheinen anschließend die anklickbaren Vorschaukarten.
-</p>
-
-</div>
+    <div class="card danger" id="card-adult" onclick="openCategory('adult')">
+        <div class="icon">🔞</div>
+        <h3>18+ Bereich</h3>
+        <small>Erwachsene Personen, erlaubte Posen & Kleidung</small>
+    </div>
 
 </div>
 
 
-<section class="summary">
+<section class="prompt-box">
 
-<h2>✅ Meine Auswahl</h2>
+    <h2>📝 Dein kombinierter Prompt</h2>
 
-<div id="summaryList" class="summary-list">
-<span style="color:#aab2c4">
-Noch keine Auswahl getroffen.
-</span>
-</div>
+    <textarea id="promptOutput" readonly>
+Wähle oben verschiedene Bereiche aus, um deinen Prompt zu erstellen.
+    </textarea>
+
+    <div class="buttons">
+
+        <button class="copy-btn" onclick="copyPrompt()">
+            📋 Prompt kopieren
+        </button>
+
+        <button class="generate-btn" onclick="generatePrompt()">
+            ✨ Prompt aktualisieren
+        </button>
+
+        <button class="clear-btn" onclick="clearAll()">
+            🗑️ Alles löschen
+        </button>
+
+    </div>
+
+    <div class="status" id="statusText">
+        Noch keine Auswahl getroffen.
+    </div>
 
 </section>
-
-
-<section class="prompt-area">
-
-<h2>✍️ Zusätzliche Beschreibung</h2>
-
-<textarea id="customText"
-placeholder="Hier kannst du zusätzliche Details eingeben, z.B. Szene, Gesichtsausdruck, Hintergrund oder besondere Wünsche..."></textarea>
-
-
-<button class="generate-btn" onclick="generatePrompt()">
-✨ KOMBINIERTE MASTER PROMPT ERSTELLEN
-</button>
-
-
-<div id="output" class="output"></div>
-
-
-<button id="copyButton" class="copy-btn" onclick="copyPrompt()">
-📋 PROMPT KOPIEREN
-</button>
-
-</section>
-
 
 </main>
 
 
-<footer>
-© 2026 Dirk Eckert – ArtStyle Studio 🎨✨
-</footer>
+<!-- MODAL -->
+
+<div id="modal" class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2 id="modalTitle">Auswahl</h2>
+
+            <span class="close" onclick="closeModal()">×</span>
+
+        </div>
+
+        <div id="optionsContainer" class="options"></div>
+
+    </div>
+
+</div>
 
 
 <script>
 
-/* =========================================
+/* =====================================
+   AUSWAHLEN
+===================================== */
+
+let selections = {
+    person: "",
+    hairstyle: "",
+    haircolor: "",
+    makeup: "",
+    clothing: "",
+    tights: "",
+    shoes: "",
+    pose: "",
+    japan: "",
+    landscape: "",
+    style: "",
+    camera: "",
+    adult: ""
+};
+
+
+/* =====================================
    DATEN
-========================================= */
+===================================== */
 
-const categories = new Set();
-const selected = {};
-
-
-/* =========================================
-   VORSCHAU DATEN
-========================================= */
-
-const data = {
-
-
-/* ---------- PERSON ---------- */
+const categories = {
 
 person: {
-
-title: "👤 Person",
-
-items: [
-
-{
-name:"Erwachsene Frau",
-icon:"👩",
-prompt:"an adult woman"
-},
-
-{
-name:"Erwachsener Mann",
-icon:"👨",
-prompt:"an adult man"
-},
-
-{
-name:"Erwachsenes Paar",
-icon:"👩‍❤️‍👨",
-prompt:"two adult people"
-}
-
+title: "👤 Person auswählen",
+options: [
+["👩", "Erwachsene Frau"],
+["👨", "Erwachsener Mann"],
+["👩‍🦳", "Reife erwachsene Frau"],
+["👨‍🦲", "Reifer erwachsener Mann"]
 ]
-
 },
 
-
-/* ---------- FRISUR ---------- */
-
-hair: {
-
-title:"💇 Frisur",
-
-items:[
-
-{
-name:"Pixie Cut",
-icon:"👩‍🦱",
-prompt:"short pixie cut hairstyle"
-},
-
-{
-name:"Kurzer Bob",
-icon:"💇‍♀️",
-prompt:"short elegant bob hairstyle"
-},
-
-{
-name:"Lange Haare",
-icon:"👩",
-prompt:"long flowing hairstyle"
-},
-
-{
-name:"Lockiges Haar",
-icon:"👩‍🦱",
-prompt:"naturally curly hairstyle"
-},
-
-{
-name:"Sehr kurzes Haar",
-icon:"💇",
-prompt:"very short stylish hairstyle"
-}
-
+hairstyle: {
+title: "💇 Frisur auswählen",
+options: [
+["✂️", "Kurzer Pixie Cut"],
+["💇‍♀️", "Kurzer Bob"],
+["👩", "Langes glattes Haar"],
+["〰️", "Langes lockiges Haar"],
+["💁", "Schulterlange Haare"],
+["✨", "Elegant gestylte Haare"],
+["🔥", "Moderner Kurzhaarschnitt"]
 ]
-
 },
-
-
-/* ---------- HAARFARBE ---------- */
 
 haircolor: {
-
-title:"🎨 Haarfarbe",
-
-items:[
-
-{
-name:"Blond",
-icon:"🟡",
-prompt:"blonde hair"
-},
-
-{
-name:"Platinblond",
-icon:"✨",
-prompt:"platinum blonde hair"
-},
-
-{
-name:"Schwarz",
-icon:"⚫",
-prompt:"deep black hair"
-},
-
-{
-name:"Braun",
-icon:"🟤",
-prompt:"natural brown hair"
-},
-
-{
-name:"Rot",
-icon:"🔴",
-prompt:"natural red hair"
-}
-
+title: "🎨 Haarfarbe auswählen",
+options: [
+["🟡", "Platinblond"],
+["🌟", "Blond"],
+["🟤", "Braun"],
+["⚫", "Schwarz"],
+["🔴", "Rot"],
+["⚪", "Silbergrau"],
+["🎨", "Kreative Haarfarbe"]
 ]
-
 },
-
-
-/* ---------- MAKE-UP ---------- */
 
 makeup: {
-
-title:"💄 Make-up",
-
-items:[
-
-{
-name:"Natürlich",
-icon:"🌸",
-prompt:"natural subtle makeup"
-},
-
-{
-name:"Soft Glamour",
-icon:"✨",
-prompt:"soft glamour makeup"
-},
-
-{
-name:"Glamour",
-icon:"💄",
-prompt:"professional glamorous makeup"
-},
-
-{
-name:"Abend Make-up",
-icon:"🌙",
-prompt:"elegant evening makeup"
-}
-
+title: "💄 Make-up auswählen",
+options: [
+["🌿", "Natürliches dezentes Make-up"],
+["✨", "Glamour Make-up"],
+["👁️", "Smokey Eyes"],
+["💋", "Eleganter Lippenstift"],
+["📸", "Professionelles Beauty-Make-up"],
+["🌟", "Hollywood Glamour"]
 ]
-
 },
-
-
-/* ---------- KLEIDUNG ---------- */
 
 clothing: {
-
-title:"👗 Kleidung",
-
-items:[
-
-{
-name:"Kurzes Kleid",
-icon:"👗",
-prompt:"wearing an elegant short dress"
-},
-
-{
-name:"Abendkleid",
-icon:"👗",
-prompt:"wearing a sophisticated elegant evening gown"
-},
-
-{
-name:"Business Outfit",
-icon:"🧥",
-prompt:"wearing an elegant professional business outfit"
-},
-
-{
-name:"Casual Chic",
-icon:"👚",
-prompt:"wearing a stylish casual chic outfit"
-},
-
-{
-name:"Anzug",
-icon:"🤵",
-prompt:"wearing an elegant tailored suit"
-}
-
+title: "👗 Kleidung auswählen",
+options: [
+["👗", "Elegantes kurzes Kleid"],
+["👔", "Eleganter schwarzer Anzug"],
+["🧥", "Elegantes Business-Outfit"],
+["👠", "Abendgarderobe"],
+["👚", "Modisches Alltags-Outfit"],
+["🥻", "Elegantes traditionelles Outfit"],
+["🧥", "Stylische Lederjacke"]
 ]
-
 },
-
-
-/* ---------- STRUMPFHOSE ---------- */
 
 tights: {
-
-title:"🧦 Strumpfhose",
-
-items:[
-
-{
-name:"Nude 10 DEN",
-icon:"🧦",
-prompt:"ultra-sheer nude nylon pantyhose, approximately 10 DEN, realistic transparency and extremely fine textile texture"
-},
-
-{
-name:"Nude 15 DEN",
-icon:"✨",
-prompt:"ultra-sheer warm-beige nude nylon pantyhose, approximately 15 DEN, realistic transparency, skin subtly visible underneath, extremely fine knitted textile microtexture, subtle silky highlights, continuous natural coverage over legs, ankles and feet"
-},
-
-{
-name:"Nude 20 DEN",
-icon:"🧦",
-prompt:"sheer nude nylon pantyhose, approximately 20 DEN, realistic fine textile texture and natural transparency"
-},
-
-{
-name:"Schwarz 15 DEN",
-icon:"⚫",
-prompt:"ultra-sheer black nylon pantyhose, approximately 15 DEN, realistic transparency and fine textile microtexture"
-},
-
-{
-name:"Schwarz 20 DEN",
-icon:"🖤",
-prompt:"sheer black nylon pantyhose, approximately 20 DEN, realistic textile texture"
-},
-
-{
-name:"30 DEN",
-icon:"🧦",
-prompt:"semi-sheer nylon pantyhose, approximately 30 DEN"
-},
-
-{
-name:"40 DEN",
-icon:"🧦",
-prompt:"semi-opaque nylon pantyhose, approximately 40 DEN"
-},
-
-{
-name:"60 DEN",
-icon:"🧦",
-prompt:"opaque nylon pantyhose, approximately 60 DEN"
-}
-
+title: "🧦 Strumpfhose auswählen",
+options: [
+["🧦", "Keine Strumpfhose"],
+["✨", "Ultra-sheer nude Strumpfhose, 15 DEN"],
+["🧦", "Feine schwarze Strumpfhose, 15 DEN"],
+["🌫️", "Transparente schwarze Strumpfhose, 20 DEN"],
+["🤍", "Hautfarbene transparente Nylon-Strumpfhose"],
+["🖤", "Elegante semi-transparente Strumpfhose"]
 ]
-
 },
-
-
-/* ---------- SCHUHE ---------- */
 
 shoes: {
-
-title:"👠 Schuhe",
-
-items:[
-
-{
-name:"Riemchen High Heels",
-icon:"👠",
-prompt:"wearing elegant strappy high heel sandals"
-},
-
-{
-name:"Klassische Pumps",
-icon:"👠",
-prompt:"wearing elegant classic high heel pumps"
-},
-
-{
-name:"Stiletto Heels",
-icon:"👠",
-prompt:"wearing elegant stiletto high heels"
-},
-
-{
-name:"Stiefel",
-icon:"🥾",
-prompt:"wearing elegant fashion boots"
-},
-
-{
-name:"Sneakers",
-icon:"👟",
-prompt:"wearing stylish modern sneakers"
-},
-
-{
-name:"Ohne Schuhe",
-icon:"🦶",
-prompt:"barefoot"
-}
-
+title: "👠 Schuhe auswählen",
+options: [
+["👠", "Elegante Riemchen High Heels"],
+["👠", "Klassische schwarze High Heels"],
+["👡", "Elegante Sandaletten"],
+["👢", "Hohe elegante Stiefel"],
+["👟", "Moderne Sneaker"],
+["👞", "Elegante Lederschuhe"],
+["🦶", "Barfuß"]
 ]
-
 },
-
-
-/* ---------- POSEN ---------- */
 
 pose: {
-
-title:"🧍 Pose",
-
-items:[
-
-{
-name:"Natürlich stehend",
-icon:"🧍",
-prompt:"standing in a natural elegant relaxed pose"
-},
-
-{
-name:"Elegant sitzend",
-icon:"🪑",
-prompt:"sitting in an elegant natural pose"
-},
-
-{
-name:"Gehend",
-icon:"🚶",
-prompt:"walking naturally in a dynamic pose"
-},
-
-{
-name:"Selbstbewusste Pose",
-icon:"✨",
-prompt:"standing in a confident stylish pose"
-},
-
-{
-name:"Portrait Pose",
-icon:"📷",
-prompt:"natural professional portrait pose"
-}
-
+title: "🧍 Körperhaltung auswählen",
+options: [
+["🧍", "Stehend in natürlicher Pose"],
+["🚶", "Elegant gehend"],
+["🪑", "Sitzend in natürlicher Pose"],
+["📸", "Selbstbewusste Fashion-Pose"],
+["🙂", "Entspannte natürliche Haltung"],
+["🕺", "Dynamische Bewegung"],
+["👤", "Ganzkörperaufnahme mit vollständig sichtbaren Füßen"]
 ]
-
 },
-
-
-/* ---------- JAPAN ---------- */
 
 japan: {
-
-title:"🗾 Japan",
-
-items:[
-
-{
-name:"Kyoto",
-icon:"🏯",
-prompt:"in Kyoto, Japan, surrounded by traditional Japanese architecture"
-},
-
-{
-name:"Fushimi Inari",
-icon:"⛩️",
-prompt:"at Fushimi Inari Shrine surrounded by iconic red torii gates in Kyoto"
-},
-
-{
-name:"Mount Fuji",
-icon:"🗻",
-prompt:"with Mount Fuji in the background, Japan"
-},
-
-{
-name:"Bambuswald",
-icon:"🎋",
-prompt:"in a peaceful Japanese bamboo forest"
-},
-
-{
-name:"Hakone",
-icon:"🌊",
-prompt:"at Hakone Shrine near Lake Ashi, Japan"
-}
-
+title: "🗾 Japan auswählen",
+options: [
+["⛩️", "Fushimi Inari Taisha in Kyoto"],
+["🏯", "Matsumoto Castle"],
+["🌸", "Japanische Kirschblüten im Frühling"],
+["⛩️", "Hakone Shrine am Lake Ashi"],
+["🏙️", "Tokio bei Nacht"],
+["🎋", "Bambuswald in Kyoto"],
+["🏔️", "Blick auf den Mount Fuji"]
 ]
-
 },
-
-
-/* ---------- LANDSCHAFT ---------- */
 
 landscape: {
-
-title:"🏔️ Landschaft",
-
-items:[
-
-{
-name:"Berge",
-icon:"🏔️",
-prompt:"surrounded by dramatic mountain landscapes"
-},
-
-{
-name:"See",
-icon:"🏞️",
-prompt:"beside a peaceful scenic lake"
-},
-
-{
-name:"Wasserfall",
-icon:"🌊",
-prompt:"near a spectacular natural waterfall"
-},
-
-{
-name:"Wald",
-icon:"🌲",
-prompt:"surrounded by a beautiful atmospheric forest"
-},
-
-{
-name:"Strand",
-icon:"🏖️",
-prompt:"on a beautiful scenic beach"
-}
-
+title: "🏔️ Landschaft auswählen",
+options: [
+["🌅", "Goldene Stunde"],
+["🏔️", "Majestätische Berglandschaft"],
+["🏖️", "Tropischer Strand"],
+["🌲", "Mystischer Wald"],
+["🏙️", "Moderne Großstadt bei Nacht"],
+["🌊", "Dramatische Küstenlandschaft"],
+["🌸", "Blühende Frühlingslandschaft"]
 ]
-
 },
-
-
-/* ---------- BILDSTIL ---------- */
 
 style: {
-
-title:"🎭 Bildstil",
-
-items:[
-
-{
-name:"Ultra-realistisch",
-icon:"📸",
-prompt:"ultra-realistic professional photography, highly detailed, realistic skin and textures"
-},
-
-{
-name:"Cinematic",
-icon:"🎬",
-prompt:"cinematic visual style, dramatic composition, atmospheric depth"
-},
-
-{
-name:"Fine Art",
-icon:"🖼️",
-prompt:"fine art photography, artistic composition, elegant visual storytelling"
-},
-
-{
-name:"Neo Abstract",
-icon:"🎨",
-prompt:"neo abstract artistic style, creative composition and expressive visual textures"
-},
-
-{
-name:"Fantasy Art",
-icon:"🌀",
-prompt:"highly detailed fantasy art, imaginative atmosphere and cinematic storytelling"
-}
-
+title: "🖼️ Bildstil auswählen",
+options: [
+["📸", "Ultra-fotorealistische professionelle Fotografie"],
+["🎬", "Cinematic Film Look"],
+["✨", "High-End Fashion Photography"],
+["🖌️", "Fine Art Photography"],
+["🌌", "Surreal & Fantasy Art"],
+["🎨", "Neo Abstract Art"],
+["🤖", "Detailreicher generativer KI-Kunststil"],
+["💎", "Ultra-detailed realistic masterpiece"]
 ]
-
 },
-
-
-/* ---------- KAMERA ---------- */
 
 camera: {
-
-title:"📸 Kamera",
-
-items:[
-
-{
-name:"Canon EOS R5",
-icon:"📸",
-prompt:"shot with Canon EOS R5, professional 85mm f/1.4 lens"
-},
-
-{
-name:"Sony A7R IV",
-icon:"📷",
-prompt:"shot with Sony A7R IV, professional portrait lens"
-},
-
-{
-name:"Nikon Z7 II",
-icon:"📸",
-prompt:"shot with Nikon Z7 II, professional high resolution lens"
-},
-
-{
-name:"Hasselblad",
-icon:"📷",
-prompt:"shot with Hasselblad medium format camera, exceptional detail"
-}
-
+title: "📷 Kamera & Objektiv auswählen",
+options: [
+["📷", "Canon EOS R5, 85mm Portraitobjektiv, f/1.4"],
+["📷", "Sony A7R IV, 85mm f/1.8"],
+["📷", "Nikon Z7 II, 85mm Objektiv"],
+["📷", "Canon EOS R5, 35mm f/1.4"],
+["📷", "Professionelle Studiofotografie mit weichem Licht"],
+["📷", "Ultra-detailed high-resolution photography"]
 ]
-
 },
 
-
-/* ---------- LICHT ---------- */
-
-light: {
-
-title:"💡 Beleuchtung",
-
-items:[
-
-{
-name:"Golden Hour",
-icon:"🌅",
-prompt:"warm golden hour sunlight, soft cinematic highlights"
-},
-
-{
-name:"Studio Licht",
-icon:"💡",
-prompt:"professional soft studio lighting with controlled highlights and shadows"
-},
-
-{
-name:"Cinematic Licht",
-icon:"🎬",
-prompt:"dramatic cinematic lighting, atmospheric shadows and depth"
-},
-
-{
-name:"Weiches Tageslicht",
-icon:"☀️",
-prompt:"soft natural daylight, realistic gentle shadows"
-},
-
-{
-name:"Neon Licht",
-icon:"🌈",
-prompt:"modern neon lighting with atmospheric reflections"
-}
-
+adult: {
+title: "🔞 18+ Bereich – nur erwachsene Personen",
+options: [
+["🔞", "Eindeutig erwachsene Person"],
+["👗", "Elegante Abendkleidung für Erwachsene"],
+["📸", "Selbstbewusste erwachsene Fashion-Pose"],
+["🪑", "Erwachsene Person sitzend in eleganter Pose"],
+["🧍", "Erwachsene Person stehend in natürlicher Pose"],
+["✨", "Glamouröse erwachsene Beauty-Fotografie"]
 ]
-
-},
-
-
-/* ---------- FORMAT ---------- */
-
-ratio: {
-
-title:"📐 Seitenverhältnis",
-
-items:[
-
-{
-name:"9:16 Hochformat",
-icon:"📱",
-prompt:"vertical composition, aspect ratio 9:16"
-},
-
-{
-name:"4:5 Portrait",
-icon:"🖼️",
-prompt:"portrait composition, aspect ratio 4:5"
-},
-
-{
-name:"3:4 Portrait",
-icon:"📷",
-prompt:"portrait composition, aspect ratio 3:4"
-},
-
-{
-name:"16:9 Kino",
-icon:"🎬",
-prompt:"cinematic widescreen composition, aspect ratio 16:9"
-},
-
-{
-name:"1:1 Quadrat",
-icon:"⬜",
-prompt:"square composition, aspect ratio 1:1"
-}
-
-]
-
 }
 
 };
 
 
-/* =========================================
-   KATEGORIE EIN/AUS
-========================================= */
+/* =====================================
+   MODAL ÖFFNEN
+===================================== */
 
-function toggleCategory(category, button) {
+function openCategory(category) {
 
-if(categories.has(category)) {
+    const data = categories[category];
 
-categories.delete(category);
+    if (!data) {
+        alert("Dieser Bereich wurde nicht gefunden.");
+        return;
+    }
 
-delete selected[category];
+    document.getElementById("modalTitle").innerText = data.title;
 
-button.classList.remove("active");
+    const container = document.getElementById("optionsContainer");
 
-} else {
+    container.innerHTML = "";
 
-categories.add(category);
+    data.options.forEach(function(option) {
 
-button.classList.add("active");
+        const div = document.createElement("div");
 
-}
+        div.className = "option";
 
-renderCategories();
+        if (selections[category] === option[1]) {
+            div.classList.add("active");
+        }
 
-updateSummary();
+        div.innerHTML =
+            '<span class="option-preview">' + option[0] + '</span>' +
+            '<strong>' + option[1] + '</strong>';
 
-}
+        div.onclick = function() {
 
+            selections[category] = option[1];
 
-/* =========================================
-   AUSWAHLEN ANZEIGEN
-========================================= */
+            document
+                .getElementById("card-" + category)
+                .classList.add("selected");
 
-function renderCategories() {
+            closeModal();
 
-const area = document.getElementById("selectionArea");
+            generatePrompt();
 
-area.innerHTML = "";
+        };
 
-if(categories.size === 0) {
+        container.appendChild(div);
 
-area.innerHTML = `
-<div class="selection-section">
-<p style="color:#aab2c4">
-Wähle oben einen oder mehrere Bereiche aus.
-</p>
-</div>
-`;
+    });
 
-return;
-
-}
-
-
-categories.forEach(category => {
-
-const categoryData = data[category];
-
-const section = document.createElement("section");
-
-section.className = "selection-section";
-
-const title = document.createElement("h2");
-
-title.textContent = categoryData.title;
-
-section.appendChild(title);
-
-
-const grid = document.createElement("div");
-
-grid.className = "preview-grid";
-
-
-categoryData.items.forEach(item => {
-
-const card = document.createElement("div");
-
-card.className = "preview-card";
-
-if(selected[category] &&
-selected[category].name === item.name) {
-
-card.classList.add("active");
-
-}
-
-card.innerHTML = `
-
-<div class="preview-image">
-${item.icon}
-</div>
-
-<div class="checkmark">✓</div>
-
-<div class="preview-label">
-${item.name}
-</div>
-
-`;
-
-card.onclick = function() {
-
-selected[category] = item;
-
-renderCategories();
-
-updateSummary();
-
-};
-
-grid.appendChild(card);
-
-});
-
-
-section.appendChild(grid);
-
-area.appendChild(section);
-
-});
+    document.getElementById("modal").style.display = "block";
 
 }
 
 
-/* =========================================
-   ZUSAMMENFASSUNG
-========================================= */
+/* =====================================
+   MODAL SCHLIESSEN
+===================================== */
 
-function updateSummary() {
+function closeModal() {
 
-const list = document.getElementById("summaryList");
-
-list.innerHTML = "";
-
-const keys = Object.keys(selected);
-
-if(keys.length === 0) {
-
-list.innerHTML = `
-<span style="color:#aab2c4">
-Noch keine Auswahl getroffen.
-</span>
-`;
-
-return;
-
-}
-
-keys.forEach(key => {
-
-const item = document.createElement("div");
-
-item.className = "summary-item";
-
-item.textContent =
-data[key].title + ": " + selected[key].name;
-
-list.appendChild(item);
-
-});
+    document.getElementById("modal").style.display = "none";
 
 }
 
 
-/* =========================================
-   MASTER PROMPT
-========================================= */
+/* =====================================
+   PROMPT GENERIEREN
+===================================== */
 
 function generatePrompt() {
 
-const keys = Object.keys(selected);
+    let promptParts = [];
 
-if(keys.length === 0) {
+    promptParts.push("Erstelle ein hochwertiges, detailliertes Bild.");
 
-alert("Bitte wähle mindestens eine Option aus.");
+    if (selections.person)
+        promptParts.push("Person: " + selections.person + ".");
 
-return;
+    if (selections.hairstyle)
+        promptParts.push("Frisur: " + selections.hairstyle + ".");
 
-}
+    if (selections.haircolor)
+        promptParts.push("Haarfarbe: " + selections.haircolor + ".");
 
+    if (selections.makeup)
+        promptParts.push("Make-up: " + selections.makeup + ".");
 
-let prompt = `MASTER PROMPT – ARTSTYLE STUDIO
+    if (selections.clothing)
+        promptParts.push("Kleidung: " + selections.clothing + ".");
 
-Created with ArtStyle Studio
-Dirk Eckert
+    if (selections.tights)
+        promptParts.push("Strumpfhose: " + selections.tights + ".");
 
-`;
+    if (selections.shoes)
+        promptParts.push("Schuhe: " + selections.shoes + ".");
 
-prompt += `SELECTED SETTINGS:
+    if (selections.pose)
+        promptParts.push("Pose: " + selections.pose + ".");
 
-`;
+    if (selections.japan)
+        promptParts.push("Ort in Japan: " + selections.japan + ".");
 
-keys.forEach(key => {
+    if (selections.landscape)
+        promptParts.push("Szene und Landschaft: " + selections.landscape + ".");
 
-prompt +=
-`• ${data[key].title}: ${selected[key].name}
-`;
+    if (selections.style)
+        promptParts.push("Bildstil: " + selections.style + ".");
 
-});
+    if (selections.camera)
+        promptParts.push("Aufgenommen mit: " + selections.camera + ".");
 
+    if (selections.adult)
+        promptParts.push("Erwachsenenbereich: " + selections.adult + ".");
 
-prompt += `
+    promptParts.push(
+        "Realistische Proportionen, natürliche Anatomie, detaillierte Hautstruktur, professionelle Beleuchtung, hochwertige Details."
+    );
 
-DETAILED IMAGE PROMPT:
+    const prompt = promptParts.join("\n\n");
 
-`;
+    document.getElementById("promptOutput").value = prompt;
 
+    let count = 0;
 
-const promptParts = [];
+    for (let key in selections) {
+        if (selections[key]) {
+            count++;
+        }
+    }
 
-keys.forEach(key => {
-
-promptParts.push(selected[key].prompt);
-
-});
-
-
-prompt += promptParts.join(", ") + `.
-
-`;
-
-
-const custom =
-document.getElementById("customText").value.trim();
-
-
-if(custom) {
-
-prompt += `
-
-ADDITIONAL CREATIVE DETAILS:
-
-${custom}
-
-`;
+    document.getElementById("statusText").innerText =
+        count + " Bereich(e) ausgewählt.";
 
 }
 
 
-prompt += `
-
-QUALITY AND COMPOSITION:
-
-Create a visually coherent, highly detailed and professionally composed image.
-
-Natural proportions and believable anatomy where applicable. Realistic textures, detailed materials, atmospheric depth, professional composition and high-quality visual storytelling.
-
-Ensure that clothing, footwear and accessories are clearly represented when selected. Maintain consistency between pose, clothing, environment and lighting.
-
-NEGATIVE PROMPT:
-
-low quality, blurry, distorted anatomy, unnatural proportions, malformed hands, extra fingers, extra limbs, malformed feet, duplicate body parts, bad composition, unwanted text, watermark, logo, oversaturated artificial textures.
-
-`;
-
-
-const output =
-document.getElementById("output");
-
-output.textContent = prompt;
-
-output.style.display = "block";
-
-document.getElementById("copyButton")
-.style.display = "block";
-
-
-output.scrollIntoView({
-
-behavior:"smooth",
-
-block:"start"
-
-});
-
-}
-
-
-/* =========================================
-   KOPIEREN
-========================================= */
+/* =====================================
+   PROMPT KOPIEREN
+===================================== */
 
 function copyPrompt() {
 
-const text =
-document.getElementById("output").textContent;
+    const text = document.getElementById("promptOutput");
 
+    text.select();
 
-navigator.clipboard.writeText(text)
+    text.setSelectionRange(0, 99999);
 
-.then(() => {
+    navigator.clipboard.writeText(text.value)
+    .then(function() {
 
-alert("✅ Dein Master Prompt wurde kopiert!");
+        document.getElementById("statusText").innerText =
+            "✅ Prompt wurde kopiert.";
 
-})
+    })
+    .catch(function() {
 
-.catch(() => {
+        document.getElementById("statusText").innerText =
+            "Bitte den Prompt manuell markieren und kopieren.";
 
-alert("Bitte den Prompt manuell markieren und kopieren.");
-
-});
+    });
 
 }
+
+
+/* =====================================
+   ALLES LÖSCHEN
+===================================== */
+
+function clearAll() {
+
+    for (let key in selections) {
+        selections[key] = "";
+    }
+
+    const cards = document.querySelectorAll(".card");
+
+    cards.forEach(function(card) {
+        card.classList.remove("selected");
+    });
+
+    document.getElementById("promptOutput").value =
+        "Wähle oben verschiedene Bereiche aus, um deinen Prompt zu erstellen.";
+
+    document.getElementById("statusText").innerText =
+        "Alle Auswahlen wurden gelöscht.";
+
+}
+
+
+/* =====================================
+   AUSSERHALB DES FENSTERS KLICKEN
+===================================== */
+
+window.onclick = function(event) {
+
+    const modal = document.getElementById("modal");
+
+    if (event.target === modal) {
+        closeModal();
+    }
+
+};
+
+
+/* =====================================
+   START
+===================================== */
+
+generatePrompt();
 
 </script>
 

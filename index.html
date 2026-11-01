@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -7,380 +8,342 @@
 <title>ArtStyle Studio – Dirk Eckert</title>
 
 <style>
+
 :root {
   --bg: #080a10;
-  --panel: #11141e;
-  --panel2: #171b28;
-  --border: #34394c;
+  --panel: #121621;
+  --panel2: #1a1f2d;
+  --border: #353d52;
+  --purple: #8b5cf6;
+  --pink: #ec4899;
+  --green: #22c55e;
   --text: #ffffff;
-  --muted: #aeb4c7;
-  --accent: #8b5cf6;
-  --accent2: #ec4899;
+  --muted: #aab2c4;
 }
 
 * {
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   margin: 0;
+  min-height: 100vh;
   font-family: Arial, Helvetica, sans-serif;
-  background: var(--bg);
   color: var(--text);
+  background:
+    radial-gradient(circle at top, #24113d 0%, #080a10 45%);
 }
 
 header {
   text-align: center;
-  padding: 42px 20px 30px;
-  background: linear-gradient(135deg, #16002b, #111827, #31004f);
-  border-bottom: 1px solid #48345c;
-}
-
-.logo {
-  font-size: 58px;
-  margin-bottom: 8px;
-}
-
-h1 {
-  margin: 0;
-  font-size: 42px;
-}
-
-.name {
-  color: #d8b4fe;
-  font-size: 23px;
-  font-weight: bold;
-  margin-top: 10px;
-}
-
-.subtitle {
-  margin-top: 12px;
-  color: var(--muted);
-  font-size: 17px;
-}
-
-nav {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  padding: 12px;
-  text-align: center;
-  background: rgba(13,16,25,.97);
+  padding: 32px 15px;
+  background: rgba(10, 10, 18, .9);
   border-bottom: 1px solid var(--border);
 }
 
-nav button {
-  width: auto;
-  margin: 3px;
-  padding: 9px 14px;
-  background: #222638;
-  font-size: 14px;
+.logo {
+  font-size: 50px;
 }
 
-nav button:hover {
-  background: var(--accent);
+h1 {
+  margin: 8px 0 5px;
+  font-size: 34px;
+}
+
+.owner {
+  font-size: 21px;
+  font-weight: bold;
+  color: #d8b4fe;
+}
+
+.subtitle {
+  margin-top: 10px;
+  color: var(--muted);
 }
 
 main {
   max-width: 1250px;
   margin: auto;
-  padding: 25px 16px 70px;
+  padding: 20px 15px 80px;
 }
 
 .hero {
-  padding: 30px;
-  margin-bottom: 32px;
-  border-radius: 28px;
-  background: linear-gradient(135deg, #5b087c, #55002d, #8b002c);
-  box-shadow: 0 15px 45px rgba(0,0,0,.4);
+  background: linear-gradient(135deg, #6d28d9, #be185d);
+  border-radius: 24px;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 15px 50px rgba(0,0,0,.35);
 }
 
 .hero h2 {
   margin-top: 0;
-  font-size: 32px;
 }
 
 .hero p {
-  margin-bottom: 0;
   line-height: 1.6;
-  font-size: 18px;
+  margin-bottom: 0;
 }
 
 .section-title {
-  margin: 35px 0 18px;
-  font-size: 28px;
+  margin: 32px 0 15px;
 }
 
-.categories {
+/* ===============================
+   KATEGORIEN
+================================ */
+
+.category-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
 }
 
-.card {
-  min-height: 205px;
+.category-btn {
+  background: var(--panel);
+  border: 2px solid var(--border);
+  border-radius: 18px;
+  padding: 15px 8px;
+  color: white;
+  cursor: pointer;
+  transition: .2s;
+  font-size: 14px;
+}
+
+.category-btn:hover {
+  border-color: var(--purple);
+  transform: translateY(-2px);
+}
+
+.category-btn.active {
+  border-color: var(--green);
+  background: #12251a;
+}
+
+.category-icon {
+  display: block;
+  font-size: 28px;
+  margin-bottom: 5px;
+}
+
+/* ===============================
+   AUSWAHLSEKTION
+================================ */
+
+.selection-section {
+  margin-bottom: 20px;
+  padding: 18px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+}
+
+.selection-section h2 {
+  margin-top: 0;
+  font-size: 20px;
+  color: #d8b4fe;
+}
+
+.preview-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+/* ===============================
+   VORSCHAU KARTEN
+================================ */
+
+.preview-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 165px;
+  border-radius: 16px;
+  border: 3px solid transparent;
+  background: var(--panel2);
+  cursor: pointer;
+  transition: .2s;
+}
+
+.preview-card:hover {
+  transform: translateY(-3px);
+}
+
+.preview-card.active {
+  border-color: var(--green);
+  box-shadow: 0 0 18px rgba(34,197,94,.35);
+}
+
+.preview-image {
+  height: 115px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 55px;
+  background:
+    linear-gradient(135deg, #35205c, #171b29);
+}
+
+.preview-label {
+  padding: 10px 6px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.checkmark {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  display: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  background: var(--green);
+  font-weight: bold;
+}
+
+.preview-card.active .checkmark {
+  display: flex;
+}
+
+/* ===============================
+   MEINE AUSWAHL
+================================ */
+
+.summary {
+  margin-top: 25px;
   padding: 20px;
   border-radius: 22px;
   background: var(--panel);
   border: 1px solid var(--border);
-  cursor: pointer;
-  transition: .25s;
 }
 
-.card:hover {
-  transform: translateY(-5px);
-  border-color: #b86cff;
-  box-shadow: 0 12px 35px rgba(139,92,246,.22);
+.summary h2 {
+  margin-top: 0;
 }
 
-.icon {
-  font-size: 40px;
-  margin-bottom: 10px;
+.summary-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
 }
 
-.card h3 {
-  margin: 0 0 10px;
-  font-size: 21px;
+.summary-item {
+  background: #252c3e;
+  border: 1px solid #46506a;
+  border-radius: 20px;
+  padding: 9px 13px;
+  font-size: 13px;
 }
 
-.card p {
-  margin: 0;
-  color: var(--muted);
-  line-height: 1.5;
-  font-size: 15px;
-}
+/* ===============================
+   PROMPT
+================================ */
 
-.studio {
-  margin-top: 35px;
-  padding: 25px;
-  border-radius: 25px;
+.prompt-area {
+  margin-top: 25px;
+  padding: 20px;
+  border-radius: 22px;
   background: var(--panel);
   border: 1px solid var(--border);
 }
 
-.hidden {
-  display: none !important;
-}
-
-.studio-header {
-  display: flex;
-  justify-content: space-between;
-  gap: 15px;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.studio-header h2 {
-  margin: 0;
-}
-
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-}
-
-.field {
-  background: var(--panel2);
-  padding: 15px;
-  border-radius: 16px;
-  border: 1px solid #2c3143;
-}
-
-label {
-  display: block;
-  margin-bottom: 8px;
-  color: #d8b4fe;
-  font-weight: bold;
-}
-
-select,
-textarea,
-input[type="text"],
-input[type="file"] {
-  width: 100%;
-  padding: 13px;
-  border-radius: 12px;
-  border: 1px solid #464c61;
-  background: #0c0f18;
-  color: white;
-  font-size: 16px;
-}
-
 textarea {
-  min-height: 120px;
+  width: 100%;
+  min-height: 110px;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid #475069;
+  background: #090b12;
+  color: white;
+  font-size: 15px;
   resize: vertical;
 }
 
-button {
+.generate-btn {
   width: 100%;
-  padding: 14px 18px;
   margin-top: 14px;
+  padding: 18px;
   border: none;
-  border-radius: 13px;
+  border-radius: 15px;
+  background: linear-gradient(135deg, var(--purple), var(--pink));
   color: white;
-  background: linear-gradient(135deg, var(--accent), var(--accent2));
-  font-size: 16px;
+  font-size: 17px;
   font-weight: bold;
   cursor: pointer;
 }
 
-button:hover {
-  opacity: .9;
-}
-
-.secondary {
-  background: #252a3b;
-}
-
-.result {
-  margin-top: 25px;
-  padding: 20px;
-  background: #090b12;
-  border-radius: 18px;
-  border: 1px solid #3d4358;
+.copy-btn {
+  display: none;
+  width: 100%;
+  margin-top: 10px;
+  padding: 15px;
+  border: none;
+  border-radius: 14px;
+  background: #263044;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .output {
-  white-space: pre-wrap;
-  line-height: 1.65;
-  color: #e8eaf2;
-}
-
-.image-tools {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 22px;
-}
-
-.preview-box {
-  min-height: 260px;
-  padding: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #080a10;
-  border: 2px dashed #464c61;
-  border-radius: 20px;
-}
-
-.preview-box img {
-  max-width: 100%;
-  max-height: 450px;
-  border-radius: 14px;
-}
-
-.placeholder {
-  color: var(--muted);
-  text-align: center;
-}
-
-.color-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 15px;
-}
-
-.color-chip {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: #202536;
-  padding: 8px 10px;
-  border-radius: 10px;
-  font-size: 13px;
-}
-
-.color-square {
-  width: 22px;
-  height: 22px;
-  border-radius: 6px;
-  border: 1px solid white;
-}
-
-.small-info {
-  margin-top: 12px;
-  color: var(--muted);
-  line-height: 1.5;
-}
-
-.warning {
+  display: none;
   margin-top: 18px;
-  padding: 14px;
-  border-radius: 14px;
-  background: #261d09;
-  border: 1px solid #6d5420;
-  color: #f2d99a;
+  padding: 18px;
+  border-radius: 15px;
+  background: #090b12;
+  border: 1px solid #48526b;
+  white-space: pre-wrap;
+  line-height: 1.6;
+  color: #e4e7ee;
 }
 
 footer {
   padding: 30px;
   text-align: center;
-  color: #8d94a8;
-  background: #090b11;
-  border-top: 1px solid #282d3d;
+  color: #80899c;
+  font-size: 13px;
 }
 
-@media (max-width: 900px) {
-  .categories {
-    grid-template-columns: repeat(2, 1fr);
+/* ===============================
+   HANDY
+================================ */
+
+@media(max-width: 900px) {
+
+  .category-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
+
+  .preview-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
 }
 
-@media (max-width: 650px) {
-
-  header {
-    padding: 32px 15px 25px;
-  }
+@media(max-width: 600px) {
 
   h1 {
-    font-size: 33px;
+    font-size: 29px;
   }
 
-  .logo {
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .preview-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .preview-image {
+    height: 105px;
     font-size: 48px;
   }
 
-  .categories {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-
-  .card {
-    min-height: 185px;
-    padding: 16px;
-  }
-
-  .card h3 {
-    font-size: 18px;
-  }
-
-  .card p {
-    font-size: 14px;
-  }
-
-  .form-grid,
-  .image-tools {
-    grid-template-columns: 1fr;
-  }
-
-  .studio {
-    padding: 18px;
-  }
-
-  .hero {
-    padding: 22px;
-  }
-
-  .hero h2 {
-    font-size: 26px;
-  }
 }
+
 </style>
 </head>
 
@@ -389,1075 +352,1090 @@ footer {
 <header>
   <div class="logo">🎨✨</div>
   <h1>ArtStyle Studio</h1>
-  <div class="name">Dirk Eckert</div>
+  <div class="owner">Dirk Eckert</div>
   <div class="subtitle">
-    Creative Prompt Studio • Bildstile • Master Prompts
+    Kombiniere Bildideen zu deinem persönlichen Master Prompt
   </div>
 </header>
 
-<nav>
-  <button onclick="showHome()">🏠 Start</button>
-  <button onclick="showStyleReader()">🖼️ Bildstil auslesen</button>
-  <button onclick="showMasterStudio()">✨ Master Prompt</button>
-</nav>
 
 <main>
 
-<!-- STARTSEITE -->
-
-<div id="homePage">
-
 <section class="hero">
-  <h2>✨ Willkommen in deinem ArtStyle Studio</h2>
 
-  <p>
-    Wähle einen kreativen Bereich aus und erstelle detaillierte
-    Bild-Prompts. Jeder Bereich besitzt passende Auswahlmöglichkeiten.
-    Zusätzlich kannst du Bilder laden und eine Style-Analyse vorbereiten.
-  </p>
+<h2>✨ Dein Kombi Prompt Studio</h2>
+
+<p>
+Wähle beliebig viele Bereiche aus und kombiniere Person, Haare,
+Make-up, Kleidung, Strumpfhose, Schuhe, Pose, Landschaft,
+Japan, Bildstil, Kamera und Beleuchtung zu einem gemeinsamen
+professionellen Prompt.
+</p>
+
 </section>
 
-<h2 class="section-title">🎨 Kreative Bereiche</h2>
 
-<div class="categories">
+<h2 class="section-title">🎛️ 1. Bereiche auswählen</h2>
 
-  <div class="card" onclick="openCategory('woman')">
-    <div class="icon">👩</div>
-    <h3>Portrait Frau</h3>
-    <p>Frisur, Haarfarbe, Make-up, Gesichtsausdruck, Pose und Kleidung.</p>
-  </div>
 
-  <div class="card" onclick="openCategory('man')">
-    <div class="icon">👨</div>
-    <h3>Portrait Mann</h3>
-    <p>Frisur, Bart, Kleidung, Gesichtsausdruck und Körperhaltung.</p>
-  </div>
+<div class="category-grid">
 
-  <div class="card" onclick="openCategory('japan')">
-    <div class="icon">🗾</div>
-    <h3>Japan Landschaften</h3>
-    <p>Kyoto, Fuji, Schreine, Bambuswälder und traditionelle Orte.</p>
-  </div>
+<button class="category-btn" onclick="toggleCategory('person',this)">
+<span class="category-icon">👤</span>
+Person
+</button>
 
-  <div class="card" onclick="openCategory('styles')">
-    <div class="icon">🎭</div>
-    <h3>KI Bildstile</h3>
-    <p>Fotorealistisch, Cinematic, Fine Art, surreal und kreativ.</p>
-  </div>
+<button class="category-btn" onclick="toggleCategory('hair',this)">
+<span class="category-icon">💇</span>
+Frisur
+</button>
 
-  <div class="card" onclick="openCategory('photo')">
-    <div class="icon">📸</div>
-    <h3>Fotorealismus</h3>
-    <p>Kameras, Objektive, Licht und professionelle Fotografie.</p>
-  </div>
+<button class="category-btn" onclick="toggleCategory('haircolor',this)">
+<span class="category-icon">🎨</span>
+Haarfarbe
+</button>
 
-  <div class="card" onclick="openCategory('fantasy')">
-    <div class="icon">🌀</div>
-    <h3>Surreal & Fantasy</h3>
-    <p>Fantastische Welten und außergewöhnliche kreative Szenen.</p>
-  </div>
+<button class="category-btn" onclick="toggleCategory('makeup',this)">
+<span class="category-icon">💄</span>
+Make-up
+</button>
 
-  <div class="card" onclick="openCategory('fashion')">
-    <div class="icon">👗</div>
-    <h3>Fashion & Kleidung</h3>
-    <p>Elegant, Business, Casual Chic, Abendmode und High Fashion.</p>
-  </div>
+<button class="category-btn" onclick="toggleCategory('clothing',this)">
+<span class="category-icon">👗</span>
+Kleidung
+</button>
 
-  <div class="card" onclick="openCategory('beauty')">
-    <div class="icon">💄</div>
-    <h3>Beauty & Make-up</h3>
-    <p>Natürliches Make-up, Glamour und Beauty Photography.</p>
-  </div>
+<button class="category-btn" onclick="toggleCategory('tights',this)">
+<span class="category-icon">🧦</span>
+Strumpfhose
+</button>
 
-  <div class="card" onclick="openCategory('hair')">
-    <div class="icon">💇</div>
-    <h3>Frisuren & Haare</h3>
-    <p>Pixie Cut, Bob, langes Haar, Farben und Styling.</p>
-  </div>
+<button class="category-btn" onclick="toggleCategory('shoes',this)">
+<span class="category-icon">👠</span>
+Schuhe
+</button>
 
-  <div class="card" onclick="openCategory('poses')">
-    <div class="icon">🧍</div>
-    <h3>Körperhaltungen</h3>
-    <p>Stehend, sitzend, gehend und kreative natürliche Posen.</p>
-  </div>
+<button class="category-btn" onclick="toggleCategory('pose',this)">
+<span class="category-icon">🧍</span>
+Pose
+</button>
 
-  <div class="card" onclick="openCategory('creativeposes')">
-    <div class="icon">🤸</div>
-    <h3>Kreative Posen</h3>
-    <p>Ästhetische, kreative und für die Bildgenerierung geeignete Posen.</p>
-  </div>
+<button class="category-btn" onclick="toggleCategory('japan',this)">
+<span class="category-icon">🗾</span>
+Japan
+</button>
 
-  <div class="card" onclick="openCategory('sensual')">
-    <div class="icon">🔥</div>
-    <h3>Sinnliche Ästhetik</h3>
-    <p>Erwachsene, stilvolle, glamouröse und sinnliche Bildatmosphären.</p>
-  </div>
+<button class="category-btn" onclick="toggleCategory('landscape',this)">
+<span class="category-icon">🏔️</span>
+Landschaft
+</button>
 
-  <div class="card" onclick="openCategory('cinematic')">
-    <div class="icon">🎬</div>
-    <h3>Cinematic</h3>
-    <p>Filmische Szenen, dramatisches Licht und Kino-Look.</p>
-  </div>
+<button class="category-btn" onclick="toggleCategory('style',this)">
+<span class="category-icon">🎭</span>
+Bildstil
+</button>
 
-  <div class="card" onclick="openCategory('characters')">
-    <div class="icon">🧙</div>
-    <h3>Fantasy Charaktere</h3>
-    <p>Krieger, Könige, Magier und mystische Figuren.</p>
-  </div>
+<button class="category-btn" onclick="toggleCategory('camera',this)">
+<span class="category-icon">📸</span>
+Kamera
+</button>
 
-  <div class="card" onclick="openCategory('nature')">
-    <div class="icon">🏔️</div>
-    <h3>Natur & Landschaft</h3>
-    <p>Berge, Seen, Wälder, Wasserfälle und Sonnenuntergänge.</p>
-  </div>
+<button class="category-btn" onclick="toggleCategory('light',this)">
+<span class="category-icon">💡</span>
+Licht
+</button>
 
-  <div class="card" onclick="openCategory('architecture')">
-    <div class="icon">🏛️</div>
-    <h3>Architektur</h3>
-    <p>Historisch, modern, futuristisch und außergewöhnlich.</p>
-  </div>
+<button class="category-btn" onclick="toggleCategory('ratio',this)">
+<span class="category-icon">📐</span>
+Format
+</button>
 
-  <div class="card" onclick="showMasterStudio()">
-    <div class="icon">✨</div>
-    <h3>Master Prompt Studio</h3>
-    <p>Kombiniere alle kreativen Elemente zu einem vollständigen Prompt.</p>
-  </div>
+</div>
 
-  <div class="card" onclick="openCategory('custom')">
-    <div class="icon">🚀</div>
-    <h3>Eigene Idee</h3>
-    <p>Deine eigene Bildidee als professionellen Prompt ausarbeiten.</p>
-  </div>
+
+<h2 class="section-title">🖼️ 2. Auswahl treffen</h2>
+
+<div id="selectionArea">
+
+<div class="selection-section">
+
+<p style="color:#aab2c4">
+Wähle oben einen oder mehrere Bereiche aus.
+Hier erscheinen anschließend die anklickbaren Vorschaukarten.
+</p>
 
 </div>
 
 </div>
 
 
-<!-- KATEGORIE-STUDIO -->
+<section class="summary">
 
-<section id="categoryStudio" class="studio hidden">
+<h2>✅ Meine Auswahl</h2>
 
-  <div class="studio-header">
-    <h2 id="categoryTitle">🎨 Prompt Studio</h2>
-  </div>
-
-  <p id="categoryDescription"></p>
-
-  <div class="form-grid" id="dynamicFields"></div>
-
-  <div class="field" style="margin-top:15px;">
-    <label>Zusätzliche eigene Beschreibung</label>
-
-    <textarea id="extraIdea"
-      placeholder="Hier kannst du zusätzliche Details eingeben..."
-    ></textarea>
-  </div>
-
-  <button onclick="generateCategoryPrompt()">
-    ✨ Prompt erstellen
-  </button>
-
-  <button class="secondary" onclick="showHome()">
-    ← Zurück zur Startseite
-  </button>
-
-  <div class="result">
-    <h3>📋 Dein fertiger Prompt</h3>
-    <div class="output" id="categoryOutput">
-      Wähle Optionen und erstelle deinen Prompt.
-    </div>
-
-    <button onclick="copyText('categoryOutput')">
-      📋 Prompt kopieren
-    </button>
-  </div>
+<div id="summaryList" class="summary-list">
+<span style="color:#aab2c4">
+Noch keine Auswahl getroffen.
+</span>
+</div>
 
 </section>
 
 
-<!-- BILDSTIL AUSLESEN -->
+<section class="prompt-area">
 
-<section id="styleReader" class="studio hidden">
+<h2>✍️ Zusätzliche Beschreibung</h2>
 
-  <div class="studio-header">
-    <h2>🖼️ Bildstil analysieren</h2>
-  </div>
+<textarea id="customText"
+placeholder="Hier kannst du zusätzliche Details eingeben, z.B. Szene, Gesichtsausdruck, Hintergrund oder besondere Wünsche..."></textarea>
 
-  <p>
-    Lade ein Bild hoch. Die App liest technische Bildinformationen
-    und dominante Farben aus und erstellt anschließend einen
-    detaillierten Analyse-Prompt für die KI.
-  </p>
 
-  <div class="warning">
-    ⚠️ Hinweis: Eine echte automatische Erkennung von Kunststil,
-    Personen, Kleidung und Bildinhalt benötigt ein KI-Bildmodell.
-    Diese Version bereitet dein Bild und einen professionellen
-    Analyse-Prompt dafür vor.
-  </div>
+<button class="generate-btn" onclick="generatePrompt()">
+✨ KOMBINIERTE MASTER PROMPT ERSTELLEN
+</button>
 
-  <div class="image-tools">
 
-    <div class="field">
+<div id="output" class="output"></div>
 
-      <label>🖼️ Bild auswählen</label>
 
-      <input type="file"
-             id="imageUpload"
-             accept="image/*"
-             onchange="loadImage(event)">
-
-      <div class="preview-box" id="previewBox">
-        <div class="placeholder">
-          Hier erscheint dein ausgewähltes Bild.
-        </div>
-      </div>
-
-    </div>
-
-    <div class="field">
-
-      <h3>🔍 Technische Bildanalyse</h3>
-
-      <div class="small-info" id="imageInfo">
-        Noch kein Bild ausgewählt.
-      </div>
-
-      <h3>🎨 Erkannte dominante Farben</h3>
-
-      <div class="color-list" id="colorList"></div>
-
-    </div>
-
-  </div>
-
-  <div class="field" style="margin-top:20px;">
-
-    <label>Welche Art Analyse möchtest du?</label>
-
-    <select id="analysisType">
-      <option value="complete">Komplette Style-Analyse</option>
-      <option value="artstyle">Nur Kunststil</option>
-      <option value="photo">Fotografie & Kamera-Look</option>
-      <option value="lighting">Licht & Atmosphäre</option>
-      <option value="composition">Komposition & Perspektive</option>
-    </select>
-
-  </div>
-
-  <button onclick="createStyleAnalysisPrompt()">
-    ✨ Style-Analyse Prompt erstellen
-  </button>
-
-  <button class="secondary" onclick="showHome()">
-    ← Zurück zur Startseite
-  </button>
-
-  <div class="result">
-
-    <h3>📝 Analyse-Prompt</h3>
-
-    <div class="output" id="styleOutput">
-      Lade ein Bild und erstelle anschließend den Analyse-Prompt.
-    </div>
-
-    <button onclick="copyText('styleOutput')">
-      📋 Analyse-Prompt kopieren
-    </button>
-
-  </div>
+<button id="copyButton" class="copy-btn" onclick="copyPrompt()">
+📋 PROMPT KOPIEREN
+</button>
 
 </section>
 
-
-<!-- MASTER STUDIO -->
-
-<section id="masterStudio" class="studio hidden">
-
-  <div class="studio-header">
-    <h2>✨ Master Prompt Studio</h2>
-  </div>
-
-  <p>
-    Kombiniere deine wichtigsten Bildvorgaben zu einem vollständigen
-    professionellen Master Prompt.
-  </p>
-
-  <div class="form-grid">
-
-    <div class="field">
-      <label>Hauptmotiv</label>
-      <input id="masterSubject"
-             type="text"
-             placeholder="z.B. erwachsene Frau mit kurzen blonden Haaren">
-    </div>
-
-    <div class="field">
-      <label>Szene</label>
-      <input id="masterScene"
-             type="text"
-             placeholder="z.B. Kyoto bei Sonnenuntergang">
-    </div>
-
-    <div class="field">
-      <label>Bildstil</label>
-      <select id="masterStyle">
-        <option>Ultra-realistische Fotografie</option>
-        <option>Cinematic Photography</option>
-        <option>Fine Art</option>
-        <option>Editorial Fashion</option>
-        <option>Fantasy Art</option>
-        <option>Surreal Art</option>
-      </select>
-    </div>
-
-    <div class="field">
-      <label>Kamera</label>
-      <select id="masterCamera">
-        <option>Canon EOS R5</option>
-        <option>Sony A7R IV</option>
-        <option>Nikon Z7 II</option>
-        <option>Hasselblad H6D-100c</option>
-      </select>
-    </div>
-
-    <div class="field">
-      <label>Objektiv</label>
-      <select id="masterLens">
-        <option>85mm f/1.4 Portrait Lens</option>
-        <option>50mm f/1.4</option>
-        <option>35mm f/1.4</option>
-        <option>100mm APO Macro</option>
-      </select>
-    </div>
-
-    <div class="field">
-      <label>Licht</label>
-      <select id="masterLight">
-        <option>Soft professional lighting</option>
-        <option>Golden hour lighting</option>
-        <option>Cinematic dramatic lighting</option>
-        <option>Natural daylight</option>
-      </select>
-    </div>
-
-    <div class="field">
-      <label>Seitenverhältnis</label>
-      <select id="masterRatio">
-        <option>9:16</option>
-        <option>4:5</option>
-        <option>3:4</option>
-        <option>16:9</option>
-        <option>1:1</option>
-      </select>
-    </div>
-
-  </div>
-
-  <button onclick="generateMasterPrompt()">
-    🚀 Master Prompt erstellen
-  </button>
-
-  <button class="secondary" onclick="showHome()">
-    ← Zurück zur Startseite
-  </button>
-
-  <div class="result">
-
-    <h3>✨ Master Prompt</h3>
-
-    <div class="output" id="masterOutput">
-      Deine Auswahl erscheint hier.
-    </div>
-
-    <button onclick="copyText('masterOutput')">
-      📋 Master Prompt kopieren
-    </button>
-
-  </div>
-
-</section>
 
 </main>
 
 
 <footer>
-  © 2026 Dirk Eckert – ArtStyle Studio 🎨✨
+© 2026 Dirk Eckert – ArtStyle Studio 🎨✨
 </footer>
 
 
 <script>
 
-/* ============================
-   KATEGORIE-DATEN
-============================ */
+/* =========================================
+   DATEN
+========================================= */
 
-const categories = {
+const categories = new Set();
+const selected = {};
 
-woman: {
-title: "👩 Portrait Frau",
-description: "Erstelle detaillierte Portrait-Prompts für erwachsene Frauen.",
-fields: [
-["Frisur","Kurz|Pixie Cut|Bob|Langer Bob|Lange Haare|Lockiges Haar"],
-["Haarfarbe","Blond|Platinblond|Braun|Schwarz|Rot|Silbergrau"],
-["Make-up","Natürlich|Soft Glamour|Glamour Make-up|Dramatisches Make-up|Editorial Beauty"],
-["Gesichtsausdruck","Freundliches Lächeln|Selbstbewusster Blick|Natürlich|Ernst|Nachdenklich"],
-["Körperhaltung","Stehend|Sitzend|Gehend|Direkt zur Kamera|Natürliches Portrait"],
-["Kleidung","Elegantes Kleid|Business Outfit|Casual Chic|Abendmode|High Fashion"],
-["Bildstil","Ultra-realistisch|Fine Art|Cinematic|Editorial Fashion"],
-["Seitenverhältnis","9:16|4:5|3:4|16:9"]
-]
+
+/* =========================================
+   VORSCHAU DATEN
+========================================= */
+
+const data = {
+
+
+/* ---------- PERSON ---------- */
+
+person: {
+
+title: "👤 Person",
+
+items: [
+
+{
+name:"Erwachsene Frau",
+icon:"👩",
+prompt:"an adult woman"
 },
 
-man: {
-title: "👨 Portrait Mann",
-description: "Erstelle detaillierte Männerportraits.",
-fields: [
-["Frisur","Glatze|Kurzes Haar|Klassischer Schnitt|Langes Haar"],
-["Bart","Ohne Bart|Drei-Tage-Bart|Vollbart|Schnurrbart"],
-["Gesichtsausdruck","Freundlich|Selbstbewusst|Ernst|Nachdenklich"],
-["Körperhaltung","Stehend|Sitzend|Gehend|Zur Kamera blickend"],
-["Kleidung","Business Anzug|Casual|Elegante Kleidung|Lederjacke|High Fashion"],
-["Bildstil","Ultra-realistisch|Cinematic|Editorial"],
-["Seitenverhältnis","9:16|4:5|3:4"]
-]
+{
+name:"Erwachsener Mann",
+icon:"👨",
+prompt:"an adult man"
 },
 
-japan: {
-title: "🗾 Japan Landschaften",
-description: "Erstelle atmosphärische japanische Landschaften.",
-fields: [
-["Ort","Kyoto|Tokio|Mount Fuji|Fushimi Inari|Arashiyama Bambuswald|Takachiho-Schlucht|Matsumoto Castle"],
-["Jahreszeit","Frühling|Sommer|Herbst|Winter"],
-["Tageszeit","Sonnenaufgang|Golden Hour|Mittag|Sonnenuntergang|Nacht"],
-["Wetter","Klar|Leichter Regen|Nebel|Schneefall"],
-["Stil","Fotorealistisch|Cinematic|Fine Art|Traditionell|Fantasy"],
-["Seitenverhältnis","9:16|16:9|4:5"]
+{
+name:"Erwachsenes Paar",
+icon:"👩‍❤️‍👨",
+prompt:"two adult people"
+}
+
 ]
+
 },
 
-styles: {
-title: "🎭 KI Bildstile",
-description: "Wähle kreative Stilrichtungen für besondere Bilder.",
-fields: [
-["Grundstil","Ultra-realistisch|Cinematic|Fine Art|Neo Abstract|Surreal|Fantasy"],
-["Details","Extrem detailliert|Realistische Texturen|Atmosphärisch|Minimalistisch"],
-["Farblook","Natürliche Farben|Warme Farben|Kühle Farben|Dramatische Farben"],
-["Komposition","Portrait|Totale|Nahaufnahme|Dynamische Perspektive"],
-["Seitenverhältnis","9:16|4:5|16:9|1:1"]
-]
-},
 
-photo: {
-title: "📸 Fotorealismus",
-description: "Professionelle Kamera- und Fotografie-Prompts.",
-fields: [
-["Kamera","Canon EOS R5|Sony A7R IV|Nikon Z7 II|Hasselblad H6D-100c"],
-["Objektiv","85mm f/1.4|50mm f/1.4|35mm f/1.4|100mm APO Macro"],
-["Licht","Studio Licht|Golden Hour|Natürliches Licht|Cinematic Light"],
-["Details","Realistische Hautstruktur|Extreme Details|Natürliche Proportionen"],
-["Seitenverhältnis","9:16|4:5|3:4"]
-]
-},
-
-fantasy: {
-title: "🌀 Surreal & Fantasy",
-description: "Fantastische Welten und kreative Szenen.",
-fields: [
-["Welt","Mystischer Wald|Schwebende Inseln|Fremder Planet|Traumwelt|Magisches Schloss"],
-["Atmosphäre","Mystisch|Dramatisch|Magisch|Dunkel|Friedlich"],
-["Stil","Fantasy Art|Surreal Art|Cinematic Fantasy|Fine Art"],
-["Seitenverhältnis","9:16|16:9|4:5"]
-]
-},
-
-fashion: {
-title: "👗 Fashion & Kleidung",
-description: "Mode und Outfit-Prompts.",
-fields: [
-["Kategorie","Business|Casual Chic|Abendmode|High Fashion|Street Fashion"],
-["Farbe","Schwarz|Weiß|Rot|Beige|Gold"],
-["Ort","Studio|Luxushotel|Stadt|Laufsteg"],
-["Stil","Editorial Fashion|Fotorealistisch|Cinematic"],
-["Seitenverhältnis","9:16|4:5"]
-]
-},
-
-beauty: {
-title: "💄 Beauty & Make-up",
-description: "Beauty und professionelle Make-up-Stile.",
-fields: [
-["Make-up","Natürlich|Soft Glam|Glamour|Dramatisch|Editorial"],
-["Fokus","Augen|Lippen|Gesicht|Gesamtes Portrait"],
-["Licht","Softbox|Beauty Light|Golden Hour"],
-["Stil","Beauty Photography|Fine Art|Editorial"],
-["Seitenverhältnis","4:5|9:16|1:1"]
-]
-},
+/* ---------- FRISUR ---------- */
 
 hair: {
-title: "💇 Frisuren & Haare",
-description: "Erstelle Prompts mit detaillierten Frisuren.",
-fields: [
-["Frisur","Pixie Cut|Bob|Langer Bob|Lange Haare|Locken"],
-["Farbe","Blond|Platinblond|Braun|Schwarz|Rot"],
-["Textur","Glatt|Wellig|Lockig|Natürlich"],
-["Stil","Fotorealistisch|Editorial|Beauty Photography"]
-]
+
+title:"💇 Frisur",
+
+items:[
+
+{
+name:"Pixie Cut",
+icon:"👩‍🦱",
+prompt:"short pixie cut hairstyle"
 },
 
-poses: {
-title: "🧍 Körperhaltungen",
-description: "Natürliche und kreative Körperhaltungen.",
-fields: [
-["Grundhaltung","Stehend|Sitzend|Gehend|Lehnend"],
-["Kamerawinkel","Frontal|Leicht von unten|Auf Augenhöhe|Seitenansicht"],
-["Ausdruck","Natürlich|Selbstbewusst|Freundlich|Dramatisch"],
-["Bildstil","Fotorealistisch|Cinematic|Fine Art"]
-]
+{
+name:"Kurzer Bob",
+icon:"💇‍♀️",
+prompt:"short elegant bob hairstyle"
 },
 
-creativeposes: {
-title: "🤸 Kreative Posen",
-description: "Ästhetische und kreative Posen für Bild-Prompts.",
-fields: [
-["Pose","Elegante stehende Pose|Sitzende Pose|Dynamische Gehpose|Künstlerische Pose"],
-["Stimmung","Elegant|Selbstbewusst|Natürlich|Cinematic"],
-["Kleidung","Casual Chic|Elegante Mode|Business|Fashion"],
-["Stil","Fotorealistisch|Editorial|Fine Art"]
-]
+{
+name:"Lange Haare",
+icon:"👩",
+prompt:"long flowing hairstyle"
 },
 
-sensual: {
-title: "🔥 Sinnliche Ästhetik",
-description: "Stilvolle erwachsene und glamouröse Bildatmosphären.",
-fields: [
-["Atmosphäre","Elegant|Glamourös|Romantisch|Cinematic"],
-["Kleidung","Elegante Abendmode|Fashion Outfit|Glamour Outfit"],
-["Beleuchtung","Weiches Licht|Golden Hour|Dramatisches Licht"],
-["Stil","Fine Art|Editorial|Cinematic Photography"]
-]
+{
+name:"Lockiges Haar",
+icon:"👩‍🦱",
+prompt:"naturally curly hairstyle"
 },
 
-cinematic: {
-title: "🎬 Cinematic",
-description: "Filmische Bildkompositionen.",
-fields: [
-["Genre","Drama|Mystery|Science Fiction|Fantasy|Romantik"],
-["Licht","Dramatisches Licht|Neonlicht|Golden Hour|Nacht"],
-["Kamerawinkel","Nahaufnahme|Totale|Low Angle|Eye Level"],
-["Look","Cinematic|Film Grain Look|High Contrast Film"]
+{
+name:"Sehr kurzes Haar",
+icon:"💇",
+prompt:"very short stylish hairstyle"
+}
+
 ]
+
 },
 
-characters: {
-title: "🧙 Fantasy Charaktere",
-description: "Entwickle fantastische Charaktere.",
-fields: [
-["Charakter","Magier|Krieger|Königin|König|Mystische Figur"],
-["Welt","Magischer Wald|Burg|Fremder Planet|Mystische Ruinen"],
-["Atmosphäre","Episch|Dunkel|Magisch|Dramatisch"],
-["Stil","Fantasy Art|Cinematic Fantasy|Fine Art"]
-]
+
+/* ---------- HAARFARBE ---------- */
+
+haircolor: {
+
+title:"🎨 Haarfarbe",
+
+items:[
+
+{
+name:"Blond",
+icon:"🟡",
+prompt:"blonde hair"
 },
 
-nature: {
-title: "🏔️ Natur & Landschaft",
-description: "Spektakuläre Naturbilder.",
-fields: [
-["Landschaft","Berge|See|Wald|Wasserfall|Küste"],
-["Tageszeit","Sonnenaufgang|Golden Hour|Sonnenuntergang|Nacht"],
-["Wetter","Klar|Nebel|Regen|Schnee"],
-["Stil","Fotorealistisch|Cinematic|Fine Art"],
-["Seitenverhältnis","16:9|9:16|4:5"]
-]
+{
+name:"Platinblond",
+icon:"✨",
+prompt:"platinum blonde hair"
 },
 
-architecture: {
-title: "🏛️ Architektur",
-description: "Historische, moderne und futuristische Architektur.",
-fields: [
-["Architektur","Modern|Historisch|Futuristisch|Japanisch|Fantasy"],
-["Ort","Stadt|Natur|Küste|Berge"],
-["Tageszeit","Tag|Golden Hour|Nacht"],
-["Stil","Architekturfotografie|Cinematic|Fine Art"]
-]
+{
+name:"Schwarz",
+icon:"⚫",
+prompt:"deep black hair"
 },
 
-custom: {
-title: "🚀 Eigene kreative Idee",
-description: "Beschreibe deine eigene Idee und ergänze kreative Vorgaben.",
-fields: [
-["Bildstil","Fotorealistisch|Cinematic|Fine Art|Fantasy|Surreal"],
-["Qualität","High Quality|Ultra Detailed|Professional Composition"],
-["Seitenverhältnis","9:16|4:5|16:9|1:1"]
+{
+name:"Braun",
+icon:"🟤",
+prompt:"natural brown hair"
+},
+
+{
+name:"Rot",
+icon:"🔴",
+prompt:"natural red hair"
+}
+
 ]
+
+},
+
+
+/* ---------- MAKE-UP ---------- */
+
+makeup: {
+
+title:"💄 Make-up",
+
+items:[
+
+{
+name:"Natürlich",
+icon:"🌸",
+prompt:"natural subtle makeup"
+},
+
+{
+name:"Soft Glamour",
+icon:"✨",
+prompt:"soft glamour makeup"
+},
+
+{
+name:"Glamour",
+icon:"💄",
+prompt:"professional glamorous makeup"
+},
+
+{
+name:"Abend Make-up",
+icon:"🌙",
+prompt:"elegant evening makeup"
+}
+
+]
+
+},
+
+
+/* ---------- KLEIDUNG ---------- */
+
+clothing: {
+
+title:"👗 Kleidung",
+
+items:[
+
+{
+name:"Kurzes Kleid",
+icon:"👗",
+prompt:"wearing an elegant short dress"
+},
+
+{
+name:"Abendkleid",
+icon:"👗",
+prompt:"wearing a sophisticated elegant evening gown"
+},
+
+{
+name:"Business Outfit",
+icon:"🧥",
+prompt:"wearing an elegant professional business outfit"
+},
+
+{
+name:"Casual Chic",
+icon:"👚",
+prompt:"wearing a stylish casual chic outfit"
+},
+
+{
+name:"Anzug",
+icon:"🤵",
+prompt:"wearing an elegant tailored suit"
+}
+
+]
+
+},
+
+
+/* ---------- STRUMPFHOSE ---------- */
+
+tights: {
+
+title:"🧦 Strumpfhose",
+
+items:[
+
+{
+name:"Nude 10 DEN",
+icon:"🧦",
+prompt:"ultra-sheer nude nylon pantyhose, approximately 10 DEN, realistic transparency and extremely fine textile texture"
+},
+
+{
+name:"Nude 15 DEN",
+icon:"✨",
+prompt:"ultra-sheer warm-beige nude nylon pantyhose, approximately 15 DEN, realistic transparency, skin subtly visible underneath, extremely fine knitted textile microtexture, subtle silky highlights, continuous natural coverage over legs, ankles and feet"
+},
+
+{
+name:"Nude 20 DEN",
+icon:"🧦",
+prompt:"sheer nude nylon pantyhose, approximately 20 DEN, realistic fine textile texture and natural transparency"
+},
+
+{
+name:"Schwarz 15 DEN",
+icon:"⚫",
+prompt:"ultra-sheer black nylon pantyhose, approximately 15 DEN, realistic transparency and fine textile microtexture"
+},
+
+{
+name:"Schwarz 20 DEN",
+icon:"🖤",
+prompt:"sheer black nylon pantyhose, approximately 20 DEN, realistic textile texture"
+},
+
+{
+name:"30 DEN",
+icon:"🧦",
+prompt:"semi-sheer nylon pantyhose, approximately 30 DEN"
+},
+
+{
+name:"40 DEN",
+icon:"🧦",
+prompt:"semi-opaque nylon pantyhose, approximately 40 DEN"
+},
+
+{
+name:"60 DEN",
+icon:"🧦",
+prompt:"opaque nylon pantyhose, approximately 60 DEN"
+}
+
+]
+
+},
+
+
+/* ---------- SCHUHE ---------- */
+
+shoes: {
+
+title:"👠 Schuhe",
+
+items:[
+
+{
+name:"Riemchen High Heels",
+icon:"👠",
+prompt:"wearing elegant strappy high heel sandals"
+},
+
+{
+name:"Klassische Pumps",
+icon:"👠",
+prompt:"wearing elegant classic high heel pumps"
+},
+
+{
+name:"Stiletto Heels",
+icon:"👠",
+prompt:"wearing elegant stiletto high heels"
+},
+
+{
+name:"Stiefel",
+icon:"🥾",
+prompt:"wearing elegant fashion boots"
+},
+
+{
+name:"Sneakers",
+icon:"👟",
+prompt:"wearing stylish modern sneakers"
+},
+
+{
+name:"Ohne Schuhe",
+icon:"🦶",
+prompt:"barefoot"
+}
+
+]
+
+},
+
+
+/* ---------- POSEN ---------- */
+
+pose: {
+
+title:"🧍 Pose",
+
+items:[
+
+{
+name:"Natürlich stehend",
+icon:"🧍",
+prompt:"standing in a natural elegant relaxed pose"
+},
+
+{
+name:"Elegant sitzend",
+icon:"🪑",
+prompt:"sitting in an elegant natural pose"
+},
+
+{
+name:"Gehend",
+icon:"🚶",
+prompt:"walking naturally in a dynamic pose"
+},
+
+{
+name:"Selbstbewusste Pose",
+icon:"✨",
+prompt:"standing in a confident stylish pose"
+},
+
+{
+name:"Portrait Pose",
+icon:"📷",
+prompt:"natural professional portrait pose"
+}
+
+]
+
+},
+
+
+/* ---------- JAPAN ---------- */
+
+japan: {
+
+title:"🗾 Japan",
+
+items:[
+
+{
+name:"Kyoto",
+icon:"🏯",
+prompt:"in Kyoto, Japan, surrounded by traditional Japanese architecture"
+},
+
+{
+name:"Fushimi Inari",
+icon:"⛩️",
+prompt:"at Fushimi Inari Shrine surrounded by iconic red torii gates in Kyoto"
+},
+
+{
+name:"Mount Fuji",
+icon:"🗻",
+prompt:"with Mount Fuji in the background, Japan"
+},
+
+{
+name:"Bambuswald",
+icon:"🎋",
+prompt:"in a peaceful Japanese bamboo forest"
+},
+
+{
+name:"Hakone",
+icon:"🌊",
+prompt:"at Hakone Shrine near Lake Ashi, Japan"
+}
+
+]
+
+},
+
+
+/* ---------- LANDSCHAFT ---------- */
+
+landscape: {
+
+title:"🏔️ Landschaft",
+
+items:[
+
+{
+name:"Berge",
+icon:"🏔️",
+prompt:"surrounded by dramatic mountain landscapes"
+},
+
+{
+name:"See",
+icon:"🏞️",
+prompt:"beside a peaceful scenic lake"
+},
+
+{
+name:"Wasserfall",
+icon:"🌊",
+prompt:"near a spectacular natural waterfall"
+},
+
+{
+name:"Wald",
+icon:"🌲",
+prompt:"surrounded by a beautiful atmospheric forest"
+},
+
+{
+name:"Strand",
+icon:"🏖️",
+prompt:"on a beautiful scenic beach"
+}
+
+]
+
+},
+
+
+/* ---------- BILDSTIL ---------- */
+
+style: {
+
+title:"🎭 Bildstil",
+
+items:[
+
+{
+name:"Ultra-realistisch",
+icon:"📸",
+prompt:"ultra-realistic professional photography, highly detailed, realistic skin and textures"
+},
+
+{
+name:"Cinematic",
+icon:"🎬",
+prompt:"cinematic visual style, dramatic composition, atmospheric depth"
+},
+
+{
+name:"Fine Art",
+icon:"🖼️",
+prompt:"fine art photography, artistic composition, elegant visual storytelling"
+},
+
+{
+name:"Neo Abstract",
+icon:"🎨",
+prompt:"neo abstract artistic style, creative composition and expressive visual textures"
+},
+
+{
+name:"Fantasy Art",
+icon:"🌀",
+prompt:"highly detailed fantasy art, imaginative atmosphere and cinematic storytelling"
+}
+
+]
+
+},
+
+
+/* ---------- KAMERA ---------- */
+
+camera: {
+
+title:"📸 Kamera",
+
+items:[
+
+{
+name:"Canon EOS R5",
+icon:"📸",
+prompt:"shot with Canon EOS R5, professional 85mm f/1.4 lens"
+},
+
+{
+name:"Sony A7R IV",
+icon:"📷",
+prompt:"shot with Sony A7R IV, professional portrait lens"
+},
+
+{
+name:"Nikon Z7 II",
+icon:"📸",
+prompt:"shot with Nikon Z7 II, professional high resolution lens"
+},
+
+{
+name:"Hasselblad",
+icon:"📷",
+prompt:"shot with Hasselblad medium format camera, exceptional detail"
+}
+
+]
+
+},
+
+
+/* ---------- LICHT ---------- */
+
+light: {
+
+title:"💡 Beleuchtung",
+
+items:[
+
+{
+name:"Golden Hour",
+icon:"🌅",
+prompt:"warm golden hour sunlight, soft cinematic highlights"
+},
+
+{
+name:"Studio Licht",
+icon:"💡",
+prompt:"professional soft studio lighting with controlled highlights and shadows"
+},
+
+{
+name:"Cinematic Licht",
+icon:"🎬",
+prompt:"dramatic cinematic lighting, atmospheric shadows and depth"
+},
+
+{
+name:"Weiches Tageslicht",
+icon:"☀️",
+prompt:"soft natural daylight, realistic gentle shadows"
+},
+
+{
+name:"Neon Licht",
+icon:"🌈",
+prompt:"modern neon lighting with atmospheric reflections"
+}
+
+]
+
+},
+
+
+/* ---------- FORMAT ---------- */
+
+ratio: {
+
+title:"📐 Seitenverhältnis",
+
+items:[
+
+{
+name:"9:16 Hochformat",
+icon:"📱",
+prompt:"vertical composition, aspect ratio 9:16"
+},
+
+{
+name:"4:5 Portrait",
+icon:"🖼️",
+prompt:"portrait composition, aspect ratio 4:5"
+},
+
+{
+name:"3:4 Portrait",
+icon:"📷",
+prompt:"portrait composition, aspect ratio 3:4"
+},
+
+{
+name:"16:9 Kino",
+icon:"🎬",
+prompt:"cinematic widescreen composition, aspect ratio 16:9"
+},
+
+{
+name:"1:1 Quadrat",
+icon:"⬜",
+prompt:"square composition, aspect ratio 1:1"
+}
+
+]
+
 }
 
 };
 
 
-/* ============================
-   NAVIGATION
-============================ */
+/* =========================================
+   KATEGORIE EIN/AUS
+========================================= */
 
-function hideAll() {
+function toggleCategory(category, button) {
 
-  document.getElementById("homePage").classList.add("hidden");
-  document.getElementById("categoryStudio").classList.add("hidden");
-  document.getElementById("styleReader").classList.add("hidden");
-  document.getElementById("masterStudio").classList.add("hidden");
+if(categories.has(category)) {
 
-}
+categories.delete(category);
 
-function showHome() {
+delete selected[category];
 
-  hideAll();
-  document.getElementById("homePage").classList.remove("hidden");
+button.classList.remove("active");
 
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
+} else {
+
+categories.add(category);
+
+button.classList.add("active");
 
 }
 
+renderCategories();
 
-/* ============================
-   KATEGORIE ÖFFNEN
-============================ */
-
-let currentCategory = "";
-
-function openCategory(category) {
-
-  currentCategory = category;
-
-  const data = categories[category];
-
-  hideAll();
-
-  document.getElementById("categoryStudio")
-    .classList.remove("hidden");
-
-  document.getElementById("categoryTitle")
-    .innerText = data.title;
-
-  document.getElementById("categoryDescription")
-    .innerText = data.description;
-
-  const container =
-    document.getElementById("dynamicFields");
-
-  container.innerHTML = "";
-
-  data.fields.forEach((field, index) => {
-
-    const title = field[0];
-    const options = field[1].split("|");
-
-    let html = `
-      <div class="field">
-        <label>${title}</label>
-        <select id="field${index}">
-    `;
-
-    options.forEach(option => {
-
-      html += `<option value="${option}">
-        ${option}
-      </option>`;
-
-    });
-
-    html += `
-        </select>
-      </div>
-    `;
-
-    container.innerHTML += html;
-
-  });
-
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
+updateSummary();
 
 }
 
 
-/* ============================
-   PROMPT GENERIEREN
-============================ */
+/* =========================================
+   AUSWAHLEN ANZEIGEN
+========================================= */
 
-function generateCategoryPrompt() {
+function renderCategories() {
 
-  const data = categories[currentCategory];
+const area = document.getElementById("selectionArea");
 
-  let selections = "";
+area.innerHTML = "";
 
-  data.fields.forEach((field, index) => {
+if(categories.size === 0) {
 
-    const value =
-      document.getElementById(`field${index}`).value;
+area.innerHTML = `
+<div class="selection-section">
+<p style="color:#aab2c4">
+Wähle oben einen oder mehrere Bereiche aus.
+</p>
+</div>
+`;
 
-    selections += `${field[0]}: ${value}\n`;
+return;
 
-  });
+}
 
-  const extra =
-    document.getElementById("extraIdea").value.trim();
 
-  let prompt = `MASTER PROMPT – ${data.title}
+categories.forEach(category => {
 
-${data.description}
+const categoryData = data[category];
 
-Ausgewählte Vorgaben:
+const section = document.createElement("section");
 
-${selections}
+section.className = "selection-section";
+
+const title = document.createElement("h2");
+
+title.textContent = categoryData.title;
+
+section.appendChild(title);
+
+
+const grid = document.createElement("div");
+
+grid.className = "preview-grid";
+
+
+categoryData.items.forEach(item => {
+
+const card = document.createElement("div");
+
+card.className = "preview-card";
+
+if(selected[category] &&
+selected[category].name === item.name) {
+
+card.classList.add("active");
+
+}
+
+card.innerHTML = `
+
+<div class="preview-image">
+${item.icon}
+</div>
+
+<div class="checkmark">✓</div>
+
+<div class="preview-label">
+${item.name}
+</div>
 
 `;
 
-  if (extra !== "") {
+card.onclick = function() {
 
-    prompt += `Zusätzliche kreative Vorgaben:
-${extra}
+selected[category] = item;
 
+renderCategories();
+
+updateSummary();
+
+};
+
+grid.appendChild(card);
+
+});
+
+
+section.appendChild(grid);
+
+area.appendChild(section);
+
+});
+
+}
+
+
+/* =========================================
+   ZUSAMMENFASSUNG
+========================================= */
+
+function updateSummary() {
+
+const list = document.getElementById("summaryList");
+
+list.innerHTML = "";
+
+const keys = Object.keys(selected);
+
+if(keys.length === 0) {
+
+list.innerHTML = `
+<span style="color:#aab2c4">
+Noch keine Auswahl getroffen.
+</span>
 `;
 
-  }
+return;
 
-  prompt += `Erstelle eine hochwertige, detaillierte Bildkomposition mit professioneller Bildgestaltung, klarer visueller Hierarchie, realistischen oder stilistisch passenden Texturen, stimmiger Beleuchtung und einer sorgfältig ausgearbeiteten Atmosphäre.
+}
 
-Ultra-detailed, high quality, professional composition, detailed textures, sharp focus where appropriate, visually coherent scene.
+keys.forEach(key => {
 
-NEGATIVE PROMPT:
-deformierte Anatomie, unnatürliche Proportionen, zusätzliche Gliedmaßen, zusätzliche Finger, verzerrte Hände, verzerrte Füße, unscharfe Details, schlechte Bildqualität, Wasserzeichen, unerwünschter Text, Bildfehler.`;
+const item = document.createElement("div");
 
-  document.getElementById("categoryOutput")
-    .innerText = prompt;
+item.className = "summary-item";
+
+item.textContent =
+data[key].title + ": " + selected[key].name;
+
+list.appendChild(item);
+
+});
 
 }
 
 
-/* ============================
-   BILDSTIL LESER
-============================ */
-
-function showStyleReader() {
-
-  hideAll();
-
-  document.getElementById("styleReader")
-    .classList.remove("hidden");
-
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
-
-}
-
-let imageColors = [];
-let imageWidth = 0;
-let imageHeight = 0;
-
-function loadImage(event) {
-
-  const file = event.target.files[0];
-
-  if (!file) return;
-
-  const reader = new FileReader();
-
-  reader.onload = function(e) {
-
-    const img = new Image();
-
-    img.onload = function() {
-
-      imageWidth = img.width;
-      imageHeight = img.height;
-
-      document.getElementById("previewBox").innerHTML =
-        `<img src="${e.target.result}" alt="Bildvorschau">`;
-
-      document.getElementById("imageInfo").innerHTML =
-        `<strong>Datei:</strong> ${file.name}<br>
-         <strong>Bildgröße:</strong> ${img.width} × ${img.height} Pixel<br>
-         <strong>Dateityp:</strong> ${file.type || "unbekannt"}`;
-
-      extractColors(img);
-
-    };
-
-    img.src = e.target.result;
-
-  };
-
-  reader.readAsDataURL(file);
-
-}
-
-
-/* DOMINANTE FARBEN */
-
-function extractColors(img) {
-
-  const canvas = document.createElement("canvas");
-
-  const ctx = canvas.getContext("2d");
-
-  const size = 100;
-
-  canvas.width = size;
-  canvas.height = size;
-
-  ctx.drawImage(img, 0, 0, size, size);
-
-  const data =
-    ctx.getImageData(0, 0, size, size).data;
-
-  const buckets = {};
-
-  for (let i = 0; i < data.length; i += 16) {
-
-    const r = Math.round(data[i] / 32) * 32;
-    const g = Math.round(data[i + 1] / 32) * 32;
-    const b = Math.round(data[i + 2] / 32) * 32;
-
-    const key = `${r},${g},${b}`;
-
-    buckets[key] =
-      (buckets[key] || 0) + 1;
-
-  }
-
-  imageColors = Object.entries(buckets)
-    .sort((a,b) => b[1] - a[1])
-    .slice(0, 5)
-    .map(item => item[0]);
-
-  const colorList =
-    document.getElementById("colorList");
-
-  colorList.innerHTML = "";
-
-  imageColors.forEach(rgb => {
-
-    const [r,g,b] =
-      rgb.split(",").map(Number);
-
-    const hex =
-      "#" +
-      r.toString(16).padStart(2,"0") +
-      g.toString(16).padStart(2,"0") +
-      b.toString(16).padStart(2,"0");
-
-    colorList.innerHTML += `
-      <div class="color-chip">
-        <div class="color-square"
-             style="background:${hex}">
-        </div>
-        ${hex}
-      </div>
-    `;
-
-  });
-
-}
-
-
-/* STYLE-ANALYSE PROMPT */
-
-function createStyleAnalysisPrompt() {
-
-  const type =
-    document.getElementById("analysisType").value;
-
-  let focus = "";
-
-  if (type === "complete") {
-    focus = `
-- Kunststil
-- Bildmotiv
-- Komposition
-- Perspektive
-- Licht
-- Farben
-- Atmosphäre
-- Texturen
-- Kamera- oder Rendering-Look
-- wichtige visuelle Merkmale`;
-  }
-
-  if (type === "artstyle") {
-    focus = `
-- Kunststil
-- visuelle Referenzen
-- Texturen
-- Farblook
-- Detailgrad
-- Rendering- oder Malstil`;
-  }
-
-  if (type === "photo") {
-    focus = `
-- Fotografie-Stil
-- mögliche Brennweite
-- Tiefenschärfe
-- Kamerawinkel
-- professionelle Lichtsetzung
-- Bildbearbeitungslook`;
-  }
-
-  if (type === "lighting") {
-    focus = `
-- Hauptlicht
-- Richtung des Lichts
-- Lichtfarbe
-- Schatten
-- Kontrast
-- Atmosphäre`;
-  }
-
-  if (type === "composition") {
-    focus = `
-- Bildaufbau
-- Perspektive
-- Kamerawinkel
-- Position des Hauptmotivs
-- Vordergrund
-- Hintergrund
-- visuelle Tiefe`;
-  }
-
-  const colors =
-    imageColors.length
-      ? imageColors.join(", ")
-      : "noch keine Farben erkannt";
-
-  const prompt = `BILDSTIL-ANALYSE
-
-Analysiere das hochgeladene Referenzbild detailliert.
-
-Technische Informationen:
-- Bildgröße: ${imageWidth} × ${imageHeight} Pixel
-- Erkannte dominante Farbtöne: ${colors}
-
-Untersuche insbesondere:
-
-${focus}
-
-Beschreibe anschließend den visuellen Stil so präzise, dass daraus ein neuer, eigenständiger Bild-Prompt mit ähnlicher ästhetischer Wirkung erstellt werden kann.
-
-Wichtig:
-Beschreibe allgemeine Stilmerkmale, Komposition, Licht, Farben, Materialien und Atmosphäre. Übernimm keine geschützten Bildinhalte oder exakten Bildkompositionen, sondern formuliere eine eigenständige stilistische Beschreibung.
-
-Am Ende erstelle:
-
-1. Eine kurze Stilbeschreibung
-2. Eine detaillierte visuelle Analyse
-3. Einen eigenständigen Prompt für ein neues Bild mit ähnlicher ästhetischer Wirkung
-4. Einen passenden Negative Prompt`;
-
-  document.getElementById("styleOutput")
-    .innerText = prompt;
-
-}
-
-
-/* ============================
+/* =========================================
    MASTER PROMPT
-============================ */
+========================================= */
 
-function showMasterStudio() {
+function generatePrompt() {
 
-  hideAll();
+const keys = Object.keys(selected);
 
-  document.getElementById("masterStudio")
-    .classList.remove("hidden");
+if(keys.length === 0) {
 
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
+alert("Bitte wähle mindestens eine Option aus.");
+
+return;
 
 }
 
-function generateMasterPrompt() {
 
-  const subject =
-    document.getElementById("masterSubject").value;
+let prompt = `MASTER PROMPT – ARTSTYLE STUDIO
 
-  const scene =
-    document.getElementById("masterScene").value;
+Created with ArtStyle Studio
+Dirk Eckert
 
-  const style =
-    document.getElementById("masterStyle").value;
+`;
 
-  const camera =
-    document.getElementById("masterCamera").value;
+prompt += `SELECTED SETTINGS:
 
-  const lens =
-    document.getElementById("masterLens").value;
+`;
 
-  const light =
-    document.getElementById("masterLight").value;
+keys.forEach(key => {
 
-  const ratio =
-    document.getElementById("masterRatio").value;
+prompt +=
+`• ${data[key].title}: ${selected[key].name}
+`;
 
-  const prompt = `MASTER PROMPT – DIRK ECKERT ARTSTYLE STUDIO
+});
 
-Hauptmotiv:
-${subject || "Kreatives Hauptmotiv"}
 
-Szene:
-${scene || "Professionell gestaltete Umgebung"}
+prompt += `
 
-Bildstil:
-${style}
+DETAILED IMAGE PROMPT:
 
-Fotografie / Kamera:
-Aufgenommen mit ${camera}, ${lens}.
+`;
 
-Beleuchtung:
-${light}.
 
-Erstelle eine hochwertige, professionelle und visuell beeindruckende Komposition.
+const promptParts = [];
 
-Ultra-detailed, high quality, realistic or stylistically appropriate textures, professional composition, atmospheric depth, detailed lighting, sharp focus where appropriate.
+keys.forEach(key => {
 
-Aspect Ratio: ${ratio}
+promptParts.push(selected[key].prompt);
+
+});
+
+
+prompt += promptParts.join(", ") + `.
+
+`;
+
+
+const custom =
+document.getElementById("customText").value.trim();
+
+
+if(custom) {
+
+prompt += `
+
+ADDITIONAL CREATIVE DETAILS:
+
+${custom}
+
+`;
+
+}
+
+
+prompt += `
+
+QUALITY AND COMPOSITION:
+
+Create a visually coherent, highly detailed and professionally composed image.
+
+Natural proportions and believable anatomy where applicable. Realistic textures, detailed materials, atmospheric depth, professional composition and high-quality visual storytelling.
+
+Ensure that clothing, footwear and accessories are clearly represented when selected. Maintain consistency between pose, clothing, environment and lighting.
 
 NEGATIVE PROMPT:
-deformierte Anatomie, unnatürliche Proportionen, zusätzliche Gliedmaßen, zusätzliche Finger, verzerrte Hände, verzerrte Füße, schlechte Bildqualität, unscharfe Details, Wasserzeichen, unerwünschter Text.`;
 
-  document.getElementById("masterOutput")
-    .innerText = prompt;
+low quality, blurry, distorted anatomy, unnatural proportions, malformed hands, extra fingers, extra limbs, malformed feet, duplicate body parts, bad composition, unwanted text, watermark, logo, oversaturated artificial textures.
+
+`;
+
+
+const output =
+document.getElementById("output");
+
+output.textContent = prompt;
+
+output.style.display = "block";
+
+document.getElementById("copyButton")
+.style.display = "block";
+
+
+output.scrollIntoView({
+
+behavior:"smooth",
+
+block:"start"
+
+});
 
 }
 
 
-/* ============================
+/* =========================================
    KOPIEREN
-============================ */
+========================================= */
 
-function copyText(id) {
+function copyPrompt() {
 
-  const text =
-    document.getElementById(id).innerText;
+const text =
+document.getElementById("output").textContent;
 
-  navigator.clipboard.writeText(text)
-    .then(() => {
-      alert("📋 Text wurde kopiert!");
-    })
-    .catch(() => {
-      alert("Kopieren nicht möglich. Bitte Text manuell markieren.");
-    });
+
+navigator.clipboard.writeText(text)
+
+.then(() => {
+
+alert("✅ Dein Master Prompt wurde kopiert!");
+
+})
+
+.catch(() => {
+
+alert("Bitte den Prompt manuell markieren und kopieren.");
+
+});
 
 }
 

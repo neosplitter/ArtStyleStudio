@@ -1,172 +1,274 @@
-<!DOCTYPE  html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ArtStyle Studio - Dirk Eckert</title>
+<title>ArtStyle Studio – Dirk Eckert</title>
 
 <style>
 :root {
-  --bg: #090b12;
-  --card: #171a26;
-  --card2: #222635;
+  --bg: #080a10;
+  --bg2: #0e1220;
+  --card: #151a28;
+  --card2: #20263a;
+  --card3: #29314a;
   --purple: #8b5cf6;
+  --purple2: #a855f7;
   --pink: #ec4899;
   --green: #22c55e;
+  --red: #ef4444;
+  --blue: #38bdf8;
+  --orange: #f59e0b;
   --text: #ffffff;
-  --muted: #b8bdd0;
-  --border: #3a4055;
+  --muted: #aeb6cf;
+  --border: #343c55;
 }
 
 * {
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   background:
-    radial-gradient(circle at top, #241044 0%, #090b12 45%);
+    radial-gradient(circle at top, #241044 0%, #0b1020 35%, #080a10 75%);
   color: var(--text);
   min-height: 100vh;
 }
 
+/* =========================
+   HEADER
+========================= */
+
 header {
   text-align: center;
-  padding: 35px 20px 30px;
-  background: linear-gradient(
-    135deg,
-    #16002b,
-    #111827,
-    #31004f
-  );
+  padding: 35px 20px 28px;
+  background:
+    linear-gradient(135deg,
+      rgba(20,0,45,.98),
+      rgba(16,24,39,.98),
+      rgba(55,0,80,.98));
   border-bottom: 1px solid #5b3b78;
+  box-shadow: 0 8px 30px rgba(0,0,0,.35);
 }
 
 .logo {
-  font-size: 48px;
+  font-size: 50px;
   margin-bottom: 8px;
 }
 
 h1 {
   margin: 0;
-  font-size: 38px;
+  font-size: 40px;
 }
 
 .name {
   margin-top: 10px;
-  font-size: 23px;
+  font-size: 22px;
   font-weight: bold;
   color: #c084fc;
 }
 
 .subtitle {
-  margin-top: 14px;
+  margin-top: 12px;
   color: var(--muted);
-  font-size: 17px;
 }
 
+/* =========================
+   LAYOUT
+========================= */
+
 main {
-  max-width: 1000px;
+  max-width: 1150px;
   margin: auto;
-  padding: 25px 16px 60px;
+  padding: 24px 16px 70px;
 }
 
 .hero {
-  background: linear-gradient(135deg, #5b087c, #9d004f);
-  padding: 28px;
-  border-radius: 28px;
-  margin-bottom: 35px;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+  padding: 26px;
+  border-radius: 26px;
+  background:
+    linear-gradient(135deg,
+      rgba(91,8,124,.95),
+      rgba(157,0,79,.95));
+  box-shadow: 0 15px 40px rgba(0,0,0,.4);
+  margin-bottom: 28px;
 }
 
 .hero h2 {
   margin-top: 0;
-  font-size: 30px;
 }
 
 .hero p {
   line-height: 1.6;
-  font-size: 17px;
+  color: #f0e8ff;
 }
 
-.section-title {
-  font-size: 30px;
-  margin: 30px 0 20px;
+/* =========================
+   STATS
+========================= */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 28px;
 }
+
+.stat {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 16px;
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 28px;
+  font-weight: bold;
+  color: #c084fc;
+}
+
+.stat-label {
+  margin-top: 5px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* =========================
+   TITLES
+========================= */
+
+.section-title {
+  margin: 35px 0 18px;
+  font-size: 27px;
+}
+
+/* =========================
+   CATEGORIES
+========================= */
 
 .categories {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  gap: 14px;
 }
 
 .card {
-  border: 3px solid var(--border);
-  background: var(--card);
-  border-radius: 25px;
-  padding: 18px 12px;
-  min-height: 150px;
+  position: relative;
+  min-height: 145px;
+  padding: 18px 10px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: 22px;
+
   cursor: pointer;
-
-  transition:
-    transform 0.15s ease,
-    background 0.15s ease,
-    border-color 0.15s ease;
-
   user-select: none;
+
+  transition: .18s ease;
   -webkit-tap-highlight-color: transparent;
 }
 
-.card:active {
-  transform: scale(0.96);
-}
-
 .card:hover {
-  border-color: var(--purple);
+  transform: translateY(-3px);
   background: var(--card2);
+  border-color: var(--purple);
 }
 
-.card.selected {
+.card:active {
+  transform: scale(.97);
+}
+
+.card.has-selection {
   border-color: var(--green);
-  background: #243c2f;
+  box-shadow: 0 0 18px rgba(34,197,94,.15);
 }
 
-.icon {
-  font-size: 45px;
-  margin-bottom: 14px;
+.card-icon {
+  font-size: 42px;
+  margin-bottom: 12px;
 }
 
 .card-title {
-  font-size: 20px;
-  text-align: center;
+  font-size: 17px;
   font-weight: bold;
+  text-align: center;
 }
 
-.card-description {
+.selection-badge {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+
+  min-width: 24px;
+  height: 24px;
+
+  padding: 3px 7px;
+  border-radius: 20px;
+
+  background: var(--green);
+  color: #07150b;
+
+  font-size: 12px;
+  font-weight: bold;
+
   display: none;
 }
 
-/* Auswahlbereich */
+.card.has-selection .selection-badge {
+  display: block;
+}
+
+/* =========================
+   SELECTION AREA
+========================= */
 
 #selectionArea {
   display: none;
-  margin-top: 35px;
-  background: #111521;
-  border: 1px solid var(--border);
-  border-radius: 25px;
+  margin-top: 28px;
+
   padding: 22px;
+
+  background: rgba(17,21,33,.97);
+  border: 1px solid var(--border);
+  border-radius: 24px;
 }
 
-#selectionArea h2 {
-  margin-top: 0;
+.selection-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+#selectionTitle {
+  margin: 0;
+}
+
+#selectionHint {
+  color: var(--muted);
+  margin: 10px 0 18px;
+  line-height: 1.5;
+}
+
+.close-selection {
+  width: auto;
+  margin: 0;
+  padding: 9px 14px;
+  font-size: 14px;
+  background: #252b3d;
 }
 
 .options {
@@ -176,127 +278,348 @@ main {
 }
 
 .option {
-  background: #222635;
-  border: 2px solid #42485d;
+  position: relative;
+
+  padding: 15px 12px;
+
+  background: var(--card2);
+  border: 2px solid #414960;
   border-radius: 16px;
-  padding: 15px;
+
   text-align: center;
   cursor: pointer;
-  font-size: 16px;
 
+  transition: .15s ease;
   -webkit-tap-highlight-color: transparent;
 }
 
-.option:active {
-  transform: scale(0.97);
+.option:hover {
+  border-color: var(--purple);
 }
 
 .option.active {
+  background: #193727;
   border-color: var(--green);
-  background: #243c2f;
 }
 
-/* Prompt */
+.option.active::after {
+  content: "✓";
+  position: absolute;
+  top: 6px;
+  right: 9px;
+
+  color: var(--green);
+  font-weight: bold;
+}
+
+/* =========================
+   SELECTED OVERVIEW
+========================= */
+
+.overview {
+  margin-top: 30px;
+  padding: 20px;
+
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+}
+
+.overview h2 {
+  margin-top: 0;
+}
+
+.selected-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  padding: 9px 12px;
+  border-radius: 30px;
+
+  background: #262d42;
+  border: 1px solid #434d68;
+
+  font-size: 14px;
+}
+
+.chip strong {
+  color: #c084fc;
+}
+
+.empty-message {
+  color: var(--muted);
+}
+
+/* =========================
+   PROMPT
+========================= */
 
 .prompt-box {
   margin-top: 30px;
-  background: #111521;
-  border-radius: 25px;
-  padding: 20px;
+  padding: 22px;
+
+  background: var(--card);
   border: 1px solid var(--border);
+  border-radius: 25px;
+}
+
+.prompt-box h2 {
+  margin-top: 0;
 }
 
 textarea {
   width: 100%;
-  min-height: 220px;
+  min-height: 260px;
+
   resize: vertical;
 
-  background: #080a10;
+  padding: 16px;
+
+  background: #080b12;
   color: white;
 
-  border: 2px solid #383e52;
-  border-radius: 16px;
+  border: 2px solid #384159;
+  border-radius: 17px;
 
-  padding: 15px;
+  font-family: inherit;
   font-size: 16px;
-  line-height: 1.5;
+  line-height: 1.55;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--purple);
+}
+
+.prompt-info {
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 15px;
 }
 
 button {
-  width: 100%;
-  margin-top: 15px;
-  padding: 17px;
-
   border: none;
-  border-radius: 16px;
+  border-radius: 15px;
 
-  background: linear-gradient(135deg, #7c3aed, #db2777);
+  padding: 16px;
+
   color: white;
 
-  font-size: 18px;
+  font-family: inherit;
+  font-size: 16px;
   font-weight: bold;
 
   cursor: pointer;
+
+  transition: .15s ease;
 }
 
 button:active {
-  transform: scale(0.98);
+  transform: scale(.97);
+}
+
+.primary {
+  background:
+    linear-gradient(135deg,
+      #7c3aed,
+      #db2777);
+}
+
+.secondary {
+  background:
+    linear-gradient(135deg,
+      #263247,
+      #111827);
+}
+
+.green {
+  background:
+    linear-gradient(135deg,
+      #15803d,
+      #22c55e);
+}
+
+.orange {
+  background:
+    linear-gradient(135deg,
+      #b45309,
+      #f59e0b);
+}
+
+.danger {
+  background:
+    linear-gradient(135deg,
+      #7f1d1d,
+      #ef4444);
 }
 
 .status {
+  min-height: 25px;
   margin-top: 15px;
-  color: #86efac;
+
   text-align: center;
-  min-height: 22px;
+  color: #86efac;
 }
 
-footer {
-  text-align: center;
-  color: #777e95;
-  padding: 30px 10px;
+/* =========================
+   LIBRARY
+========================= */
+
+.library {
+  margin-top: 35px;
+
+  padding: 22px;
+
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 25px;
+}
+
+.library h2 {
+  margin-top: 0;
+}
+
+.saved-prompt {
+  margin-top: 12px;
+
+  padding: 16px;
+
+  background: #0c101a;
+  border: 1px solid #333c52;
+  border-radius: 16px;
+}
+
+.saved-prompt-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 10px;
+}
+
+.saved-title {
+  font-weight: bold;
+  color: #c084fc;
+}
+
+.saved-text {
+  margin-top: 10px;
+
+  color: #c5ccdf;
+  line-height: 1.5;
+
+  max-height: 100px;
+  overflow: auto;
+
   font-size: 14px;
 }
 
-/* Mobil */
+.saved-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
 
-@media (max-width: 600px) {
+.small-button {
+  width: auto;
+  padding: 9px 12px;
+  margin: 0;
 
-  h1 {
-    font-size: 32px;
+  font-size: 13px;
+
+  background: #293149;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+  text-align: center;
+  padding: 35px 10px;
+  color: #727b92;
+  font-size: 14px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+
+  header {
+    padding-top: 28px;
   }
 
-  .logo {
-    font-size: 42px;
+  h1 {
+    font-size: 31px;
+  }
+
+  .name {
+    font-size: 19px;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
   }
 
   .categories {
-    gap: 12px;
+    gap: 11px;
   }
 
   .card {
-    min-height: 135px;
-    padding: 14px 8px;
+    min-height: 125px;
   }
 
-  .icon {
-    font-size: 40px;
+  .card-icon {
+    font-size: 37px;
   }
 
   .card-title {
-    font-size: 17px;
+    font-size: 15px;
   }
 
   .options {
     grid-template-columns: 1fr;
   }
 
+  .button-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding: 21px;
+  }
+
+  .section-title {
+    font-size: 23px;
+  }
+
 }
+
 </style>
 </head>
 
 <body>
 
 <header>
+
   <div class="logo">🎨✨</div>
 
   <h1>ArtStyle Studio</h1>
@@ -304,8 +627,9 @@ footer {
   <div class="name">Dirk Eckert</div>
 
   <div class="subtitle">
-    Dein persönliches Creative Prompt Studio
+    Mega Creative Prompt Studio · Erstelle deine individuellen Bild-Prompts
   </div>
+
 </header>
 
 
@@ -313,116 +637,86 @@ footer {
 
 <section class="hero">
 
-  <h2>✨ Willkommen in deinem Prompt Studio</h2>
+  <h2>🚀 Willkommen im ArtStyle Studio</h2>
 
   <p>
-    Wähle verschiedene Bereiche aus und kombiniere sie
-    zu einem individuellen Bild-Prompt.
+    Kombiniere Personen, Frisuren, Kleidung, Posen, Landschaften,
+    Bildstile, Kameras, Beleuchtung und viele weitere Elemente.
+    Mehrere Bildstile können gleichzeitig kombiniert werden.
   </p>
 
 </section>
 
 
-<h2 class="section-title">🎛️ 1. Bereiche auswählen</h2>
+<!-- STATISTIK -->
 
+<div class="stats">
 
-<div class="categories">
-
-  <div class="card" onclick="openCategory('Person')">
-    <div class="icon">👤</div>
-    <div class="card-title">Person</div>
+  <div class="stat">
+    <div class="stat-number" id="selectedCount">0</div>
+    <div class="stat-label">Ausgewählte Elemente</div>
   </div>
 
-
-  <div class="card" onclick="openCategory('Frisur')">
-    <div class="icon">💇</div>
-    <div class="card-title">Frisur</div>
+  <div class="stat">
+    <div class="stat-number" id="categoryCount">0</div>
+    <div class="stat-label">Verwendete Kategorien</div>
   </div>
 
-
-  <div class="card" onclick="openCategory('Haarfarbe')">
-    <div class="icon">🎨</div>
-    <div class="card-title">Haarfarbe</div>
-  </div>
-
-
-  <div class="card" onclick="openCategory('Make-up')">
-    <div class="icon">💄</div>
-    <div class="card-title">Make-up</div>
-  </div>
-
-
-  <div class="card" onclick="openCategory('Kleidung')">
-    <div class="icon">👗</div>
-    <div class="card-title">Kleidung</div>
-  </div>
-
-
-  <div class="card" onclick="openCategory('Strumpfhose')">
-    <div class="icon">🧦</div>
-    <div class="card-title">Strumpfhose</div>
-  </div>
-
-
-  <div class="card" onclick="openCategory('Schuhe')">
-    <div class="icon">👠</div>
-    <div class="card-title">Schuhe</div>
-  </div>
-
-
-  <div class="card" onclick="openCategory('Pose')">
-    <div class="icon">🧍</div>
-    <div class="card-title">Pose</div>
-  </div>
-
-
-  <div class="card" onclick="openCategory('Japan')">
-    <div class="icon">🇯🇵</div>
-    <div class="card-title">Japan</div>
-  </div>
-
-
-  <div class="card" onclick="openCategory('Landschaft')">
-    <div class="icon">🏔️</div>
-    <div class="card-title">Landschaft</div>
-  </div>
-
-
-  <div class="card" onclick="openCategory('Bildstil')">
-    <div class="icon">🖼️</div>
-    <div class="card-title">Bildstil</div>
-  </div>
-
-
-  <div class="card" onclick="openCategory('Fotorealismus')">
-    <div class="icon">📸</div>
-    <div class="card-title">Fotorealismus</div>
-  </div>
-
-
-  <div class="card" onclick="openCategory('Fantasy')">
-    <div class="icon">🌌</div>
-    <div class="card-title">Fantasy</div>
-  </div>
-
-
-  <div class="card" onclick="openCategory('Erwachsene Kreativposen')">
-    <div class="icon">🔞</div>
-    <div class="card-title">18+ Kreativbereich</div>
+  <div class="stat">
+    <div class="stat-number" id="savedCount">0</div>
+    <div class="stat-label">Gespeicherte Prompts</div>
   </div>
 
 </div>
+
+
+<h2 class="section-title">🎛️ Prompt-Bereiche</h2>
+
+
+<div class="categories" id="categoriesContainer"></div>
 
 
 <!-- AUSWAHL -->
 
 <section id="selectionArea">
 
-  <h2 id="selectionTitle">
-    Auswahl
-  </h2>
+  <div class="selection-header">
 
-  <div class="options" id="optionsContainer"></div>
+    <h2 id="selectionTitle">Auswahl</h2>
+
+    <button
+      class="close-selection"
+      onclick="closeSelection()">
+      ✕ Schließen
+    </button>
+
+  </div>
+
+  <p id="selectionHint"></p>
+
+  <div
+    class="options"
+    id="optionsContainer">
+  </div>
+
+</section>
+
+
+<!-- AUSWAHLÜBERSICHT -->
+
+<section class="overview">
+
+  <h2>✅ Deine Auswahl</h2>
+
+  <div
+    class="selected-list"
+    id="selectedList">
+
+    <div class="empty-message">
+      Noch keine Auswahl getroffen.
+    </div>
+
+  </div>
 
 </section>
 
@@ -431,18 +725,65 @@ footer {
 
 <section class="prompt-box">
 
-  <h2>📝 Dein kombinierter Prompt</h2>
+  <h2>📝 Dein Master Prompt</h2>
 
   <textarea
     id="promptOutput"
-    placeholder="Wähle oben Bereiche aus. Deine Auswahl wird hier automatisch kombiniert."
+    placeholder="Wähle oben Bereiche aus. Dein individueller Prompt wird automatisch erstellt."
   ></textarea>
 
-  <button onclick="copyPrompt()">
-    📋 Prompt kopieren
-  </button>
+  <div class="prompt-info">
+    <span>Du kannst den Prompt jederzeit manuell bearbeiten.</span>
+    <span id="characterCount">0 Zeichen</span>
+  </div>
+
+
+  <div class="button-grid">
+
+    <button class="primary" onclick="copyPrompt()">
+      📋 Prompt kopieren
+    </button>
+
+    <button class="green" onclick="savePrompt()">
+      💾 Prompt speichern
+    </button>
+
+    <button class="orange" onclick="randomPrompt()">
+      🎲 Zufälligen Prompt erstellen
+    </button>
+
+    <button class="secondary" onclick="exportData()">
+      📤 Backup exportieren
+    </button>
+
+    <button class="secondary" onclick="importData()">
+      📥 Backup importieren
+    </button>
+
+    <button class="danger" onclick="resetAll()">
+      🔄 Alles zurücksetzen
+    </button>
+
+  </div>
 
   <div class="status" id="status"></div>
+
+</section>
+
+
+<!-- PROMPT BIBLIOTHEK -->
+
+<section class="library">
+
+  <h2>📚 Meine Prompt-Bibliothek</h2>
+
+  <div id="savedPrompts">
+
+    <div class="empty-message">
+      Noch keine Prompts gespeichert.
+    </div>
+
+  </div>
 
 </section>
 
@@ -450,199 +791,485 @@ footer {
 
 
 <footer>
-  ArtStyle Studio · Dirk Eckert
+  🎨 ArtStyle Studio · Dirk Eckert · Dein persönliches Creative Prompt Studio
 </footer>
 
 
 <script>
 
-/* ===================================
-   DATENBANK DER AUSWAHLMÖGLICHKEITEN
-=================================== */
+/* =========================================
+   KATEGORIEN
+========================================= */
 
 const categories = {
 
-  "Person": [
-    "Erwachsene Frau",
-    "Erwachsener Mann",
-    "Elegantes Frauenportrait",
-    "Elegantes Männerportrait"
-  ],
+  "Person": {
+    icon: "👤",
+    multi: false,
+    options: [
+      "Erwachsene Frau",
+      "Erwachsener Mann",
+      "Elegantes Frauenportrait",
+      "Elegantes Männerportrait",
+      "Reife elegante Frau",
+      "Reifer eleganter Mann",
+      "Fashion Model",
+      "Cinematic Portrait"
+    ]
+  },
 
-  "Frisur": [
-    "Pixie Cut",
-    "Kurzer Bob",
-    "Langes glattes Haar",
-    "Langes lockiges Haar",
-    "Schulterlanges Haar",
-    "Glatze",
-    "Kurzer moderner Haarschnitt"
-  ],
+  "Alter": {
+    icon: "🎂",
+    multi: false,
+    options: [
+      "Junge erwachsene Person",
+      "Erwachsene Person",
+      "Reife erwachsene Person",
+      "Elegant und selbstbewusst",
+      "Zeitlose elegante Ausstrahlung"
+    ]
+  },
 
-  "Haarfarbe": [
-    "Blond",
-    "Platinblond",
-    "Dunkelblond",
-    "Braun",
-    "Schwarz",
-    "Rot",
-    "Grau"
-  ],
+  "Frisur": {
+    icon: "💇",
+    multi: false,
+    options: [
+      "Pixie Cut",
+      "Kurzer Bob",
+      "Kurzer moderner Haarschnitt",
+      "Schulterlanges Haar",
+      "Langes glattes Haar",
+      "Langes lockiges Haar",
+      "Elegante Hochsteckfrisur",
+      "Glatze"
+    ]
+  },
 
-  "Make-up": [
-    "Natürliches Make-up",
-    "Glamour-Make-up",
-    "Dezentes Tages-Make-up",
-    "Elegantes Abend-Make-up",
-    "Kein sichtbares Make-up"
-  ],
+  "Haarfarbe": {
+    icon: "🎨",
+    multi: false,
+    options: [
+      "Blond",
+      "Platinblond",
+      "Dunkelblond",
+      "Braun",
+      "Dunkelbraun",
+      "Schwarz",
+      "Rot",
+      "Grau"
+    ]
+  },
 
-  "Kleidung": [
-    "Elegantes Kleid",
-    "Kurzes Kleid",
-    "Abendkleid",
-    "Business-Outfit",
-    "Eleganter Anzug",
-    "Casual Outfit",
-    "Moderne Streetwear"
-  ],
+  "Make-up": {
+    icon: "💄",
+    multi: false,
+    options: [
+      "Natürliches Make-up",
+      "Glamour-Make-up",
+      "Elegantes Abend-Make-up",
+      "Dezentes Tages-Make-up",
+      "Professionelles Fashion-Make-up",
+      "Kein sichtbares Make-up"
+    ]
+  },
 
-  "Strumpfhose": [
-    "Ultra-sheer nude Nylon, 15 DEN",
-    "Feine beige Strumpfhose, 15 DEN",
-    "Schwarze transparente Strumpfhose",
-    "Elegante Feinstrumpfhose",
-    "Keine Strumpfhose"
-  ],
+  "Kleidung": {
+    icon: "👗",
+    multi: true,
+    options: [
+      "Elegantes Kleid",
+      "Kurzes Kleid",
+      "Abendkleid",
+      "Business-Outfit",
+      "Eleganter Anzug",
+      "Elegante Bluse",
+      "Moderne Streetwear",
+      "Casual Outfit",
+      "Luxuriöse Fashion"
+    ]
+  },
 
-  "Schuhe": [
-    "Riemchen High Heels",
-    "Elegante High Heels",
-    "Pumps",
-    "Stiefel",
-    "Sneaker",
-    "Elegante Lederschuhe",
-    "Barfuß"
-  ],
+  "Strumpfhose": {
+    icon: "🧦",
+    multi: true,
+    options: [
+      "Ultra-sheer nude Nylon, 15 DEN",
+      "Realistische feine Nylon-Mikrostruktur",
+      "Natürliche Transparenz mit sichtbarer Haut darunter",
+      "Kontinuierliche Nylonbedeckung über Beine, Füße und Zehen",
+      "Dezente seidige Highlights",
+      "Schwarze transparente Strumpfhose",
+      "Elegante Feinstrumpfhose",
+      "Keine Strumpfhose"
+    ]
+  },
 
-  "Pose": [
-    "Natürlich stehend",
-    "Elegant stehend",
-    "Sitzend",
-    "Gehend",
-    "Leicht zur Kamera gedreht",
-    "Selbstbewusste Pose",
-    "Entspannte natürliche Pose"
-  ],
+  "Schuhe": {
+    icon: "👠",
+    multi: false,
+    options: [
+      "Riemchen High Heels",
+      "Elegante High Heels",
+      "Pumps",
+      "Stiefel",
+      "Sneaker",
+      "Elegante Lederschuhe",
+      "Barfuß"
+    ]
+  },
 
-  "Japan": [
-    "Kyoto bei Sonnenuntergang",
-    "Fushimi Inari Taisha",
-    "Japanischer Bambuswald",
-    "Traditioneller japanischer Garten",
-    "Tokio bei Nacht",
-    "Matsumoto Castle"
-  ],
+  "Pose": {
+    icon: "🧍",
+    multi: true,
+    options: [
+      "Natürlich stehend",
+      "Elegant stehend",
+      "Selbstbewusste Pose",
+      "Entspannte natürliche Pose",
+      "Sitzend",
+      "Gehend",
+      "Leicht zur Kamera gedreht",
+      "Dynamische Fashion-Pose"
+    ]
+  },
 
-  "Landschaft": [
-    "Berglandschaft",
-    "Strand bei Sonnenuntergang",
-    "Wald im Morgennebel",
-    "See mit Spiegelung",
-    "Winterlandschaft",
-    "Tropische Landschaft"
-  ],
+  "Gesichtsausdruck": {
+    icon: "😊",
+    multi: false,
+    options: [
+      "Natürliches Lächeln",
+      "Selbstbewusster Blick",
+      "Eleganter neutraler Gesichtsausdruck",
+      "Freundliche Ausstrahlung",
+      "Cinematic ernster Blick",
+      "Entspanntere natürliche Mimik"
+    ]
+  },
 
-  "Bildstil": [
-    "Cinematic Style",
-    "Fine-Art Photography",
-    "Editorial Photography",
-    "Neo Abstract",
-    "Dramatic Lighting",
-    "Dreamlike Art"
-  ],
+  "Hintergrund": {
+    icon: "🌆",
+    multi: true,
+    options: [
+      "Moderner luxuriöser Hintergrund",
+      "Professionelles Fotostudio",
+      "Elegantes Hotel",
+      "Große Fensterfront",
+      "Moderne Architektur",
+      "Minimalistischer Hintergrund",
+      "Städtische Kulisse",
+      "Naturkulisse"
+    ]
+  },
 
-  "Fotorealismus": [
-    "Ultra-realistische professionelle Fotografie",
-    "Canon EOS R5",
-    "85mm Portraitobjektiv",
-    "Natürliche Hautstruktur",
-    "Professionelle Studiobeleuchtung",
-    "Ultra-detailliert"
-  ],
+  "Japan": {
+    icon: "🇯🇵",
+    multi: true,
+    options: [
+      "Kyoto bei Sonnenuntergang",
+      "Fushimi Inari Taisha",
+      "Japanischer Bambuswald",
+      "Traditioneller japanischer Garten",
+      "Tokio bei Nacht",
+      "Matsumoto Castle",
+      "Hakone und Lake Ashi",
+      "Takachiho-Schlucht",
+      "Japanische Kirschblüten"
+    ]
+  },
 
-  "Fantasy": [
-    "Surreale Fantasiewelt",
-    "Mystische Atmosphäre",
-    "Magische Beleuchtung",
-    "Cinematic Fantasy",
-    "Epische Landschaft",
-    "Traumhafte Szene"
-  ],
+  "Landschaft": {
+    icon: "🏔️",
+    multi: true,
+    options: [
+      "Epische Berglandschaft",
+      "Strand bei Sonnenuntergang",
+      "Wald im Morgennebel",
+      "See mit Spiegelung",
+      "Winterlandschaft",
+      "Tropische Landschaft",
+      "Dramatische Küstenlandschaft",
+      "Goldene Herbstlandschaft"
+    ]
+  },
 
-  "Erwachsene Kreativposen": [
-    "Erwachsene Person in eleganter Pose",
-    "Fashion-Pose im Studio",
-    "Sitzende stilvolle Pose",
-    "Stehende glamouröse Pose",
-    "Cinematic Fashion Photography",
-    "Künstlerische Portraitpose"
-  ]
+  "Bildstil": {
+    icon: "🖼️",
+    multi: true,
+    options: [
+      "Cinematic Style",
+      "Fine-Art Photography",
+      "Editorial Photography",
+      "Neo Abstract",
+      "Dramatic Lighting",
+      "Dreamlike Art",
+      "Luxury Fashion Photography",
+      "Magazine Cover Style",
+      "Minimalist Art",
+      "Hyper-Detailed Art"
+    ]
+  },
+
+  "Fotorealismus": {
+    icon: "📸",
+    multi: true,
+    options: [
+      "Ultra-realistische professionelle Fotografie",
+      "Extrem realistische Details",
+      "Natürliche Hautstruktur",
+      "Realistische Hautporen",
+      "Keine künstliche Hautglättung",
+      "Professionelle Studiobeleuchtung",
+      "Ultra-detailliert",
+      "Hochwertige Bildqualität"
+    ]
+  },
+
+  "Kamera": {
+    icon: "📷",
+    multi: false,
+    options: [
+      "Canon EOS R5",
+      "Sony A7R IV",
+      "Nikon Z7 II",
+      "Hasselblad H6D-100c",
+      "Phase One IQ4 150MP"
+    ]
+  },
+
+  "Objektiv": {
+    icon: "🔍",
+    multi: false,
+    options: [
+      "85mm Portraitobjektiv f/1.4",
+      "85mm Portraitobjektiv f/1.8",
+      "50mm Objektiv",
+      "35mm Objektiv f/1.4",
+      "100mm APO Macro Objektiv"
+    ]
+  },
+
+  "Beleuchtung": {
+    icon: "💡",
+    multi: true,
+    options: [
+      "Golden Hour Beleuchtung",
+      "Weiches diffuses Licht",
+      "Cinematic Lighting",
+      "Dramatisches Rim Light",
+      "Professionelle Studiobeleuchtung",
+      "Warmes Sonnenlicht",
+      "Atmosphärische Beleuchtung",
+      "Natürliche Fensterbeleuchtung"
+    ]
+  },
+
+  "Stimmung": {
+    icon: "🎭",
+    multi: true,
+    options: [
+      "Elegante Atmosphäre",
+      "Luxuriöse Atmosphäre",
+      "Mystische Stimmung",
+      "Romantische Stimmung",
+      "Dramatische Atmosphäre",
+      "Ruhige harmonische Stimmung",
+      "Epische Atmosphäre",
+      "Traumhafte Stimmung"
+    ]
+  },
+
+  "Fantasy": {
+    icon: "🌌",
+    multi: true,
+    options: [
+      "Surreale Fantasiewelt",
+      "Mystische Atmosphäre",
+      "Magische Beleuchtung",
+      "Cinematic Fantasy",
+      "Epische Landschaft",
+      "Traumhafte Szene",
+      "Schwebende Lichter",
+      "Fantastische Architektur"
+    ]
+  },
+
+  "Bildformat": {
+    icon: "📐",
+    multi: false,
+    options: [
+      "Seitenverhältnis 9:16, vertikales Portraitformat",
+      "Seitenverhältnis 16:9, Cinematic Format",
+      "Seitenverhältnis 1:1",
+      "Seitenverhältnis 4:5",
+      "Seitenverhältnis 3:4",
+      "Seitenverhältnis 2:3"
+    ]
+  },
+
+  "Komposition": {
+    icon: "🎬",
+    multi: true,
+    options: [
+      "Professionelle Komposition",
+      "Symmetrische Bildgestaltung",
+      "Dynamische Perspektive",
+      "Cinematic Perspektive",
+      "Kamera auf Augenhöhe",
+      "Kamera weiter zurück, vollständige Person sichtbar",
+      "Gesamter Körper inklusive Füße sichtbar",
+      "Sorgfältige Bildgestaltung"
+    ]
+  },
+
+  "Erwachsene Kreativposen": {
+    icon: "🔞",
+    multi: true,
+    options: [
+      "Erwachsene Person in eleganter Pose",
+      "Fashion-Pose im Studio",
+      "Sitzende stilvolle Pose",
+      "Stehende glamouröse Pose",
+      "Cinematic Fashion Photography",
+      "Künstlerische Portraitpose",
+      "Selbstbewusste elegante Pose"
+    ]
+  }
 
 };
 
 
-/* ===================================
-   AUSWAHLEN SPEICHERN
-=================================== */
+/* =========================================
+   AUSWAHLEN
+========================================= */
 
 let selectedValues = {};
+let currentCategory = null;
 
 
-/* ===================================
-   KATEGORIE ÖFFNEN
-=================================== */
+/* =========================================
+   INIT
+========================================= */
 
-function openCategory(category) {
+function init() {
 
-  const area = document.getElementById("selectionArea");
-  const title = document.getElementById("selectionTitle");
-  const container = document.getElementById("optionsContainer");
+  loadCurrentSelection();
 
-  area.style.display = "block";
+  renderCategories();
 
-  title.textContent = "✨ " + category + " auswählen";
+  updatePrompt();
+
+  renderSavedPrompts();
+
+  updateStats();
+
+}
+
+
+/* =========================================
+   KATEGORIEN RENDERN
+========================================= */
+
+function renderCategories() {
+
+  const container =
+    document.getElementById("categoriesContainer");
 
   container.innerHTML = "";
 
-  categories[category].forEach(function(option) {
+  Object.keys(categories).forEach(function(category) {
 
-    const element = document.createElement("div");
+    const data = categories[category];
+
+    const card = document.createElement("div");
+
+    card.className = "card";
+
+    const count = getSelectionCount(category);
+
+    if (count > 0) {
+      card.classList.add("has-selection");
+    }
+
+    card.onclick = function() {
+      openCategory(category);
+    };
+
+    card.innerHTML = `
+      <div class="selection-badge">${count}</div>
+      <div class="card-icon">${data.icon}</div>
+      <div class="card-title">${category}</div>
+    `;
+
+    container.appendChild(card);
+
+  });
+
+}
+
+
+/* =========================================
+   KATEGORIE ÖFFNEN
+========================================= */
+
+function openCategory(category) {
+
+  currentCategory = category;
+
+  const area =
+    document.getElementById("selectionArea");
+
+  const title =
+    document.getElementById("selectionTitle");
+
+  const hint =
+    document.getElementById("selectionHint");
+
+  const container =
+    document.getElementById("optionsContainer");
+
+  const data = categories[category];
+
+  area.style.display = "block";
+
+  title.textContent =
+    data.icon + " " + category;
+
+  hint.textContent = data.multi
+    ? "☑️ Mehrere Optionen können gleichzeitig kombiniert werden."
+    : "☝️ Eine Option auswählen.";
+
+  container.innerHTML = "";
+
+  data.options.forEach(function(option) {
+
+    const element =
+      document.createElement("div");
 
     element.className = "option";
 
     element.textContent = option;
 
-    if (selectedValues[category] === option) {
+
+    if (isOptionSelected(category, option)) {
       element.classList.add("active");
     }
 
+
     element.onclick = function() {
 
-      selectedValues[category] = option;
+      toggleOption(category, option);
 
       openCategory(category);
 
-      updatePrompt();
+      updateEverything();
 
     };
+
 
     container.appendChild(element);
 
   });
 
-
-  /* Zur Auswahl scrollen */
 
   setTimeout(function() {
 
@@ -656,80 +1283,991 @@ function openCategory(category) {
 }
 
 
-/* ===================================
-   PROMPT AKTUALISIEREN
-=================================== */
+/* =========================================
+   OPTION AUSWÄHLEN
+========================================= */
 
-function updatePrompt() {
+function toggleOption(category, option) {
 
-  const output = document.getElementById("promptOutput");
+  const data = categories[category];
 
-  let promptParts = [];
 
-  for (let category in selectedValues) {
+  if (data.multi) {
 
-    promptParts.push(selectedValues[category]);
+    if (!selectedValues[category]) {
+      selectedValues[category] = [];
+    }
+
+    const index =
+      selectedValues[category].indexOf(option);
+
+
+    if (index >= 0) {
+
+      selectedValues[category].splice(index, 1);
+
+      if (selectedValues[category].length === 0) {
+        delete selectedValues[category];
+      }
+
+    } else {
+
+      selectedValues[category].push(option);
+
+    }
+
+
+  } else {
+
+    if (selectedValues[category] === option) {
+
+      delete selectedValues[category];
+
+    } else {
+
+      selectedValues[category] = option;
+
+    }
 
   }
-
-
-  if (promptParts.length === 0) {
-
-    output.value = "";
-
-    return;
-
-  }
-
-
-  let finalPrompt =
-    "Erstelle ein hochwertiges Bild mit: " +
-    promptParts.join(", ") +
-    ". Professionelle Komposition, realistische Details, hochwertige Beleuchtung und sorgfältige Bildgestaltung.";
-
-  output.value = finalPrompt;
 
 }
 
 
-/* ===================================
-   PROMPT KOPIEREN
-=================================== */
+/* =========================================
+   AUSWAHL PRÜFEN
+========================================= */
 
-function copyPrompt() {
+function isOptionSelected(category, option) {
 
-  const output = document.getElementById("promptOutput");
+  const value = selectedValues[category];
 
-  if (output.value.trim() === "") {
 
-    document.getElementById("status").textContent =
-      "⚠️ Bitte zuerst einige Bereiche auswählen.";
+  if (!value) {
+    return false;
+  }
+
+
+  if (Array.isArray(value)) {
+    return value.includes(option);
+  }
+
+
+  return value === option;
+
+}
+
+
+/* =========================================
+   ANZAHL
+========================================= */
+
+function getSelectionCount(category) {
+
+  const value = selectedValues[category];
+
+  if (!value) return 0;
+
+  if (Array.isArray(value)) {
+    return value.length;
+  }
+
+  return 1;
+
+}
+
+
+/* =========================================
+   PROMPT ERSTELLEN
+========================================= */
+
+function updatePrompt() {
+
+  const output =
+    document.getElementById("promptOutput");
+
+  const parts = [];
+
+
+  Object.keys(categories).forEach(function(category) {
+
+    const value = selectedValues[category];
+
+    if (!value) return;
+
+
+    if (Array.isArray(value)) {
+
+      value.forEach(function(item) {
+        parts.push(item);
+      });
+
+    } else {
+
+      parts.push(value);
+
+    }
+
+  });
+
+
+  if (parts.length === 0) {
+
+    output.value = "";
+
+    updateCharacterCount();
 
     return;
 
   }
 
 
-  output.select();
+  const qualityText =
 
-  output.setSelectionRange(0, 99999);
+    "Professionelle Komposition, realistische Details, " +
+    "hochwertige Beleuchtung, sorgfältige Bildgestaltung, " +
+    "harmonische Proportionen und hochwertige finale Bildqualität.";
 
 
-  navigator.clipboard.writeText(output.value)
+  output.value =
+    "Erstelle ein hochwertiges Bild mit: " +
+    parts.join(", ") +
+    ". " +
+    qualityText;
+
+
+  updateCharacterCount();
+
+}
+
+
+/* =========================================
+   ÜBERSICHT
+========================================= */
+
+function renderOverview() {
+
+  const container =
+    document.getElementById("selectedList");
+
+  container.innerHTML = "";
+
+  let hasSelection = false;
+
+
+  Object.keys(categories).forEach(function(category) {
+
+    const value = selectedValues[category];
+
+    if (!value) return;
+
+    hasSelection = true;
+
+
+    const values =
+      Array.isArray(value)
+        ? value
+        : [value];
+
+
+    values.forEach(function(item) {
+
+      const chip =
+        document.createElement("div");
+
+      chip.className = "chip";
+
+      chip.innerHTML =
+        "<strong>" +
+        category +
+        ":</strong> " +
+        item;
+
+      container.appendChild(chip);
+
+    });
+
+  });
+
+
+  if (!hasSelection) {
+
+    container.innerHTML =
+      '<div class="empty-message">' +
+      'Noch keine Auswahl getroffen.' +
+      '</div>';
+
+  }
+
+}
+
+
+/* =========================================
+   STATISTIK
+========================================= */
+
+function updateStats() {
+
+  let elements = 0;
+  let categoriesUsed = 0;
+
+
+  Object.keys(selectedValues).forEach(function(category) {
+
+    const value = selectedValues[category];
+
+    categoriesUsed++;
+
+
+    if (Array.isArray(value)) {
+      elements += value.length;
+    } else {
+      elements++;
+    }
+
+  });
+
+
+  document.getElementById("selectedCount")
+    .textContent = elements;
+
+  document.getElementById("categoryCount")
+    .textContent = categoriesUsed;
+
+
+  const saved =
+    getSavedPrompts();
+
+  document.getElementById("savedCount")
+    .textContent = saved.length;
+
+}
+
+
+/* =========================================
+   ALLES AKTUALISIEREN
+========================================= */
+
+function updateEverything() {
+
+  updatePrompt();
+
+  renderOverview();
+
+  renderCategories();
+
+  updateStats();
+
+  saveCurrentSelection();
+
+}
+
+
+/* =========================================
+   ZEICHENZÄHLER
+========================================= */
+
+function updateCharacterCount() {
+
+  const output =
+    document.getElementById("promptOutput");
+
+  document.getElementById("characterCount")
+    .textContent =
+      output.value.length + " Zeichen";
+
+}
+
+
+document.getElementById("promptOutput")
+  .addEventListener("input", updateCharacterCount);
+
+
+/* =========================================
+   KOPIEREN
+========================================= */
+
+async function copyPrompt() {
+
+  const output =
+    document.getElementById("promptOutput");
+
+  const status =
+    document.getElementById("status");
+
+
+  if (!output.value.trim()) {
+
+    status.textContent =
+      "⚠️ Bitte zuerst einen Prompt erstellen.";
+
+    return;
+
+  }
+
+
+  try {
+
+    if (
+      navigator.clipboard &&
+      window.isSecureContext
+    ) {
+
+      await navigator.clipboard.writeText(
+        output.value
+      );
+
+    } else {
+
+      output.select();
+
+      document.execCommand("copy");
+
+    }
+
+
+    status.textContent =
+      "✅ Prompt wurde erfolgreich kopiert!";
+
+
+  } catch (error) {
+
+    output.select();
+
+    status.textContent =
+      "⚠️ Bitte den Prompt manuell kopieren.";
+
+  }
+
+}
+
+
+/* =========================================
+   ZURÜCKSETZEN
+========================================= */
+
+function resetAll() {
+
+  if (
+    !confirm(
+      "Möchtest du wirklich alle aktuellen Auswahlen löschen?"
+    )
+  ) {
+    return;
+  }
+
+
+  selectedValues = {};
+
+  document.getElementById("promptOutput").value = "";
+
+  document.getElementById("selectionArea").style.display =
+    "none";
+
+  document.getElementById("status").textContent =
+    "🔄 Alle Auswahlen wurden zurückgesetzt.";
+
+  localStorage.removeItem(
+    "artstyleCurrentSelection"
+  );
+
+
+  updateEverything();
+
+}
+
+
+/* =========================================
+   ZUFALLS-PROMPT
+========================================= */
+
+function randomPrompt() {
+
+  selectedValues = {};
+
+
+  Object.keys(categories).forEach(function(category) {
+
+    const data = categories[category];
+
+
+    /* Nicht jede Kategorie muss gewählt werden */
+
+    const probability =
+      data.multi ? 0.35 : 0.65;
+
+
+    if (Math.random() > probability) {
+      return;
+    }
+
+
+    if (data.multi) {
+
+      const count =
+        Math.floor(Math.random() * 3) + 1;
+
+
+      const shuffled =
+        [...data.options]
+          .sort(function() {
+            return Math.random() - 0.5;
+          })
+          .slice(0, count);
+
+
+      selectedValues[category] =
+        shuffled;
+
+
+    } else {
+
+      const option =
+        data.options[
+          Math.floor(
+            Math.random() *
+            data.options.length
+          )
+        ];
+
+
+      selectedValues[category] =
+        option;
+
+    }
+
+  });
+
+
+  updateEverything();
+
+
+  document.getElementById("status").textContent =
+    "🎲 Ein neuer zufälliger Prompt wurde erstellt!";
+
+
+  document
+    .getElementById("promptOutput")
+    .scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+
+}
+
+
+/* =========================================
+   PROMPT SPEICHERN
+========================================= */
+
+function savePrompt() {
+
+  const output =
+    document.getElementById("promptOutput");
+
+  const status =
+    document.getElementById("status");
+
+
+  if (!output.value.trim()) {
+
+    status.textContent =
+      "⚠️ Kein Prompt zum Speichern vorhanden.";
+
+    return;
+
+  }
+
+
+  const title =
+    prompt(
+      "Wie möchtest du diesen Prompt nennen?",
+      "Mein ArtStyle Prompt"
+    );
+
+
+  if (!title) {
+    return;
+  }
+
+
+  const saved =
+    getSavedPrompts();
+
+
+  saved.unshift({
+
+    id: Date.now(),
+
+    title: title,
+
+    prompt: output.value,
+
+    date:
+      new Date()
+        .toLocaleString("de-DE")
+
+  });
+
+
+  localStorage.setItem(
+    "artstyleSavedPrompts",
+    JSON.stringify(saved)
+  );
+
+
+  status.textContent =
+    "💾 Prompt wurde gespeichert!";
+
+
+  renderSavedPrompts();
+
+  updateStats();
+
+}
+
+
+/* =========================================
+   GESPEICHERTE PROMPTS
+========================================= */
+
+function getSavedPrompts() {
+
+  try {
+
+    return JSON.parse(
+      localStorage.getItem(
+        "artstyleSavedPrompts"
+      )
+    ) || [];
+
+  } catch {
+
+    return [];
+
+  }
+
+}
+
+
+function renderSavedPrompts() {
+
+  const container =
+    document.getElementById("savedPrompts");
+
+  const prompts =
+    getSavedPrompts();
+
+
+  container.innerHTML = "";
+
+
+  if (prompts.length === 0) {
+
+    container.innerHTML =
+      '<div class="empty-message">' +
+      'Noch keine Prompts gespeichert.' +
+      '</div>';
+
+    return;
+
+  }
+
+
+  prompts.forEach(function(item) {
+
+    const element =
+      document.createElement("div");
+
+    element.className =
+      "saved-prompt";
+
+
+    element.innerHTML = `
+
+      <div class="saved-prompt-header">
+
+        <div class="saved-title">
+          ${escapeHtml(item.title)}
+        </div>
+
+        <small style="color:#777e95">
+          ${escapeHtml(item.date)}
+        </small>
+
+      </div>
+
+      <div class="saved-text">
+        ${escapeHtml(item.prompt)}
+      </div>
+
+      <div class="saved-actions">
+
+        <button
+          class="small-button"
+          onclick="loadSavedPrompt(${item.id})">
+          📂 Laden
+        </button>
+
+        <button
+          class="small-button"
+          onclick="copySavedPrompt(${item.id})">
+          📋 Kopieren
+        </button>
+
+        <button
+          class="small-button"
+          onclick="deleteSavedPrompt(${item.id})">
+          🗑️ Löschen
+        </button>
+
+      </div>
+
+    `;
+
+
+    container.appendChild(element);
+
+  });
+
+}
+
+
+function escapeHtml(text) {
+
+  const div =
+    document.createElement("div");
+
+  div.textContent = text;
+
+  return div.innerHTML;
+
+}
+
+
+/* =========================================
+   GESPEICHERTEN PROMPT LADEN
+========================================= */
+
+function loadSavedPrompt(id) {
+
+  const prompts =
+    getSavedPrompts();
+
+  const item =
+    prompts.find(function(p) {
+      return p.id === id;
+    });
+
+
+  if (!item) return;
+
+
+  document.getElementById("promptOutput").value =
+    item.prompt;
+
+
+  updateCharacterCount();
+
+
+  document.getElementById("status").textContent =
+    "📂 Gespeicherter Prompt wurde geladen.";
+
+
+  document
+    .getElementById("promptOutput")
+    .scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+
+}
+
+
+/* =========================================
+   GESPEICHERTEN PROMPT KOPIEREN
+========================================= */
+
+function copySavedPrompt(id) {
+
+  const prompts =
+    getSavedPrompts();
+
+  const item =
+    prompts.find(function(p) {
+      return p.id === id;
+    });
+
+
+  if (!item) return;
+
+
+  navigator.clipboard
+    .writeText(item.prompt)
     .then(function() {
 
-      document.getElementById("status").textContent =
-        "✅ Prompt wurde kopiert!";
+      alert(
+        "Prompt wurde kopiert!"
+      );
 
     })
     .catch(function() {
 
-      document.getElementById("status").textContent =
-        "⚠️ Kopieren nicht möglich. Bitte Text manuell kopieren.";
+      alert(
+        "Bitte Prompt manuell kopieren."
+      );
 
     });
 
 }
+
+
+/* =========================================
+   PROMPT LÖSCHEN
+========================================= */
+
+function deleteSavedPrompt(id) {
+
+  if (
+    !confirm(
+      "Diesen gespeicherten Prompt löschen?"
+    )
+  ) {
+    return;
+  }
+
+
+  let prompts =
+    getSavedPrompts();
+
+
+  prompts =
+    prompts.filter(function(item) {
+      return item.id !== id;
+    });
+
+
+  localStorage.setItem(
+    "artstyleSavedPrompts",
+    JSON.stringify(prompts)
+  );
+
+
+  renderSavedPrompts();
+
+  updateStats();
+
+}
+
+
+/* =========================================
+   AUTOMATISCH SPEICHERN
+========================================= */
+
+function saveCurrentSelection() {
+
+  localStorage.setItem(
+    "artstyleCurrentSelection",
+    JSON.stringify(selectedValues)
+  );
+
+}
+
+
+function loadCurrentSelection() {
+
+  try {
+
+    const saved =
+      localStorage.getItem(
+        "artstyleCurrentSelection"
+      );
+
+
+    if (saved) {
+
+      selectedValues =
+        JSON.parse(saved);
+
+    }
+
+  } catch {
+
+    selectedValues = {};
+
+  }
+
+}
+
+
+/* =========================================
+   BACKUP EXPORT
+========================================= */
+
+function exportData() {
+
+  const data = {
+
+    version: "ArtStyle Studio 3.0",
+
+    exported:
+      new Date().toISOString(),
+
+    savedPrompts:
+      getSavedPrompts(),
+
+    currentSelection:
+      selectedValues
+
+  };
+
+
+  const blob =
+    new Blob(
+      [JSON.stringify(data, null, 2)],
+      {
+        type: "application/json"
+      }
+    );
+
+
+  const url =
+    URL.createObjectURL(blob);
+
+
+  const link =
+    document.createElement("a");
+
+
+  link.href = url;
+
+  link.download =
+    "artstyle-studio-backup.json";
+
+
+  link.click();
+
+
+  URL.revokeObjectURL(url);
+
+
+  document.getElementById("status").textContent =
+    "📤 Backup wurde exportiert.";
+
+}
+
+
+/* =========================================
+   BACKUP IMPORT
+========================================= */
+
+function importData() {
+
+  const input =
+    document.createElement("input");
+
+
+  input.type = "file";
+
+  input.accept =
+    ".json,application/json";
+
+
+  input.onchange =
+    function(event) {
+
+      const file =
+        event.target.files[0];
+
+
+      if (!file) return;
+
+
+      const reader =
+        new FileReader();
+
+
+      reader.onload =
+        function(e) {
+
+          try {
+
+            const data =
+              JSON.parse(e.target.result);
+
+
+            if (
+              data.savedPrompts
+            ) {
+
+              localStorage.setItem(
+                "artstyleSavedPrompts",
+                JSON.stringify(
+                  data.savedPrompts
+                )
+              );
+
+            }
+
+
+            if (
+              data.currentSelection
+            ) {
+
+              selectedValues =
+                data.currentSelection;
+
+            }
+
+
+            updateEverything();
+
+            renderSavedPrompts();
+
+
+            document.getElementById("status")
+              .textContent =
+              "📥 Backup erfolgreich importiert!";
+
+
+          } catch {
+
+            alert(
+              "❌ Diese Datei ist kein gültiges ArtStyle Studio Backup."
+            );
+
+          }
+
+        };
+
+
+      reader.readAsText(file);
+
+    };
+
+
+  input.click();
+
+}
+
+
+/* =========================================
+   AUSWAHL SCHLIESSEN
+========================================= */
+
+function closeSelection() {
+
+  document.getElementById("selectionArea").style.display =
+    "none";
+
+}
+
+
+/* =========================================
+   START
+========================================= */
+
+init();
 
 </script>
 

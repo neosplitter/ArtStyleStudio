@@ -12,17 +12,14 @@
   --bg2: #0e1220;
   --card: #151a28;
   --card2: #20263a;
-  --card3: #29314a;
+  --border: #39425c;
   --purple: #8b5cf6;
-  --purple2: #a855f7;
   --pink: #ec4899;
   --green: #22c55e;
   --red: #ef4444;
-  --blue: #38bdf8;
   --orange: #f59e0b;
   --text: #ffffff;
   --muted: #aeb6cf;
-  --border: #343c55;
 }
 
 * {
@@ -36,9 +33,9 @@ html {
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  background:
-    radial-gradient(circle at top, #241044 0%, #0b1020 35%, #080a10 75%);
   color: var(--text);
+  background:
+    radial-gradient(circle at top, #241044 0%, #0d1020 40%, #080a10 75%);
   min-height: 100vh;
 }
 
@@ -47,19 +44,37 @@ body {
 ========================= */
 
 header {
+  padding: 25px 16px 30px;
   text-align: center;
-  padding: 35px 20px 28px;
-  background:
-    linear-gradient(135deg,
-      rgba(20,0,45,.98),
-      rgba(16,24,39,.98),
-      rgba(55,0,80,.98));
+  background: linear-gradient(
+    135deg,
+    #16002b,
+    #111827,
+    #31004f
+  );
   border-bottom: 1px solid #5b3b78;
-  box-shadow: 0 8px 30px rgba(0,0,0,.35);
+}
+
+.topbar {
+  max-width: 1200px;
+  margin: 0 auto 25px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.language-select {
+  width: auto;
+  min-width: 190px;
+  padding: 12px 15px;
+  border-radius: 14px;
+  background: #171a26;
+  color: white;
+  border: 1px solid #555d76;
+  font-size: 15px;
 }
 
 .logo {
-  font-size: 50px;
+  font-size: 52px;
   margin-bottom: 8px;
 }
 
@@ -69,10 +84,10 @@ h1 {
 }
 
 .name {
-  margin-top: 10px;
-  font-size: 22px;
-  font-weight: bold;
+  margin-top: 8px;
+  font-size: 21px;
   color: #c084fc;
+  font-weight: bold;
 }
 
 .subtitle {
@@ -85,20 +100,17 @@ h1 {
 ========================= */
 
 main {
-  max-width: 1150px;
+  max-width: 1200px;
   margin: auto;
-  padding: 24px 16px 70px;
+  padding: 25px 16px 70px;
 }
 
 .hero {
-  padding: 26px;
-  border-radius: 26px;
-  background:
-    linear-gradient(135deg,
-      rgba(91,8,124,.95),
-      rgba(157,0,79,.95));
-  box-shadow: 0 15px 40px rgba(0,0,0,.4);
-  margin-bottom: 28px;
+  padding: 28px;
+  border-radius: 28px;
+  background: linear-gradient(135deg, #5b087c, #9d004f);
+  box-shadow: 0 15px 45px rgba(0,0,0,.4);
+  margin-bottom: 25px;
 }
 
 .hero h2 {
@@ -107,7 +119,6 @@ main {
 
 .hero p {
   line-height: 1.6;
-  color: #f0e8ff;
 }
 
 /* =========================
@@ -142,12 +153,36 @@ main {
 }
 
 /* =========================
-   TITLES
+   SECTION
 ========================= */
 
 .section-title {
   margin: 35px 0 18px;
-  font-size: 27px;
+  font-size: 28px;
+}
+
+/* =========================
+   PRESETS
+========================= */
+
+.presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.preset {
+  width: auto;
+  margin: 0;
+  padding: 12px 16px;
+  background: #242b40;
+  border: 1px solid #49526b;
+  border-radius: 30px;
+  font-size: 14px;
+}
+
+.preset:hover {
+  border-color: var(--purple);
 }
 
 /* =========================
@@ -162,29 +197,29 @@ main {
 
 .card {
   position: relative;
-  min-height: 145px;
+  min-height: 140px;
   padding: 18px 10px;
 
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 
   background: var(--card);
   border: 2px solid var(--border);
   border-radius: 22px;
 
   cursor: pointer;
-  user-select: none;
-
   transition: .18s ease;
+
+  user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
 
 .card:hover {
   transform: translateY(-3px);
-  background: var(--card2);
   border-color: var(--purple);
+  background: var(--card2);
 }
 
 .card:active {
@@ -193,7 +228,7 @@ main {
 
 .card.has-selection {
   border-color: var(--green);
-  box-shadow: 0 0 18px rgba(34,197,94,.15);
+  box-shadow: 0 0 20px rgba(34,197,94,.15);
 }
 
 .card-icon {
@@ -202,29 +237,25 @@ main {
 }
 
 .card-title {
-  font-size: 17px;
   font-weight: bold;
   text-align: center;
 }
 
 .selection-badge {
+  display: none;
   position: absolute;
   top: 10px;
   right: 12px;
 
-  min-width: 24px;
-  height: 24px;
+  min-width: 25px;
+  padding: 4px 7px;
 
-  padding: 3px 7px;
   border-radius: 20px;
-
   background: var(--green);
-  color: #07150b;
+  color: #06120a;
 
   font-size: 12px;
   font-weight: bold;
-
-  display: none;
 }
 
 .card.has-selection .selection-badge {
@@ -238,18 +269,17 @@ main {
 #selectionArea {
   display: none;
   margin-top: 28px;
-
   padding: 22px;
 
-  background: rgba(17,21,33,.97);
+  background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 24px;
+  border-radius: 25px;
 }
 
 .selection-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   gap: 15px;
 }
 
@@ -259,16 +289,7 @@ main {
 
 #selectionHint {
   color: var(--muted);
-  margin: 10px 0 18px;
   line-height: 1.5;
-}
-
-.close-selection {
-  width: auto;
-  margin: 0;
-  padding: 9px 14px;
-  font-size: 14px;
-  background: #252b3d;
 }
 
 .options {
@@ -281,20 +302,14 @@ main {
   position: relative;
 
   padding: 15px 12px;
+  text-align: center;
 
   background: var(--card2);
   border: 2px solid #414960;
   border-radius: 16px;
 
-  text-align: center;
   cursor: pointer;
-
-  transition: .15s ease;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.option:hover {
-  border-color: var(--purple);
+  transition: .15s;
 }
 
 .option.active {
@@ -305,28 +320,25 @@ main {
 .option.active::after {
   content: "✓";
   position: absolute;
-  top: 6px;
-  right: 9px;
-
+  top: 7px;
+  right: 10px;
   color: var(--green);
   font-weight: bold;
 }
 
 /* =========================
-   SELECTED OVERVIEW
+   OVERVIEW
 ========================= */
 
-.overview {
+.overview,
+.reference-box,
+.prompt-box,
+.library {
   margin-top: 30px;
-  padding: 20px;
-
+  padding: 22px;
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 24px;
-}
-
-.overview h2 {
-  margin-top: 0;
+  border-radius: 25px;
 }
 
 .selected-list {
@@ -337,11 +349,9 @@ main {
 
 .chip {
   padding: 9px 12px;
-  border-radius: 30px;
-
-  background: #262d42;
-  border: 1px solid #434d68;
-
+  border-radius: 25px;
+  background: #252d43;
+  border: 1px solid #46506c;
   font-size: 14px;
 }
 
@@ -354,34 +364,49 @@ main {
 }
 
 /* =========================
+   REFERENCE IMAGE
+========================= */
+
+.upload-area {
+  margin-top: 15px;
+}
+
+.file-input {
+  width: 100%;
+  padding: 14px;
+  background: #0b0e16;
+  border: 1px dashed #5b6584;
+  border-radius: 15px;
+  color: white;
+}
+
+.reference-preview {
+  display: none;
+  margin-top: 18px;
+  text-align: center;
+}
+
+.reference-preview img {
+  max-width: 100%;
+  max-height: 400px;
+  border-radius: 18px;
+  border: 2px solid var(--purple);
+}
+
+/* =========================
    PROMPT
 ========================= */
 
-.prompt-box {
-  margin-top: 30px;
-  padding: 22px;
-
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 25px;
-}
-
-.prompt-box h2 {
-  margin-top: 0;
-}
-
 textarea {
   width: 100%;
-  min-height: 260px;
+  min-height: 280px;
+  padding: 16px;
 
   resize: vertical;
 
-  padding: 16px;
-
   background: #080b12;
   color: white;
-
-  border: 2px solid #384159;
+  border: 2px solid #39435c;
   border-radius: 17px;
 
   font-family: inherit;
@@ -397,9 +422,10 @@ textarea:focus {
 .prompt-info {
   display: flex;
   justify-content: space-between;
+  gap: 10px;
+  margin-top: 8px;
   color: var(--muted);
   font-size: 13px;
-  margin-top: 8px;
 }
 
 /* =========================
@@ -414,20 +440,16 @@ textarea:focus {
 }
 
 button {
+  padding: 16px;
   border: none;
   border-radius: 15px;
 
-  padding: 16px;
-
   color: white;
-
   font-family: inherit;
   font-size: 16px;
   font-weight: bold;
 
   cursor: pointer;
-
-  transition: .15s ease;
 }
 
 button:active {
@@ -435,44 +457,44 @@ button:active {
 }
 
 .primary {
-  background:
-    linear-gradient(135deg,
-      #7c3aed,
-      #db2777);
-}
-
-.secondary {
-  background:
-    linear-gradient(135deg,
-      #263247,
-      #111827);
+  background: linear-gradient(135deg, #7c3aed, #db2777);
 }
 
 .green {
-  background:
-    linear-gradient(135deg,
-      #15803d,
-      #22c55e);
+  background: linear-gradient(135deg, #15803d, #22c55e);
 }
 
 .orange {
-  background:
-    linear-gradient(135deg,
-      #b45309,
-      #f59e0b);
+  background: linear-gradient(135deg, #b45309, #f59e0b);
+}
+
+.secondary {
+  background: linear-gradient(135deg, #334155, #111827);
 }
 
 .danger {
-  background:
-    linear-gradient(135deg,
-      #7f1d1d,
-      #ef4444);
+  background: linear-gradient(135deg, #7f1d1d, #ef4444);
+}
+
+.small-button {
+  width: auto;
+  margin: 0;
+  padding: 9px 12px;
+  font-size: 13px;
+  background: #293149;
+}
+
+.close-selection {
+  width: auto;
+  margin: 0;
+  padding: 10px 14px;
+  background: #293149;
+  font-size: 14px;
 }
 
 .status {
   min-height: 25px;
   margin-top: 15px;
-
   text-align: center;
   color: #86efac;
 }
@@ -481,23 +503,20 @@ button:active {
    LIBRARY
 ========================= */
 
-.library {
-  margin-top: 35px;
+.library-search {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 15px;
 
-  padding: 22px;
+  background: #0b0e16;
+  color: white;
 
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 25px;
-}
-
-.library h2 {
-  margin-top: 0;
+  border: 1px solid #424b64;
+  border-radius: 14px;
 }
 
 .saved-prompt {
   margin-top: 12px;
-
   padding: 16px;
 
   background: #0c101a;
@@ -505,45 +524,51 @@ button:active {
   border-radius: 16px;
 }
 
-.saved-prompt-header {
+.saved-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-
   gap: 10px;
 }
 
 .saved-title {
-  font-weight: bold;
   color: #c084fc;
+  font-weight: bold;
+}
+
+.favorite {
+  color: #fbbf24;
 }
 
 .saved-text {
   margin-top: 10px;
-
   color: #c5ccdf;
   line-height: 1.5;
-
-  max-height: 100px;
-  overflow: auto;
-
   font-size: 14px;
 }
 
 .saved-actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   margin-top: 12px;
 }
 
-.small-button {
-  width: auto;
-  padding: 9px 12px;
-  margin: 0;
+/* =========================
+   RTL
+========================= */
 
-  font-size: 13px;
+body.rtl {
+  direction: rtl;
+}
 
-  background: #293149;
+body.rtl .topbar {
+  justify-content: flex-start;
+}
+
+body.rtl .selection-badge,
+body.rtl .option.active::after {
+  right: auto;
+  left: 10px;
 }
 
 /* =========================
@@ -551,10 +576,9 @@ button:active {
 ========================= */
 
 footer {
-  text-align: center;
   padding: 35px 10px;
-  color: #727b92;
-  font-size: 14px;
+  text-align: center;
+  color: #717a92;
 }
 
 /* =========================
@@ -563,19 +587,16 @@ footer {
 
 @media (max-width: 650px) {
 
-  header {
-    padding-top: 28px;
-  }
-
   h1 {
-    font-size: 31px;
-  }
-
-  .name {
-    font-size: 19px;
+    font-size: 32px;
   }
 
   .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .options,
+  .button-grid {
     grid-template-columns: 1fr;
   }
 
@@ -595,24 +616,11 @@ footer {
     font-size: 15px;
   }
 
-  .options {
-    grid-template-columns: 1fr;
-  }
-
-  .button-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .hero {
-    padding: 21px;
-  }
-
-  .section-title {
-    font-size: 23px;
+  .prompt-info {
+    flex-direction: column;
   }
 
 }
-
 </style>
 </head>
 
@@ -620,14 +628,30 @@ footer {
 
 <header>
 
+  <div class="topbar">
+
+    <select
+      id="languageSelector"
+      class="language-select"
+      onchange="changeLanguage(this.value)"
+    >
+      <option value="de">🇩🇪 Deutsch</option>
+      <option value="en">🇬🇧 English</option>
+      <option value="es">🇪🇸 Español</option>
+      <option value="fr">🇫🇷 Français</option>
+      <option value="ar">🇸🇦 العربية</option>
+    </select>
+
+  </div>
+
   <div class="logo">🎨✨</div>
 
   <h1>ArtStyle Studio</h1>
 
   <div class="name">Dirk Eckert</div>
 
-  <div class="subtitle">
-    Mega Creative Prompt Studio · Erstelle deine individuellen Bild-Prompts
+  <div class="subtitle" id="subtitle">
+    Dein persönliches Creative Prompt Studio
   </div>
 
 </header>
@@ -637,46 +661,81 @@ footer {
 
 <section class="hero">
 
-  <h2>🚀 Willkommen im ArtStyle Studio</h2>
+  <h2 id="welcomeTitle">
+    🚀 Willkommen im ArtStyle Studio
+  </h2>
 
-  <p>
-    Kombiniere Personen, Frisuren, Kleidung, Posen, Landschaften,
-    Bildstile, Kameras, Beleuchtung und viele weitere Elemente.
-    Mehrere Bildstile können gleichzeitig kombiniert werden.
+  <p id="welcomeText">
+    Kombiniere verschiedene Elemente und erstelle deinen persönlichen Master Prompt.
   </p>
 
 </section>
 
 
-<!-- STATISTIK -->
-
 <div class="stats">
 
   <div class="stat">
     <div class="stat-number" id="selectedCount">0</div>
-    <div class="stat-label">Ausgewählte Elemente</div>
+    <div class="stat-label" id="selectedLabel">
+      Ausgewählte Elemente
+    </div>
   </div>
 
   <div class="stat">
     <div class="stat-number" id="categoryCount">0</div>
-    <div class="stat-label">Verwendete Kategorien</div>
+    <div class="stat-label" id="categoryLabel">
+      Verwendete Kategorien
+    </div>
   </div>
 
   <div class="stat">
     <div class="stat-number" id="savedCount">0</div>
-    <div class="stat-label">Gespeicherte Prompts</div>
+    <div class="stat-label" id="savedLabel">
+      Gespeicherte Prompts
+    </div>
   </div>
 
 </div>
 
 
-<h2 class="section-title">🎛️ Prompt-Bereiche</h2>
+<h2 class="section-title" id="presetTitle">
+  ⭐ Stil-Presets
+</h2>
+
+<div class="presets">
+
+  <button class="preset" onclick="loadPreset('cinematic')">
+    🎬 Cinematic
+  </button>
+
+  <button class="preset" onclick="loadPreset('fashion')">
+    👗 Luxury Fashion
+  </button>
+
+  <button class="preset" onclick="loadPreset('portrait')">
+    📸 Portrait
+  </button>
+
+  <button class="preset" onclick="loadPreset('fantasy')">
+    🌌 Fantasy
+  </button>
+
+  <button class="preset" onclick="loadPreset('japan')">
+    🇯🇵 Japan
+  </button>
+
+</div>
 
 
-<div class="categories" id="categoriesContainer"></div>
+<h2 class="section-title" id="categoryTitle">
+  🎛️ Prompt-Bereiche
+</h2>
 
+<div
+  class="categories"
+  id="categoriesContainer">
+</div>
 
-<!-- AUSWAHL -->
 
 <section id="selectionArea">
 
@@ -686,7 +745,8 @@ footer {
 
     <button
       class="close-selection"
-      onclick="closeSelection()">
+      onclick="closeSelection()"
+      id="closeButton">
       ✕ Schließen
     </button>
 
@@ -702,88 +762,148 @@ footer {
 </section>
 
 
-<!-- AUSWAHLÜBERSICHT -->
-
 <section class="overview">
 
-  <h2>✅ Deine Auswahl</h2>
+  <h2 id="overviewTitle">
+    ✅ Deine Auswahl
+  </h2>
 
   <div
     class="selected-list"
     id="selectedList">
+  </div>
 
-    <div class="empty-message">
-      Noch keine Auswahl getroffen.
-    </div>
+</section>
+
+
+<section class="reference-box">
+
+  <h2 id="referenceTitle">
+    🖼️ Referenzbild
+  </h2>
+
+  <p id="referenceText">
+    Lade optional ein Bild als visuelle Referenz hoch.
+  </p>
+
+  <div class="upload-area">
+
+    <input
+      class="file-input"
+      type="file"
+      accept="image/*"
+      onchange="previewImage(event)"
+    >
+
+  </div>
+
+  <div
+    class="reference-preview"
+    id="referencePreview">
+
+    <img
+      id="previewImage"
+      alt="Referenzbild"
+    >
 
   </div>
 
 </section>
 
 
-<!-- PROMPT -->
-
 <section class="prompt-box">
 
-  <h2>📝 Dein Master Prompt</h2>
+  <h2 id="promptTitle">
+    📝 Dein Master Prompt
+  </h2>
 
   <textarea
     id="promptOutput"
-    placeholder="Wähle oben Bereiche aus. Dein individueller Prompt wird automatisch erstellt."
+    placeholder="Wähle oben Bereiche aus..."
   ></textarea>
 
   <div class="prompt-info">
-    <span>Du kannst den Prompt jederzeit manuell bearbeiten.</span>
-    <span id="characterCount">0 Zeichen</span>
+
+    <span id="editInfo">
+      Du kannst den Prompt manuell bearbeiten.
+    </span>
+
+    <span id="characterCount">
+      0 Zeichen
+    </span>
+
   </div>
 
 
   <div class="button-grid">
 
-    <button class="primary" onclick="copyPrompt()">
+    <button
+      class="primary"
+      onclick="copyPrompt()"
+      id="copyButton">
       📋 Prompt kopieren
     </button>
 
-    <button class="green" onclick="savePrompt()">
+    <button
+      class="green"
+      onclick="savePrompt()"
+      id="saveButton">
       💾 Prompt speichern
     </button>
 
-    <button class="orange" onclick="randomPrompt()">
-      🎲 Zufälligen Prompt erstellen
+    <button
+      class="orange"
+      onclick="randomPrompt()"
+      id="randomButton">
+      🎲 Zufall
     </button>
 
-    <button class="secondary" onclick="exportData()">
+    <button
+      class="secondary"
+      onclick="exportData()"
+      id="exportButton">
       📤 Backup exportieren
     </button>
 
-    <button class="secondary" onclick="importData()">
+    <button
+      class="secondary"
+      onclick="importData()"
+      id="importButton">
       📥 Backup importieren
     </button>
 
-    <button class="danger" onclick="resetAll()">
-      🔄 Alles zurücksetzen
+    <button
+      class="danger"
+      onclick="resetAll()"
+      id="resetButton">
+      🔄 Zurücksetzen
     </button>
 
   </div>
 
-  <div class="status" id="status"></div>
+  <div
+    class="status"
+    id="status">
+  </div>
 
 </section>
 
 
-<!-- PROMPT BIBLIOTHEK -->
-
 <section class="library">
 
-  <h2>📚 Meine Prompt-Bibliothek</h2>
+  <h2 id="libraryTitle">
+    📚 Meine Prompt-Bibliothek
+  </h2>
 
-  <div id="savedPrompts">
+  <input
+    type="text"
+    class="library-search"
+    id="librarySearch"
+    placeholder="🔎 Gespeicherte Prompts suchen..."
+    oninput="renderSavedPrompts()"
+  >
 
-    <div class="empty-message">
-      Noch keine Prompts gespeichert.
-    </div>
-
-  </div>
+  <div id="savedPrompts"></div>
 
 </section>
 
@@ -791,11 +911,183 @@ footer {
 
 
 <footer>
-  🎨 ArtStyle Studio · Dirk Eckert · Dein persönliches Creative Prompt Studio
+  🎨 ArtStyle Studio · Dirk Eckert
 </footer>
 
 
 <script>
+
+/* =========================================
+   SPRACHEN
+========================================= */
+
+const translations = {
+
+  de: {
+    subtitle: "Dein persönliches Creative Prompt Studio",
+    welcomeTitle: "🚀 Willkommen im ArtStyle Studio",
+    welcomeText: "Kombiniere verschiedene Elemente und erstelle deinen persönlichen Master Prompt.",
+    selectedLabel: "Ausgewählte Elemente",
+    categoryLabel: "Verwendete Kategorien",
+    savedLabel: "Gespeicherte Prompts",
+    presetTitle: "⭐ Stil-Presets",
+    categoryTitle: "🎛️ Prompt-Bereiche",
+    close: "✕ Schließen",
+    overview: "✅ Deine Auswahl",
+    referenceTitle: "🖼️ Referenzbild",
+    referenceText: "Lade optional ein Bild als visuelle Referenz hoch.",
+    promptTitle: "📝 Dein Master Prompt",
+    editInfo: "Du kannst den Prompt manuell bearbeiten.",
+    copy: "📋 Prompt kopieren",
+    save: "💾 Prompt speichern",
+    random: "🎲 Zufall",
+    export: "📤 Backup exportieren",
+    import: "📥 Backup importieren",
+    reset: "🔄 Zurücksetzen",
+    library: "📚 Meine Prompt-Bibliothek",
+    search: "🔎 Gespeicherte Prompts suchen...",
+    empty: "Noch keine Auswahl getroffen.",
+    libraryEmpty: "Noch keine Prompts gespeichert.",
+    multi: "☑️ Mehrere Optionen können gleichzeitig kombiniert werden.",
+    single: "☝️ Eine Option auswählen.",
+    promptStart: "Erstelle ein hochwertiges Bild mit: ",
+    quality: "Professionelle Komposition, realistische Details, hochwertige Beleuchtung und sorgfältige Bildgestaltung."
+  },
+
+  en: {
+    subtitle: "Your personal Creative Prompt Studio",
+    welcomeTitle: "🚀 Welcome to ArtStyle Studio",
+    welcomeText: "Combine different elements and create your personal master prompt.",
+    selectedLabel: "Selected elements",
+    categoryLabel: "Categories used",
+    savedLabel: "Saved prompts",
+    presetTitle: "⭐ Style Presets",
+    categoryTitle: "🎛️ Prompt Categories",
+    close: "✕ Close",
+    overview: "✅ Your Selection",
+    referenceTitle: "🖼️ Reference Image",
+    referenceText: "Optionally upload an image as a visual reference.",
+    promptTitle: "📝 Your Master Prompt",
+    editInfo: "You can edit the prompt manually.",
+    copy: "📋 Copy Prompt",
+    save: "💾 Save Prompt",
+    random: "🎲 Random",
+    export: "📤 Export Backup",
+    import: "📥 Import Backup",
+    reset: "🔄 Reset",
+    library: "📚 My Prompt Library",
+    search: "🔎 Search saved prompts...",
+    empty: "No selection yet.",
+    libraryEmpty: "No saved prompts yet.",
+    multi: "☑️ Multiple options can be combined.",
+    single: "☝️ Select one option.",
+    promptStart: "Create a high-quality image with: ",
+    quality: "Professional composition, realistic details, high-quality lighting and careful image design."
+  },
+
+  es: {
+    subtitle: "Tu estudio personal de prompts creativos",
+    welcomeTitle: "🚀 Bienvenido a ArtStyle Studio",
+    welcomeText: "Combina diferentes elementos y crea tu prompt maestro personal.",
+    selectedLabel: "Elementos seleccionados",
+    categoryLabel: "Categorías utilizadas",
+    savedLabel: "Prompts guardados",
+    presetTitle: "⭐ Estilos predefinidos",
+    categoryTitle: "🎛️ Categorías del prompt",
+    close: "✕ Cerrar",
+    overview: "✅ Tu selección",
+    referenceTitle: "🖼️ Imagen de referencia",
+    referenceText: "Opcionalmente carga una imagen como referencia visual.",
+    promptTitle: "📝 Tu Master Prompt",
+    editInfo: "Puedes editar el prompt manualmente.",
+    copy: "📋 Copiar prompt",
+    save: "💾 Guardar prompt",
+    random: "🎲 Aleatorio",
+    export: "📤 Exportar copia",
+    import: "📥 Importar copia",
+    reset: "🔄 Restablecer",
+    library: "📚 Mi biblioteca de prompts",
+    search: "🔎 Buscar prompts guardados...",
+    empty: "Aún no hay selección.",
+    libraryEmpty: "Aún no hay prompts guardados.",
+    multi: "☑️ Se pueden combinar varias opciones.",
+    single: "☝️ Selecciona una opción.",
+    promptStart: "Crea una imagen de alta calidad con: ",
+    quality: "Composición profesional, detalles realistas, iluminación de alta calidad y diseño de imagen cuidado."
+  },
+
+  fr: {
+    subtitle: "Votre studio personnel de prompts créatifs",
+    welcomeTitle: "🚀 Bienvenue dans ArtStyle Studio",
+    welcomeText: "Combinez différents éléments et créez votre master prompt personnel.",
+    selectedLabel: "Éléments sélectionnés",
+    categoryLabel: "Catégories utilisées",
+    savedLabel: "Prompts enregistrés",
+    presetTitle: "⭐ Styles prédéfinis",
+    categoryTitle: "🎛️ Catégories de prompt",
+    close: "✕ Fermer",
+    overview: "✅ Votre sélection",
+    referenceTitle: "🖼️ Image de référence",
+    referenceText: "Téléchargez éventuellement une image comme référence visuelle.",
+    promptTitle: "📝 Votre Master Prompt",
+    editInfo: "Vous pouvez modifier le prompt manuellement.",
+    copy: "📋 Copier le prompt",
+    save: "💾 Enregistrer le prompt",
+    random: "🎲 Aléatoire",
+    export: "📤 Exporter la sauvegarde",
+    import: "📥 Importer la sauvegarde",
+    reset: "🔄 Réinitialiser",
+    library: "📚 Ma bibliothèque de prompts",
+    search: "🔎 Rechercher des prompts...",
+    empty: "Aucune sélection.",
+    libraryEmpty: "Aucun prompt enregistré.",
+    multi: "☑️ Plusieurs options peuvent être combinées.",
+    single: "☝️ Sélectionnez une option.",
+    promptStart: "Créez une image de haute qualité avec : ",
+    quality: "Composition professionnelle, détails réalistes, éclairage de haute qualité et conception soignée."
+  },
+
+  ar: {
+    subtitle: "استوديو البرومبت الإبداعي الشخصي الخاص بك",
+    welcomeTitle: "🚀 مرحبًا بك في ArtStyle Studio",
+    welcomeText: "اجمع عناصر مختلفة وأنشئ البرومبت الرئيسي الخاص بك.",
+    selectedLabel: "العناصر المختارة",
+    categoryLabel: "الفئات المستخدمة",
+    savedLabel: "البرومبتات المحفوظة",
+    presetTitle: "⭐ أنماط جاهزة",
+    categoryTitle: "🎛️ فئات البرومبت",
+    close: "✕ إغلاق",
+    overview: "✅ اختياراتك",
+    referenceTitle: "🖼️ صورة مرجعية",
+    referenceText: "يمكنك اختياريًا رفع صورة كمرجع بصري.",
+    promptTitle: "📝 البرومبت الرئيسي",
+    editInfo: "يمكنك تعديل البرومبت يدويًا.",
+    copy: "📋 نسخ البرومبت",
+    save: "💾 حفظ البرومبت",
+    random: "🎲 عشوائي",
+    export: "📤 تصدير النسخة الاحتياطية",
+    import: "📥 استيراد النسخة الاحتياطية",
+    reset: "🔄 إعادة تعيين",
+    library: "📚 مكتبة البرومبتات",
+    search: "🔎 البحث في البرومبتات...",
+    empty: "لا توجد اختيارات بعد.",
+    libraryEmpty: "لا توجد برومبتات محفوظة.",
+    multi: "☑️ يمكن اختيار عدة خيارات.",
+    single: "☝️ اختر خيارًا واحدًا.",
+    promptStart: "أنشئ صورة عالية الجودة باستخدام: ",
+    quality: "تكوين احترافي، تفاصيل واقعية، إضاءة عالية الجودة وتصميم دقيق للصورة."
+  }
+
+};
+
+
+/* =========================================
+   AKTUELLE SPRACHE
+========================================= */
+
+let currentLanguage =
+  localStorage.getItem("artstyleLanguage") || "de";
+
 
 /* =========================================
    KATEGORIEN
@@ -811,22 +1103,8 @@ const categories = {
       "Erwachsener Mann",
       "Elegantes Frauenportrait",
       "Elegantes Männerportrait",
-      "Reife elegante Frau",
-      "Reifer eleganter Mann",
       "Fashion Model",
       "Cinematic Portrait"
-    ]
-  },
-
-  "Alter": {
-    icon: "🎂",
-    multi: false,
-    options: [
-      "Junge erwachsene Person",
-      "Erwachsene Person",
-      "Reife erwachsene Person",
-      "Elegant und selbstbewusst",
-      "Zeitlose elegante Ausstrahlung"
     ]
   },
 
@@ -836,11 +1114,9 @@ const categories = {
     options: [
       "Pixie Cut",
       "Kurzer Bob",
-      "Kurzer moderner Haarschnitt",
       "Schulterlanges Haar",
       "Langes glattes Haar",
       "Langes lockiges Haar",
-      "Elegante Hochsteckfrisur",
       "Glatze"
     ]
   },
@@ -851,9 +1127,7 @@ const categories = {
     options: [
       "Blond",
       "Platinblond",
-      "Dunkelblond",
       "Braun",
-      "Dunkelbraun",
       "Schwarz",
       "Rot",
       "Grau"
@@ -867,8 +1141,6 @@ const categories = {
       "Natürliches Make-up",
       "Glamour-Make-up",
       "Elegantes Abend-Make-up",
-      "Dezentes Tages-Make-up",
-      "Professionelles Fashion-Make-up",
       "Kein sichtbares Make-up"
     ]
   },
@@ -883,8 +1155,6 @@ const categories = {
       "Business-Outfit",
       "Eleganter Anzug",
       "Elegante Bluse",
-      "Moderne Streetwear",
-      "Casual Outfit",
       "Luxuriöse Fashion"
     ]
   },
@@ -894,13 +1164,11 @@ const categories = {
     multi: true,
     options: [
       "Ultra-sheer nude Nylon, 15 DEN",
-      "Realistische feine Nylon-Mikrostruktur",
-      "Natürliche Transparenz mit sichtbarer Haut darunter",
-      "Kontinuierliche Nylonbedeckung über Beine, Füße und Zehen",
+      "Feine Nylon-Mikrostruktur",
+      "Realistische Transparenz",
+      "Kontinuierliche Bedeckung über Beine, Füße und Zehen",
       "Dezente seidige Highlights",
-      "Schwarze transparente Strumpfhose",
-      "Elegante Feinstrumpfhose",
-      "Keine Strumpfhose"
+      "Schwarze transparente Strumpfhose"
     ]
   },
 
@@ -913,7 +1181,6 @@ const categories = {
       "Pumps",
       "Stiefel",
       "Sneaker",
-      "Elegante Lederschuhe",
       "Barfuß"
     ]
   },
@@ -924,40 +1191,10 @@ const categories = {
     options: [
       "Natürlich stehend",
       "Elegant stehend",
-      "Selbstbewusste Pose",
-      "Entspannte natürliche Pose",
       "Sitzend",
       "Gehend",
-      "Leicht zur Kamera gedreht",
-      "Dynamische Fashion-Pose"
-    ]
-  },
-
-  "Gesichtsausdruck": {
-    icon: "😊",
-    multi: false,
-    options: [
-      "Natürliches Lächeln",
-      "Selbstbewusster Blick",
-      "Eleganter neutraler Gesichtsausdruck",
-      "Freundliche Ausstrahlung",
-      "Cinematic ernster Blick",
-      "Entspanntere natürliche Mimik"
-    ]
-  },
-
-  "Hintergrund": {
-    icon: "🌆",
-    multi: true,
-    options: [
-      "Moderner luxuriöser Hintergrund",
-      "Professionelles Fotostudio",
-      "Elegantes Hotel",
-      "Große Fensterfront",
-      "Moderne Architektur",
-      "Minimalistischer Hintergrund",
-      "Städtische Kulisse",
-      "Naturkulisse"
+      "Selbstbewusste Pose",
+      "Leicht zur Kamera gedreht"
     ]
   },
 
@@ -968,12 +1205,9 @@ const categories = {
       "Kyoto bei Sonnenuntergang",
       "Fushimi Inari Taisha",
       "Japanischer Bambuswald",
-      "Traditioneller japanischer Garten",
       "Tokio bei Nacht",
       "Matsumoto Castle",
-      "Hakone und Lake Ashi",
-      "Takachiho-Schlucht",
-      "Japanische Kirschblüten"
+      "Hakone und Lake Ashi"
     ]
   },
 
@@ -986,9 +1220,7 @@ const categories = {
       "Wald im Morgennebel",
       "See mit Spiegelung",
       "Winterlandschaft",
-      "Tropische Landschaft",
-      "Dramatische Küstenlandschaft",
-      "Goldene Herbstlandschaft"
+      "Tropische Landschaft"
     ]
   },
 
@@ -1003,8 +1235,6 @@ const categories = {
       "Dramatic Lighting",
       "Dreamlike Art",
       "Luxury Fashion Photography",
-      "Magazine Cover Style",
-      "Minimalist Art",
       "Hyper-Detailed Art"
     ]
   },
@@ -1018,9 +1248,7 @@ const categories = {
       "Natürliche Hautstruktur",
       "Realistische Hautporen",
       "Keine künstliche Hautglättung",
-      "Professionelle Studiobeleuchtung",
-      "Ultra-detailliert",
-      "Hochwertige Bildqualität"
+      "Ultra-detailliert"
     ]
   },
 
@@ -1057,9 +1285,7 @@ const categories = {
       "Cinematic Lighting",
       "Dramatisches Rim Light",
       "Professionelle Studiobeleuchtung",
-      "Warmes Sonnenlicht",
-      "Atmosphärische Beleuchtung",
-      "Natürliche Fensterbeleuchtung"
+      "Warmes Sonnenlicht"
     ]
   },
 
@@ -1072,8 +1298,6 @@ const categories = {
       "Mystische Stimmung",
       "Romantische Stimmung",
       "Dramatische Atmosphäre",
-      "Ruhige harmonische Stimmung",
-      "Epische Atmosphäre",
       "Traumhafte Stimmung"
     ]
   },
@@ -1087,9 +1311,7 @@ const categories = {
       "Magische Beleuchtung",
       "Cinematic Fantasy",
       "Epische Landschaft",
-      "Traumhafte Szene",
-      "Schwebende Lichter",
-      "Fantastische Architektur"
+      "Traumhafte Szene"
     ]
   },
 
@@ -1113,25 +1335,9 @@ const categories = {
       "Professionelle Komposition",
       "Symmetrische Bildgestaltung",
       "Dynamische Perspektive",
-      "Cinematic Perspektive",
       "Kamera auf Augenhöhe",
-      "Kamera weiter zurück, vollständige Person sichtbar",
-      "Gesamter Körper inklusive Füße sichtbar",
-      "Sorgfältige Bildgestaltung"
-    ]
-  },
-
-  "Erwachsene Kreativposen": {
-    icon: "🔞",
-    multi: true,
-    options: [
-      "Erwachsene Person in eleganter Pose",
-      "Fashion-Pose im Studio",
-      "Sitzende stilvolle Pose",
-      "Stehende glamouröse Pose",
-      "Cinematic Fashion Photography",
-      "Künstlerische Portraitpose",
-      "Selbstbewusste elegante Pose"
+      "Kamera weiter zurück",
+      "Gesamter Körper inklusive Füße sichtbar"
     ]
   }
 
@@ -1147,26 +1353,143 @@ let currentCategory = null;
 
 
 /* =========================================
-   INIT
+   INITIALISIERUNG
 ========================================= */
 
 function init() {
 
+  document.getElementById("languageSelector").value =
+    currentLanguage;
+
   loadCurrentSelection();
+
+  applyLanguage();
 
   renderCategories();
 
-  updatePrompt();
+  updateEverything();
 
   renderSavedPrompts();
-
-  updateStats();
 
 }
 
 
 /* =========================================
-   KATEGORIEN RENDERN
+   SPRACHE WECHSELN
+========================================= */
+
+function changeLanguage(language) {
+
+  currentLanguage = language;
+
+  localStorage.setItem(
+    "artstyleLanguage",
+    language
+  );
+
+  applyLanguage();
+
+}
+
+
+function applyLanguage() {
+
+  const t = translations[currentLanguage];
+
+  document.documentElement.lang =
+    currentLanguage;
+
+  document.body.classList.toggle(
+    "rtl",
+    currentLanguage === "ar"
+  );
+
+  document.documentElement.dir =
+    currentLanguage === "ar"
+      ? "rtl"
+      : "ltr";
+
+
+  document.getElementById("subtitle").textContent =
+    t.subtitle;
+
+  document.getElementById("welcomeTitle").textContent =
+    t.welcomeTitle;
+
+  document.getElementById("welcomeText").textContent =
+    t.welcomeText;
+
+  document.getElementById("selectedLabel").textContent =
+    t.selectedLabel;
+
+  document.getElementById("categoryLabel").textContent =
+    t.categoryLabel;
+
+  document.getElementById("savedLabel").textContent =
+    t.savedLabel;
+
+  document.getElementById("presetTitle").textContent =
+    t.presetTitle;
+
+  document.getElementById("categoryTitle").textContent =
+    t.categoryTitle;
+
+  document.getElementById("closeButton").textContent =
+    t.close;
+
+  document.getElementById("overviewTitle").textContent =
+    t.overview;
+
+  document.getElementById("referenceTitle").textContent =
+    t.referenceTitle;
+
+  document.getElementById("referenceText").textContent =
+    t.referenceText;
+
+  document.getElementById("promptTitle").textContent =
+    t.promptTitle;
+
+  document.getElementById("editInfo").textContent =
+    t.editInfo;
+
+  document.getElementById("copyButton").textContent =
+    t.copy;
+
+  document.getElementById("saveButton").textContent =
+    t.save;
+
+  document.getElementById("randomButton").textContent =
+    t.random;
+
+  document.getElementById("exportButton").textContent =
+    t.export;
+
+  document.getElementById("importButton").textContent =
+    t.import;
+
+  document.getElementById("resetButton").textContent =
+    t.reset;
+
+  document.getElementById("libraryTitle").textContent =
+    t.library;
+
+  document.getElementById("librarySearch").placeholder =
+    t.search;
+
+
+  renderCategories();
+
+  renderOverview();
+
+  renderSavedPrompts();
+
+  updatePrompt();
+
+}
+
+
+/* =========================================
+   KATEGORIEN
 ========================================= */
 
 function renderCategories() {
@@ -1176,29 +1499,37 @@ function renderCategories() {
 
   container.innerHTML = "";
 
+
   Object.keys(categories).forEach(function(category) {
 
     const data = categories[category];
 
-    const card = document.createElement("div");
+    const count =
+      getSelectionCount(category);
+
+
+    const card =
+      document.createElement("div");
 
     card.className = "card";
 
-    const count = getSelectionCount(category);
 
     if (count > 0) {
       card.classList.add("has-selection");
     }
 
+
     card.onclick = function() {
       openCategory(category);
     };
+
 
     card.innerHTML = `
       <div class="selection-badge">${count}</div>
       <div class="card-icon">${data.icon}</div>
       <div class="card-title">${category}</div>
     `;
+
 
     container.appendChild(card);
 
@@ -1215,30 +1546,26 @@ function openCategory(category) {
 
   currentCategory = category;
 
-  const area =
-    document.getElementById("selectionArea");
+  const data = categories[category];
 
-  const title =
-    document.getElementById("selectionTitle");
+  const t = translations[currentLanguage];
 
-  const hint =
-    document.getElementById("selectionHint");
+
+  document.getElementById("selectionArea").style.display =
+    "block";
+
+  document.getElementById("selectionTitle").textContent =
+    data.icon + " " + category;
+
+  document.getElementById("selectionHint").textContent =
+    data.multi ? t.multi : t.single;
+
 
   const container =
     document.getElementById("optionsContainer");
 
-  const data = categories[category];
-
-  area.style.display = "block";
-
-  title.textContent =
-    data.icon + " " + category;
-
-  hint.textContent = data.multi
-    ? "☑️ Mehrere Optionen können gleichzeitig kombiniert werden."
-    : "☝️ Eine Option auswählen.";
-
   container.innerHTML = "";
+
 
   data.options.forEach(function(option) {
 
@@ -1273,10 +1600,12 @@ function openCategory(category) {
 
   setTimeout(function() {
 
-    area.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
+    document
+      .getElementById("selectionArea")
+      .scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
 
   }, 100);
 
@@ -1298,6 +1627,7 @@ function toggleOption(category, option) {
       selectedValues[category] = [];
     }
 
+
     const index =
       selectedValues[category].indexOf(option);
 
@@ -1305,6 +1635,7 @@ function toggleOption(category, option) {
     if (index >= 0) {
 
       selectedValues[category].splice(index, 1);
+
 
       if (selectedValues[category].length === 0) {
         delete selectedValues[category];
@@ -1340,12 +1671,11 @@ function toggleOption(category, option) {
 
 function isOptionSelected(category, option) {
 
-  const value = selectedValues[category];
+  const value =
+    selectedValues[category];
 
 
-  if (!value) {
-    return false;
-  }
+  if (!value) return false;
 
 
   if (Array.isArray(value)) {
@@ -1358,27 +1688,24 @@ function isOptionSelected(category, option) {
 }
 
 
-/* =========================================
-   ANZAHL
-========================================= */
-
 function getSelectionCount(category) {
 
-  const value = selectedValues[category];
+  const value =
+    selectedValues[category];
+
 
   if (!value) return 0;
 
-  if (Array.isArray(value)) {
-    return value.length;
-  }
 
-  return 1;
+  return Array.isArray(value)
+    ? value.length
+    : 1;
 
 }
 
 
 /* =========================================
-   PROMPT ERSTELLEN
+   PROMPT
 ========================================= */
 
 function updatePrompt() {
@@ -1391,7 +1718,9 @@ function updatePrompt() {
 
   Object.keys(categories).forEach(function(category) {
 
-    const value = selectedValues[category];
+    const value =
+      selectedValues[category];
+
 
     if (!value) return;
 
@@ -1422,18 +1751,15 @@ function updatePrompt() {
   }
 
 
-  const qualityText =
-
-    "Professionelle Komposition, realistische Details, " +
-    "hochwertige Beleuchtung, sorgfältige Bildgestaltung, " +
-    "harmonische Proportionen und hochwertige finale Bildqualität.";
+  const t =
+    translations[currentLanguage];
 
 
   output.value =
-    "Erstelle ein hochwertiges Bild mit: " +
+    t.promptStart +
     parts.join(", ") +
     ". " +
-    qualityText;
+    t.quality;
 
 
   updateCharacterCount();
@@ -1450,16 +1776,23 @@ function renderOverview() {
   const container =
     document.getElementById("selectedList");
 
+  const t =
+    translations[currentLanguage];
+
   container.innerHTML = "";
+
 
   let hasSelection = false;
 
 
   Object.keys(categories).forEach(function(category) {
 
-    const value = selectedValues[category];
+    const value =
+      selectedValues[category];
+
 
     if (!value) return;
+
 
     hasSelection = true;
 
@@ -1494,7 +1827,7 @@ function renderOverview() {
 
     container.innerHTML =
       '<div class="empty-message">' +
-      'Noch keine Auswahl getroffen.' +
+      t.empty +
       '</div>';
 
   }
@@ -1509,43 +1842,38 @@ function renderOverview() {
 function updateStats() {
 
   let elements = 0;
-  let categoriesUsed = 0;
+  let categoryCount = 0;
 
 
   Object.keys(selectedValues).forEach(function(category) {
 
-    const value = selectedValues[category];
+    categoryCount++;
 
-    categoriesUsed++;
+    const value =
+      selectedValues[category];
 
 
-    if (Array.isArray(value)) {
-      elements += value.length;
-    } else {
-      elements++;
-    }
+    elements += Array.isArray(value)
+      ? value.length
+      : 1;
 
   });
 
 
-  document.getElementById("selectedCount")
-    .textContent = elements;
+  document.getElementById("selectedCount").textContent =
+    elements;
 
-  document.getElementById("categoryCount")
-    .textContent = categoriesUsed;
+  document.getElementById("categoryCount").textContent =
+    categoryCount;
 
-
-  const saved =
-    getSavedPrompts();
-
-  document.getElementById("savedCount")
-    .textContent = saved.length;
+  document.getElementById("savedCount").textContent =
+    getSavedPrompts().length;
 
 }
 
 
 /* =========================================
-   ALLES AKTUALISIEREN
+   UPDATE
 ========================================= */
 
 function updateEverything() {
@@ -1564,7 +1892,7 @@ function updateEverything() {
 
 
 /* =========================================
-   ZEICHENZÄHLER
+   ZEICHEN
 ========================================= */
 
 function updateCharacterCount() {
@@ -1572,15 +1900,48 @@ function updateCharacterCount() {
   const output =
     document.getElementById("promptOutput");
 
-  document.getElementById("characterCount")
-    .textContent =
-      output.value.length + " Zeichen";
+  document.getElementById("characterCount").textContent =
+    output.value.length + " Zeichen";
 
 }
 
 
-document.getElementById("promptOutput")
+document
+  .getElementById("promptOutput")
   .addEventListener("input", updateCharacterCount);
+
+
+/* =========================================
+   REFERENZBILD
+========================================= */
+
+function previewImage(event) {
+
+  const file =
+    event.target.files[0];
+
+
+  if (!file) return;
+
+
+  const reader =
+    new FileReader();
+
+
+  reader.onload = function(e) {
+
+    document.getElementById("previewImage").src =
+      e.target.result;
+
+    document.getElementById("referencePreview").style.display =
+      "block";
+
+  };
+
+
+  reader.readAsDataURL(file);
+
+}
 
 
 /* =========================================
@@ -1592,243 +1953,88 @@ async function copyPrompt() {
   const output =
     document.getElementById("promptOutput");
 
-  const status =
-    document.getElementById("status");
-
-
-  if (!output.value.trim()) {
-
-    status.textContent =
-      "⚠️ Bitte zuerst einen Prompt erstellen.";
-
-    return;
-
-  }
+  if (!output.value.trim()) return;
 
 
   try {
 
-    if (
-      navigator.clipboard &&
-      window.isSecureContext
-    ) {
+    await navigator.clipboard.writeText(
+      output.value
+    );
 
-      await navigator.clipboard.writeText(
-        output.value
-      );
+    setStatus("✅ Prompt wurde kopiert!");
 
-    } else {
-
-      output.select();
-
-      document.execCommand("copy");
-
-    }
-
-
-    status.textContent =
-      "✅ Prompt wurde erfolgreich kopiert!";
-
-
-  } catch (error) {
+  } catch {
 
     output.select();
 
-    status.textContent =
-      "⚠️ Bitte den Prompt manuell kopieren.";
+    document.execCommand("copy");
+
+    setStatus("✅ Prompt wurde kopiert!");
 
   }
 
 }
 
 
-/* =========================================
-   ZURÜCKSETZEN
-========================================= */
-
-function resetAll() {
-
-  if (
-    !confirm(
-      "Möchtest du wirklich alle aktuellen Auswahlen löschen?"
-    )
-  ) {
-    return;
-  }
-
-
-  selectedValues = {};
-
-  document.getElementById("promptOutput").value = "";
-
-  document.getElementById("selectionArea").style.display =
-    "none";
+function setStatus(message) {
 
   document.getElementById("status").textContent =
-    "🔄 Alle Auswahlen wurden zurückgesetzt.";
-
-  localStorage.removeItem(
-    "artstyleCurrentSelection"
-  );
-
-
-  updateEverything();
+    message;
 
 }
 
 
 /* =========================================
-   ZUFALLS-PROMPT
-========================================= */
-
-function randomPrompt() {
-
-  selectedValues = {};
-
-
-  Object.keys(categories).forEach(function(category) {
-
-    const data = categories[category];
-
-
-    /* Nicht jede Kategorie muss gewählt werden */
-
-    const probability =
-      data.multi ? 0.35 : 0.65;
-
-
-    if (Math.random() > probability) {
-      return;
-    }
-
-
-    if (data.multi) {
-
-      const count =
-        Math.floor(Math.random() * 3) + 1;
-
-
-      const shuffled =
-        [...data.options]
-          .sort(function() {
-            return Math.random() - 0.5;
-          })
-          .slice(0, count);
-
-
-      selectedValues[category] =
-        shuffled;
-
-
-    } else {
-
-      const option =
-        data.options[
-          Math.floor(
-            Math.random() *
-            data.options.length
-          )
-        ];
-
-
-      selectedValues[category] =
-        option;
-
-    }
-
-  });
-
-
-  updateEverything();
-
-
-  document.getElementById("status").textContent =
-    "🎲 Ein neuer zufälliger Prompt wurde erstellt!";
-
-
-  document
-    .getElementById("promptOutput")
-    .scrollIntoView({
-      behavior: "smooth",
-      block: "center"
-    });
-
-}
-
-
-/* =========================================
-   PROMPT SPEICHERN
+   SPEICHERN
 ========================================= */
 
 function savePrompt() {
 
-  const output =
-    document.getElementById("promptOutput");
-
-  const status =
-    document.getElementById("status");
+  const promptText =
+    document.getElementById("promptOutput").value;
 
 
-  if (!output.value.trim()) {
-
-    status.textContent =
-      "⚠️ Kein Prompt zum Speichern vorhanden.";
-
-    return;
-
-  }
+  if (!promptText.trim()) return;
 
 
   const title =
-    prompt(
-      "Wie möchtest du diesen Prompt nennen?",
-      "Mein ArtStyle Prompt"
-    );
+    prompt("Name für diesen Prompt:", "Mein ArtStyle Prompt");
 
 
-  if (!title) {
-    return;
-  }
+  if (!title) return;
 
 
-  const saved =
+  const prompts =
     getSavedPrompts();
 
 
-  saved.unshift({
-
+  prompts.unshift({
     id: Date.now(),
-
     title: title,
-
-    prompt: output.value,
-
-    date:
-      new Date()
-        .toLocaleString("de-DE")
-
+    prompt: promptText,
+    favorite: false,
+    date: new Date().toLocaleString()
   });
 
 
   localStorage.setItem(
     "artstyleSavedPrompts",
-    JSON.stringify(saved)
+    JSON.stringify(prompts)
   );
-
-
-  status.textContent =
-    "💾 Prompt wurde gespeichert!";
 
 
   renderSavedPrompts();
 
   updateStats();
 
+  setStatus("💾 Prompt gespeichert!");
+
 }
 
 
 /* =========================================
-   GESPEICHERTE PROMPTS
+   BIBLIOTHEK
 ========================================= */
 
 function getSavedPrompts() {
@@ -1836,9 +2042,7 @@ function getSavedPrompts() {
   try {
 
     return JSON.parse(
-      localStorage.getItem(
-        "artstyleSavedPrompts"
-      )
+      localStorage.getItem("artstyleSavedPrompts")
     ) || [];
 
   } catch {
@@ -1855,8 +2059,36 @@ function renderSavedPrompts() {
   const container =
     document.getElementById("savedPrompts");
 
-  const prompts =
+  const search =
+    document
+      .getElementById("librarySearch")
+      .value
+      .toLowerCase();
+
+  const t =
+    translations[currentLanguage];
+
+
+  let prompts =
     getSavedPrompts();
+
+
+  prompts = prompts.filter(function(item) {
+
+    return (
+      item.title.toLowerCase().includes(search) ||
+      item.prompt.toLowerCase().includes(search)
+    );
+
+  });
+
+
+  prompts.sort(function(a, b) {
+
+    return Number(b.favorite) -
+           Number(a.favorite);
+
+  });
 
 
   container.innerHTML = "";
@@ -1866,7 +2098,7 @@ function renderSavedPrompts() {
 
     container.innerHTML =
       '<div class="empty-message">' +
-      'Noch keine Prompts gespeichert.' +
+      t.libraryEmpty +
       '</div>';
 
     return;
@@ -1885,15 +2117,16 @@ function renderSavedPrompts() {
 
     element.innerHTML = `
 
-      <div class="saved-prompt-header">
+      <div class="saved-header">
 
         <div class="saved-title">
+
+          ${item.favorite ? "⭐ " : ""}
           ${escapeHtml(item.title)}
+
         </div>
 
-        <small style="color:#777e95">
-          ${escapeHtml(item.date)}
-        </small>
+        <small>${escapeHtml(item.date)}</small>
 
       </div>
 
@@ -1917,8 +2150,14 @@ function renderSavedPrompts() {
 
         <button
           class="small-button"
+          onclick="toggleFavorite(${item.id})">
+          ⭐
+        </button>
+
+        <button
+          class="small-button"
           onclick="deleteSavedPrompt(${item.id})">
-          🗑️ Löschen
+          🗑️
         </button>
 
       </div>
@@ -1945,19 +2184,11 @@ function escapeHtml(text) {
 }
 
 
-/* =========================================
-   GESPEICHERTEN PROMPT LADEN
-========================================= */
-
 function loadSavedPrompt(id) {
 
-  const prompts =
-    getSavedPrompts();
-
   const item =
-    prompts.find(function(p) {
-      return p.id === id;
-    });
+    getSavedPrompts()
+      .find(p => p.id === id);
 
 
   if (!item) return;
@@ -1966,85 +2197,63 @@ function loadSavedPrompt(id) {
   document.getElementById("promptOutput").value =
     item.prompt;
 
-
   updateCharacterCount();
 
-
-  document.getElementById("status").textContent =
-    "📂 Gespeicherter Prompt wurde geladen.";
-
-
-  document
-    .getElementById("promptOutput")
-    .scrollIntoView({
-      behavior: "smooth",
-      block: "center"
-    });
+  setStatus("📂 Prompt geladen!");
 
 }
 
 
-/* =========================================
-   GESPEICHERTEN PROMPT KOPIEREN
-========================================= */
-
 function copySavedPrompt(id) {
 
-  const prompts =
-    getSavedPrompts();
-
   const item =
-    prompts.find(function(p) {
-      return p.id === id;
-    });
+    getSavedPrompts()
+      .find(p => p.id === id);
 
 
   if (!item) return;
 
 
-  navigator.clipboard
-    .writeText(item.prompt)
-    .then(function() {
+  navigator.clipboard.writeText(item.prompt);
 
-      alert(
-        "Prompt wurde kopiert!"
-      );
-
-    })
-    .catch(function() {
-
-      alert(
-        "Bitte Prompt manuell kopieren."
-      );
-
-    });
+  setStatus("📋 Prompt kopiert!");
 
 }
 
 
-/* =========================================
-   PROMPT LÖSCHEN
-========================================= */
+function toggleFavorite(id) {
 
-function deleteSavedPrompt(id) {
-
-  if (
-    !confirm(
-      "Diesen gespeicherten Prompt löschen?"
-    )
-  ) {
-    return;
-  }
-
-
-  let prompts =
+  const prompts =
     getSavedPrompts();
 
 
-  prompts =
-    prompts.filter(function(item) {
-      return item.id !== id;
-    });
+  const item =
+    prompts.find(p => p.id === id);
+
+
+  if (!item) return;
+
+
+  item.favorite =
+    !item.favorite;
+
+
+  localStorage.setItem(
+    "artstyleSavedPrompts",
+    JSON.stringify(prompts)
+  );
+
+
+  renderSavedPrompts();
+
+}
+
+
+function deleteSavedPrompt(id) {
+
+  const prompts =
+    getSavedPrompts()
+      .filter(p => p.id !== id);
 
 
   localStorage.setItem(
@@ -2061,7 +2270,175 @@ function deleteSavedPrompt(id) {
 
 
 /* =========================================
-   AUTOMATISCH SPEICHERN
+   PRESETS
+========================================= */
+
+function loadPreset(type) {
+
+  selectedValues = {};
+
+
+  if (type === "cinematic") {
+
+    selectedValues["Bildstil"] = [
+      "Cinematic Style",
+      "Dramatic Lighting"
+    ];
+
+    selectedValues["Beleuchtung"] = [
+      "Cinematic Lighting",
+      "Dramatisches Rim Light"
+    ];
+
+  }
+
+
+  if (type === "fashion") {
+
+    selectedValues["Bildstil"] = [
+      "Luxury Fashion Photography",
+      "Editorial Photography"
+    ];
+
+    selectedValues["Kleidung"] = [
+      "Luxuriöse Fashion"
+    ];
+
+  }
+
+
+  if (type === "portrait") {
+
+    selectedValues["Person"] =
+      "Cinematic Portrait";
+
+    selectedValues["Fotorealismus"] = [
+      "Ultra-realistische professionelle Fotografie",
+      "Natürliche Hautstruktur",
+      "Realistische Hautporen"
+    ];
+
+    selectedValues["Kamera"] =
+      "Canon EOS R5";
+
+    selectedValues["Objektiv"] =
+      "85mm Portraitobjektiv f/1.4";
+
+  }
+
+
+  if (type === "fantasy") {
+
+    selectedValues["Fantasy"] = [
+      "Surreale Fantasiewelt",
+      "Magische Beleuchtung",
+      "Cinematic Fantasy"
+    ];
+
+  }
+
+
+  if (type === "japan") {
+
+    selectedValues["Japan"] = [
+      "Kyoto bei Sonnenuntergang",
+      "Japanischer Bambuswald"
+    ];
+
+    selectedValues["Bildstil"] = [
+      "Fine-Art Photography",
+      "Cinematic Style"
+    ];
+
+  }
+
+
+  updateEverything();
+
+}
+
+
+/* =========================================
+   ZUFALL
+========================================= */
+
+function randomPrompt() {
+
+  selectedValues = {};
+
+
+  Object.keys(categories).forEach(function(category) {
+
+    const data =
+      categories[category];
+
+
+    if (Math.random() < 0.45) return;
+
+
+    if (data.multi) {
+
+      selectedValues[category] =
+        [...data.options]
+          .sort(() => Math.random() - 0.5)
+          .slice(
+            0,
+            Math.floor(Math.random() * 3) + 1
+          );
+
+    } else {
+
+      selectedValues[category] =
+        data.options[
+          Math.floor(
+            Math.random() *
+            data.options.length
+          )
+        ];
+
+    }
+
+  });
+
+
+  updateEverything();
+
+  setStatus("🎲 Zufälliger Prompt erstellt!");
+
+}
+
+
+/* =========================================
+   RESET
+========================================= */
+
+function resetAll() {
+
+  if (
+    !confirm("Alle Auswahlen wirklich zurücksetzen?")
+  ) {
+    return;
+  }
+
+
+  selectedValues = {};
+
+  document.getElementById("promptOutput").value = "";
+
+  localStorage.removeItem(
+    "artstyleCurrentSelection"
+  );
+
+
+  updateEverything();
+
+  setStatus("🔄 Alles zurückgesetzt.");
+
+}
+
+
+/* =========================================
+   LOKAL SPEICHERN
 ========================================= */
 
 function saveCurrentSelection() {
@@ -2101,33 +2478,23 @@ function loadCurrentSelection() {
 
 
 /* =========================================
-   BACKUP EXPORT
+   EXPORT
 ========================================= */
 
 function exportData() {
 
   const data = {
-
-    version: "ArtStyle Studio 3.0",
-
-    exported:
-      new Date().toISOString(),
-
-    savedPrompts:
-      getSavedPrompts(),
-
-    currentSelection:
-      selectedValues
-
+    version: "ArtStyle Studio V4",
+    language: currentLanguage,
+    currentSelection: selectedValues,
+    savedPrompts: getSavedPrompts()
   };
 
 
   const blob =
     new Blob(
       [JSON.stringify(data, null, 2)],
-      {
-        type: "application/json"
-      }
+      {type: "application/json"}
     );
 
 
@@ -2144,21 +2511,15 @@ function exportData() {
   link.download =
     "artstyle-studio-backup.json";
 
-
   link.click();
 
-
   URL.revokeObjectURL(url);
-
-
-  document.getElementById("status").textContent =
-    "📤 Backup wurde exportiert.";
 
 }
 
 
 /* =========================================
-   BACKUP IMPORT
+   IMPORT
 ========================================= */
 
 function importData() {
@@ -2166,84 +2527,84 @@ function importData() {
   const input =
     document.createElement("input");
 
-
   input.type = "file";
 
-  input.accept =
-    ".json,application/json";
+  input.accept = ".json";
 
 
-  input.onchange =
-    function(event) {
+  input.onchange = function(event) {
 
-      const file =
-        event.target.files[0];
-
-
-      if (!file) return;
+    const file =
+      event.target.files[0];
 
 
-      const reader =
-        new FileReader();
+    if (!file) return;
 
 
-      reader.onload =
-        function(e) {
-
-          try {
-
-            const data =
-              JSON.parse(e.target.result);
+    const reader =
+      new FileReader();
 
 
-            if (
-              data.savedPrompts
-            ) {
+    reader.onload = function(e) {
 
-              localStorage.setItem(
-                "artstyleSavedPrompts",
-                JSON.stringify(
-                  data.savedPrompts
-                )
-              );
+      try {
 
-            }
+        const data =
+          JSON.parse(e.target.result);
 
 
-            if (
-              data.currentSelection
-            ) {
+        if (data.currentSelection) {
 
-              selectedValues =
-                data.currentSelection;
+          selectedValues =
+            data.currentSelection;
 
-            }
+        }
 
 
-            updateEverything();
+        if (data.savedPrompts) {
 
-            renderSavedPrompts();
+          localStorage.setItem(
+            "artstyleSavedPrompts",
+            JSON.stringify(data.savedPrompts)
+          );
 
-
-            document.getElementById("status")
-              .textContent =
-              "📥 Backup erfolgreich importiert!";
-
-
-          } catch {
-
-            alert(
-              "❌ Diese Datei ist kein gültiges ArtStyle Studio Backup."
-            );
-
-          }
-
-        };
+        }
 
 
-      reader.readAsText(file);
+        if (data.language) {
+
+          currentLanguage =
+            data.language;
+
+          document
+            .getElementById("languageSelector")
+            .value =
+            currentLanguage;
+
+        }
+
+
+        applyLanguage();
+
+        updateEverything();
+
+        renderSavedPrompts();
+
+
+        setStatus("📥 Backup erfolgreich importiert!");
+
+      } catch {
+
+        alert("❌ Ungültige Backup-Datei.");
+
+      }
 
     };
+
+
+    reader.readAsText(file);
+
+  };
 
 
   input.click();
@@ -2252,12 +2613,14 @@ function importData() {
 
 
 /* =========================================
-   AUSWAHL SCHLIESSEN
+   SCHLIESSEN
 ========================================= */
 
 function closeSelection() {
 
-  document.getElementById("selectionArea").style.display =
+  document
+    .getElementById("selectionArea")
+    .style.display =
     "none";
 
 }

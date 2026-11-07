@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ArtStyle Studio – Dirk Eckert</title>
+<title>ArtStyle Studio V6.0 – Dirk Eckert</title>
 <style>
 :root{
   --bg:#080a10;--bg2:#101524;--card:#151a28;--card2:#20263a;
@@ -34,7 +34,24 @@ textarea{width:100%;min-height:280px;padding:16px;resize:vertical;background:#08
 body.rtl{direction:rtl}body.rtl .topbar{justify-content:flex-start}body.rtl .selection-badge,body.rtl .option.active:after{right:auto;left:10px}
 footer{padding:35px 10px;text-align:center;color:#717a92}
 @media(max-width:650px){h1{font-size:32px}.stats,.options,.button-grid{grid-template-columns:1fr}.categories{gap:11px}.card{min-height:125px}.card-icon{font-size:37px}.card-title{font-size:15px}.prompt-info{flex-direction:column}}
-</style>
+
+/* V6 clean navigation and responsive studio layout */
+.category-toolbar{display:grid;gap:12px;margin:0 0 18px}
+.category-search{width:100%;padding:15px 16px;border-radius:15px;background:#0b0e16;color:white;border:1px solid #424b64;font-size:16px}
+.category-tabs{display:flex;gap:8px;overflow-x:auto;padding:2px 0 8px;scrollbar-width:thin}
+.category-tabs .tab{flex:0 0 auto;width:auto;margin:0;padding:11px 15px;border-radius:30px;background:#1c2435;border:1px solid #3e4962;color:#dce4f7;font-size:14px}
+.category-tabs .tab.active{background:linear-gradient(135deg,#6d28d9,#be185d);border-color:#c084fc;color:#fff}
+main{max-width:1120px}
+.hero{background:linear-gradient(125deg,#28105b,#4b145e 55%,#172c54);border:1px solid #68438e}
+.stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+.categories{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.card{min-height:132px;background:linear-gradient(155deg,#171e2e,#101521);border:1px solid #35415a}
+.card.has-selection{border:2px solid #22c55e}
+.panel,#selectionArea{box-shadow:0 10px 28px rgba(0,0,0,.18)}
+.section-title{font-size:25px}
+@media(max-width:760px){.categories{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:430px){.categories{gap:9px}.card{min-height:112px;padding:13px 7px}.card-icon{font-size:32px}.card-title{font-size:13px}.stats{gap:7px}.stat{padding:12px 5px}.stat-number{font-size:23px}.stat-label{font-size:11px}}
+\n</style>
 </head>
 <body>
 <header>
@@ -50,7 +67,19 @@ footer{padding:35px 10px;text-align:center;color:#717a92}
  <div class="stat"><div class="stat-number" id="savedCount">0</div><div class="stat-label" id="savedLabel"></div></div>
 </div>
 <h2 class="section-title" id="presetTitle"></h2><div class="presets" id="presetButtons"></div>
-<h2 class="section-title" id="categoryTitle"></h2><div class="categories" id="categoriesContainer"></div>
+<h2 class="section-title" id="categoryTitle"></h2>
+<div class="category-toolbar">
+  <input id="categorySearch" class="category-search" type="search" placeholder="Bereiche suchen …" oninput="renderCategories()">
+  <div class="category-tabs" id="categoryTabs">
+    <button type="button" class="tab active" data-group="all" onclick="setCategoryGroup('all')">Alle</button>
+    <button type="button" class="tab" data-group="people" onclick="setCategoryGroup('people')">Person & Beauty</button>
+    <button type="button" class="tab" data-group="worlds" onclick="setCategoryGroup('worlds')">Welten & Fantasy</button>
+    <button type="button" class="tab" data-group="space" onclick="setCategoryGroup('space')">Galaxie</button>
+    <button type="button" class="tab" data-group="trains" onclick="setCategoryGroup('trains')">Zugwelten</button>
+    <button type="button" class="tab" data-group="photo" onclick="setCategoryGroup('photo')">Foto & Technik</button>
+  </div>
+</div>
+<div class="categories" id="categoriesContainer"></div>
 <section id="selectionArea"><div class="selection-header"><h2 id="selectionTitle"></h2><button class="close-selection" onclick="closeSelection()" id="closeButton"></button></div><p class="hint" id="selectionHint"></p><div class="options" id="optionsContainer"></div></section>
 <section class="panel"><h2 id="overviewTitle"></h2><div class="selected-list" id="selectedList"></div></section>
 <section class="panel"><h2 id="referenceTitle"></h2><p id="referenceText"></p><input class="file-input" type="file" accept="image/*" onchange="previewImage(event)"><div class="reference-preview" id="referencePreview"><img id="previewImage" alt="Reference"></div></section>
@@ -61,7 +90,7 @@ footer{padding:35px 10px;text-align:center;color:#717a92}
 <button class="secondary" onclick="importData()" id="importButton"></button><button class="danger" onclick="resetAll()" id="resetButton"></button>
 </div><div class="status" id="status"></div></section>
 <section class="panel"><h2 id="libraryTitle"></h2><input class="library-search" id="librarySearch" oninput="renderSavedPrompts()"><div id="savedPrompts"></div></section>
-</main><footer>🎨 ArtStyle Studio V5.5 · Beauty & Glamour · Dirk Eckert</footer>
+</main><footer>🎨 ArtStyle Studio V6.0 · Creative Worlds · Dirk Eckert</footer>
 
 <script>
 const LANGS={
@@ -93,6 +122,18 @@ const CATEGORIES=[
 ["format","📐",false,{de:"Bildformat",en:"Aspect Ratio",es:"Formato",fr:"Format",ar:"أبعاد الصورة"},["ar916","ar169","ar11","ar45","ar34","ar23"]],
 ["composition","🎬",true,{de:"Komposition",en:"Composition",es:"Composición",fr:"Composition",ar:"التكوين"},["professionalComposition","symmetric","dynamic","eyeLevel","cameraBack","fullBodyFeet"]],
 ["adultCreative","🔞",true,{de:"18+ Kreativbereich",en:"18+ Creative Area",es:"Área creativa 18+",fr:"Espace créatif 18+",ar:"منطقة إبداعية +18"},["adultElegant","fashionStudio","seatedStylish","standingGlamour","cinematicFashion","artisticPortrait"]]
+,["galaxyScene","🌌",true,{de:"Galaktische Szenen",en:"Galactic Scenes",es:"Escenas galácticas",fr:"Scènes galactiques",ar:"مشاهد مجرية"},["spaceBattle","fleetFormation","planetOrbit","moonlitGalaxy","deepSpace","spaceStation","asteroidField"]]
+,["spacecraft","🚀",true,{de:"Raumschiffe & Flotten",en:"Spaceships & Fleets",es:"Naves y flotas",fr:"Vaisseaux et flottes",ar:"سفن وأساطيل فضائية"},["triangularStarship","fighterSquadron","sleekStarfighter","massiveDreadnought","cargoShip","orbitalCruiser"]]
+,["spaceCharacters","🛡️",true,{de:"Sci-Fi Figuren & Droiden",en:"Sci-Fi Characters & Droids",es:"Personajes y droides",fr:"Personnages et droïdes",ar:"شخصيات وروبوتات خيال علمي"},["armoredSpaceSoldier","battleDroid","robotCompanion","spacePilot","galacticCommander","alienExplorer"]]
+,["spaceWorlds","🪐",true,{de:"Planeten & Welten",en:"Planets & Worlds",es:"Planetas y mundos",fr:"Planètes et mondes",ar:"كواكب وعوالم"},["desertPlanet","icePlanet","volcanicPlanet","oceanPlanet","forestMoon","ringedPlanet"]]
+,["spaceEffects","✨",true,{de:"Weltraum-Effekte",en:"Space Effects",es:"Efectos espaciales",fr:"Effets spatiaux",ar:"مؤثرات فضائية"},["laserBolts","engineGlow","cosmicNebula","cinematicLensFlare","explosionsInDistance","dramaticSpaceLighting"]]
+,["trainType","🚆",false,{de:"Zugtyp",en:"Train Type",es:"Tipo de tren",fr:"Type de train",ar:"نوع القطار"},["swissPanoramaTrain","redAlpineExpress","historicSteamTrain","modernIntercity","mountainRailcar","vintageElectricTrain","luxuryTouristTrain"]]
+,["trainLandscape","🏔️",true,{de:"Bahnlandschaften",en:"Railway Landscapes",es:"Paisajes ferroviarios",fr:"Paysages ferroviaires",ar:"مناظر السكك الحديدية"},["matterhornAlps","greenAlpineValley","flowerMeadow","pineForest","mountainLake","snowyMountainPass","dramaticCliffs","riversideRailway","alpineVillage"]]
+,["trainRoute","🛤️",true,{de:"Strecken & Bauwerke",en:"Routes & Structures",es:"Rutas y estructuras",fr:"Itinéraires et ouvrages",ar:"المسارات والمنشآت"},["stoneViaduct","curvedMountainTrack","lakesideTrack","railwayTunnel","steepMountainLine","historicStation","highMountainBridge","valleyRailway"]]
+,["trainView","📷",false,{de:"Zugperspektive",en:"Train Perspective",es:"Perspectiva del tren",fr:"Perspective du train",ar:"منظور القطار"},["frontThreeQuarterTrain","sideViewTrain","distantTrainLandscape","trainFromAbove","trackLevelView","trainApproachingCamera"]]
+,["trainSeason","🌦️",false,{de:"Jahreszeit & Wetter",en:"Season & Weather",es:"Estación y clima",fr:"Saison et météo",ar:"الفصل والطقس"},["springAlps","summerAlps","autumnAlps","winterAlps","clearBlueSky","morningMist","goldenSunset","freshSnowfall"]]
+,["trainMood","🌅",true,{de:"Licht & Bildstimmung",en:"Light & Atmosphere",es:"Luz y ambiente",fr:"Lumière et ambiance",ar:"الإضاءة والأجواء"},["brightTravelPoster","cinematicGoldenHour","crispDaylight","softCloudLight","moodyMountainAtmosphere","photorealisticTravel"]]
+
 ];
 
 const O={
@@ -381,6 +422,7 @@ hairClip:["Elegant hair clip","Horquilla elegante","Barrette élégante","مشب
 subtleEarJewelry:["Subtle ear jewelry","Joyas discretas para las orejas","Bijoux d’oreilles discrets","حلي أذن رقيقة"]
 });
 
+Object.assign(O, {"spaceBattle":["Epische Weltraumschlacht","Epic space battle","Batalla espacial épica","Bataille spatiale épique","معركة فضائية ملحمية"],"fleetFormation":["Raumschiffflotte in Formation","Spaceship fleet formation","Flota espacial en formación","Flotte spatiale en formation","أسطول سفن فضائية بتشكيل"],"planetOrbit":["Planet in der Umlaufbahn","Planet in orbit","Planeta en órbita","Planète en orbite","كوكب في المدار"],"moonlitGalaxy":["Galaxie mit Monden","Moonlit galaxy","Galaxia iluminada por lunas","Galaxie éclairée par les lunes","مجرة مضاءة بالأقمار"],"deepSpace":["Tiefer Weltraum","Deep space","Espacio profundo","Espace profond","الفضاء العميق"],"spaceStation":["Futuristische Raumstation","Futuristic space station","Estación espacial futurista","Station spatiale futuriste","محطة فضائية مستقبلية"],"asteroidField":["Asteroidenfeld","Asteroid field","Campo de asteroides","Champ d’astéroïdes","حقل كويكبات"],"triangularStarship":["Massives dreieckiges Sternenschiff","Massive triangular starship","Nave estelar triangular masiva","Vaisseau stellaire triangulaire massif","سفينة فضائية ضخمة مثلثة"],"fighterSquadron":["Jägerstaffel im Formationsflug","Fighter squadron in formation","Escuadrón de cazas en formación","Escadron de chasse en formation","سرب مقاتلات في تشكيل"],"sleekStarfighter":["Eleganter Sternenjäger","Sleek starfighter","Caza estelar estilizado","Chasseur stellaire élégant","مقاتلة فضائية انسيابية"],"massiveDreadnought":["Gigantisches Schlachtschiff","Massive dreadnought","Acorazado gigantesco","Cuirassé gigantesque","سفينة حربية عملاقة"],"cargoShip":["Futuristisches Frachtschiff","Futuristic cargo ship","Nave de carga futurista","Cargo spatial futuriste","سفينة شحن مستقبلية"],"orbitalCruiser":["Schwerer Orbitalkreuzer","Heavy orbital cruiser","Crucero orbital pesado","Croiseur orbital lourd","طراد مداري ثقيل"],"armoredSpaceSoldier":["Gepanzerter Weltraumsoldat","Armored space soldier","Soldado espacial blindado","Soldat spatial blindé","جندي فضائي مدرع"],"battleDroid":["Kampfdroide","Battle droid","Droide de combate","Droïde de combat","روبوت قتالي"],"robotCompanion":["Futuristischer Roboterbegleiter","Futuristic robot companion","Compañero robot futurista","Compagnon robot futuriste","رفيق روبوت مستقبلي"],"spacePilot":["Raumpilot im Cockpit","Space pilot in cockpit","Piloto espacial en cabina","Pilote spatial dans le cockpit","طيار فضائي في قمرة القيادة"],"galacticCommander":["Galaktischer Kommandant","Galactic commander","Comandante galáctico","Commandant galactique","قائد مجري"],"alienExplorer":["Außerirdischer Entdecker","Alien explorer","Explorador alienígena","Explorateur extraterrestre","مستكشف فضائي"],"desertPlanet":["Wüstenplanet","Desert planet","Planeta desértico","Planète désertique","كوكب صحراوي"],"icePlanet":["Eisplanet","Ice planet","Planeta helado","Planète glacée","كوكب جليدي"],"volcanicPlanet":["Vulkanischer Planet","Volcanic planet","Planeta volcánico","Planète volcanique","كوكب بركاني"],"oceanPlanet":["Ozeanplanet","Ocean planet","Planeta oceánico","Planète océanique","كوكب محيطي"],"forestMoon":["Bewaldeter Mond","Forest moon","Luna boscosa","Lune forestière","قمر مليء بالغابات"],"ringedPlanet":["Planet mit leuchtenden Ringen","Ringed planet","Planeta con anillos","Planète aux anneaux","كوكب ذو حلقات"],"laserBolts":["Leuchtende Laserstrahlen","Glowing laser bolts","Rayos láser luminosos","Tirs laser lumineux","أشعة ليزر متوهجة"],"engineGlow":["Leuchtende Triebwerke","Glowing engines","Motores brillantes","Propulseurs lumineux","محركات متوهجة"],"cosmicNebula":["Leuchtender kosmischer Nebel","Glowing cosmic nebula","Nebulosa cósmica luminosa","Nébuleuse cosmique lumineuse","سديم كوني متوهج"],"cinematicLensFlare":["Cinematische Lichtreflexe","Cinematic lens flare","Destello cinematográfico","Reflet d’objectif cinématographique","وهج عدسة سينمائي"],"explosionsInDistance":["Explosionen in der Ferne","Distant explosions","Explosiones a lo lejos","Explosions au loin","انفجارات بعيدة"],"dramaticSpaceLighting":["Dramatisches Weltraumlicht","Dramatic space lighting","Iluminación espacial dramática","Éclairage spatial dramatique","إضاءة فضائية درامية"],"swissPanoramaTrain":["Schweizer Panoramazug","Swiss panoramic train","Tren panorámico suizo","Train panoramique suisse","قطار بانورامي سويسري"],"redAlpineExpress":["Roter Alpenexpress","Red Alpine Express","Expreso alpino rojo","Express alpin rouge","قطار جبلي سريع أحمر"],"historicSteamTrain":["Historische Dampflok","Historic steam train","Tren de vapor histórico","Train à vapeur historique","قطار بخاري تاريخي"],"modernIntercity":["Moderner Intercity","Modern intercity train","Tren interurbano moderno","Train interurbain moderne","قطار حديث بين المدن"],"mountainRailcar":["Historischer Bergtriebwagen","Mountain railcar","Automotor de montaña","Automotrice de montagne","عربة قطار جبلية"],"vintageElectricTrain":["Nostalgischer Elektrozug","Vintage electric train","Tren eléctrico clásico","Train électrique rétro","قطار كهربائي قديم"],"luxuryTouristTrain":["Luxus-Touristenzug","Luxury tourist train","Tren turístico de lujo","Train touristique de luxe","قطار سياحي فاخر"],"matterhornAlps":["Matterhorn und Schweizer Alpen","Matterhorn and Swiss Alps","Cervino y Alpes suizos","Cervin et Alpes suisses","ماترهورن وجبال الألب السويسرية"],"greenAlpineValley":["Grünes Alpental","Green alpine valley","Valle alpino verde","Vallée alpine verdoyante","وادي جبلي أخضر"],"flowerMeadow":["Blühende Bergwiese","Flowering mountain meadow","Pradera alpina florida","Prairie alpine fleurie","مرج جبلي مزهر"],"pineForest":["Dichter Nadelwald","Dense pine forest","Bosque de coníferas","Forêt de conifères","غابة صنوبر كثيفة"],"mountainLake":["Türkisblauer Bergsee","Turquoise mountain lake","Lago de montaña turquesa","Lac de montagne turquoise","بحيرة جبلية فيروزية"],"snowyMountainPass":["Verschneiter Gebirgspass","Snowy mountain pass","Paso de montaña nevado","Col de montagne enneigé","ممر جبلي ثلجي"],"dramaticCliffs":["Dramatische Felswände","Dramatic cliffs","Acantilados dramáticos","Falaises spectaculaires","منحدرات صخرية مهيبة"],"riversideRailway":["Bahnstrecke am Fluss","Riverside railway","Vía junto al río","Voie ferrée au bord de la rivière","سكة حديد بجانب النهر"],"alpineVillage":["Idyllisches Alpendorf","Picturesque alpine village","Pueblo alpino pintoresco","Village alpin pittoresque","قرية جبلية خلابة"],"stoneViaduct":["Historisches Steinviadukt","Historic stone viaduct","Viaducto histórico de piedra","Viaduc historique en pierre","جسر حجري تاريخي"],"curvedMountainTrack":["Kurvige Bergbahnstrecke","Curving mountain railway","Vía de montaña sinuosa","Voie ferrée de montagne sinueuse","سكة حديد جبلية متعرجة"],"lakesideTrack":["Gleis direkt am See","Track beside a lake","Vía junto al lago","Voie au bord du lac","سكة بجانب البحيرة"],"railwayTunnel":["Eisenbahntunnel im Gebirge","Mountain railway tunnel","Túnel ferroviario de montaña","Tunnel ferroviaire de montagne","نفق سكة حديد جبلي"],"steepMountainLine":["Steile Gebirgsbahn","Steep mountain railway","Ferrocarril de montaña empinado","Chemin de fer de montagne escarpé","سكة حديد جبلية شديدة الانحدار"],"historicStation":["Historischer Bergbahnhof","Historic mountain station","Estación histórica de montaña","Gare de montagne historique","محطة جبلية تاريخية"],"highMountainBridge":["Hohe Bahnbrücke","High mountain railway bridge","Puente ferroviario de montaña","Pont ferroviaire de haute montagne","جسر سكة حديد جبلي مرتفع"],"valleyRailway":["Bahnstrecke durch ein Tal","Valley railway","Ferrocarril por un valle","Voie ferrée dans une vallée","سكة حديد عبر وادٍ"],"frontThreeQuarterTrain":["Zug von schräg vorne","Train from front three-quarter view","Tren en vista frontal de tres cuartos","Train vu de trois-quarts avant","القطار من زاوية أمامية"],"sideViewTrain":["Zug in Seitenansicht","Train side view","Tren de perfil","Train de profil","القطار من الجانب"],"distantTrainLandscape":["Zug als Teil einer weiten Landschaft","Train within a wide landscape","Tren en paisaje panorámico","Train dans un vaste paysage","قطار ضمن منظر طبيعي واسع"],"trainFromAbove":["Zug aus der Vogelperspektive","Train from above","Tren desde arriba","Train vu du dessus","القطار من منظور علوي"],"trackLevelView":["Kameraperspektive auf Gleishöhe","Track-level camera view","Vista a nivel de vía","Vue au niveau des rails","منظور الكاميرا عند مستوى السكة"],"trainApproachingCamera":["Zug fährt auf die Kamera zu","Train approaching the camera","Tren acercándose a la cámara","Train arrivant vers la caméra","قطار يقترب من الكاميرا"],"springAlps":["Frühling in den Alpen","Spring in the Alps","Primavera en los Alpes","Printemps dans les Alpes","الربيع في جبال الألب"],"summerAlps":["Sommer in den Alpen","Summer in the Alps","Verano en los Alpes","Été dans les Alpes","الصيف في جبال الألب"],"autumnAlps":["Herbst in den Alpen","Autumn in the Alps","Otoño en los Alpes","Automne dans les Alpes","الخريف في جبال الألب"],"winterAlps":["Winter in den Alpen","Winter in the Alps","Invierno en los Alpes","Hiver dans les Alpes","الشتاء في جبال الألب"],"clearBlueSky":["Klarer blauer Himmel","Clear blue sky","Cielo azul despejado","Ciel bleu dégagé","سماء زرقاء صافية"],"morningMist":["Sanfter Morgennebel","Soft morning mist","Niebla matinal suave","Brume matinale légère","ضباب صباحي خفيف"],"goldenSunset":["Goldener Sonnenuntergang","Golden sunset","Atardecer dorado","Coucher de soleil doré","غروب ذهبي"],"freshSnowfall":["Frischer Schneefall","Fresh snowfall","Nevada reciente","Chute de neige fraîche","تساقط ثلوج حديث"],"brightTravelPoster":["Helles Reiseplakat","Bright travel poster","Póster de viaje luminoso","Affiche de voyage lumineuse","ملصق سفر مشرق"],"cinematicGoldenHour":["Cinematische Golden Hour","Cinematic golden hour","Hora dorada cinematográfica","Heure dorée cinématographique","الساعة الذهبية السينمائية"],"crispDaylight":["Klares Tageslicht","Crisp daylight","Luz diurna nítida","Lumière du jour nette","ضوء نهار واضح"],"softCloudLight":["Weiches Licht durch Wolken","Soft light through clouds","Luz suave entre nubes","Lumière douce à travers les nuages","ضوء ناعم عبر السحب"],"moodyMountainAtmosphere":["Stimmungsvolle Bergatmosphäre","Moody mountain atmosphere","Atmósfera montañosa evocadora","Atmosphère montagneuse poétique","أجواء جبلية مؤثرة"],"photorealisticTravel":["Fotorealistische Reisefotografie","Photorealistic travel photography","Fotografía de viaje fotorrealista","Photographie de voyage photoréaliste","تصوير سفر واقعي"]});
 const IDX={de:0,en:1,es:2,fr:3,ar:4};
 let currentLanguage="de";
 let selectedValues={};
@@ -395,7 +437,9 @@ const CATEGORY_ORDER = [
   "beautyStyle", "beautyPose", "expression", "beautyMakeup", "beautyLips",
   "beautySkin", "beautyFraming", "beautyLighting", "beautyOutfit", "beautyAccessories",
   "japan", "landscape", "style", "realism", "camera", "lens", "lighting",
-  "mood", "fantasy", "format", "composition", "adultCreative"
+  "mood", "fantasy", "format", "composition", "adultCreative",
+  "galaxyScene", "spacecraft", "spaceCharacters", "spaceWorlds", "spaceEffects",
+  "trainType", "trainLandscape", "trainRoute", "trainView", "trainSeason", "trainMood"
 ];
 CATEGORIES.sort((a, b) => {
   const ai = CATEGORY_ORDER.indexOf(a[0]);
@@ -433,11 +477,29 @@ function renderPresets(){
  const box=document.getElementById("presetButtons");box.innerHTML="";
  ids.forEach((id,i)=>{const b=document.createElement("button");b.className="preset";b.textContent=labels[currentLanguage][i];b.onclick=()=>loadPreset(id);box.appendChild(b)});
 }
+let activeCategoryGroup="all";
+function categoryGroup(id){
+ if(["galaxyScene","spacecraft","spaceCharacters","spaceWorlds","spaceEffects"].includes(id))return "space";
+ if(id.startsWith("train"))return "trains";
+ if(["person","hair","hairColor","makeup","clothing","hosiery","shoes","pose"].includes(id)||id.startsWith("beauty")||id==="expression")return "people";
+ if(["camera","lens","lighting","realism","format","composition"].includes(id))return "photo";
+ if(["japan","landscape","style","mood","fantasy"].includes(id))return "worlds";
+ return "all";
+}
+function setCategoryGroup(group){
+ activeCategoryGroup=group;
+ document.querySelectorAll("#categoryTabs .tab").forEach(b=>b.classList.toggle("active",b.dataset.group===group));
+ renderCategories();
+}
 function renderCategories(){
  const box=document.getElementById("categoriesContainer");box.innerHTML="";
+ const query=(document.getElementById("categorySearch")?.value||"").toLocaleLowerCase();
  CATEGORIES.forEach(([id,icon,multi,names])=>{
+   const title=txt(names);
+   if(activeCategoryGroup!=="all"&&categoryGroup(id)!==activeCategoryGroup)return;
+   if(query&&!title.toLocaleLowerCase().includes(query)&&!id.toLocaleLowerCase().includes(query))return;
    const count=getSelectionCount(id),card=document.createElement("div");card.className="card"+(count?" has-selection":"");
-   card.setAttribute("role","button");card.tabIndex=0;card.onclick=()=>openCategory(id);card.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openCategory(id)}};card.innerHTML=`<div class="selection-badge">${count}</div><div class="card-icon">${icon}</div><div class="card-title">${txt(names)}</div>`;box.appendChild(card);
+   card.setAttribute("role","button");card.tabIndex=0;card.onclick=()=>openCategory(id);card.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openCategory(id)}};card.innerHTML=`<div class="selection-badge">${count}</div><div class="card-icon">${icon}</div><div class="card-title">${title}</div>`;box.appendChild(card);
  });
 }
 function openCategory(id){

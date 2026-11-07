@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ArtStyle Studio V6.0 – Dirk Eckert</title>
+<title>ArtStyle Studio V6.1 – Dirk Eckert</title>
 <style>
 :root{
   --bg:#080a10;--bg2:#101524;--card:#151a28;--card2:#20263a;
@@ -76,6 +76,7 @@ main{max-width:1120px}
     <button type="button" class="tab" data-group="worlds" onclick="setCategoryGroup('worlds')">Welten & Fantasy</button>
     <button type="button" class="tab" data-group="space" onclick="setCategoryGroup('space')">Galaxie</button>
     <button type="button" class="tab" data-group="trains" onclick="setCategoryGroup('trains')">Zugwelten</button>
+    <button type="button" class="tab" data-group="broken" onclick="setCategoryGroup('broken')">3D-Durchbruch</button>
     <button type="button" class="tab" data-group="photo" onclick="setCategoryGroup('photo')">Foto & Technik</button>
   </div>
 </div>
@@ -90,7 +91,7 @@ main{max-width:1120px}
 <button class="secondary" onclick="importData()" id="importButton"></button><button class="danger" onclick="resetAll()" id="resetButton"></button>
 </div><div class="status" id="status"></div></section>
 <section class="panel"><h2 id="libraryTitle"></h2><input class="library-search" id="librarySearch" oninput="renderSavedPrompts()"><div id="savedPrompts"></div></section>
-</main><footer>🎨 ArtStyle Studio V6.0 · Creative Worlds · Dirk Eckert</footer>
+</main><footer>🎨 ArtStyle Studio V6.1 · Creative Worlds · Dirk Eckert</footer>
 
 <script>
 const LANGS={
@@ -432,14 +433,148 @@ function tr(key){return LANGS[currentLanguage][key]}
 function txt(obj){return obj[currentLanguage]}
 
 // V5.6: Erst Person und persönliche Gestaltung, danach Bildgestaltung.
+// V6.1: zusätzliche Auswahlbereiche für Galaxie, Zugwelten und 3D-Durchbruch.
+O["spaceCharactersMoreOpt1"]=["Jedi-Ritter", "Jedi-Ritter", "Jedi-Ritter", "Jedi-Ritter", "Jedi-Ritter"];
+O["spaceCharactersMoreOpt2"]=["Sith-Lord", "Sith-Lord", "Sith-Lord", "Sith-Lord", "Sith-Lord"];
+O["spaceCharactersMoreOpt3"]=["Sturmtruppen-Einheit", "Sturmtruppen-Einheit", "Sturmtruppen-Einheit", "Sturmtruppen-Einheit", "Sturmtruppen-Einheit"];
+O["spaceCharactersMoreOpt4"]=["Kopfgeldjäger", "Kopfgeldjäger", "Kopfgeldjäger", "Kopfgeldjäger", "Kopfgeldjäger"];
+O["spaceCharactersMoreOpt5"]=["Rebellenpilot", "Rebellenpilot", "Rebellenpilot", "Rebellenpilot", "Rebellenpilot"];
+O["spaceCharactersMoreOpt6"]=["Imperialer Offizier", "Imperialer Offizier", "Imperialer Offizier", "Imperialer Offizier", "Imperialer Offizier"];
+O["spaceCharactersMoreOpt7"]=["Außerirdischer Schmuggler", "Außerirdischer Schmuggler", "Außerirdischer Schmuggler", "Außerirdischer Schmuggler", "Außerirdischer Schmuggler"];
+O["spaceCharactersMoreOpt8"]=["Gepanzerter Kommandant", "Gepanzerter Kommandant", "Gepanzerter Kommandant", "Gepanzerter Kommandant", "Gepanzerter Kommandant"];
+O["spaceCharactersMoreOpt9"]=["Droiden-Techniker", "Droiden-Techniker", "Droiden-Techniker", "Droiden-Techniker", "Droiden-Techniker"];
+O["spaceCharactersMoreOpt10"]=["Wüsten-Nomade", "Wüsten-Nomade", "Wüsten-Nomade", "Wüsten-Nomade", "Wüsten-Nomade"];
+CATEGORIES.push(["spaceCharactersMore","🧑‍🚀",true,{"de": "Galaktische Charaktere", "en": "Galaktische Charaktere", "es": "Galaktische Charaktere", "fr": "Galaktische Charaktere", "ar": "Galaktische Charaktere"}, ["spaceCharactersMoreOpt1", "spaceCharactersMoreOpt2", "spaceCharactersMoreOpt3", "spaceCharactersMoreOpt4", "spaceCharactersMoreOpt5", "spaceCharactersMoreOpt6", "spaceCharactersMoreOpt7", "spaceCharactersMoreOpt8", "spaceCharactersMoreOpt9", "spaceCharactersMoreOpt10"]]);
+O["spaceLocationsOpt1"]=["Korridor eines Todessterns", "Korridor eines Todessterns", "Korridor eines Todessterns", "Korridor eines Todessterns", "Korridor eines Todessterns"];
+O["spaceLocationsOpt2"]=["Wüsten-Außenposten", "Wüsten-Außenposten", "Wüsten-Außenposten", "Wüsten-Außenposten", "Wüsten-Außenposten"];
+O["spaceLocationsOpt3"]=["Basis auf einem Eisplaneten", "Basis auf einem Eisplaneten", "Basis auf einem Eisplaneten", "Basis auf einem Eisplaneten", "Basis auf einem Eisplaneten"];
+O["spaceLocationsOpt4"]=["Dorf auf einem Waldmond", "Dorf auf einem Waldmond", "Dorf auf einem Waldmond", "Dorf auf einem Waldmond", "Dorf auf einem Waldmond"];
+O["spaceLocationsOpt5"]=["Orbitale Hangarbucht", "Orbitale Hangarbucht", "Orbitale Hangarbucht", "Orbitale Hangarbucht", "Orbitale Hangarbucht"];
+O["spaceLocationsOpt6"]=["Raumhafen in der Abenddämmerung", "Raumhafen in der Abenddämmerung", "Raumhafen in der Abenddämmerung", "Raumhafen in der Abenddämmerung", "Raumhafen in der Abenddämmerung"];
+O["spaceLocationsOpt7"]=["Festung auf Vulkanwelt", "Festung auf Vulkanwelt", "Festung auf Vulkanwelt", "Festung auf Vulkanwelt", "Festung auf Vulkanwelt"];
+O["spaceLocationsOpt8"]=["Alter Jedi-Tempel", "Alter Jedi-Tempel", "Alter Jedi-Tempel", "Alter Jedi-Tempel", "Alter Jedi-Tempel"];
+O["spaceLocationsOpt9"]=["Kommandobrücke eines Sternenschiffs", "Kommandobrücke eines Sternenschiffs", "Kommandobrücke eines Sternenschiffs", "Kommandobrücke eines Sternenschiffs", "Kommandobrücke eines Sternenschiffs"];
+O["spaceLocationsOpt10"]=["Asteroiden-Hangar", "Asteroiden-Hangar", "Asteroiden-Hangar", "Asteroiden-Hangar", "Asteroiden-Hangar"];
+CATEGORIES.push(["spaceLocations","🪐",true,{"de": "Galaktische Schauplätze", "en": "Galaktische Schauplätze", "es": "Galaktische Schauplätze", "fr": "Galaktische Schauplätze", "ar": "Galaktische Schauplätze"}, ["spaceLocationsOpt1", "spaceLocationsOpt2", "spaceLocationsOpt3", "spaceLocationsOpt4", "spaceLocationsOpt5", "spaceLocationsOpt6", "spaceLocationsOpt7", "spaceLocationsOpt8", "spaceLocationsOpt9", "spaceLocationsOpt10"]]);
+O["spaceScenesOpt1"]=["Epische Weltraumschlacht", "Epische Weltraumschlacht", "Epische Weltraumschlacht", "Epische Weltraumschlacht", "Epische Weltraumschlacht"];
+O["spaceScenesOpt2"]=["Rasante Verfolgungsjagd", "Rasante Verfolgungsjagd", "Rasante Verfolgungsjagd", "Rasante Verfolgungsjagd", "Rasante Verfolgungsjagd"];
+O["spaceScenesOpt3"]=["Lichtschwertduell", "Lichtschwertduell", "Lichtschwertduell", "Lichtschwertduell", "Lichtschwertduell"];
+O["spaceScenesOpt4"]=["Ankunft einer riesigen Flotte", "Ankunft einer riesigen Flotte", "Ankunft einer riesigen Flotte", "Ankunft einer riesigen Flotte", "Ankunft einer riesigen Flotte"];
+O["spaceScenesOpt5"]=["Start aus einem Raumhangar", "Start aus einem Raumhangar", "Start aus einem Raumhangar", "Start aus einem Raumhangar", "Start aus einem Raumhangar"];
+O["spaceScenesOpt6"]=["Planetare Invasion", "Planetare Invasion", "Planetare Invasion", "Planetare Invasion", "Planetare Invasion"];
+O["spaceScenesOpt7"]=["Letzter Verteidigungswall", "Letzter Verteidigungswall", "Letzter Verteidigungswall", "Letzter Verteidigungswall", "Letzter Verteidigungswall"];
+O["spaceScenesOpt8"]=["Dramatische Cockpit-Szene", "Dramatische Cockpit-Szene", "Dramatische Cockpit-Szene", "Dramatische Cockpit-Szene", "Dramatische Cockpit-Szene"];
+O["spaceScenesOpt9"]=["Rettungsmission im All", "Rettungsmission im All", "Rettungsmission im All", "Rettungsmission im All", "Rettungsmission im All"];
+O["spaceScenesOpt10"]=["Heimlicher Anflug", "Heimlicher Anflug", "Heimlicher Anflug", "Heimlicher Anflug", "Heimlicher Anflug"];
+CATEGORIES.push(["spaceScenes","⚔️",true,{"de": "Star-Wars-Szenen", "en": "Star-Wars-Szenen", "es": "Star-Wars-Szenen", "fr": "Star-Wars-Szenen", "ar": "Star-Wars-Szenen"}, ["spaceScenesOpt1", "spaceScenesOpt2", "spaceScenesOpt3", "spaceScenesOpt4", "spaceScenesOpt5", "spaceScenesOpt6", "spaceScenesOpt7", "spaceScenesOpt8", "spaceScenesOpt9", "spaceScenesOpt10"]]);
+O["spaceWeaponsOpt1"]=["Blaues Lichtschwert", "Blaues Lichtschwert", "Blaues Lichtschwert", "Blaues Lichtschwert", "Blaues Lichtschwert"];
+O["spaceWeaponsOpt2"]=["Grünes Lichtschwert", "Grünes Lichtschwert", "Grünes Lichtschwert", "Grünes Lichtschwert", "Grünes Lichtschwert"];
+O["spaceWeaponsOpt3"]=["Rotes Lichtschwert", "Rotes Lichtschwert", "Rotes Lichtschwert", "Rotes Lichtschwert", "Rotes Lichtschwert"];
+O["spaceWeaponsOpt4"]=["Energie-Blaster", "Energie-Blaster", "Energie-Blaster", "Energie-Blaster", "Energie-Blaster"];
+O["spaceWeaponsOpt5"]=["Schwerer Repetierblaster", "Schwerer Repetierblaster", "Schwerer Repetierblaster", "Schwerer Repetierblaster", "Schwerer Repetierblaster"];
+O["spaceWeaponsOpt6"]=["Plasmakanone", "Plasmakanone", "Plasmakanone", "Plasmakanone", "Plasmakanone"];
+O["spaceWeaponsOpt7"]=["Technisches Handgelenk-Gadget", "Technisches Handgelenk-Gadget", "Technisches Handgelenk-Gadget", "Technisches Handgelenk-Gadget", "Technisches Handgelenk-Gadget"];
+O["spaceWeaponsOpt8"]=["Energieschild", "Energieschild", "Energieschild", "Energieschild", "Energieschild"];
+O["spaceWeaponsOpt9"]=["Kampfpilotenhelm", "Kampfpilotenhelm", "Kampfpilotenhelm", "Kampfpilotenhelm", "Kampfpilotenhelm"];
+O["spaceWeaponsOpt10"]=["Technischer Ausrüstungsgürtel", "Technischer Ausrüstungsgürtel", "Technischer Ausrüstungsgürtel", "Technischer Ausrüstungsgürtel", "Technischer Ausrüstungsgürtel"];
+CATEGORIES.push(["spaceWeapons","🔫",false,{"de": "Waffen & Ausrüstung", "en": "Waffen & Ausrüstung", "es": "Waffen & Ausrüstung", "fr": "Waffen & Ausrüstung", "ar": "Waffen & Ausrüstung"}, ["spaceWeaponsOpt1", "spaceWeaponsOpt2", "spaceWeaponsOpt3", "spaceWeaponsOpt4", "spaceWeaponsOpt5", "spaceWeaponsOpt6", "spaceWeaponsOpt7", "spaceWeaponsOpt8", "spaceWeaponsOpt9", "spaceWeaponsOpt10"]]);
+O["spaceCameraOpt1"]=["Heroische Untersicht auf ein Sternenschiff", "Heroische Untersicht auf ein Sternenschiff", "Heroische Untersicht auf ein Sternenschiff", "Heroische Untersicht auf ein Sternenschiff", "Heroische Untersicht auf ein Sternenschiff"];
+O["spaceCameraOpt2"]=["Weite Flottenaufnahme", "Weite Flottenaufnahme", "Weite Flottenaufnahme", "Weite Flottenaufnahme", "Weite Flottenaufnahme"];
+O["spaceCameraOpt3"]=["Cockpit-Blick über die Schulter", "Cockpit-Blick über die Schulter", "Cockpit-Blick über die Schulter", "Cockpit-Blick über die Schulter", "Cockpit-Blick über die Schulter"];
+O["spaceCameraOpt4"]=["Jäger im engen Vorbeiflug", "Jäger im engen Vorbeiflug", "Jäger im engen Vorbeiflug", "Jäger im engen Vorbeiflug", "Jäger im engen Vorbeiflug"];
+O["spaceCameraOpt5"]=["Planetarer Horizont aus dem Orbit", "Planetarer Horizont aus dem Orbit", "Planetarer Horizont aus dem Orbit", "Planetarer Horizont aus dem Orbit", "Planetarer Horizont aus dem Orbit"];
+O["spaceCameraOpt6"]=["Dramatische schräge Kameraperspektive", "Dramatische schräge Kameraperspektive", "Dramatische schräge Kameraperspektive", "Dramatische schräge Kameraperspektive", "Dramatische schräge Kameraperspektive"];
+O["spaceCameraOpt7"]=["Bodenperspektive auf dem Schlachtfeld", "Bodenperspektive auf dem Schlachtfeld", "Bodenperspektive auf dem Schlachtfeld", "Bodenperspektive auf dem Schlachtfeld", "Bodenperspektive auf dem Schlachtfeld"];
+O["spaceCameraOpt8"]=["Makroaufnahme von Droiden-Details", "Makroaufnahme von Droiden-Details", "Makroaufnahme von Droiden-Details", "Makroaufnahme von Droiden-Details", "Makroaufnahme von Droiden-Details"];
+O["spaceCameraOpt9"]=["Dynamische Kamerafahrt", "Dynamische Kamerafahrt", "Dynamische Kamerafahrt", "Dynamische Kamerafahrt", "Dynamische Kamerafahrt"];
+O["spaceCameraOpt10"]=["Extrem weite Weltraumaufnahme", "Extrem weite Weltraumaufnahme", "Extrem weite Weltraumaufnahme", "Extrem weite Weltraumaufnahme", "Extrem weite Weltraumaufnahme"];
+CATEGORIES.push(["spaceCamera","🎥",false,{"de": "Galaktische Perspektiven", "en": "Galaktische Perspektiven", "es": "Galaktische Perspektiven", "fr": "Galaktische Perspektiven", "ar": "Galaktische Perspektiven"}, ["spaceCameraOpt1", "spaceCameraOpt2", "spaceCameraOpt3", "spaceCameraOpt4", "spaceCameraOpt5", "spaceCameraOpt6", "spaceCameraOpt7", "spaceCameraOpt8", "spaceCameraOpt9", "spaceCameraOpt10"]]);
+O["trainVehiclesOpt1"]=["Klassische Dampflokomotive", "Klassische Dampflokomotive", "Klassische Dampflokomotive", "Klassische Dampflokomotive", "Klassische Dampflokomotive"];
+O["trainVehiclesOpt2"]=["Zahnradbahn", "Zahnradbahn", "Zahnradbahn", "Zahnradbahn", "Zahnradbahn"];
+O["trainVehiclesOpt3"]=["Schmalspurbahn", "Schmalspurbahn", "Schmalspurbahn", "Schmalspurbahn", "Schmalspurbahn"];
+O["trainVehiclesOpt4"]=["Panoramawagen mit großen Fenstern", "Panoramawagen mit großen Fenstern", "Panoramawagen mit großen Fenstern", "Panoramawagen mit großen Fenstern", "Panoramawagen mit großen Fenstern"];
+O["trainVehiclesOpt5"]=["Historischer Triebwagen", "Historischer Triebwagen", "Historischer Triebwagen", "Historischer Triebwagen", "Historischer Triebwagen"];
+O["trainVehiclesOpt6"]=["Elektrischer Bergtriebwagen", "Elektrischer Bergtriebwagen", "Elektrischer Bergtriebwagen", "Elektrischer Bergtriebwagen", "Elektrischer Bergtriebwagen"];
+O["trainVehiclesOpt7"]=["Diesellokomotive", "Diesellokomotive", "Diesellokomotive", "Diesellokomotive", "Diesellokomotive"];
+O["trainVehiclesOpt8"]=["Luxus-Nachtzug", "Luxus-Nachtzug", "Luxus-Nachtzug", "Luxus-Nachtzug", "Luxus-Nachtzug"];
+O["trainVehiclesOpt9"]=["Roter Regionalzug", "Roter Regionalzug", "Roter Regionalzug", "Roter Regionalzug", "Roter Regionalzug"];
+O["trainVehiclesOpt10"]=["Historische Überlandstraßenbahn", "Historische Überlandstraßenbahn", "Historische Überlandstraßenbahn", "Historische Überlandstraßenbahn", "Historische Überlandstraßenbahn"];
+CATEGORIES.push(["trainVehicles","🚂",false,{"de": "Weitere Zugtypen", "en": "Weitere Zugtypen", "es": "Weitere Zugtypen", "fr": "Weitere Zugtypen", "ar": "Weitere Zugtypen"}, ["trainVehiclesOpt1", "trainVehiclesOpt2", "trainVehiclesOpt3", "trainVehiclesOpt4", "trainVehiclesOpt5", "trainVehiclesOpt6", "trainVehiclesOpt7", "trainVehiclesOpt8", "trainVehiclesOpt9", "trainVehiclesOpt10"]]);
+O["trainLocationsOpt1"]=["Matterhorn-Panorama", "Matterhorn-Panorama", "Matterhorn-Panorama", "Matterhorn-Panorama", "Matterhorn-Panorama"];
+O["trainLocationsOpt2"]=["Alpenblumenwiese", "Alpenblumenwiese", "Alpenblumenwiese", "Alpenblumenwiese", "Alpenblumenwiese"];
+O["trainLocationsOpt3"]=["Schweizer Bergdorf", "Schweizer Bergdorf", "Schweizer Bergdorf", "Schweizer Bergdorf", "Schweizer Bergdorf"];
+O["trainLocationsOpt4"]=["Gletschertal", "Gletschertal", "Gletschertal", "Gletschertal", "Gletschertal"];
+O["trainLocationsOpt5"]=["Smaragdgrüner Bergsee", "Smaragdgrüner Bergsee", "Smaragdgrüner Bergsee", "Smaragdgrüner Bergsee", "Smaragdgrüner Bergsee"];
+O["trainLocationsOpt6"]=["Bewaldeter Berghang", "Bewaldeter Berghang", "Bewaldeter Berghang", "Bewaldeter Berghang", "Bewaldeter Berghang"];
+O["trainLocationsOpt7"]=["Felsiger Alpenpass", "Felsiger Alpenpass", "Felsiger Alpenpass", "Felsiger Alpenpass", "Felsiger Alpenpass"];
+O["trainLocationsOpt8"]=["Bahnstrecke neben Wasserfall", "Bahnstrecke neben Wasserfall", "Bahnstrecke neben Wasserfall", "Bahnstrecke neben Wasserfall", "Bahnstrecke neben Wasserfall"];
+O["trainLocationsOpt9"]=["Küstenbahn am Meer", "Küstenbahn am Meer", "Küstenbahn am Meer", "Küstenbahn am Meer", "Küstenbahn am Meer"];
+O["trainLocationsOpt10"]=["Bahn durch herbstlichen Wald", "Bahn durch herbstlichen Wald", "Bahn durch herbstlichen Wald", "Bahn durch herbstlichen Wald", "Bahn durch herbstlichen Wald"];
+CATEGORIES.push(["trainLocations","🌄",true,{"de": "Zug-Hintergründe & Orte", "en": "Zug-Hintergründe & Orte", "es": "Zug-Hintergründe & Orte", "fr": "Zug-Hintergründe & Orte", "ar": "Zug-Hintergründe & Orte"}, ["trainLocationsOpt1", "trainLocationsOpt2", "trainLocationsOpt3", "trainLocationsOpt4", "trainLocationsOpt5", "trainLocationsOpt6", "trainLocationsOpt7", "trainLocationsOpt8", "trainLocationsOpt9", "trainLocationsOpt10"]]);
+O["trainStructuresOpt1"]=["Historisches Steinbogenviadukt", "Historisches Steinbogenviadukt", "Historisches Steinbogenviadukt", "Historisches Steinbogenviadukt", "Historisches Steinbogenviadukt"];
+O["trainStructuresOpt2"]=["Kreisende Gebirgsbahn", "Kreisende Gebirgsbahn", "Kreisende Gebirgsbahn", "Kreisende Gebirgsbahn", "Kreisende Gebirgsbahn"];
+O["trainStructuresOpt3"]=["Bahn direkt an einer Felswand", "Bahn direkt an einer Felswand", "Bahn direkt an einer Felswand", "Bahn direkt an einer Felswand", "Bahn direkt an einer Felswand"];
+O["trainStructuresOpt4"]=["Hohe Alpenbahnbrücke", "Hohe Alpenbahnbrücke", "Hohe Alpenbahnbrücke", "Hohe Alpenbahnbrücke", "Hohe Alpenbahnbrücke"];
+O["trainStructuresOpt5"]=["Bahndamm durch einen See", "Bahndamm durch einen See", "Bahndamm durch einen See", "Bahndamm durch einen See", "Bahndamm durch einen See"];
+O["trainStructuresOpt6"]=["Langer Gebirgstunnel", "Langer Gebirgstunnel", "Langer Gebirgstunnel", "Langer Gebirgstunnel", "Langer Gebirgstunnel"];
+O["trainStructuresOpt7"]=["Serpentinenstrecke", "Serpentinenstrecke", "Serpentinenstrecke", "Serpentinenstrecke", "Serpentinenstrecke"];
+O["trainStructuresOpt8"]=["Historischer Bahnsteig", "Historischer Bahnsteig", "Historischer Bahnsteig", "Historischer Bahnsteig", "Historischer Bahnsteig"];
+O["trainStructuresOpt9"]=["Bahnstrecke entlang eines Flusses", "Bahnstrecke entlang eines Flusses", "Bahnstrecke entlang eines Flusses", "Bahnstrecke entlang eines Flusses", "Bahnstrecke entlang eines Flusses"];
+O["trainStructuresOpt10"]=["Steinbrücke über ein Tal", "Steinbrücke über ein Tal", "Steinbrücke über ein Tal", "Steinbrücke über ein Tal", "Steinbrücke über ein Tal"];
+CATEGORIES.push(["trainStructures","🏗️",true,{"de": "Bahnstrecken & Bauwerke", "en": "Bahnstrecken & Bauwerke", "es": "Bahnstrecken & Bauwerke", "fr": "Bahnstrecken & Bauwerke", "ar": "Bahnstrecken & Bauwerke"}, ["trainStructuresOpt1", "trainStructuresOpt2", "trainStructuresOpt3", "trainStructuresOpt4", "trainStructuresOpt5", "trainStructuresOpt6", "trainStructuresOpt7", "trainStructuresOpt8", "trainStructuresOpt9", "trainStructuresOpt10"]]);
+O["trainAtmosphereOpt1"]=["Sonniger Alpenmorgen", "Sonniger Alpenmorgen", "Sonniger Alpenmorgen", "Sonniger Alpenmorgen", "Sonniger Alpenmorgen"];
+O["trainAtmosphereOpt2"]=["Blaue Stunde an der Bahnstrecke", "Blaue Stunde an der Bahnstrecke", "Blaue Stunde an der Bahnstrecke", "Blaue Stunde an der Bahnstrecke", "Blaue Stunde an der Bahnstrecke"];
+O["trainAtmosphereOpt3"]=["Nebeliger Tagesanbruch", "Nebeliger Tagesanbruch", "Nebeliger Tagesanbruch", "Nebeliger Tagesanbruch", "Nebeliger Tagesanbruch"];
+O["trainAtmosphereOpt4"]=["Warmer Abendglanz", "Warmer Abendglanz", "Warmer Abendglanz", "Warmer Abendglanz", "Warmer Abendglanz"];
+O["trainAtmosphereOpt5"]=["Dramatische Gewitterwolken", "Dramatische Gewitterwolken", "Dramatische Gewitterwolken", "Dramatische Gewitterwolken", "Dramatische Gewitterwolken"];
+O["trainAtmosphereOpt6"]=["Frisches Frühlingsgrün", "Frisches Frühlingsgrün", "Frisches Frühlingsgrün", "Frisches Frühlingsgrün", "Frisches Frühlingsgrün"];
+O["trainAtmosphereOpt7"]=["Goldene Herbstblätter", "Goldene Herbstblätter", "Goldene Herbstblätter", "Goldene Herbstblätter", "Goldene Herbstblätter"];
+O["trainAtmosphereOpt8"]=["Verschneite Gleise", "Verschneite Gleise", "Verschneite Gleise", "Verschneite Gleise", "Verschneite Gleise"];
+O["trainAtmosphereOpt9"]=["Sonnenstrahlen durch Wolken", "Sonnenstrahlen durch Wolken", "Sonnenstrahlen durch Wolken", "Sonnenstrahlen durch Wolken", "Sonnenstrahlen durch Wolken"];
+O["trainAtmosphereOpt10"]=["Klare, frische Bergluft", "Klare, frische Bergluft", "Klare, frische Bergluft", "Klare, frische Bergluft", "Klare, frische Bergluft"];
+CATEGORIES.push(["trainAtmosphere","🌤️",true,{"de": "Zug-Licht & Atmosphäre", "en": "Zug-Licht & Atmosphäre", "es": "Zug-Licht & Atmosphäre", "fr": "Zug-Licht & Atmosphäre", "ar": "Zug-Licht & Atmosphäre"}, ["trainAtmosphereOpt1", "trainAtmosphereOpt2", "trainAtmosphereOpt3", "trainAtmosphereOpt4", "trainAtmosphereOpt5", "trainAtmosphereOpt6", "trainAtmosphereOpt7", "trainAtmosphereOpt8", "trainAtmosphereOpt9", "trainAtmosphereOpt10"]]);
+O["brokenRealityMoreOpt1"]=["Zug bricht durch eine Wand", "Zug bricht durch eine Wand", "Zug bricht durch eine Wand", "Zug bricht durch eine Wand", "Zug bricht durch eine Wand"];
+O["brokenRealityMoreOpt2"]=["Schiff bricht aus der Bildfläche", "Schiff bricht aus der Bildfläche", "Schiff bricht aus der Bildfläche", "Schiff bricht aus der Bildfläche", "Schiff bricht aus der Bildfläche"];
+O["brokenRealityMoreOpt3"]=["Berg ragt aus dem Bildrahmen", "Berg ragt aus dem Bildrahmen", "Berg ragt aus dem Bildrahmen", "Berg ragt aus dem Bildrahmen", "Berg ragt aus dem Bildrahmen"];
+O["brokenRealityMoreOpt4"]=["Portal durch massiven Stein", "Portal durch massiven Stein", "Portal durch massiven Stein", "Portal durch massiven Stein", "Portal durch massiven Stein"];
+O["brokenRealityMoreOpt5"]=["Lokomotive bricht aus der Leinwand", "Lokomotive bricht aus der Leinwand", "Lokomotive bricht aus der Leinwand", "Lokomotive bricht aus der Leinwand", "Lokomotive bricht aus der Leinwand"];
+O["brokenRealityMoreOpt6"]=["Raumschiff durch Dimensionsriss", "Raumschiff durch Dimensionsriss", "Raumschiff durch Dimensionsriss", "Raumschiff durch Dimensionsriss", "Raumschiff durch Dimensionsriss"];
+O["brokenRealityMoreOpt7"]=["Wasserfall fließt aus dem Bild", "Wasserfall fließt aus dem Bild", "Wasserfall fließt aus dem Bild", "Wasserfall fließt aus dem Bild", "Wasserfall fließt aus dem Bild"];
+O["brokenRealityMoreOpt8"]=["Riesige Uhr sprengt den Rahmen", "Riesige Uhr sprengt den Rahmen", "Riesige Uhr sprengt den Rahmen", "Riesige Uhr sprengt den Rahmen", "Riesige Uhr sprengt den Rahmen"];
+O["brokenRealityMoreOpt9"]=["Hand greift aus dem Bild heraus", "Hand greift aus dem Bild heraus", "Hand greift aus dem Bild heraus", "Hand greift aus dem Bild heraus", "Hand greift aus dem Bild heraus"];
+O["brokenRealityMoreOpt10"]=["Schwebende Architekturfragmente", "Schwebende Architekturfragmente", "Schwebende Architekturfragmente", "Schwebende Architekturfragmente", "Schwebende Architekturfragmente"];
+CATEGORIES.push(["brokenRealityMore","💥",true,{"de": "3D-Durchbruch-Motive", "en": "3D-Durchbruch-Motive", "es": "3D-Durchbruch-Motive", "fr": "3D-Durchbruch-Motive", "ar": "3D-Durchbruch-Motive"}, ["brokenRealityMoreOpt1", "brokenRealityMoreOpt2", "brokenRealityMoreOpt3", "brokenRealityMoreOpt4", "brokenRealityMoreOpt5", "brokenRealityMoreOpt6", "brokenRealityMoreOpt7", "brokenRealityMoreOpt8", "brokenRealityMoreOpt9", "brokenRealityMoreOpt10"]]);
+O["brokenEffectsOpt1"]=["Zackiger Betonrand", "Zackiger Betonrand", "Zackiger Betonrand", "Zackiger Betonrand", "Zackiger Betonrand"];
+O["brokenEffectsOpt2"]=["Fliegende Steinsplitter", "Fliegende Steinsplitter", "Fliegende Steinsplitter", "Fliegende Steinsplitter", "Fliegende Steinsplitter"];
+O["brokenEffectsOpt3"]=["Aufgerissene Putzkanten", "Aufgerissene Putzkanten", "Aufgerissene Putzkanten", "Aufgerissene Putzkanten", "Aufgerissene Putzkanten"];
+O["brokenEffectsOpt4"]=["Zersplitterter Glasring", "Zersplitterter Glasring", "Zersplitterter Glasring", "Zersplitterter Glasring", "Zersplitterter Glasring"];
+O["brokenEffectsOpt5"]=["Starker räumlicher Herausdrück-Effekt", "Starker räumlicher Herausdrück-Effekt", "Starker räumlicher Herausdrück-Effekt", "Starker räumlicher Herausdrück-Effekt", "Starker räumlicher Herausdrück-Effekt"];
+O["brokenEffectsOpt6"]=["Zerrissene Leinwandfasern", "Zerrissene Leinwandfasern", "Zerrissene Leinwandfasern", "Zerrissene Leinwandfasern", "Zerrissene Leinwandfasern"];
+O["brokenEffectsOpt7"]=["Aufgerollte, gebrochene Bildkanten", "Aufgerollte, gebrochene Bildkanten", "Aufgerollte, gebrochene Bildkanten", "Aufgerollte, gebrochene Bildkanten", "Aufgerollte, gebrochene Bildkanten"];
+O["brokenEffectsOpt8"]=["Schwebender Staub und Gesteinsmehl", "Schwebender Staub und Gesteinsmehl", "Schwebender Staub und Gesteinsmehl", "Schwebender Staub und Gesteinsmehl", "Schwebender Staub und Gesteinsmehl"];
+O["brokenEffectsOpt9"]=["Bröckelnde Mauerstruktur", "Bröckelnde Mauerstruktur", "Bröckelnde Mauerstruktur", "Bröckelnde Mauerstruktur", "Bröckelnde Mauerstruktur"];
+O["brokenEffectsOpt10"]=["Tiefe Schatten im Bildriss", "Tiefe Schatten im Bildriss", "Tiefe Schatten im Bildriss", "Tiefe Schatten im Bildriss", "Tiefe Schatten im Bildriss"];
+CATEGORIES.push(["brokenEffects","🧩",true,{"de": "3D-Bruch & Effekte", "en": "3D-Bruch & Effekte", "es": "3D-Bruch & Effekte", "fr": "3D-Bruch & Effekte", "ar": "3D-Bruch & Effekte"}, ["brokenEffectsOpt1", "brokenEffectsOpt2", "brokenEffectsOpt3", "brokenEffectsOpt4", "brokenEffectsOpt5", "brokenEffectsOpt6", "brokenEffectsOpt7", "brokenEffectsOpt8", "brokenEffectsOpt9", "brokenEffectsOpt10"]]);
+O["brokenLightingOpt1"]=["Leuchtendes Licht aus dem Riss", "Leuchtendes Licht aus dem Riss", "Leuchtendes Licht aus dem Riss", "Leuchtendes Licht aus dem Riss", "Leuchtendes Licht aus dem Riss"];
+O["brokenLightingOpt2"]=["Volumetrisches Portal-Leuchten", "Volumetrisches Portal-Leuchten", "Volumetrisches Portal-Leuchten", "Volumetrisches Portal-Leuchten", "Volumetrisches Portal-Leuchten"];
+O["brokenLightingOpt3"]=["Warmes Feuerlicht aus dem Inneren", "Warmes Feuerlicht aus dem Inneren", "Warmes Feuerlicht aus dem Inneren", "Warmes Feuerlicht aus dem Inneren", "Warmes Feuerlicht aus dem Inneren"];
+O["brokenLightingOpt4"]=["Kühles kosmisches Licht im Inneren", "Kühles kosmisches Licht im Inneren", "Kühles kosmisches Licht im Inneren", "Kühles kosmisches Licht im Inneren", "Kühles kosmisches Licht im Inneren"];
+O["brokenLightingOpt5"]=["Goldene Lichtstrahlen durch Staub", "Goldene Lichtstrahlen durch Staub", "Goldene Lichtstrahlen durch Staub", "Goldene Lichtstrahlen durch Staub", "Goldene Lichtstrahlen durch Staub"];
+O["brokenLightingOpt6"]=["Filmisches Gegenlicht", "Filmisches Gegenlicht", "Filmisches Gegenlicht", "Filmisches Gegenlicht", "Filmisches Gegenlicht"];
+O["brokenLightingOpt7"]=["Glühende Funken und Partikel", "Glühende Funken und Partikel", "Glühende Funken und Partikel", "Glühende Funken und Partikel", "Glühende Funken und Partikel"];
+O["brokenLightingOpt8"]=["Sanfter verträumter Lichtnebel", "Sanfter verträumter Lichtnebel", "Sanfter verträumter Lichtnebel", "Sanfter verträumter Lichtnebel", "Sanfter verträumter Lichtnebel"];
+O["brokenLightingOpt9"]=["Dramatisches seitliches Leuchten", "Dramatisches seitliches Leuchten", "Dramatisches seitliches Leuchten", "Dramatisches seitliches Leuchten", "Dramatisches seitliches Leuchten"];
+O["brokenLightingOpt10"]=["Räumliches Umgebungslicht", "Räumliches Umgebungslicht", "Räumliches Umgebungslicht", "Räumliches Umgebungslicht", "Räumliches Umgebungslicht"];
+CATEGORIES.push(["brokenLighting","✨",true,{"de": "3D-Durchbruch-Beleuchtung", "en": "3D-Durchbruch-Beleuchtung", "es": "3D-Durchbruch-Beleuchtung", "fr": "3D-Durchbruch-Beleuchtung", "ar": "3D-Durchbruch-Beleuchtung"}, ["brokenLightingOpt1", "brokenLightingOpt2", "brokenLightingOpt3", "brokenLightingOpt4", "brokenLightingOpt5", "brokenLightingOpt6", "brokenLightingOpt7", "brokenLightingOpt8", "brokenLightingOpt9", "brokenLightingOpt10"]]);
+
 const CATEGORY_ORDER = [
   "person", "hair", "hairColor", "makeup", "clothing", "hosiery", "shoes", "pose",
   "beautyStyle", "beautyPose", "expression", "beautyMakeup", "beautyLips",
   "beautySkin", "beautyFraming", "beautyLighting", "beautyOutfit", "beautyAccessories",
   "japan", "landscape", "style", "realism", "camera", "lens", "lighting",
   "mood", "fantasy", "format", "composition", "adultCreative",
-  "galaxyScene", "spacecraft", "spaceCharacters", "spaceWorlds", "spaceEffects",
-  "trainType", "trainLandscape", "trainRoute", "trainView", "trainSeason", "trainMood"
+  "galaxyScene", "spacecraft", "spaceCharacters", "spaceWorlds", "spaceEffects", "spaceCharactersMore", "spaceLocations", "spaceScenes", "spaceWeapons", "spaceCamera",
+  "trainType", "trainLandscape", "trainRoute", "trainView", "trainSeason", "trainMood", "trainVehicles", "trainLocations", "trainStructures", "trainAtmosphere", "brokenRealityMore", "brokenEffects", "brokenLighting"
 ];
 CATEGORIES.sort((a, b) => {
   const ai = CATEGORY_ORDER.indexOf(a[0]);
@@ -481,6 +616,7 @@ let activeCategoryGroup="all";
 function categoryGroup(id){
  if(["galaxyScene","spacecraft","spaceCharacters","spaceWorlds","spaceEffects"].includes(id))return "space";
  if(id.startsWith("train"))return "trains";
+ if(id.startsWith("broken"))return "broken";
  if(["person","hair","hairColor","makeup","clothing","hosiery","shoes","pose"].includes(id)||id.startsWith("beauty")||id==="expression")return "people";
  if(["camera","lens","lighting","realism","format","composition"].includes(id))return "photo";
  if(["japan","landscape","style","mood","fantasy"].includes(id))return "worlds";
@@ -538,7 +674,7 @@ function randomPrompt(){selectedValues={};CATEGORIES.forEach(c=>{if(Math.random(
 function resetAll(){if(!confirm(tr("resetAsk")))return;selectedValues={};document.getElementById("promptOutput").value="";localStorage.removeItem("artstyleCurrentSelection");updateEverything();setStatus(tr("resetDone"))}
 function saveCurrentSelection(){localStorage.setItem("artstyleCurrentSelection",JSON.stringify(selectedValues))}
 function loadCurrentSelection(){try{selectedValues=JSON.parse(localStorage.getItem("artstyleCurrentSelection"))||{}}catch{selectedValues={}}}
-function exportData(){const data={version:"ArtStyle Studio V5.4",language:currentLanguage,currentSelection:selectedValues,savedPrompts:getSavedPrompts()};const b=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="artstyle-studio-backup.json";a.click();URL.revokeObjectURL(u)}
+function exportData(){const data={version:"ArtStyle Studio V6.1",language:currentLanguage,currentSelection:selectedValues,savedPrompts:getSavedPrompts()};const b=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="artstyle-studio-backup.json";a.click();URL.revokeObjectURL(u)}
 function importData(){const i=document.createElement("input");i.type="file";i.accept=".json";i.onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=x=>{try{const d=JSON.parse(x.target.result);selectedValues=d.currentSelection||{};if(d.savedPrompts)localStorage.setItem("artstyleSavedPrompts",JSON.stringify(d.savedPrompts));if(d.language&&LANGS[d.language]){currentLanguage=d.language;document.getElementById("languageSelector").value=currentLanguage}changeLanguage(currentLanguage);updateEverything();renderSavedPrompts();setStatus(tr("importOK"))}catch{alert(tr("importBad"))}};r.readAsText(f)};i.click()}
 function closeSelection(){document.getElementById("selectionArea").style.display="none"}
 init();

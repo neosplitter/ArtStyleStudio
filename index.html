@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ArtStyle Studio V6.1 – Dirk Eckert</title>
+<title>ArtStyle Studio V6.2 – Dirk Eckert</title>
 <style>
 :root{
   --bg:#080a10;--bg2:#101524;--card:#151a28;--card2:#20263a;
@@ -51,7 +51,28 @@ main{max-width:1120px}
 .section-title{font-size:25px}
 @media(max-width:760px){.categories{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:430px){.categories{gap:9px}.card{min-height:112px;padding:13px 7px}.card-icon{font-size:32px}.card-title{font-size:13px}.stats{gap:7px}.stat{padding:12px 5px}.stat-number{font-size:23px}.stat-label{font-size:11px}}
-\n</style>
+\n
+.studio-dashboard{margin:26px 0 34px}
+.dashboard-heading{margin-bottom:15px}
+.dashboard-kicker{display:inline-block;color:var(--accent,#d7a86e);font-size:11px;font-weight:800;letter-spacing:2px;margin-bottom:6px}
+.dashboard-heading h2{font-size:23px;margin:0 0 5px}
+.dashboard-heading p{margin:0;color:var(--muted,#999);font-size:14px}
+.studio-tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.studio-tile{min-height:158px;border:1px solid rgba(255,255,255,.13);border-radius:17px;padding:16px;text-align:left;color:#fff;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:6px;cursor:pointer;background:linear-gradient(145deg,#292b35,#171820);box-shadow:0 7px 20px rgba(0,0,0,.18);transition:transform .15s,border-color .15s}
+.studio-tile:active{transform:scale(.98)}
+.tile-beauty{background:linear-gradient(145deg,#57364e,#211923)}
+.tile-space{background:linear-gradient(145deg,#253e60,#151b2b)}
+.tile-trains{background:linear-gradient(145deg,#31584b,#17251f)}
+.tile-broken{background:linear-gradient(145deg,#69432d,#261b19)}
+.tile-worlds{background:linear-gradient(145deg,#45513c,#1c241d)}
+.tile-photo{background:linear-gradient(145deg,#454957,#1c1e28)}
+.tile-emoji{font-size:28px;line-height:1.1}
+.tile-name{font-weight:800;font-size:16px}
+.tile-desc{font-size:12px;color:rgba(255,255,255,.78);line-height:1.35}
+.tile-arrow{font-size:12px;font-weight:700;margin-top:auto;padding-top:7px;color:#f2d4a8}
+@media(max-width:430px){.studio-tiles{gap:9px}.studio-tile{min-height:145px;padding:12px}.tile-name{font-size:14px}.tile-desc{font-size:11px}}
+
+</style>
 </head>
 <body>
 <header>
@@ -66,6 +87,23 @@ main{max-width:1120px}
  <div class="stat"><div class="stat-number" id="categoryCount">0</div><div class="stat-label" id="categoryLabel"></div></div>
  <div class="stat"><div class="stat-number" id="savedCount">0</div><div class="stat-label" id="savedLabel"></div></div>
 </div>
+
+<section class="studio-dashboard" aria-label="Studio-Bereiche">
+  <div class="dashboard-heading">
+    <span class="dashboard-kicker">DEIN KREATIVBEREICH</span>
+    <h2>Wähle dein Studio</h2>
+    <p>Direkt zu den Themenwelten und Bildstilen.</p>
+  </div>
+  <div class="studio-tiles">
+    <button class="studio-tile tile-beauty" onclick="goToStudio('people')"><span class="tile-emoji">💄</span><span class="tile-name">Beauty & Glamour</span><span class="tile-desc">Porträts, Make-up, Posen</span><span class="tile-arrow">Auswählen →</span></button>
+    <button class="studio-tile tile-space" onclick="goToStudio('space')"><span class="tile-emoji">🚀</span><span class="tile-name">Galaxie & Star Wars</span><span class="tile-desc">Raumschiffe, Helden, Schlachten</span><span class="tile-arrow">Auswählen →</span></button>
+    <button class="studio-tile tile-trains" onclick="goToStudio('trains')"><span class="tile-emoji">🚂</span><span class="tile-name">Zugwelten</span><span class="tile-desc">Bergbahnen, Züge, Landschaften</span><span class="tile-arrow">Auswählen →</span></button>
+    <button class="studio-tile tile-broken" onclick="goToStudio('broken')"><span class="tile-emoji">💥</span><span class="tile-name">3D-Durchbruch</span><span class="tile-desc">Bildrisse, Portale, Effekte</span><span class="tile-arrow">Auswählen →</span></button>
+    <button class="studio-tile tile-worlds" onclick="goToStudio('worlds')"><span class="tile-emoji">🏯</span><span class="tile-name">Fantasy & Japan</span><span class="tile-desc">Magische Orte und Traumwelten</span><span class="tile-arrow">Auswählen →</span></button>
+    <button class="studio-tile tile-photo" onclick="goToStudio('photo')"><span class="tile-emoji">📷</span><span class="tile-name">Foto & Technik</span><span class="tile-desc">Kamera, Objektiv, Licht</span><span class="tile-arrow">Auswählen →</span></button>
+  </div>
+</section>
+
 <h2 class="section-title" id="presetTitle"></h2><div class="presets" id="presetButtons"></div>
 <h2 class="section-title" id="categoryTitle"></h2>
 <div class="category-toolbar">
@@ -91,7 +129,7 @@ main{max-width:1120px}
 <button class="secondary" onclick="importData()" id="importButton"></button><button class="danger" onclick="resetAll()" id="resetButton"></button>
 </div><div class="status" id="status"></div></section>
 <section class="panel"><h2 id="libraryTitle"></h2><input class="library-search" id="librarySearch" oninput="renderSavedPrompts()"><div id="savedPrompts"></div></section>
-</main><footer>🎨 ArtStyle Studio V6.1 · Creative Worlds · Dirk Eckert</footer>
+</main><footer>🎨 ArtStyle Studio V6.2 · Creative Worlds · Dirk Eckert</footer>
 
 <script>
 const LANGS={
@@ -433,7 +471,7 @@ function tr(key){return LANGS[currentLanguage][key]}
 function txt(obj){return obj[currentLanguage]}
 
 // V5.6: Erst Person und persönliche Gestaltung, danach Bildgestaltung.
-// V6.1: zusätzliche Auswahlbereiche für Galaxie, Zugwelten und 3D-Durchbruch.
+// V6.2: zusätzliche Auswahlbereiche für Galaxie, Zugwelten und 3D-Durchbruch.
 O["spaceCharactersMoreOpt1"]=["Jedi-Ritter", "Jedi-Ritter", "Jedi-Ritter", "Jedi-Ritter", "Jedi-Ritter"];
 O["spaceCharactersMoreOpt2"]=["Sith-Lord", "Sith-Lord", "Sith-Lord", "Sith-Lord", "Sith-Lord"];
 O["spaceCharactersMoreOpt3"]=["Sturmtruppen-Einheit", "Sturmtruppen-Einheit", "Sturmtruppen-Einheit", "Sturmtruppen-Einheit", "Sturmtruppen-Einheit"];
@@ -614,13 +652,19 @@ function renderPresets(){
 }
 let activeCategoryGroup="all";
 function categoryGroup(id){
- if(["galaxyScene","spacecraft","spaceCharacters","spaceWorlds","spaceEffects"].includes(id))return "space";
+ if(id.startsWith("space")||["galaxyScene","spacecraft","spaceCharacters","spaceWorlds","spaceEffects"].includes(id))return "space";
  if(id.startsWith("train"))return "trains";
  if(id.startsWith("broken"))return "broken";
  if(["person","hair","hairColor","makeup","clothing","hosiery","shoes","pose"].includes(id)||id.startsWith("beauty")||id==="expression")return "people";
  if(["camera","lens","lighting","realism","format","composition"].includes(id))return "photo";
  if(["japan","landscape","style","mood","fantasy"].includes(id))return "worlds";
  return "all";
+}
+function goToStudio(group){
+ const search=document.getElementById("categorySearch");
+ if(search)search.value="";
+ setCategoryGroup(group);
+ document.getElementById("categoryTitle").scrollIntoView({behavior:"smooth",block:"start"});
 }
 function setCategoryGroup(group){
  activeCategoryGroup=group;
@@ -674,7 +718,7 @@ function randomPrompt(){selectedValues={};CATEGORIES.forEach(c=>{if(Math.random(
 function resetAll(){if(!confirm(tr("resetAsk")))return;selectedValues={};document.getElementById("promptOutput").value="";localStorage.removeItem("artstyleCurrentSelection");updateEverything();setStatus(tr("resetDone"))}
 function saveCurrentSelection(){localStorage.setItem("artstyleCurrentSelection",JSON.stringify(selectedValues))}
 function loadCurrentSelection(){try{selectedValues=JSON.parse(localStorage.getItem("artstyleCurrentSelection"))||{}}catch{selectedValues={}}}
-function exportData(){const data={version:"ArtStyle Studio V6.1",language:currentLanguage,currentSelection:selectedValues,savedPrompts:getSavedPrompts()};const b=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="artstyle-studio-backup.json";a.click();URL.revokeObjectURL(u)}
+function exportData(){const data={version:"ArtStyle Studio V6.2",language:currentLanguage,currentSelection:selectedValues,savedPrompts:getSavedPrompts()};const b=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="artstyle-studio-backup.json";a.click();URL.revokeObjectURL(u)}
 function importData(){const i=document.createElement("input");i.type="file";i.accept=".json";i.onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=x=>{try{const d=JSON.parse(x.target.result);selectedValues=d.currentSelection||{};if(d.savedPrompts)localStorage.setItem("artstyleSavedPrompts",JSON.stringify(d.savedPrompts));if(d.language&&LANGS[d.language]){currentLanguage=d.language;document.getElementById("languageSelector").value=currentLanguage}changeLanguage(currentLanguage);updateEverything();renderSavedPrompts();setStatus(tr("importOK"))}catch{alert(tr("importBad"))}};r.readAsText(f)};i.click()}
 function closeSelection(){document.getElementById("selectionArea").style.display="none"}
 init();

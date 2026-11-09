@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ArtStyle Studio V6.3 – Dirk Eckert</title>
+<title>ArtStyle Studio V6.4 – Dirk Eckert</title>
 <style>
 :root{
   --bg:#080a10;--bg2:#101524;--card:#151a28;--card2:#20263a;
@@ -129,7 +129,7 @@ main{max-width:1120px}
 <button class="secondary" onclick="importData()" id="importButton"></button><button class="danger" onclick="resetAll()" id="resetButton"></button>
 </div><div class="status" id="status"></div></section>
 <section class="panel"><h2 id="libraryTitle"></h2><input class="library-search" id="librarySearch" oninput="renderSavedPrompts()"><div id="savedPrompts"></div></section>
-</main><footer>🎨 ArtStyle Studio V6.3 · Creative Worlds · Dirk Eckert</footer>
+</main><footer>🎨 ArtStyle Studio V6.4 · Creative Worlds · Dirk Eckert</footer>
 
 <script>
 const LANGS={
@@ -296,6 +296,95 @@ const BAREFOOT_CATEGORIES = [
 ["feetDetails","✨",true,{de:"Fußdetails & natürliche Zehen",en:"Foot Details & Natural Toes",es:"Detalles de pies y dedos naturales",fr:"Détails des pieds et orteils naturels",ar:"تفاصيل القدمين والأصابع الطبيعية"},["fiveToesEachFoot","anatomicallyCorrectToes","clearlySeparatedToes","naturalToeLengths","naturalToeAlignment","naturalToenailsUnpainted","realisticFootAnatomy","naturalSkinTextureFeet","subtleSkinCreases","realisticSoleAndInstep","noFootDistortion","noExtraToes","noMissingToes","noShoesNoSocks","naturalFeetLighting"]]
 ];
 CATEGORIES.push(...BAREFOOT_CATEGORIES);
+
+// V6.4: erweiterter Modebereich für Strumpfhosen, Nylon und Netzlooks.
+const HOSIERY_FASHION_CATEGORIES = [
+["hosieryStyle","🧦",true,{de:"Strumpfhosen-Stile",en:"Hosiery Styles",es:"Estilos de medias",fr:"Styles de collants",ar:"أنماط الجوارب الطويلة"},["classicSheer","luxuryNylon","floralTattooTights","lacePatternTights","ornamentalTights","geometricTights","polkaDotTights","stripedTights","diamondPatternTights","fishnetFine","fishnetMedium","fishnetBold","backSeamTights","overkneeEffectTights","fashionStatementTights"]],
+["hosieryDenier","🎚️",false,{de:"DEN-Stärke & Transparenz",en:"DEN & Transparency",es:"Grosor DEN y transparencia",fr:"Épaisseur DEN et transparence",ar:"سماكة DEN والشفافية"},["eightDenier","tenDenier","fifteenDenier","twentyDenier","thirtyDenier","fortyDenier","sixtyDenier","eightyDenier","hundredDenier","ultraSheer","sheerTransparent","semiOpaque","opaqueMatte","softSatinSheen","naturalSkinVisible"]],
+["hosieryPattern","🌸",true,{de:"Muster & Netzdesigns",en:"Patterns & Fishnet Designs",es:"Patrones y diseños de red",fr:"Motifs et résilles",ar:"النقوش وتصاميم الشبك"},["floralLaceMotif","largeFloralTattoo","delicateRosePattern","baroqueOrnament","ornamentalVines","fineDiamondNet","microFishnet","classicFishnet","wideFishnet","geometricMesh","polkaDots","verticalPinstripes","backSeamDetail","swirlPattern","asymmetricPattern"]],
+["hosieryColor","🎨",true,{de:"Nylon-Farben & Finish",en:"Nylon Colors & Finish",es:"Colores y acabado del nylon",fr:"Couleurs et finition du nylon",ar:"ألوان النايلون واللمسة النهائية"},["warmNude","naturalBeige","honeyBeige","blackNylon","softCharcoal","smokyGrey","espressoBrown","ivoryNylon","burgundyNylon","navyNylon","deepRedNylon","matteFinish","silkyFinish","subtleGloss","twoTonePattern"]],
+["hosieryFoot","🦶",true,{de:"Fußteil, Spitze & Zehen",en:"Foot, Toe & Reinforcement",es:"Pie, puntera y refuerzo",fr:"Pied, pointe et renfort",ar:"القدم والأصابع والتدعيم"},["fullFootCoverage","continuousToeCoverage","sheerToeSection","reinforcedToe","invisibleToeReinforcement","sandalToeStyle","openToeHosiery","seamlessToe","definedToeShape","naturalToeOutline","heelReinforcement","noAbruptToeCap","fiveToesNaturalShape","unpaintedToenailsSubtle","fineNylonTextureFeet"]]
+];
+CATEGORIES.push(...HOSIERY_FASHION_CATEGORIES);
+
+Object.assign(O, {
+classicSheer:["Klassische transparente Feinstrumpfhose","Classic sheer tights","Medias finas clásicas transparentes","Collants fins classiques transparents","جوارب شفافة كلاسيكية"],
+luxuryNylon:["Edle seidige Nylon-Strumpfhose","Luxury silky nylon tights","Medias de nylon sedosas de lujo","Collants en nylon soyeux de luxe","جوارب نايلون حريرية فاخرة"],
+floralTattooTights:["Florale Tattoo-Strumpfhose wie im Referenzbild","Floral tattoo tights like the reference","Medias efecto tatuaje floral como la referencia","Collants effet tatouage floral comme la référence","جوارب بنقوش زهرية كوشم مثل الصورة المرجعية"],
+lacePatternTights:["Strumpfhose mit feinem Spitzenmuster","Tights with delicate lace pattern","Medias con delicado encaje","Collants à motif dentelle délicat","جوارب بنقشة دانتيل رقيقة"],
+ornamentalTights:["Elegantes ornamentales Muster","Elegant ornamental pattern","Patrón ornamental elegante","Motif ornemental élégant","نقوش زخرفية أنيقة"],
+geometricTights:["Geometrisch gemusterte Strumpfhose","Geometric patterned tights","Medias con patrón geométrico","Collants à motifs géométriques","جوارب بنقوش هندسية"],
+polkaDotTights:["Feine Punkte","Fine polka dots","Lunares finos","Petits pois délicats","نقاط صغيرة"],
+stripedTights:["Elegante Streifen","Elegant stripes","Rayas elegantes","Rayures élégantes","خطوط أنيقة"],
+diamondPatternTights:["Rautenmuster","Diamond pattern","Patrón de rombos","Motif losanges","نقشة ماسية"],
+fishnetFine:["Feines Netz","Fine fishnet","Red fina","Résille fine","شبك ناعم"],
+fishnetMedium:["Mittleres Netz","Medium fishnet","Red mediana","Résille moyenne","شبك متوسط"],
+fishnetBold:["Grobes modisches Netz","Bold fashion fishnet","Red gruesa de moda","Résille large tendance","شبك عريض عصري"],
+backSeamTights:["Strumpfhose mit eleganter Rückennaht","Tights with elegant back seam","Medias con costura trasera elegante","Collants avec couture arrière élégante","جوارب بخط خلفي أنيق"],
+overkneeEffectTights:["Overknee-Effekt","Over-the-knee effect","Efecto por encima de la rodilla","Effet cuissardes","تأثير فوق الركبة"],
+fashionStatementTights:["Auffällige Fashion-Strumpfhose","Statement fashion tights","Medias llamativas de moda","Collants mode audacieux","جوارب موضة جريئة"],
+eightDenier:["8 DEN – ultrafein und hauchzart","8 DEN – ultra-fine and delicate","8 DEN – ultrafinas y delicadas","8 DEN – ultra-fins et délicats","8 DEN – فائقة الرقة"],
+tenDenier:["10 DEN – sehr transparent","10 DEN – very sheer","10 DEN – muy transparentes","10 DEN – très transparents","10 DEN – شفافة جدًا"],
+fifteenDenier:["15 DEN – zart transparent, Haut bleibt sichtbar","15 DEN – delicate transparency, skin remains visible","15 DEN – transparencia delicada, la piel sigue visible","15 DEN – transparence délicate, peau visible","15 DEN – شفافية رقيقة مع ظهور البشرة"],
+twentyDenier:["20 DEN – transparent und elegant","20 DEN – sheer and elegant","20 DEN – transparentes y elegantes","20 DEN – transparents et élégants","20 DEN – شفافة وأنيقة"],
+thirtyDenier:["30 DEN – leicht deckend","30 DEN – lightly opaque","30 DEN – ligeramente opacas","30 DEN – légèrement opaques","30 DEN – شبه معتمة قليلًا"],
+fortyDenier:["40 DEN – seidig und halbtransparent","40 DEN – silky and semi-sheer","40 DEN – sedosas y semitransparentes","40 DEN – soyeux et semi-transparents","40 DEN – حريرية وشبه شفافة"],
+sixtyDenier:["60 DEN – deutlich deckender","60 DEN – more opaque","60 DEN – más opacas","60 DEN – plus opaques","60 DEN – أكثر عتامة"],
+eightyDenier:["80 DEN – blickdicht","80 DEN – opaque","80 DEN – opacas","80 DEN – opaques","80 DEN – معتمة"],
+hundredDenier:["100 DEN – extra blickdicht","100 DEN – extra opaque","100 DEN – extra opacas","100 DEN – extra opaques","100 DEN – معتمة جدًا"],
+ultraSheer:["Ultratransparente Optik","Ultra-sheer appearance","Aspecto ultratransparente","Aspect ultra-transparent","مظهر فائق الشفافية"],
+sheerTransparent:["Transparente Optik mit sichtbarer Haut","Sheer look with visible skin","Aspecto transparente con piel visible","Aspect transparent avec peau visible","مظهر شفاف مع ظهور البشرة"],
+semiOpaque:["Halbtransparente Optik","Semi-opaque appearance","Aspecto semitransparente","Aspect semi-opaque","مظهر شبه معتم"],
+opaqueMatte:["Blickdicht und matt","Opaque and matte","Opacas y mates","Opaques et mates","معتمة وغير لامعة"],
+softSatinSheen:["Dezenter seidiger Glanz","Subtle silky sheen","Brillo sedoso sutil","Éclat soyeux subtil","لمعان حريري خفيف"],
+naturalSkinVisible:["Natürliche Haut bleibt sichtbar","Natural skin remains visible","La piel natural sigue visible","La peau naturelle reste visible","تبقى البشرة الطبيعية ظاهرة"],
+floralLaceMotif:["Florales Spitzenmotiv","Floral lace motif","Motivo floral de encaje","Motif floral en dentelle","نقشة دانتيل زهرية"],
+largeFloralTattoo:["Großes florales Tattoo-Muster","Large floral tattoo pattern","Gran patrón floral tipo tatuaje","Grand motif floral effet tatouage","نقشة زهرية كبيرة تشبه الوشم"],
+delicateRosePattern:["Zartes Rosenmuster","Delicate rose pattern","Delicado patrón de rosas","Motif délicat de roses","نقشة ورود رقيقة"],
+baroqueOrnament:["Barocke Ornamente","Baroque ornaments","Ornamentos barrocos","Ornements baroques","زخارف باروكية"],
+ornamentalVines:["Ranken und florale Ornamente","Vines and floral ornaments","Enredaderas y ornamentos florales","Volutes et ornements floraux","أغصان وزخارف زهرية"],
+fineDiamondNet:["Feines Rautennetz","Fine diamond fishnet","Red fina de rombos","Résille fine en losanges","شبك ماسي ناعم"],
+microFishnet:["Mikro-Netzstruktur","Micro fishnet texture","Textura de microred","Texture micro-résille","نسيج شبكي دقيق"],
+classicFishnet:["Klassisches Netzdesign","Classic fishnet design","Diseño de red clásico","Résille classique","تصميم شبكي كلاسيكي"],
+wideFishnet:["Weitmaschiges Netz","Wide fishnet","Red de malla amplia","Résille à grandes mailles","شبك واسع الفتحات"],
+geometricMesh:["Geometrisches Netzmuster","Geometric mesh pattern","Patrón de malla geométrica","Motif de résille géométrique","نقشة شبكية هندسية"],
+polkaDots:["Punktmuster","Polka dot pattern","Patrón de lunares","Motif à pois","نقشة منقطة"],
+verticalPinstripes:["Feine vertikale Linien","Fine vertical pinstripes","Líneas verticales finas","Fines rayures verticales","خطوط عمودية رفيعة"],
+backSeamDetail:["Betonte rückwärtige Naht","Defined back seam","Costura trasera marcada","Couture arrière marquée","درزة خلفية واضحة"],
+swirlPattern:["Geschwungene Muster","Swirl pattern","Patrón de remolinos","Motif tourbillonnant","نقشة حلزونية"],
+asymmetricPattern:["Asymmetrisches Muster","Asymmetric pattern","Patrón asimétrico","Motif asymétrique","نقشة غير متماثلة"],
+warmNude:["Warmes Nude-Beige","Warm nude beige","Beige nude cálido","Beige nude chaud","بيج نيود دافئ"],
+naturalBeige:["Natürliches Beige","Natural beige","Beige natural","Beige naturel","بيج طبيعي"],
+honeyBeige:["Honig-Beige","Honey beige","Beige miel","Beige miel","بيج عسلي"],
+blackNylon:["Klassisches Schwarz","Classic black","Negro clásico","Noir classique","أسود كلاسيكي"],
+softCharcoal:["Weiches Anthrazit","Soft charcoal","Carbón suave","Anthracite doux","فحمي ناعم"],
+smokyGrey:["Rauchiges Grau","Smoky grey","Gris ahumado","Gris fumé","رمادي دخاني"],
+espressoBrown:["Espressobraun","Espresso brown","Marrón espresso","Brun expresso","بني إسبريسو"],
+ivoryNylon:["Elfenbein","Ivory","Marfil","Ivoire","عاجي"],
+burgundyNylon:["Bordeauxrot","Burgundy","Burdeos","Bordeaux","خمري"],
+navyNylon:["Marineblau","Navy blue","Azul marino","Bleu marine","أزرق كحلي"],
+deepRedNylon:["Tiefes Rot","Deep red","Rojo intenso","Rouge profond","أحمر داكن"],
+matteFinish:["Mattes Finish","Matte finish","Acabado mate","Finition mate","لمسة نهائية غير لامعة"],
+silkyFinish:["Seidiges Finish","Silky finish","Acabado sedoso","Finition soyeuse","لمسة حريرية"],
+subtleGloss:["Dezent glänzendes Finish","Subtle glossy finish","Acabado ligeramente brillante","Finition légèrement brillante","لمعان خفيف"],
+twoTonePattern:["Zweifarbiger Musterlook","Two-tone patterned look","Diseño estampado bicolor","Motif bicolore","نقشة بلونين"],
+fullFootCoverage:["Durchgehende Bedeckung bis über den Fuß","Continuous coverage over the entire foot","Cobertura continua de todo el pie","Couverture continue de tout le pied","تغطية متواصلة لكامل القدم"],
+continuousToeCoverage:["Nylon bedeckt Fuß und alle Zehen lückenlos","Nylon covers the foot and all toes continuously","El nylon cubre el pie y todos los dedos","Le nylon couvre le pied et tous les orteils","النايلون يغطي القدم وجميع الأصابع باستمرار"],
+sheerToeSection:["Transparenter Zehenbereich","Sheer toe section","Zona de dedos transparente","Pointe transparente","جزء أصابع شفاف"],
+reinforcedToe:["Dezent verstärkte Fußspitze","Subtly reinforced toe","Puntera discretamente reforzada","Pointe discrètement renforcée","مقدمة قدم معززة بشكل خفيف"],
+invisibleToeReinforcement:["Nahezu unsichtbare Zehenverstärkung","Nearly invisible toe reinforcement","Refuerzo de dedos casi invisible","Renfort des orteils presque invisible","تعزيز شبه غير مرئي للأصابع"],
+sandalToeStyle:["Sandalen-taugliche transparente Fußspitze","Sandal-toe sheer finish","Puntera transparente apta para sandalias","Pointe transparente adaptée aux sandales","مقدمة شفافة مناسبة للصنادل"],
+openToeHosiery:["Offene Zehenpartie","Open-toe hosiery","Medias con puntera abierta","Collants à bout ouvert","جوارب مفتوحة الأصابع"],
+seamlessToe:["Nahtlose Zehenpartie","Seamless toe","Puntera sin costuras","Pointe sans couture","مقدمة بلا درزات"],
+definedToeShape:["Natürliche Zehenform unter dem Nylon erkennbar","Natural toe shape visible beneath nylon","Forma natural de los dedos visible bajo el nylon","Forme naturelle des orteils visible sous le nylon","شكل أصابع القدم الطبيعي ظاهر تحت النايلون"],
+naturalToeOutline:["Dezente natürliche Zehenkonturen","Subtle natural toe outlines","Contornos naturales sutiles de los dedos","Contours naturels subtils des orteils","حدود طبيعية خفيفة لأصابع القدم"],
+heelReinforcement:["Dezent verstärkter Fersenbereich","Subtle reinforced heel","Talón discretamente reforzado","Talon discrètement renforcé","كعب معزز بشكل خفيف"],
+noAbruptToeCap:["Keine harte oder abrupt endende Zehenkappe","No harsh or abrupt toe cap","Sin puntera marcada ni abrupta","Pas de pointe dure ou abrupte","بدون غطاء أصابع حاد أو مفاجئ"],
+fiveToesNaturalShape:["Fünf anatomisch natürliche Zehen unter dem Stoff","Five anatomically natural toes beneath the fabric","Cinco dedos anatómicos naturales bajo la tela","Cinq orteils anatomiquement naturels sous le tissu","خمسة أصابع طبيعية تشريحيًا تحت القماش"],
+unpaintedToenailsSubtle:["Unlackierte Fußnägel dezent durch den Stoff sichtbar","Unpainted toenails subtly visible through the fabric","Uñas sin pintar sutilmente visibles a través de la tela","Ongles non vernis subtilement visibles à travers le tissu","أظافر غير مطلية ظاهرة برفق عبر القماش"],
+fineNylonTextureFeet:["Feine Nylon-Struktur auch über Spann und Zehen","Fine nylon texture over instep and toes","Textura fina de nylon también sobre empeine y dedos","Texture fine du nylon sur le cou-de-pied et les orteils","نسيج نايلون دقيق فوق مشط القدم والأصابع"]
+});
+
 
 Object.assign(O, {
 alwaysBarefoot:["Immer barfuß, keine Schuhe und keine Socken","Always barefoot, no shoes and no socks","Siempre descalza, sin zapatos ni calcetines","Toujours pieds nus, sans chaussures ni chaussettes","حافية القدمين دائمًا، بدون أحذية أو جوارب"],
@@ -797,7 +886,7 @@ function randomPrompt(){selectedValues={};CATEGORIES.forEach(c=>{if(Math.random(
 function resetAll(){if(!confirm(tr("resetAsk")))return;selectedValues={};document.getElementById("promptOutput").value="";localStorage.removeItem("artstyleCurrentSelection");updateEverything();setStatus(tr("resetDone"))}
 function saveCurrentSelection(){localStorage.setItem("artstyleCurrentSelection",JSON.stringify(selectedValues))}
 function loadCurrentSelection(){try{selectedValues=JSON.parse(localStorage.getItem("artstyleCurrentSelection"))||{}}catch{selectedValues={}}}
-function exportData(){const data={version:"ArtStyle Studio V6.3",language:currentLanguage,currentSelection:selectedValues,savedPrompts:getSavedPrompts()};const b=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="artstyle-studio-backup.json";a.click();URL.revokeObjectURL(u)}
+function exportData(){const data={version:"ArtStyle Studio V6.4",language:currentLanguage,currentSelection:selectedValues,savedPrompts:getSavedPrompts()};const b=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="artstyle-studio-backup.json";a.click();URL.revokeObjectURL(u)}
 function importData(){const i=document.createElement("input");i.type="file";i.accept=".json";i.onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=x=>{try{const d=JSON.parse(x.target.result);selectedValues=d.currentSelection||{};if(d.savedPrompts)localStorage.setItem("artstyleSavedPrompts",JSON.stringify(d.savedPrompts));if(d.language&&LANGS[d.language]){currentLanguage=d.language;document.getElementById("languageSelector").value=currentLanguage}changeLanguage(currentLanguage);updateEverything();renderSavedPrompts();setStatus(tr("importOK"))}catch{alert(tr("importBad"))}};r.readAsText(f)};i.click()}
 function closeSelection(){document.getElementById("selectionArea").style.display="none"}
 init();

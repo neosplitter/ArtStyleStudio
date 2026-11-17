@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ArtStyle Studio V6.8 – Dirk Eckert</title>
+<title>ArtStyle Studio V6.9 – Dirk Eckert</title>
 <style>
 :root{
   --bg:#080a10;--bg2:#101524;--card:#151a28;--card2:#20263a;
@@ -69,6 +69,7 @@ main{max-width:1120px}
 .tile-rooms{background:linear-gradient(145deg,#66513a,#27201b)}
 .tile-barefoot{background:linear-gradient(145deg,#4b6862,#1d2928)}
 .tile-art{background:linear-gradient(145deg,#80543d,#2b1c19)}
+.tile-dimension{background:linear-gradient(145deg,#176b78,#211b38)}
 .tile-photo{background:linear-gradient(145deg,#454957,#1c1e28)}
 .tile-emoji{font-size:28px;line-height:1.1}
 .tile-name{font-weight:800;font-size:16px}
@@ -109,6 +110,7 @@ main{max-width:1120px}
     <button class="studio-tile tile-rooms" onclick="goToStudio('rooms')"><span class="tile-emoji">🏛️</span><span class="tile-name">Räume & Architektur</span><span class="tile-desc">Interieurs, Hallen, Portale und Räume</span><span class="tile-arrow">Auswählen →</span></button>
     <button class="studio-tile tile-barefoot" onclick="goToStudio('barefoot')"><span class="tile-emoji">🦶</span><span class="tile-name">Barfuß & Fuß-Fashion</span><span class="tile-desc">Barfuß-Posen, sichtbare Zehen und natürliche Füße</span><span class="tile-arrow">Auswählen →</span></button>
     <button class="studio-tile tile-art" onclick="goToStudio('art')"><span class="tile-emoji">🎨</span><span class="tile-name">Maler & Kunststile</span><span class="tile-desc">Zehn große Künstler und ihre Bildwelten</span><span class="tile-arrow">Auswählen →</span></button>
+    <button class="studio-tile tile-dimension" onclick="goToStudio('dimension')"><span class="tile-emoji">🪄</span><span class="tile-name">3D Mixed Media & Dimensionen</span><span class="tile-desc">Bildwelten, die aus Rahmen, Wänden und Portalen brechen</span><span class="tile-arrow">Auswählen →</span></button>
   </div>
 </section>
 
@@ -128,6 +130,7 @@ main{max-width:1120px}
     <button type="button" class="tab" data-group="rooms" onclick="setCategoryGroup('rooms')">Räume & Architektur</button>
     <button type="button" class="tab" data-group="barefoot" onclick="setCategoryGroup('barefoot')">Barfuß & Fuß-Fashion</button>
     <button type="button" class="tab" data-group="art" onclick="setCategoryGroup('art')">Maler & Kunststile</button>
+    <button type="button" class="tab" data-group="dimension" onclick="setCategoryGroup('dimension')">3D Mixed Media</button>
   </div>
 </div>
 <div class="categories" id="categoriesContainer"></div>
@@ -141,7 +144,7 @@ main{max-width:1120px}
 <button class="secondary" onclick="importData()" id="importButton"></button><button class="danger" onclick="resetAll()" id="resetButton"></button>
 </div><div class="status" id="status"></div></section>
 <section class="panel"><h2 id="libraryTitle"></h2><input class="library-search" id="librarySearch" oninput="renderSavedPrompts()"><div id="savedPrompts"></div></section>
-</main><footer>🎨 ArtStyle Studio V6.8 · Creative Worlds · Dirk Eckert</footer>
+</main><footer>🎨 ArtStyle Studio V6.9 · Creative Worlds · Dirk Eckert</footer>
 
 <script>
 const LANGS={
@@ -808,6 +811,55 @@ const NEW_VISUAL_STUDIOS = [
 ["painterArt","🎨",true,{de:"Große Maler & Kunststile",en:"Great Painters & Art Styles",es:"Grandes pintores y estilos",fr:"Grands peintres et styles",ar:"رسامون عظماء وأساليب فنية"},["daliArt","vanGoghArt","monetArt","picassoArt","leonardoArt","michelangeloArt","rembrandtArt","klimtArt","kahloArt","hokusaiArt","magritteArt"]]
 ];
 CATEGORIES.push(...NEW_VISUAL_STUDIOS);
+
+const DIMENSION_STUDIOS = [
+["dimensionPortals","🌀",true,{de:"Portale & Durchbrüche",en:"Portals & Breakthroughs",es:"Portales y rupturas",fr:"Portails et percées",ar:"بوابات واختراقات"},["stoneWallPortal","rockyPassage","circularWaterfallPortal","framedSunset","brokenCanvasWorld","dimensionalArch"]],
+["dimensionFrames","🖼️",true,{de:"Rahmen, Glas & Bild-im-Bild",en:"Frames, Glass & Picture-in-Picture",es:"Marcos y cristal",fr:"Cadres et verre",ar:"إطارات وزجاج"},["layeredGlassPanels","glowingGlassFrame","doubleLandscapeFrame","floatingCanvas","liquidGlassWorld","windowIntoDream"]],
+["dimensionNature","🌿",true,{de:"Schwebende Naturwelten",en:"Floating Nature Worlds",es:"Mundos naturales flotantes",fr:"Mondes naturels flottants",ar:"عوالم طبيعية عائمة"},["floatingWaterfallIsland","suspendedRiver","mossyStonePath","floatingForest","moonlitFloatingGarden","waterfallIntoClouds"]],
+["dimensionSculpture","🗿",true,{de:"Plastische Porträts & Skulpturen",en:"Sculptural Portraits",es:"Retratos escultóricos",fr:"Portraits sculpturaux",ar:"منحوتات فنية"},["botanicalSculpturePortrait","porcelainReliefFace","floralBasRelief","weatheredStoneBust","butterflySculpture","organicClayPortrait"]],
+["dimensionTexture","🎨",true,{de:"Materialien & Farbexplosion",en:"Textures & Color Explosion",es:"Texturas y color",fr:"Textures et couleurs",ar:"ملمس وألوان"},["thickPaletteKnifeTexture","layeredImpastoPaint","oxidizedMetalTexture","polishedStoneRelief","vibrantPigmentStreams","crackedPlasterTexture"]],
+["dimensionGlitch","🏯",true,{de:"Glitch-Architektur & Linienkunst",en:"Glitch Architecture & Line Art",es:"Arquitectura glitch",fr:"Architecture glitch",ar:"عمارة غليتش"},["japaneseTempleGlitch","verticalPixelStreaks","architecturalLineFragments","vanishingStructure","chromaticMotionTrails","fragmentedPagoda"]]
+];
+CATEGORIES.push(...DIMENSION_STUDIOS);
+Object.assign(O, {
+stoneWallPortal:["Aufgebrochene Steinwand mit einer Traumlandschaft dahinter","Broken stone wall revealing a dream landscape","Muro de piedra abierto con paisaje onírico","Mur de pierre ouvert sur un paysage onirique","جدار حجري مفتوح على منظر حالم"],
+rockyPassage:["Zerklüfteter Felsdurchgang mit goldenem Weg in eine andere Welt","Rocky passage with a golden path into another world","Paso rocoso con camino dorado a otro mundo","Passage rocheux avec chemin doré vers un autre monde","ممر صخري بطريق ذهبي إلى عالم آخر"],
+circularWaterfallPortal:["Monumentales rundes Portal mit Wasserfällen und rotem Sonnenuntergang","Monumental circular portal with waterfalls and red sunset","Portal circular monumental con cascadas y atardecer rojo","Portail circulaire monumental avec cascades et coucher de soleil rouge","بوابة دائرية ضخمة مع شلالات وغروب أحمر"],
+framedSunset:["Leuchtender Sonnenuntergang in einem schwebenden 3D-Bilderrahmen","Glowing sunset inside a floating 3D picture frame","Atardecer luminoso en marco 3D flotante","Coucher de soleil lumineux dans un cadre 3D flottant","غروب متوهج داخل إطار ثلاثي الأبعاد عائم"],
+brokenCanvasWorld:["Gemalte Landschaft bricht plastisch aus einer Leinwand hervor","Painted landscape physically breaking out of a canvas","Paisaje pintado que emerge del lienzo","Paysage peint qui surgit de la toile","منظر مرسوم يخرج مجسماً من لوحة"],
+dimensionalArch:["Monumentaler Torbogen als Übergang zwischen zwei Dimensionen","Monumental archway between two dimensions","Arco monumental entre dos dimensiones","Arche monumentale entre deux dimensions","قوس ضخم بين بُعدين"],
+layeredGlassPanels:["Transparente farbige Glaspaneele mit ineinanderfließenden Traumlandschaften","Transparent colored glass panels with interwoven dreamscapes","Paneles de vidrio de colores con paisajes entrelazados","Panneaux de verre coloré avec paysages entremêlés","ألواح زجاجية ملونة تتداخل فيها مناظر الأحلام"],
+glowingGlassFrame:["Leuchtender Glasrahmen mit farbenprächtiger Naturwelt","Glowing glass frame with a vivid natural world","Marco de vidrio luminoso con naturaleza colorida","Cadre de verre lumineux avec nature colorée","إطار زجاجي مضيء بعالم طبيعي ملون"],
+doubleLandscapeFrame:["Zwei versetzte Bildrahmen mit unterschiedlichen Landschaftsebenen","Two offset picture frames with different landscape layers","Dos marcos desplazados con distintos paisajes","Deux cadres décalés avec différents paysages","إطاران متداخلان بطبقات مناظر مختلفة"],
+floatingCanvas:["Schwebende Leinwand mit dreidimensionaler Landschaft","Floating canvas with a three-dimensional landscape","Lienzo flotante con paisaje tridimensional","Toile flottante avec paysage tridimensionnel","لوحة عائمة بمنظر ثلاثي الأبعاد"],
+liquidGlassWorld:["Fließende Glasoberfläche, die eine farbige Fantasiewelt einschließt","Flowing glass surface enclosing a colorful fantasy world","Cristal fluido que encierra un mundo fantástico","Verre fluide enfermant un monde fantastique","سطح زجاجي سائل يحتضن عالماً خيالياً"],
+windowIntoDream:["Fenster in einer schlichten Wand mit Blick in eine surreale Traumwelt","Window in a plain wall opening onto a surreal dream world","Ventana en pared sencilla hacia un mundo surrealista","Fenêtre dans un mur sobre ouverte sur un monde surréaliste","نافذة في جدار بسيط تطل على عالم سريالي"],
+floatingWaterfallIsland:["Schwebende Felseninsel mit türkisblauem Fluss und Wasserfall","Floating rocky island with turquoise river and waterfall","Isla rocosa flotante con río turquesa y cascada","Île rocheuse flottante avec rivière turquoise et cascade","جزيرة صخرية عائمة ونهر فيروزي وشلال"],
+suspendedRiver:["Flusslauf schwebt als Landschaftsstreifen frei im Nebel","River flowing through a floating strip of landscape in mist","Río sobre una franja de paisaje flotante en la niebla","Rivière sur une bande de paysage flottante dans la brume","نهر يجري فوق شريط أرض عائم وسط الضباب"],
+mossyStonePath:["Moosbewachsener Steinstufenweg durch eine leuchtende Herbstlandschaft","Moss-covered stone path through a glowing autumn landscape","Camino de piedra cubierto de musgo en paisaje otoñal","Chemin de pierre moussu dans un paysage d'automne lumineux","ممر حجري مغطى بالطحالب وسط منظر خريفي"],
+floatingForest:["Schwebende Insel mit uralten Bäumen, Wurzeln und Wasserfällen","Floating island with ancient trees, roots and waterfalls","Isla flotante con árboles antiguos, raíces y cascadas","Île flottante avec arbres anciens, racines et cascades","جزيرة عائمة بأشجار عتيقة وجذور وشلالات"],
+moonlitFloatingGarden:["Schwebender Garten unter einem riesigen dunklen Mond","Floating garden beneath a huge dark moon","Jardín flotante bajo una enorme luna oscura","Jardin flottant sous une immense lune sombre","حديقة عائمة تحت قمر داكن ضخم"],
+waterfallIntoClouds:["Wasserfall stürzt von einer Insel hinab in weiche Wolken","Waterfall plunging from an island into soft clouds","Cascada que cae desde una isla hacia nubes suaves","Cascade plongeant d'une île dans des nuages doux","شلال يهبط من جزيرة إلى سحب ناعمة"],
+botanicalSculpturePortrait:["Porträtbüste mit plastischen Blüten, Blättern und Schmetterlingen","Portrait bust with sculpted flowers, leaves and butterflies","Busto con flores, hojas y mariposas esculpidas","Buste avec fleurs, feuilles et papillons sculptés","تمثال نصفي بأزهار وأوراق وفراشات منحوتة"],
+porcelainReliefFace:["Porzellangesicht mit reliefartigen floralen Ornamenten","Porcelain face with raised floral relief ornaments","Rostro de porcelana con relieves florales","Visage en porcelaine avec reliefs floraux","وجه خزفي بزخارف نباتية بارزة"],
+floralBasRelief:["Florale Basreliefs auf einer glatten Skulpturenoberfläche","Floral bas-reliefs on a smooth sculptural surface","Bajorrelieves florales sobre superficie escultórica","Bas-reliefs floraux sur surface sculpturale","نقوش زهرية بارزة على سطح منحوت"],
+weatheredStoneBust:["Monumentale Büste aus verwittertem Stein mit farbigen Einschlüssen","Monumental weathered stone bust with colorful inclusions","Busto monumental de piedra erosionada","Buste monumental en pierre patinée","تمثال حجري ضخم متآكل"],
+butterflySculpture:["Skulpturales Gesicht mit filigranen Schmetterlingsflügeln","Sculptural face with delicate butterfly wings","Rostro escultórico con alas de mariposa","Visage sculptural avec ailes de papillon","وجه منحوت بأجنحة فراشات"],
+organicClayPortrait:["Organisches Porträt aus Keramik und modellierten Naturformen","Organic portrait made of ceramic and sculpted natural forms","Retrato orgánico de cerámica y formas naturales","Portrait organique en céramique et formes naturelles","صورة عضوية من الخزف وأشكال طبيعية"],
+thickPaletteKnifeTexture:["Dicke Ölfarbenschichten mit sichtbaren Spachtelspuren","Thick oil paint layers with visible palette-knife marks","Capas gruesas de óleo con marcas de espátula","Épaisses couches d'huile avec traces de couteau","طبقات زيتية سميكة بآثار سكين الرسم"],
+layeredImpastoPaint:["Mehrfarbiger Impasto-Auftrag mit plastischer Reliefoberfläche","Multicolored impasto paint with sculptural raised surface","Pintura impasto multicolor con relieve","Peinture impasto multicolore en relief","طلاء سميك متعدد الألوان بسطح بارز"],
+oxidizedMetalTexture:["Verwittertes oxidiertes Metall in Rostrot, Türkis und tiefem Blau","Weathered oxidized metal in rust red, turquoise and deep blue","Metal oxidado en rojo óxido, turquesa y azul","Métal oxydé en rouge rouille, turquoise et bleu","معدن مؤكسد بأحمر الصدأ والفيروزي والأزرق"],
+polishedStoneRelief:["Polierter Naturstein mit gebrochenen Kanten und plastischem Relief","Polished natural stone with fractured edges and sculptural relief","Piedra pulida con bordes rotos y relieve","Pierre polie aux bords fracturés et relief","حجر مصقول بحواف مكسورة ونقش بارز"],
+vibrantPigmentStreams:["Leuchtende Farbpigmente fließen in vertikalen und diagonalen Bahnen","Vivid pigments flowing in vertical and diagonal streams","Pigmentos vivos en trazos verticales y diagonales","Pigments éclatants en traînées verticales et diagonales","أصباغ زاهية تتدفق في مسارات رأسية وقطرية"],
+crackedPlasterTexture:["Aufgebrochener Putz mit rauen Kanten und farbigen Farbschichten","Broken plaster with rough edges and colored paint layers","Yeso agrietado con bordes ásperos y capas de color","Plâtre fissuré aux bords rugueux et couches colorées","جص متشقق بحواف خشنة وطبقات لونية"],
+japaneseTempleGlitch:["Japanischer Tempel, dessen Architektur in farbige Linien und Fragmente zerfließt","Japanese temple dissolving into colored lines and fragments","Templo japonés que se disuelve en líneas y fragmentos","Temple japonais se dissolvant en lignes et fragments colorés","معبد ياباني تذوب عمارته إلى خطوط وشظايا ملونة"],
+verticalPixelStreaks:["Lange vertikale Farbspuren und digitale Linien über einer Traumlandschaft","Long vertical color streaks and digital lines over a dreamscape","Estelas verticales de color y líneas digitales sobre paisaje onírico","Traînées verticales colorées et lignes numériques sur paysage onirique","خطوط لونية رأسية طويلة فوق منظر حالم"],
+architecturalLineFragments:["Gebäudeteile zerlegen sich in feine geometrische Linien","Buildings dissolving into fine geometric lines","Edificios que se descomponen en líneas geométricas","Bâtiments se décomposant en lignes géométriques","مبانٍ تتفكك إلى خطوط هندسية دقيقة"],
+vanishingStructure:["Architektur löst sich nach oben in lange abstrakte Linien auf","Architecture dissolving upward into long abstract lines","Arquitectura que se disuelve hacia arriba en líneas","Architecture se dissolvant vers le haut en lignes","عمارة تتلاشى إلى الأعلى في خطوط تجريدية"],
+chromaticMotionTrails:["Dynamische orange-blaue Licht- und Farbspuren","Dynamic orange and blue light and color trails","Estelas dinámicas de luz y color naranja y azul","Traînées dynamiques de lumière et de couleur orange et bleue","مسارات ضوئية ولونية ديناميكية بالبرتقالي والأزرق"],
+fragmentedPagoda:["Japanische Pagode aus versetzten Ebenen, Nebel und linearen Fragmenten","Japanese pagoda made of offset layers, mist and linear fragments","Pagoda japonesa de niveles desplazados, niebla y fragmentos lineales","Pagode japonaise à niveaux décalés, brume et fragments linéaires","معبد ياباني متعدد المستويات مع ضباب وشظايا خطية"]
+});
+
 Object.assign(O, {
 daliArt:["Surrealistische Traumwelten, schmelzende Formen, präzise gemalte rätselhafte Symbole – inspiriert von Salvador Dalí","Surreal dreamscapes, melting forms and precisely rendered enigmatic symbols – inspired by Salvador Dalí","Mundos oníricos surrealistas, formas derretidas y símbolos enigmáticos – inspirado en Salvador Dalí","Univers oniriques surréalistes, formes fondues et symboles énigmatiques – inspiré de Salvador Dalí","عوالم سريالية حالمة وأشكال ذائبة ورموز غامضة"],
 vanGoghArt:["Ausdrucksstarke Wirbelbewegungen, leuchtende Farben und dynamische Pinselstriche – inspiriert von Vincent van Gogh","Expressive swirling movement, vivid colors and dynamic brushwork – inspired by Vincent van Gogh","Movimiento arremolinado, colores vivos y pinceladas dinámicas – inspirado en Vincent van Gogh","Mouvements tourbillonnants, couleurs vives et coups de pinceau dynamiques – inspiré de Vincent van Gogh","حركة دوامية وألوان زاهية وضربات فرشاة قوية"],
@@ -934,6 +986,7 @@ function categoryGroup(id){
  if(["roomTypes","architecture","roomDetails","roomLighting"].includes(id))return "rooms";
  if(["barefootStyle","footPose","barefootBodyPose","feetFraming","feetDetails"].includes(id))return "barefoot";
  if(id==="painterArt")return "art";
+ if(id.startsWith("dimension"))return "dimension";
  return "all";
 }
 function goToStudio(group){
@@ -994,7 +1047,7 @@ function randomPrompt(){selectedValues={};CATEGORIES.forEach(c=>{if(Math.random(
 function resetAll(){if(!confirm(tr("resetAsk")))return;selectedValues={};document.getElementById("promptOutput").value="";localStorage.removeItem("artstyleCurrentSelection");updateEverything();setStatus(tr("resetDone"))}
 function saveCurrentSelection(){localStorage.setItem("artstyleCurrentSelection",JSON.stringify(selectedValues))}
 function loadCurrentSelection(){try{selectedValues=JSON.parse(localStorage.getItem("artstyleCurrentSelection"))||{}}catch{selectedValues={}}}
-function exportData(){const data={version:"ArtStyle Studio V6.8",language:currentLanguage,currentSelection:selectedValues,savedPrompts:getSavedPrompts()};const b=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="artstyle-studio-backup.json";a.click();URL.revokeObjectURL(u)}
+function exportData(){const data={version:"ArtStyle Studio V6.9",language:currentLanguage,currentSelection:selectedValues,savedPrompts:getSavedPrompts()};const b=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="artstyle-studio-backup.json";a.click();URL.revokeObjectURL(u)}
 function importData(){const i=document.createElement("input");i.type="file";i.accept=".json";i.onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=x=>{try{const d=JSON.parse(x.target.result);selectedValues=d.currentSelection||{};if(d.savedPrompts)localStorage.setItem("artstyleSavedPrompts",JSON.stringify(d.savedPrompts));if(d.language&&LANGS[d.language]){currentLanguage=d.language;document.getElementById("languageSelector").value=currentLanguage}changeLanguage(currentLanguage);updateEverything();renderSavedPrompts();setStatus(tr("importOK"))}catch{alert(tr("importBad"))}};r.readAsText(f)};i.click()}
 function closeSelection(){document.getElementById("selectionArea").style.display="none"}
 init();

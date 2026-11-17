@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ArtStyle Studio V6.4 – Dirk Eckert</title>
+<title>ArtStyle Studio V6.8 – Dirk Eckert</title>
 <style>
 :root{
   --bg:#080a10;--bg2:#101524;--card:#151a28;--card2:#20263a;
@@ -65,6 +65,10 @@ main{max-width:1120px}
 .tile-trains{background:linear-gradient(145deg,#31584b,#17251f)}
 .tile-broken{background:linear-gradient(145deg,#69432d,#261b19)}
 .tile-worlds{background:linear-gradient(145deg,#45513c,#1c241d)}
+.tile-surreal{background:linear-gradient(145deg,#60416f,#21172e)}
+.tile-rooms{background:linear-gradient(145deg,#66513a,#27201b)}
+.tile-barefoot{background:linear-gradient(145deg,#4b6862,#1d2928)}
+.tile-art{background:linear-gradient(145deg,#80543d,#2b1c19)}
 .tile-photo{background:linear-gradient(145deg,#454957,#1c1e28)}
 .tile-emoji{font-size:28px;line-height:1.1}
 .tile-name{font-weight:800;font-size:16px}
@@ -101,6 +105,10 @@ main{max-width:1120px}
     <button class="studio-tile tile-broken" onclick="goToStudio('broken')"><span class="tile-emoji">💥</span><span class="tile-name">3D-Durchbruch</span><span class="tile-desc">Bildrisse, Portale, Effekte</span><span class="tile-arrow">Auswählen →</span></button>
     <button class="studio-tile tile-worlds" onclick="goToStudio('worlds')"><span class="tile-emoji">🏯</span><span class="tile-name">Fantasy & Japan</span><span class="tile-desc">Magische Orte und Traumwelten</span><span class="tile-arrow">Auswählen →</span></button>
     <button class="studio-tile tile-photo" onclick="goToStudio('photo')"><span class="tile-emoji">📷</span><span class="tile-name">Foto & Technik</span><span class="tile-desc">Kamera, Objektiv, Licht</span><span class="tile-arrow">Auswählen →</span></button>
+    <button class="studio-tile tile-surreal" onclick="goToStudio('surreal')"><span class="tile-emoji">🌀</span><span class="tile-name">Surreale Bildwelten</span><span class="tile-desc">Traumlogik, Symbole, schwebende Motive</span><span class="tile-arrow">Auswählen →</span></button>
+    <button class="studio-tile tile-rooms" onclick="goToStudio('rooms')"><span class="tile-emoji">🏛️</span><span class="tile-name">Räume & Architektur</span><span class="tile-desc">Interieurs, Hallen, Portale und Räume</span><span class="tile-arrow">Auswählen →</span></button>
+    <button class="studio-tile tile-barefoot" onclick="goToStudio('barefoot')"><span class="tile-emoji">🦶</span><span class="tile-name">Barfuß & Fuß-Fashion</span><span class="tile-desc">Barfuß-Posen, sichtbare Zehen und natürliche Füße</span><span class="tile-arrow">Auswählen →</span></button>
+    <button class="studio-tile tile-art" onclick="goToStudio('art')"><span class="tile-emoji">🎨</span><span class="tile-name">Maler & Kunststile</span><span class="tile-desc">Zehn große Künstler und ihre Bildwelten</span><span class="tile-arrow">Auswählen →</span></button>
   </div>
 </section>
 
@@ -116,6 +124,10 @@ main{max-width:1120px}
     <button type="button" class="tab" data-group="trains" onclick="setCategoryGroup('trains')">Zugwelten</button>
     <button type="button" class="tab" data-group="broken" onclick="setCategoryGroup('broken')">3D-Durchbruch</button>
     <button type="button" class="tab" data-group="photo" onclick="setCategoryGroup('photo')">Foto & Technik</button>
+    <button type="button" class="tab" data-group="surreal" onclick="setCategoryGroup('surreal')">Surreale Bildwelten</button>
+    <button type="button" class="tab" data-group="rooms" onclick="setCategoryGroup('rooms')">Räume & Architektur</button>
+    <button type="button" class="tab" data-group="barefoot" onclick="setCategoryGroup('barefoot')">Barfuß & Fuß-Fashion</button>
+    <button type="button" class="tab" data-group="art" onclick="setCategoryGroup('art')">Maler & Kunststile</button>
   </div>
 </div>
 <div class="categories" id="categoriesContainer"></div>
@@ -129,7 +141,7 @@ main{max-width:1120px}
 <button class="secondary" onclick="importData()" id="importButton"></button><button class="danger" onclick="resetAll()" id="resetButton"></button>
 </div><div class="status" id="status"></div></section>
 <section class="panel"><h2 id="libraryTitle"></h2><input class="library-search" id="librarySearch" oninput="renderSavedPrompts()"><div id="savedPrompts"></div></section>
-</main><footer>🎨 ArtStyle Studio V6.4 · Creative Worlds · Dirk Eckert</footer>
+</main><footer>🎨 ArtStyle Studio V6.8 · Creative Worlds · Dirk Eckert</footer>
 
 <script>
 const LANGS={
@@ -297,7 +309,7 @@ const BAREFOOT_CATEGORIES = [
 ];
 CATEGORIES.push(...BAREFOOT_CATEGORIES);
 
-// V6.4: erweiterter Modebereich für Strumpfhosen, Nylon und Netzlooks.
+// V6.8: erweiterter Modebereich für Strumpfhosen, Nylon und Netzlooks.
 const HOSIERY_FASHION_CATEGORIES = [
 ["hosieryStyle","🧦",true,{de:"Strumpfhosen-Stile",en:"Hosiery Styles",es:"Estilos de medias",fr:"Styles de collants",ar:"أنماط الجوارب الطويلة"},["classicSheer","luxuryNylon","floralTattooTights","lacePatternTights","ornamentalTights","geometricTights","polkaDotTights","stripedTights","diamondPatternTights","fishnetFine","fishnetMedium","fishnetBold","backSeamTights","overkneeEffectTights","fashionStatementTights"]],
 ["hosieryDenier","🎚️",false,{de:"DEN-Stärke & Transparenz",en:"DEN & Transparency",es:"Grosor DEN y transparencia",fr:"Épaisseur DEN et transparence",ar:"سماكة DEN والشفافية"},["eightDenier","tenDenier","fifteenDenier","twentyDenier","thirtyDenier","fortyDenier","sixtyDenier","eightyDenier","hundredDenier","ultraSheer","sheerTransparent","semiOpaque","opaqueMatte","softSatinSheen","naturalSkinVisible"]],
@@ -782,6 +794,98 @@ const CATEGORY_ORDER = [
   "galaxyScene", "spacecraft", "spaceCharacters", "spaceWorlds", "spaceEffects", "spaceCharactersMore", "spaceLocations", "spaceScenes", "spaceWeapons", "spaceCamera",
   "trainType", "trainLandscape", "trainRoute", "trainView", "trainSeason", "trainMood", "trainVehicles", "trainLocations", "trainStructures", "trainAtmosphere", "brokenRealityMore", "brokenEffects", "brokenLighting"
 ];
+
+// V6.8 – übersichtliche Themenstudios: Surreale Bildwelten und Räume & Architektur.
+const NEW_VISUAL_STUDIOS = [
+["surrealSubjects","🌀",true,{de:"Surreale Motive & Symbole",en:"Surreal Subjects & Symbols",es:"Motivos y símbolos surrealistas",fr:"Sujets et symboles surréalistes",ar:"موضوعات ورموز سريالية"},["floatingFace","meltingClock","floatingBowlerHat","cloudPortrait","treeOnCloud","giantMoon","hourglassSymbol","redBalloon"]],
+["surrealComposition","🖼️",true,{de:"Surreale Kompositionen",en:"Surreal Compositions",es:"Composiciones surrealistas",fr:"Compositions surréalistes",ar:"تكوينات سريالية"},["impossibleScale","floatingObjects","dreamPortal","fragmentingFace","levitatingFrame","symbolicStillLife","mirrorWorld","gravityDefying"]],
+["surrealNature","🍂",true,{de:"Traumlandschaften & Natur",en:"Dreamscapes & Nature",es:"Paisajes oníricos y naturaleza",fr:"Paysages oniriques et nature",ar:"مناظر الأحلام والطبيعة"},["solitaryRedTree","cloudSea","mistyMountainWorld","surrealOcean","autumnDreamscape","moonlitLandscape","goldenHourDream","floatingIsland"]],
+["surrealMood","⌛",true,{de:"Zeit, Stimmung & Atmosphäre",en:"Time, Mood & Atmosphere",es:"Tiempo, ambiente y atmósfera",fr:"Temps, ambiance et atmosphère",ar:"الزمن والمزاج والأجواء"},["dreamlikeMelancholy","poeticSolitude","mysticalSerenity","nostalgicTime","cinematicDusk","etherealLight","symbolicMystery","quietWonder"]],
+["roomTypes","🏛️",true,{de:"Raumtypen & Interieurs",en:"Room Types & Interiors",es:"Tipos de espacios e interiores",fr:"Types de pièces et intérieurs",ar:"أنواع الغرف والديكورات"},["luxuryLivingRoom","grandHall","surrealBedroom","modernGallery","palaceInterior","minimalistRoom","darkLibrary","dreamlikeAtrium"]],
+["architecture","🏰",true,{de:"Architektur & Bauformen",en:"Architecture & Structures",es:"Arquitectura y estructuras",fr:"Architecture et structures",ar:"العمارة والهياكل"},["stoneArchway","ornateDoorway","endlessCorridor","floatingStaircase","impossibleArchitecture","gothicWindows","classicalColumns","monumentalFacade"]],
+["roomDetails","🪞",true,{de:"Fenster, Türen & Raumdetails",en:"Windows, Doors & Room Details",es:"Ventanas, puertas y detalles",fr:"Fenêtres, portes et détails",ar:"النوافذ والأبواب والتفاصيل"},["tallWindows","archedWindow","openPortalDoor","ornateMirror","antiqueFurniture","marbleFloor","velvetCurtains","sculpturalDecor"]],
+["roomLighting","🕯️",true,{de:"Raumlicht & Materialien",en:"Interior Lighting & Materials",es:"Iluminación y materiales",fr:"Éclairage et matériaux",ar:"إضاءة ومواد داخلية"},["sunbeamsThroughWindow","warmCandlelight","dramaticSideLight","softAmbientGlow","polishedMarble","darkWalnutWood","agedStoneTexture","brushedGoldAccents"]],
+["painterArt","🎨",true,{de:"Große Maler & Kunststile",en:"Great Painters & Art Styles",es:"Grandes pintores y estilos",fr:"Grands peintres et styles",ar:"رسامون عظماء وأساليب فنية"},["daliArt","vanGoghArt","monetArt","picassoArt","leonardoArt","michelangeloArt","rembrandtArt","klimtArt","kahloArt","hokusaiArt","magritteArt"]]
+];
+CATEGORIES.push(...NEW_VISUAL_STUDIOS);
+Object.assign(O, {
+daliArt:["Surrealistische Traumwelten, schmelzende Formen, präzise gemalte rätselhafte Symbole – inspiriert von Salvador Dalí","Surreal dreamscapes, melting forms and precisely rendered enigmatic symbols – inspired by Salvador Dalí","Mundos oníricos surrealistas, formas derretidas y símbolos enigmáticos – inspirado en Salvador Dalí","Univers oniriques surréalistes, formes fondues et symboles énigmatiques – inspiré de Salvador Dalí","عوالم سريالية حالمة وأشكال ذائبة ورموز غامضة"],
+vanGoghArt:["Ausdrucksstarke Wirbelbewegungen, leuchtende Farben und dynamische Pinselstriche – inspiriert von Vincent van Gogh","Expressive swirling movement, vivid colors and dynamic brushwork – inspired by Vincent van Gogh","Movimiento arremolinado, colores vivos y pinceladas dinámicas – inspirado en Vincent van Gogh","Mouvements tourbillonnants, couleurs vives et coups de pinceau dynamiques – inspiré de Vincent van Gogh","حركة دوامية وألوان زاهية وضربات فرشاة قوية"],
+monetArt:["Impressionistische Lichtstimmung, weiche Farbübergänge und flirrende Naturreflexe – inspiriert von Claude Monet","Impressionist light, soft color transitions and shimmering reflections in nature – inspired by Claude Monet","Luz impresionista, transiciones suaves y reflejos brillantes de la naturaleza – inspirado en Claude Monet","Lumière impressionniste, transitions douces et reflets chatoyants de la nature – inspiré de Claude Monet","ضوء انطباعي وانتقالات لونية ناعمة وانعكاسات طبيعية متلألئة"],
+picassoArt:["Kubistische Perspektiven, geometrische Formen und mutige Farbflächen – inspiriert von Pablo Picasso","Cubist perspectives, geometric forms and bold blocks of color – inspired by Pablo Picasso","Perspectivas cubistas, formas geométricas y bloques de color audaces – inspirado en Pablo Picasso","Perspectives cubistes, formes géométriques et aplats de couleurs audacieux – inspiré de Pablo Picasso","منظورات تكعيبية وأشكال هندسية ومساحات لونية جريئة"],
+leonardoArt:["Renaissance-Komposition, feine sfumato-Übergänge und ausgewogene klassische Proportionen – inspiriert von Leonardo da Vinci","Renaissance composition, delicate sfumato transitions and balanced classical proportions – inspired by Leonardo da Vinci","Composición renacentista, transiciones sfumato y proporciones clásicas equilibradas – inspirado en Leonardo da Vinci","Composition Renaissance, transitions sfumato délicates et proportions classiques équilibrées – inspiré de Léonard de Vinci","تكوين عصر النهضة وانتقالات سفوماتو دقيقة ونسب كلاسيكية متوازنة"],
+michelangeloArt:["Monumentale Figuren, kraftvolle Anatomie und dramatische Fresko-Anmutung – inspiriert von Michelangelo","Monumental figures, powerful anatomy and dramatic fresco-like grandeur – inspired by Michelangelo","Figuras monumentales, anatomía poderosa y grandeza de fresco dramático – inspirado en Miguel Ángel","Figures monumentales, anatomie puissante et grandeur de fresque dramatique – inspiré de Michel-Ange","شخصيات ضخمة وتشريح قوي وعظمة جداريات درامية"],
+rembrandtArt:["Meisterhaftes Hell-Dunkel, warmes Goldbraun und psychologische Porträttiefe – inspiriert von Rembrandt","Masterful chiaroscuro, warm golden browns and psychologically rich portraiture – inspired by Rembrandt","Claroscuro magistral, marrones dorados cálidos y retratos de gran profundidad – inspirado en Rembrandt","Clair-obscur magistral, bruns dorés chaleureux et portraits psychologiquement profonds – inspiré de Rembrandt","تباين ضوئي بارع وبني ذهبي دافئ وبورتريهات عميقة"],
+klimtArt:["Dekorativer Jugendstil, goldene Ornamente, elegante Muster und flächige Farbgestaltung – inspiriert von Gustav Klimt","Decorative Art Nouveau, golden ornament, elegant patterns and flattened color fields – inspired by Gustav Klimt","Art Nouveau decorativo, ornamentos dorados, patrones elegantes y campos de color planos – inspirado en Gustav Klimt","Art nouveau décoratif, ornements dorés, motifs élégants et aplats colorés – inspiré de Gustav Klimt","فن حديث زخرفي وزخارف ذهبية وأنماط أنيقة ومساحات لونية"],
+kahloArt:["Symbolische Selbstporträt-Ästhetik, kräftige Farben, botanische Motive und emotionale Direktheit – inspiriert von Frida Kahlo","Symbolic self-portrait aesthetic, bold colors, botanical motifs and emotional directness – inspired by Frida Kahlo","Estética de autorretrato simbólico, colores intensos, motivos botánicos y emoción directa – inspirado en Frida Kahlo","Esthétique d’autoportrait symbolique, couleurs intenses, motifs botaniques et émotion directe – inspiré de Frida Kahlo","جماليات الصور الذاتية الرمزية وألوان قوية وزخارف نباتية وتعبير عاطفي"],
+hokusaiArt:["Japanische Ukiyo-e-Holzschnittästhetik, klare Konturen und kraftvolle Wellenformen – inspiriert von Katsushika Hokusai","Japanese ukiyo-e woodblock aesthetic, crisp outlines and powerful wave forms – inspired by Katsushika Hokusai","Estética japonesa de xilografía ukiyo-e, contornos definidos y olas poderosas – inspirado en Katsushika Hokusai","Esthétique japonaise de l’estampe ukiyo-e, contours nets et vagues puissantes – inspiré de Katsushika Hokusai","جماليات الطباعة اليابانية أوكييو-إي وخطوط واضحة وأمواج قوية"],
+magritteArt:["Surreale Bildrätsel, schwebende Alltagsobjekte, verhüllte Gesichter und poetische Traumlogik – inspiriert von René Magritte","Surreal visual puzzles, floating everyday objects, veiled faces and poetic dream logic – inspired by René Magritte","Acertijos visuales surrealistas, objetos cotidianos flotantes, rostros velados y lógica poética onírica – inspirado en René Magritte","Énigmes visuelles surréalistes, objets du quotidien flottants, visages voilés et logique onirique poétique – inspiré de René Magritte","ألغاز بصرية سريالية وأشياء يومية عائمة ووجوه محجوبة ومنطق حلمي شاعري"],
+floatingFace:["Schwebendes monumentales Gesicht aus Stein und Wolken","Monumental floating face made of stone and clouds","Rostro monumental flotante de piedra y nubes","Visage monumental flottant de pierre et de nuages","وجه حجري ضخم عائم بين السحب"],
+meltingClock:["Schmelzende Uhr im Stil surrealer Traumkunst","Melting clock in a surreal dream-art style","Reloj derretido de estilo onírico surrealista","Horloge fondante dans un style onirique surréaliste","ساعة ذائبة بأسلوب فني سريالي"],
+floatingBowlerHat:["Schwebender schwarzer Bowlerhut","Floating black bowler hat","Bombín negro flotante","Chapeau melon noir flottant","قبعة سوداء عائمة"],
+cloudPortrait:["Gesicht, das aus Wolkenformationen entsteht","Face emerging from cloud formations","Rostro que emerge de formaciones de nubes","Visage émergeant de formations nuageuses","وجه يتشكل من السحب"],
+treeOnCloud:["Einsamer Baum auf einer schwebenden Wolkeninsel","Solitary tree on a floating cloud island","Árbol solitario en una isla flotante de nubes","Arbre solitaire sur une île de nuages flottante","شجرة وحيدة على جزيرة سحابية عائمة"],
+giantMoon:["Riesiger Mond über einer surrealen Landschaft","Giant moon above a surreal landscape","Luna gigante sobre un paisaje surrealista","Lune géante au-dessus d'un paysage surréaliste","قمر عملاق فوق منظر سريالي"],
+hourglassSymbol:["Antike Sanduhr als Symbol für Vergänglichkeit","Antique hourglass symbolizing the passage of time","Reloj de arena antiguo como símbolo del paso del tiempo","Sablier ancien symbolisant le passage du temps","ساعة رملية قديمة ترمز إلى مرور الزمن"],
+redBalloon:["Ein einzelner roter Ballon in einer Traumwelt","A single red balloon in a dream world","Un globo rojo solitario en un mundo onírico","Un ballon rouge solitaire dans un monde de rêve","بالون أحمر وحيد في عالم الأحلام"],
+impossibleScale:["Unmögliche Größenverhältnisse zwischen Objekten","Impossible scale relationships between objects","Relaciones de escala imposibles entre objetos","Rapports d'échelle impossibles entre les objets","أحجام غير منطقية بين الأشياء"],
+floatingObjects:["Schwebende Gegenstände ohne sichtbare Aufhängung","Floating objects with no visible support","Objetos flotantes sin soporte visible","Objets flottants sans support visible","أشياء عائمة بلا دعامة ظاهرة"],
+dreamPortal:["Leuchtendes Portal in eine andere Wirklichkeit","Glowing portal into another reality","Portal luminoso hacia otra realidad","Portail lumineux vers une autre réalité","بوابة مضيئة إلى واقع آخر"],
+fragmentingFace:["Gesicht löst sich kunstvoll in Fragmente auf","Face artistically dissolving into fragments","Rostro que se desintegra artísticamente en fragmentos","Visage se dissolvant artistiquement en fragments","وجه يتفتت بشكل فني"],
+levitatingFrame:["Schwebender leerer Bilderrahmen am Himmel","Empty picture frame levitating in the sky","Marco vacío flotando en el cielo","Cadre vide flottant dans le ciel","إطار صورة فارغ عائم في السماء"],
+symbolicStillLife:["Symbolisches Stillleben mit Uhr, Buch und Rose","Symbolic still life with clock, book and rose","Bodegón simbólico con reloj, libro y rosa","Nature morte symbolique avec horloge, livre et rose","طبيعة صامتة رمزية بساعة وكتاب ووردة"],
+mirrorWorld:["Spiegel öffnet den Blick in eine andere Welt","Mirror revealing another world","Espejo que revela otro mundo","Miroir révélant un autre monde","مرآة تكشف عالماً آخر"],
+gravityDefying:["Schwerkraft wird in der Szene aufgehoben","Gravity-defying scene","Escena que desafía la gravedad","Scène défiant la gravité","مشهد يتحدى الجاذبية"],
+solitaryRedTree:["Einsamer Baum mit leuchtend rotem Herbstlaub","Solitary tree with vivid red autumn leaves","Árbol solitario con hojas otoñales de rojo intenso","Arbre solitaire aux feuilles d'automne rouge vif","شجرة وحيدة بأوراق خريفية حمراء"],
+cloudSea:["Weites Wolkenmeer unter dramatischem Himmel","Vast sea of clouds beneath a dramatic sky","Mar de nubes bajo un cielo dramático","Vaste mer de nuages sous un ciel dramatique","بحر واسع من السحب تحت سماء درامية"],
+mistyMountainWorld:["Nebelverhangene Berge und ferne Burgen","Misty mountains and distant castles","Montañas brumosas y castillos lejanos","Montagnes brumeuses et châteaux lointains","جبال ضبابية وقلاع بعيدة"],
+surrealOcean:["Surreales Meer mit spiegelnder Wasseroberfläche","Surreal ocean with mirror-like water","Océano surrealista con agua reflectante","Océan surréaliste à l'eau miroitante","محيط سريالي بمياه عاكسة"],
+autumnDreamscape:["Herbstliche Traumlandschaft mit roten Blättern","Autumn dreamscape with red leaves","Paisaje otoñal de ensueño con hojas rojas","Paysage automnal de rêve aux feuilles rouges","مشهد خريفي حالم بأوراق حمراء"],
+moonlitLandscape:["Traumlandschaft im silbernen Mondlicht","Dreamscape in silver moonlight","Paisaje onírico a la luz plateada de la luna","Paysage onirique au clair de lune argenté","منظر حالم تحت ضوء القمر الفضي"],
+goldenHourDream:["Surreale Landschaft im goldenen Abendlicht","Surreal landscape in golden evening light","Paisaje surrealista con luz dorada del atardecer","Paysage surréaliste dans la lumière dorée du soir","منظر سريالي بضوء المساء الذهبي"],
+floatingIsland:["Schwebende Insel über einem Wolkenmeer","Floating island above a sea of clouds","Isla flotante sobre un mar de nubes","Île flottante au-dessus d'une mer de nuages","جزيرة عائمة فوق بحر من السحب"],
+dreamlikeMelancholy:["Melancholische, verträumte Stimmung","Melancholic, dreamlike mood","Ambiente melancólico y onírico","Ambiance mélancolique et rêveuse","أجواء حالمة وحزينة"],
+poeticSolitude:["Poetische Einsamkeit und stille Weite","Poetic solitude and quiet vastness","Soledad poética y amplitud silenciosa","Solitude poétique et immensité silencieuse","وحدة شاعرية واتساع هادئ"],
+mysticalSerenity:["Mystische Ruhe und zeitlose Stille","Mystical calm and timeless silence","Calma mística y silencio atemporal","Calme mystique et silence intemporel","هدوء غامض وسكون خالد"],
+nostalgicTime:["Nostalgische Zeitreise-Atmosphäre","Nostalgic time-travel atmosphere","Atmósfera nostálgica de viaje en el tiempo","Atmosphère nostalgique de voyage dans le temps","أجواء حنين ورحلة عبر الزمن"],
+cinematicDusk:["Filmische Dämmerung mit warmem Gegenlicht","Cinematic dusk with warm backlight","Crepúsculo cinematográfico con contraluz cálida","Crépuscule cinématographique en contre-jour chaud","غسق سينمائي بإضاءة خلفية دافئة"],
+etherealLight:["Ätherisches Licht zwischen Wolken und Nebel","Ethereal light between clouds and mist","Luz etérea entre nubes y niebla","Lumière éthérée entre nuages et brume","ضوء أثيري بين السحب والضباب"],
+symbolicMystery:["Geheimnisvolle symbolische Bildsprache","Mysterious symbolic visual language","Lenguaje visual simbólico y misterioso","Langage visuel symbolique et mystérieux","لغة بصرية رمزية وغامضة"],
+quietWonder:["Leise Magie und staunende Atmosphäre","Quiet magic and a sense of wonder","Magia sutil y atmósfera de asombro","Magie discrète et atmosphère d'émerveillement","سحر هادئ وأجواء مدهشة"],
+luxuryLivingRoom:["Luxuriöses modernes Wohnzimmer","Luxury modern living room","Salón moderno de lujo","Salon moderne luxueux","غرفة معيشة عصرية فاخرة"],
+grandHall:["Monumentale Empfangshalle mit hohen Säulen","Monumental reception hall with tall columns","Vestíbulo monumental con columnas altas","Hall monumental avec hautes colonnes","قاعة استقبال ضخمة بأعمدة عالية"],
+surrealBedroom:["Surreales Schlafzimmer mit traumhafter Perspektive","Surreal bedroom with dreamlike perspective","Dormitorio surrealista con perspectiva onírica","Chambre surréaliste à perspective onirique","غرفة نوم سريالية بمنظور حالم"],
+modernGallery:["Minimalistische Galerie für zeitgenössische Kunst","Minimalist contemporary art gallery","Galería minimalista de arte contemporáneo","Galerie minimaliste d'art contemporain","معرض فني معاصر بسيط"],
+palaceInterior:["Prunkvolles Palastinterieur","Opulent palace interior","Interior de palacio suntuoso","Intérieur de palais somptueux","داخل قصر فخم"],
+minimalistRoom:["Ruhiger minimalistischer Raum","Calm minimalist room","Espacio minimalista tranquilo","Pièce minimaliste apaisante","غرفة بسيطة وهادئة"],
+darkLibrary:["Dunkle Bibliothek mit hohen Bücherregalen","Dark library with towering bookshelves","Biblioteca oscura con estanterías altas","Bibliothèque sombre aux hautes étagères","مكتبة داكنة برفوف كتب شاهقة"],
+dreamlikeAtrium:["Lichtdurchflutetes Atrium mit surrealer Tiefe","Light-filled atrium with surreal depth","Atrio luminoso con profundidad surrealista","Atrium lumineux à profondeur surréaliste","ردهة داخلية مضيئة بعمق سريالي"],
+stoneArchway:["Monumentaler Torbogen aus altem Stein","Monumental archway made of aged stone","Arco monumental de piedra antigua","Arche monumentale en pierre ancienne","قوس ضخم من الحجر القديم"],
+ornateDoorway:["Aufwendig verzierter historischer Eingang","Ornately decorated historic doorway","Entrada histórica ornamentada","Entrée historique richement décorée","مدخل تاريخي مزخرف"],
+endlessCorridor:["Endlos wirkender Korridor mit Fluchtpunkt","Endless corridor with a strong vanishing point","Pasillo aparentemente infinito con punto de fuga","Couloir semblant infini avec point de fuite","ممر يبدو بلا نهاية بمنظور عميق"],
+floatingStaircase:["Schwebende Treppe in einem unmöglichen Raum","Floating staircase in an impossible room","Escalera flotante en una habitación imposible","Escalier flottant dans une pièce impossible","درج عائم في غرفة مستحيلة"],
+impossibleArchitecture:["Unmögliche surreale Architektur","Impossible surreal architecture","Arquitectura surrealista imposible","Architecture surréaliste impossible","عمارة سريالية مستحيلة"],
+gothicWindows:["Gotische Fenster mit steinernen Maßwerken","Gothic windows with stone tracery","Ventanas góticas con tracería de piedra","Fenêtres gothiques à remplage de pierre","نوافذ قوطية بزخارف حجرية"],
+classicalColumns:["Klassische Säulen und symmetrische Fassaden","Classical columns and symmetrical facades","Columnas clásicas y fachadas simétricas","Colonnes classiques et façades symétriques","أعمدة كلاسيكية وواجهات متناظرة"],
+monumentalFacade:["Monumentale historische Gebäudefassade","Monumental historic building facade","Fachada monumental de edificio histórico","Façade monumentale d'un bâtiment historique","واجهة مبنى تاريخي ضخمة"],
+tallWindows:["Hohe raumhohe Fenster","Tall floor-to-ceiling windows","Ventanas altas de suelo a techo","Grandes fenêtres du sol au plafond","نوافذ طويلة من الأرض إلى السقف"],
+archedWindow:["Elegantes Rundbogenfenster","Elegant arched window","Elegante ventana arqueada","Élégante fenêtre cintrée","نافذة أنيقة مقوسة"],
+openPortalDoor:["Offene Tür als Portal in eine andere Welt","Open doorway as a portal to another world","Puerta abierta como portal a otro mundo","Porte ouverte comme portail vers un autre monde","باب مفتوح كبوابة إلى عالم آخر"],
+ornateMirror:["Antiker Spiegel mit kunstvollem Goldrahmen","Antique mirror with ornate gold frame","Espejo antiguo con marco dorado ornamentado","Miroir ancien au cadre doré orné","مرآة قديمة بإطار ذهبي مزخرف"],
+antiqueFurniture:["Edle antike Möbelstücke","Elegant antique furniture","Muebles antiguos elegantes","Mobilier ancien élégant","أثاث عتيق أنيق"],
+marbleFloor:["Polierter Marmorboden mit Spiegelungen","Polished marble floor with reflections","Suelo de mármol pulido con reflejos","Sol en marbre poli avec reflets","أرضية رخامية مصقولة بانعكاسات"],
+velvetCurtains:["Schwere Samtvorhänge","Heavy velvet curtains","Cortinas pesadas de terciopelo","Lourds rideaux de velours","ستائر مخملية ثقيلة"],
+sculpturalDecor:["Skulpturale Designobjekte als Raumdekoration","Sculptural design objects as interior decor","Objetos escultóricos de diseño como decoración","Objets sculpturaux comme décoration intérieure","قطع فنية نحتية للديكور"],
+sunbeamsThroughWindow:["Sonnenstrahlen fallen durch hohe Fenster","Sunbeams streaming through tall windows","Rayos de sol entrando por ventanas altas","Rayons de soleil traversant de hautes fenêtres","أشعة الشمس تدخل عبر نوافذ عالية"],
+warmCandlelight:["Warmes Licht vieler Kerzen","Warm light from many candles","Luz cálida de muchas velas","Lumière chaude de nombreuses bougies","ضوء دافئ من الشموع"],
+dramaticSideLight:["Dramatisches seitliches Licht","Dramatic side lighting","Iluminación lateral dramática","Éclairage latéral dramatique","إضاءة جانبية درامية"],
+softAmbientGlow:["Weiches atmosphärisches Raumlicht","Soft ambient interior glow","Luz ambiental suave","Lueur ambiante douce","توهج داخلي ناعم"],
+polishedMarble:["Edler polierter Marmor","Elegant polished marble","Mármol pulido elegante","Marbre poli élégant","رخام مصقول أنيق"],
+darkWalnutWood:["Dunkles Walnussholz","Dark walnut wood","Madera de nogal oscuro","Bois de noyer foncé","خشب جوز داكن"],
+agedStoneTexture:["Wettergegerbte alte Steintextur","Weathered aged stone texture","Textura de piedra antigua desgastada","Texture de pierre ancienne patinée","ملمس حجر قديم متآكل"],
+brushedGoldAccents:["Gebürstete goldene Akzente","Brushed gold accents","Detalles dorados cepillados","Accents dorés brossés","لمسات ذهبية مصقولة"]
+});
+
 CATEGORIES.sort((a, b) => {
   const ai = CATEGORY_ORDER.indexOf(a[0]);
   const bi = CATEGORY_ORDER.indexOf(b[0]);
@@ -826,6 +930,10 @@ function categoryGroup(id){
  if(["person","hair","hairColor","makeup","clothing","hosiery","shoes","pose"].includes(id)||id.startsWith("beauty")||id==="expression")return "people";
  if(["camera","lens","lighting","realism","format","composition"].includes(id))return "photo";
  if(["japan","landscape","style","mood","fantasy"].includes(id))return "worlds";
+ if(id.startsWith("surreal"))return "surreal";
+ if(["roomTypes","architecture","roomDetails","roomLighting"].includes(id))return "rooms";
+ if(["barefootStyle","footPose","barefootBodyPose","feetFraming","feetDetails"].includes(id))return "barefoot";
+ if(id==="painterArt")return "art";
  return "all";
 }
 function goToStudio(group){
@@ -853,7 +961,7 @@ function renderCategories(){
 function openCategory(id){
  currentCategory=id;const c=catById(id),t=LANGS[currentLanguage];document.getElementById("selectionArea").style.display="block";document.getElementById("selectionTitle").textContent=c[1]+" "+txt(c[3]);document.getElementById("selectionHint").textContent=c[2]?t.multi:t.single;
  const box=document.getElementById("optionsContainer");box.innerHTML="";
- c[4].forEach(opt=>{const e=document.createElement("div");e.className="option"+(isSelected(id,opt)?" active":"");e.textContent=optionText(opt);e.onclick=()=>{toggleOption(id,opt);openCategory(id);updateEverything()};box.appendChild(e)});
+ c[4].forEach(opt=>{const e=document.createElement("div");e.className="option"+(isSelected(id,opt)?" active":"");e.textContent=optionText(opt);e.onclick=()=>{toggleOption(id,opt);updateEverything();closeSelection();document.getElementById("categorySearch").value="";renderCategories();setTimeout(()=>document.getElementById("categoryTitle").scrollIntoView({behavior:"smooth",block:"start"}),60)};box.appendChild(e)});
  setTimeout(()=>document.getElementById("selectionArea").scrollIntoView({behavior:"smooth",block:"start"}),50);
 }
 function toggleOption(id,opt){const c=catById(id);if(c[2]){if(!selectedValues[id])selectedValues[id]=[];const i=selectedValues[id].indexOf(opt);if(i>=0){selectedValues[id].splice(i,1);if(!selectedValues[id].length)delete selectedValues[id]}else selectedValues[id].push(opt)}else{if(selectedValues[id]===opt)delete selectedValues[id];else selectedValues[id]=opt}}
@@ -886,7 +994,7 @@ function randomPrompt(){selectedValues={};CATEGORIES.forEach(c=>{if(Math.random(
 function resetAll(){if(!confirm(tr("resetAsk")))return;selectedValues={};document.getElementById("promptOutput").value="";localStorage.removeItem("artstyleCurrentSelection");updateEverything();setStatus(tr("resetDone"))}
 function saveCurrentSelection(){localStorage.setItem("artstyleCurrentSelection",JSON.stringify(selectedValues))}
 function loadCurrentSelection(){try{selectedValues=JSON.parse(localStorage.getItem("artstyleCurrentSelection"))||{}}catch{selectedValues={}}}
-function exportData(){const data={version:"ArtStyle Studio V6.4",language:currentLanguage,currentSelection:selectedValues,savedPrompts:getSavedPrompts()};const b=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="artstyle-studio-backup.json";a.click();URL.revokeObjectURL(u)}
+function exportData(){const data={version:"ArtStyle Studio V6.8",language:currentLanguage,currentSelection:selectedValues,savedPrompts:getSavedPrompts()};const b=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="artstyle-studio-backup.json";a.click();URL.revokeObjectURL(u)}
 function importData(){const i=document.createElement("input");i.type="file";i.accept=".json";i.onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=x=>{try{const d=JSON.parse(x.target.result);selectedValues=d.currentSelection||{};if(d.savedPrompts)localStorage.setItem("artstyleSavedPrompts",JSON.stringify(d.savedPrompts));if(d.language&&LANGS[d.language]){currentLanguage=d.language;document.getElementById("languageSelector").value=currentLanguage}changeLanguage(currentLanguage);updateEverything();renderSavedPrompts();setStatus(tr("importOK"))}catch{alert(tr("importBad"))}};r.readAsText(f)};i.click()}
 function closeSelection(){document.getElementById("selectionArea").style.display="none"}
 init();

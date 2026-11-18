@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ArtStyle Studio V8.0 – Dirk Eckert</title>
+<title>ArtStyle Studio V10.2 – Dirk Eckert</title>
 <style>
 :root{
   --bg:#080a10;--bg2:#101524;--card:#151a28;--card2:#20263a;
@@ -89,6 +89,49 @@ main{max-width:1120px}
 .director-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:10px}
 .director-actions button{flex:1 1 150px}
 @media(max-width:520px){.director-grid{grid-template-columns:1fr}.director-actions button{flex-basis:100%}}
+
+
+/* V9 Film Studio visual preview cards */
+.film-option{display:flex;align-items:center;gap:12px;padding:9px;border:1px solid var(--border,#333);border-radius:14px;margin:8px 0;background:var(--card,#171923);cursor:pointer;min-height:88px}
+.film-option.active{border:2px solid var(--accent,#c9a66b);background:rgba(201,166,107,.12)}
+.film-option img{width:104px;height:72px;object-fit:cover;border-radius:9px;flex-shrink:0}
+.film-option .film-option-title{font-weight:700;font-size:14px;line-height:1.3}
+.film-option .film-option-desc{font-size:11px;opacity:.75;margin-top:4px;line-height:1.35}
+
+.film-library-head{display:flex;flex-direction:column;gap:5px;margin:4px 0 14px;padding:13px 15px;border-radius:14px;background:linear-gradient(120deg,#382047,#18243a);border:1px solid #6d4a83}
+.film-library-head span{font-size:12px;color:var(--muted)}
+.film-preview-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
+.film-option{position:relative;display:flex;flex-direction:column;align-items:stretch;gap:0;width:100%;min-width:0;overflow:hidden;padding:0;text-align:left;border:2px solid #3b435a;border-radius:15px;background:#111827;color:#fff;cursor:pointer;min-height:190px}
+.film-option img{display:block;width:100%;height:118px;object-fit:cover;border-radius:0;flex:none;transition:transform .2s}
+.film-option:active img{transform:scale(1.03)}
+.film-option-shade{position:absolute;inset:0 0 auto;height:118px;background:linear-gradient(0deg,rgba(0,0,0,.45),transparent 75%);pointer-events:none}
+.film-option-copy{display:flex;flex-direction:column;gap:5px;padding:10px 10px 12px;min-height:70px}
+.film-option .film-option-title{font-size:13px;font-weight:800;line-height:1.3}
+.film-option .film-option-desc{font-size:11px;opacity:.72;margin:0;line-height:1.3}
+.film-option.active{border:2px solid #22c55e;background:#142b22;box-shadow:0 0 0 1px rgba(34,197,94,.2)}
+.film-option.active:after{content:"✓ Ausgewählt";position:absolute;top:8px;right:8px;padding:5px 8px;border-radius:20px;background:#16a34a;color:#04130a;font-size:10px;font-weight:800}
+.film-option.film-image-fallback{background:linear-gradient(145deg,#50315f,#16283c)}
+@media(max-width:360px){.film-preview-grid{gap:8px}.film-option img{height:100px}.film-option{min-height:172px}.film-option-copy{padding:8px}}
+
+.film-library-head{padding:12px;border-radius:14px;background:linear-gradient(120deg,#251c31,#172c3c);color:#fff;margin:0 0 12px}
+.film-library-head strong{display:block;font-size:16px;margin-bottom:4px}
+.film-library-head span{font-size:12px;opacity:.85}
+
+
+.visual-library-head{display:flex;flex-direction:column;gap:5px;margin:4px 0 14px;padding:13px 15px;border-radius:14px;background:linear-gradient(120deg,#183a42,#302044);border:1px solid #3d7b82}
+.visual-library-head strong{font-size:14px}
+.visual-library-head span{font-size:12px;color:var(--muted);line-height:1.4}
+.visual-preview-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
+.visual-option{position:relative;display:flex;flex-direction:column;align-items:stretch;gap:0;width:100%;min-width:0;overflow:hidden;padding:0;text-align:left;border:2px solid #39425c;border-radius:15px;background:#111827;color:#fff;cursor:pointer;min-height:178px}
+.visual-option img{display:block;width:100%;height:112px;object-fit:cover;flex:none}
+.visual-option-shade{position:absolute;inset:0 0 auto;height:112px;background:linear-gradient(0deg,rgba(0,0,0,.42),transparent 78%);pointer-events:none}
+.visual-option-copy{display:flex;flex-direction:column;gap:5px;padding:10px;min-height:64px}
+.visual-option-title{font-size:12px;font-weight:800;line-height:1.3}
+.visual-option-desc{font-size:10px;opacity:.7}
+.visual-option.active{border:2px solid #22c55e;background:#142b22;box-shadow:0 0 0 1px rgba(34,197,94,.2)}
+.visual-option.active:after{content:"✓ Ausgewählt";position:absolute;top:8px;right:8px;padding:5px 8px;border-radius:20px;background:#16a34a;color:#04130a;font-size:10px;font-weight:800}
+.visual-option.visual-image-fallback{background:linear-gradient(145deg,#50315f,#16283c)}
+@media(max-width:360px){.visual-preview-grid{gap:8px}.visual-option img{height:96px}.visual-option{min-height:160px}.visual-option-copy{padding:8px}}
 
 </style>
 </head>
@@ -208,7 +251,7 @@ main{max-width:1120px}
 <button class="secondary" onclick="importData()" id="importButton"></button><button class="danger" onclick="resetAll()" id="resetButton"></button>
 </div><div class="status" id="status"></div></section>
 <section class="panel"><h2 id="libraryTitle"></h2><input class="library-search" id="librarySearch" oninput="renderSavedPrompts()"><div id="savedPrompts"></div></section>
-</main><footer>🎨 ArtStyle Studio V8.0 · Creative Worlds · Dirk Eckert</footer>
+</main><footer>🎨 ArtStyle Studio V10.2 · Creative Worlds · Dirk Eckert</footer>
 
 <script>
 const LANGS={
@@ -226,7 +269,7 @@ const CATEGORIES=[
 ["makeup","💄",false,{de:"Make-up",en:"Makeup",es:"Maquillaje",fr:"Maquillage",ar:"المكياج"},["naturalMakeup","glamourMakeup","eveningMakeup","noMakeup"]],
 ["clothing","👗",true,{de:"Kleidung",en:"Clothing",es:"Ropa",fr:"Vêtements",ar:"الملابس"},["elegantDress","shortDress","eveningDress","business","suit","blouse","luxuryFashion"]],
 ["hosiery","🧦",true,{de:"Strumpfhose",en:"Pantyhose",es:"Pantimedias",fr:"Collants",ar:"الجوارب الطويلة"},["nudeNylon","fineTexture","realisticTransparency","continuousCoverage","silkyHighlights","blackSheer"]],
-["shoes","👠",false,{de:"Schuhe",en:"Shoes",es:"Zapatos",fr:"Chaussures",ar:"الأحذية"},["strapHeels","heels","pumps","boots","sneakers","barefoot"]],
+["shoes","👠",false,{de:"Schuhe",en:"Shoes",es:"Zapatos",fr:"Chaussures",ar:"الأحذية"},["strapHeels","heels","pumps","boots","sneakers","sandals","barefoot"]],
 ["pose","🧍",true,{de:"Pose",en:"Pose",es:"Pose",fr:"Pose",ar:"الوضعية"},["standingNatural","standingElegant","sitting","walking","confident","cameraTurned"]],
 ["japan","🇯🇵",true,{de:"Japan",en:"Japan",es:"Japón",fr:"Japon",ar:"اليابان"},["kyotoSunset","fushimi","bamboo","tokyoNight","matsumoto","hakone"]],
 ["landscape","🏔️",true,{de:"Landschaft",en:"Landscape",es:"Paisaje",fr:"Paysage",ar:"المناظر الطبيعية"},["mountains","sunsetBeach","mistForest","reflectionLake","winter","tropical"]],
@@ -261,7 +304,7 @@ blonde:["Blond","Blonde","Rubio","Blond","أشقر"],platinum:["Platinblond","Pl
 naturalMakeup:["Natürliches Make-up","Natural makeup","Maquillaje natural","Maquillage naturel","مكياج طبيعي"],glamourMakeup:["Glamour-Make-up","Glamour makeup","Maquillaje glamuroso","Maquillage glamour","مكياج فاخر"],eveningMakeup:["Elegantes Abend-Make-up","Elegant evening makeup","Maquillaje elegante de noche","Maquillage élégant du soir","مكياج مسائي أنيق"],noMakeup:["Kein sichtbares Make-up","No visible makeup","Sin maquillaje visible","Pas de maquillage visible","بدون مكياج ظاهر"],
 elegantDress:["Elegantes Kleid","Elegant dress","Vestido elegante","Robe élégante","فستان أنيق"],shortDress:["Kurzes Kleid","Short dress","Vestido corto","Robe courte","فستان قصير"],eveningDress:["Abendkleid","Evening gown","Vestido de noche","Robe de soirée","فستان سهرة"],business:["Business-Outfit","Business outfit","Conjunto de negocios","Tenue professionnelle","زي عمل"],suit:["Eleganter Anzug","Elegant suit","Traje elegante","Costume élégant","بدلة أنيقة"],blouse:["Elegante Bluse","Elegant blouse","Blusa elegante","Chemisier élégant","بلوزة أنيقة"],luxuryFashion:["Luxuriöse Fashion","Luxury fashion","Moda de lujo","Mode de luxe","أزياء فاخرة"],
 nudeNylon:["Ultra-sheer nude Nylon, 15 DEN","Ultra-sheer nude nylon, 15 DEN","Nylon nude ultra transparente, 15 DEN","Nylon nude ultra-transparent, 15 DEN","نايلون بلون البشرة فائق الشفافية 15 DEN"],fineTexture:["Extrem feine Nylon-Mikrostruktur","Extremely fine nylon microtexture","Microtextura de nylon extremadamente fina","Microtexture de nylon extrêmement fine","نسيج نايلون دقيق جدًا"],realisticTransparency:["Realistische Transparenz","Realistic transparency","Transparencia realista","Transparence réaliste","شفافية واقعية"],continuousCoverage:["Kontinuierliche Bedeckung über Beine, Füße und Zehen","Continuous coverage over legs, feet and toes","Cobertura continua sobre piernas, pies y dedos","Couverture continue sur les jambes, les pieds et les orteils","تغطية مستمرة للساقين والقدمين وأصابع القدم"],silkyHighlights:["Dezente seidige Highlights","Subtle silky highlights","Sutiles reflejos sedosos","Reflets soyeux subtils","لمسات حريرية خفيفة"],blackSheer:["Schwarze transparente Strumpfhose","Black sheer pantyhose","Pantimedias negras transparentes","Collants noirs transparents","جوارب طويلة سوداء شفافة"],
-strapHeels:["Riemchen High Heels","Strappy high heels","Tacones de tiras","Talons à brides","كعب عالي بأشرطة"],heels:["Elegante High Heels","Elegant high heels","Tacones elegantes","Talons élégants","كعب عالي أنيق"],pumps:["Pumps","Pumps","Pumps","Escarpins","حذاء بكعب"],boots:["Stiefel","Boots","Botas","Bottes","أحذية طويلة"],sneakers:["Sneaker","Sneakers","Zapatillas","Baskets","أحذية رياضية"],barefoot:["Barfuß","Barefoot","Descalzo","Pieds nus","حافي القدمين"],
+strapHeels:["Riemchen High Heels","Strappy high heels","Tacones de tiras","Talons à brides","كعب عالي بأشرطة"],heels:["Elegante High Heels","Elegant high heels","Tacones elegantes","Talons élégants","كعب عالي أنيق"],pumps:["Pumps","Pumps","Pumps","Escarpins","حذاء بكعب"],boots:["Stiefel","Boots","Botas","Bottes","أحذية طويلة"],sneakers:["Sneaker","Sneakers","Zapatillas","Baskets","أحذية رياضية"],sandals:["Sandalen","Sandals","Sandalias","Sandales","صنادل"],barefoot:["Barfuß","Barefoot","Descalzo","Pieds nus","حافي القدمين"],
 standingNatural:["Natürlich stehend","Standing naturally","De pie naturalmente","Debout naturellement","واقف بشكل طبيعي"],standingElegant:["Elegant stehend","Standing elegantly","De pie elegantemente","Debout élégamment","واقف بأناقة"],sitting:["Sitzend","Sitting","Sentado","Assis","جالس"],walking:["Gehend","Walking","Caminando","En marchant","يمشي"],confident:["Selbstbewusste Pose","Confident pose","Pose segura","Pose confiante","وضعية واثقة"],cameraTurned:["Leicht zur Kamera gedreht","Slightly turned toward camera","Ligeramente girado hacia la cámara","Légèrement tourné vers la caméra","ملتفت قليلًا نحو الكاميرا"],
 kyotoSunset:["Kyoto bei Sonnenuntergang","Kyoto at sunset","Kioto al atardecer","Kyoto au coucher du soleil","كيوتو عند الغروب"],fushimi:["Fushimi Inari Taisha","Fushimi Inari Taisha","Fushimi Inari Taisha","Fushimi Inari Taisha","فوشيمي إيناري تايشا"],bamboo:["Japanischer Bambuswald","Japanese bamboo forest","Bosque de bambú japonés","Forêt de bambous japonaise","غابة الخيزران اليابانية"],tokyoNight:["Tokio bei Nacht","Tokyo at night","Tokio de noche","Tokyo la nuit","طوكيو ليلًا"],matsumoto:["Matsumoto Castle","Matsumoto Castle","Castillo de Matsumoto","Château de Matsumoto","قلعة ماتسوموتو"],hakone:["Hakone und Lake Ashi","Hakone and Lake Ashi","Hakone y el lago Ashi","Hakone et le lac Ashi","هاكونه وبحيرة آشي"],
 mountains:["Epische Berglandschaft","Epic mountain landscape","Paisaje montañoso épico","Paysage montagneux épique","مناظر جبلية ملحمية"],sunsetBeach:["Strand bei Sonnenuntergang","Beach at sunset","Playa al atardecer","Plage au coucher du soleil","شاطئ عند الغروب"],mistForest:["Wald im Morgennebel","Forest in morning mist","Bosque en niebla matinal","Forêt dans la brume matinale","غابة في ضباب الصباح"],reflectionLake:["See mit Spiegelung","Lake with reflection","Lago con reflejo","Lac avec reflet","بحيرة مع انعكاس"],winter:["Winterlandschaft","Winter landscape","Paisaje invernal","Paysage hivernal","مناظر شتوية"],tropical:["Tropische Landschaft","Tropical landscape","Paisaje tropical","Paysage tropical","مناظر استوائية"],
@@ -1083,6 +1126,83 @@ classicHollywoodDrama:["Klassischer Hollywood-Glamour mit dramatischer Studiobel
 });
 
 
+// V10.1 – erweiterte Filmbibliothek mit 100+ Filmreferenzen und visuellen Vorschaukarten
+const FILM_PREVIEW_IMAGES = {
+  space:[
+    'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=640&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=640&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=640&auto=format&fit=crop'
+  ],
+  action:[
+    'https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=640&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=640&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=640&auto=format&fit=crop'
+  ],
+  adventure:[
+    'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=640&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=640&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=640&auto=format&fit=crop'
+  ],
+  fantasy:[
+    'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=640&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1511497584788-876760111969?w=640&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=640&auto=format&fit=crop'
+  ],
+  romance:[
+    'https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=640&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=640&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1500534623283-312aade485b7?w=640&auto=format&fit=crop'
+  ],
+  horror:[
+    'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=640&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1511497584788-876760111969?w=640&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=640&auto=format&fit=crop'
+  ],
+  dystopia:[
+    'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=640&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=640&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=640&auto=format&fit=crop'
+  ],
+  classic:[
+    'https://images.unsplash.com/photo-1489599849927-2ee91cc8aba5?w=640&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=640&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1500534623283-312aade485b7?w=640&auto=format&fit=crop'
+  ]
+};
+function filmPreviewFor(genre, filmName, index=0){
+  const pool=FILM_PREVIEW_IMAGES[genre]||FILM_PREVIEW_IMAGES.classic;
+  let hash=index;
+  for(let i=0;i<filmName.length;i++) hash=(hash*31+filmName.charCodeAt(i))>>>0;
+  return pool[hash%pool.length];
+}
+const FILM_LIBRARY = [
+ ['filmSpaceSaga','🚀','Science-Fiction, Weltraum & Zukunft','space',[
+  'Star Wars: Eine neue Hoffnung (1977)','Star Wars: Das Imperium schlägt zurück (1980)','Star Wars: Die Rückkehr der Jedi-Ritter (1983)','Star Wars: Die dunkle Bedrohung (1999)','Star Wars: Angriff der Klonkrieger (2002)','Star Wars: Die Rache der Sith (2005)','Rogue One: A Star Wars Story (2016)','Solo: A Star Wars Story (2018)','Star Trek II: Der Zorn des Khan (1982)','Star Trek: Der erste Kontakt (1996)','Star Trek (2009)','Star Trek Into Darkness (2013)','Star Trek Beyond (2016)','Interstellar (2014)','2001: Odyssee im Weltraum (1968)','Der Marsianer (2015)','Gravity (2013)','Contact (1997)','Arrival (2016)','Dune (2021)','Dune: Part Two (2024)','Blade Runner (1982)','Blade Runner 2049 (2017)','Das fünfte Element (1997)','Planet der Affen (1968)','Planet der Affen: Prevolution (2011)','Total Recall (1990)','RoboCop (1987)','Elysium (2013)','Oblivion (2013)']],
+ ['filmActionThriller','🎯','Action, Agenten & Thriller','action',[
+  'James Bond: Goldfinger (1964)','James Bond: Der Spion, der mich liebte (1977)','James Bond: GoldenEye (1995)','James Bond: Casino Royale (2006)','James Bond: Ein Quantum Trost (2008)','James Bond: Skyfall (2012)','James Bond: Spectre (2015)','James Bond: Keine Zeit zu sterben (2021)','Mission: Impossible (1996)','Mission: Impossible – Fallout (2018)','Mission: Impossible – Dead Reckoning (2023)','John Wick (2014)','John Wick: Kapitel 2 (2017)','John Wick: Kapitel 3 (2019)','John Wick: Kapitel 4 (2023)','The Dark Knight (2008)','Inception (2010)','Tenet (2020)','Matrix (1999)','Matrix Reloaded (2003)','Matrix Revolutions (2003)','Heat (1995)','Speed (1994)','Stirb langsam (1988)','Lethal Weapon (1987)','The Rock (1996)','Face/Off (1997)','Bourne Identität (2002)','Kingsman: The Secret Service (2014)','Top Gun: Maverick (2022)']],
+ ['filmAdventureWorlds','🧭','Abenteuer, Piraten & Entdeckungen','adventure',[
+  'Fluch der Karibik (2003)','Fluch der Karibik 2 (2006)','Am Ende der Welt (2007)','Fremde Gezeiten (2011)','Salazars Rache (2017)','Jäger des verlorenen Schatzes (1981)','Indiana Jones und der Tempel des Todes (1984)','Indiana Jones und der letzte Kreuzzug (1989)','Indiana Jones und das Königreich des Kristallschädels (2008)','Indiana Jones und das Rad des Schicksals (2023)','Die Mumie (1999)','Die Mumie kehrt zurück (2001)','King Kong (2005)','Kong: Skull Island (2017)','Jurassic Park (1993)','Vergessene Welt: Jurassic Park (1997)','Jurassic World (2015)','Jurassic World: Das gefallene Königreich (2018)','Master & Commander (2003)','Der letzte Samurai (2003)','Troja (2004)','Gladiator (2000)','Gladiator II (2024)','300 (2006)','Apocalypto (2006)','Robin Hood (2010)','Ben Hur (1959)','Lawrence von Arabien (1962)','Die Schatzinsel (1950)','Auf der Jagd nach dem grünen Diamanten (1984)']],
+ ['filmFantasyMagic','🧙','Fantasy, Magie & mythische Welten','fantasy',[
+  'Der Herr der Ringe: Die Gefährten (2001)','Der Herr der Ringe: Die zwei Türme (2002)','Der Herr der Ringe: Die Rückkehr des Königs (2003)','Der Hobbit: Eine unerwartete Reise (2012)','Der Hobbit: Smaugs Einöde (2013)','Der Hobbit: Die Schlacht der fünf Heere (2014)','Harry Potter und der Stein der Weisen (2001)','Harry Potter und die Kammer des Schreckens (2002)','Harry Potter und der Gefangene von Askaban (2004)','Harry Potter und der Feuerkelch (2005)','Harry Potter und der Orden des Phönix (2007)','Harry Potter und der Halbblutprinz (2009)','Harry Potter und die Heiligtümer des Todes (2010/2011)','Phantastische Tierwesen (2016)','Die Chroniken von Narnia (2005)','Warcraft: The Beginning (2016)','Der goldene Kompass (2007)','Die unendliche Geschichte (1984)','Alice im Wunderland (2010)','Maleficent (2014)','Pans Labyrinth (2006)','Conan der Barbar (1982)','Legende (1985)','Willow (1988)','Stardust (2007)']],
+ ['filmDisasterDrama','🌪️','Katastrophen, Naturgewalten & Endzeit','dystopia',[
+  '2012 (2009)','The Day After Tomorrow (2004)','Twister (1996)','Twisters (2024)','Into the Storm (2014)','Greenland (2020)','Deep Impact (1998)','Armageddon (1998)','San Andreas (2015)','Dante’s Peak (1997)','The Impossible (2012)','Pompeii (2014)','Waterworld (1995)','Snowpiercer (2013)','The Road (2009)','I Am Legend (2007)','World War Z (2013)','Mad Max: Fury Road (2015)','Mad Max 2 (1981)','The Book of Eli (2010)','Blade Runner 2049 (2017)','Children of Men (2006)','Oblivion (2013)','War of the Worlds (2005)','A Quiet Place (2018)']],
+ ['filmHorrorMystery','👁️','Horror, Mystery & düstere Welten','horror',[
+  'Shining (1980)','Es (2017)','Es: Kapitel 2 (2019)','Halloween (1978)','Scream (1996)','Alien (1979)','Aliens (1986)','Alien 3 (1992)','Prometheus (2012)','Alien: Covenant (2017)','Predator (1987)','Predator 2 (1990)','Prey (2022)','Event Horizon (1997)','A Quiet Place (2018)','A Quiet Place: Tag Eins (2024)','Constantine (2005)','Sleepy Hollow (1999)','Van Helsing (2004)','Dracula (1992)','Interview mit einem Vampir (1994)','The Crow (1994)','The Ring (2002)','Silent Hill (2006)','The Others (2001)']],
+ ['filmRomanceDrama','❤️','Romantik, Drama & große Gefühle','romance',[
+  'Titanic (1997)','Pretty Woman (1990)','Dirty Dancing (1987)','Ghost – Nachricht von Sam (1990)','Wie ein einziger Tag (2004)','Der große Gatsby (2013)','Moulin Rouge! (2001)','La La Land (2016)','A Star Is Born (2018)','Romeo + Julia (1996)','Notting Hill (1999)','Bodyguard (1992)','Pearl Harbor (2001)','Legenden der Leidenschaft (1994)','Casablanca (1942)','Vom Winde verweht (1939)','Doktor Schiwago (1965)','The English Patient (1996)','Stolz und Vorurteil (2005)','Carol (2015)','The Holiday (2006)','Brücken am Fluss (1995)','Ein ganzes halbes Jahr (2016)','Mamma Mia! (2008)','West Side Story (2021)']],
+ ['filmCultClassics','🎞️','Kultfilme, Klassiker & große Leinwandmomente','classic',[
+  'Zurück in die Zukunft (1985)','Zurück in die Zukunft II (1989)','Zurück in die Zukunft III (1990)','Ghostbusters (1984)','E.T. – Der Außerirdische (1982)','Gremlins (1984)','Scarface (1983)','Pulp Fiction (1994)','Forrest Gump (1994)','Der Pate (1972)','Der Pate II (1974)','Rocky (1976)','Rambo (1982)','Apocalypse Now (1979)','Blues Brothers (1980)','Jaws – Der weiße Hai (1975)','Thelma & Louise (1991)','Easy Rider (1969)','Amadeus (1984)','Chariots of Fire (1981)','Blade Runner (1982)','The Truman Show (1998)','American Beauty (1999)','The Grand Budapest Hotel (2014)','Once Upon a Time in Hollywood (2019)']]
+];
+FILM_LIBRARY.forEach(([id,icon,title,image,films])=>{
+ const opts=films.map((_,i)=>'v9film_'+id+'_'+i);
+ CATEGORIES.push([id,icon,true,{de:title,en:title,es:title,fr:title,ar:title},opts]);
+ films.forEach((film,i)=>{
+   const key=opts[i];
+   O[key]=[film+' – filmische Bildwelt, charakteristische Atmosphäre, Setdesign, Lichtstimmung und Bildkomposition als kreative Referenz',film+' – cinematic visual world, characteristic atmosphere, production design, lighting and composition as creative reference',film+' – mundo visual cinematográfico y atmósfera característica',film+' – univers visuel cinématographique et atmosphère caractéristique',film+' – عالم بصري سينمائي وأجواء مميزة'];
+   FILM_SOURCE_LABELS[key]=film;
+ });
+});
+
 const PAIR_STUDIOS = [
 ["pairEveryday","🤝",true,{de:"Natürlich & Alltag",en:"Natural & Everyday",es:"Natural y cotidiano",fr:"Naturel et quotidien",ar:"طبيعي ويومي"},["pairSideBySide","pairWalkingTogether","pairCasualConversation","pairLaughingTogether","pairCoffeeDate","pairLookingAtView"]],
 ["pairRomantic","❤️",true,{de:"Romantische Posen",en:"Romantic Poses",es:"Poses románticas",fr:"Poses romantiques",ar:"وضعيات رومانسية"},["pairForeheadTouch","pairGentleHug","pairHandInHand","pairSlowDance","pairSunsetEmbrace","pairNoseToNose"]],
@@ -1170,6 +1290,113 @@ pairEpicWideShot:["Kleine Paarfigur in einer monumentalen Landschaft, beide steh
 });
 
 function optionText(id){if(PAIR_SOURCE_LABELS[id])return PAIR_SOURCE_LABELS[id]+" — "+((O[id]||[])[IDX[currentLanguage]]||(O[id]||[])[0]||id);if(FILM_SOURCE_LABELS[id])return FILM_SOURCE_LABELS[id]+" — "+((O[id]||[])[IDX[currentLanguage]]||(O[id]||[])[0]||id);if(currentLanguage==="de"&&BEAUTY_DE[id])return BEAUTY_DE[id];const a=O[id]||[];return a[IDX[currentLanguage]]||a[0]||id}
+
+const CATEGORY_PREVIEW_POOLS={
+ person:['photo-1534528741775-53994a69daeb','photo-1500648767791-00dcc994a43e','photo-1531123897727-8f129e1688ce','photo-1506794778202-cad84cf45f1d'],
+ hair:['photo-1524504388940-b1c1722653e1','photo-1506794778202-cad84cf45f1d','photo-1529139574466-a303027c1d8b'],
+ hairColor:['photo-1524504388940-b1c1722653e1','photo-1534528741775-53994a69daeb','photo-1529139574466-a303027c1d8b'],
+ makeup:['photo-1488426862026-3ee34a7d66df','photo-1524504388940-b1c1722653e1','photo-1534528741775-53994a69daeb'],
+ clothing:['photo-1539109136881-3be0616acf4b','photo-1529139574466-a303027c1d8b','photo-1490481651871-ab68de25d43d'],
+ hosiery:['photo-1515886657613-9f3515b0c78f','photo-1539109136881-3be0616acf4b','photo-1529139574466-a303027c1d8b'],
+ shoes:['photo-1543163521-1bf539c55dd2','photo-1542291026-7eec264c27ff','photo-1515886657613-9f3515b0c78f'],
+ pose:['photo-1534528741775-53994a69daeb','photo-1500648767791-00dcc994a43e','photo-1529139574466-a303027c1d8b'],
+ japan:['photo-1493976040374-85c8e12f0c0e','photo-1478436127897-769e1b3f0f36','photo-1528360983277-13d401602fc8'],
+ landscape:['photo-1470770841072-f978cf4d019e','photo-1500530855697-b586d89ba3ee','photo-1464822759023-fed622ff2c3b'],
+ style:['photo-1534447677768-be436bb09401','photo-1519608487953-e999c86e7455','photo-1470252649378-9c29740c9fa8'],
+ realism:['photo-1470252649378-9c29740c9fa8','photo-1500534623283-312aade485b7','photo-1518837695005-2083093ee35b'],
+ camera:['photo-1516035069371-29a1b244cc32','photo-1519183071298-a2962be90b8e','photo-1502982720700-bfff97f2ecac'],
+ lens:['photo-1516035069371-29a1b244cc32','photo-1519183071298-a2962be90b8e'],
+ lighting:['photo-1470252649378-9c29740c9fa8','photo-1519608487953-e999c86e7455','photo-1500534623283-312aade485b7'],
+ mood:['photo-1518837695005-2083093ee35b','photo-1470252649378-9c29740c9fa8','photo-1519608487953-e999c86e7455'],
+ fantasy:['photo-1518709268805-4e9042af9f23','photo-1511497584788-876760111969','photo-1462331940025-496dfbfc7564'],
+ format:['photo-1500530855697-b586d89ba3ee','photo-1519608487953-e999c86e7455'],
+ composition:['photo-1500534623283-312aade485b7','photo-1515886657613-9f3515b0c78f'],
+ adultCreative:['photo-1539109136881-3be0616acf4b','photo-1529139574466-a303027c1d8b'],
+ galaxyScene:['photo-1462331940025-496dfbfc7564','photo-1446776811953-b23d57bd21aa'],
+ spacecraft:['photo-1446776811953-b23d57bd21aa','photo-1451187580459-43490279c0fa'],
+ spaceCharacters:['photo-1535223289827-42f1e9919769','photo-1519608487953-e999c86e7455'],
+ spaceWorlds:['photo-1462331940025-496dfbfc7564','photo-1470252649378-9c29740c9fa8'],
+ spaceEffects:['photo-1462331940025-496dfbfc7564','photo-1519608487953-e999c86e7455'],
+ trainType:['photo-1474487548417-781cb71495f3','photo-1519681393784-d120267933ba','photo-1500530855697-b586d89ba3ee'],
+ trainLandscape:['photo-1470770841072-f978cf4d019e','photo-1464822759023-fed622ff2c3b','photo-1500530855697-b586d89ba3ee'],
+ trainRoute:['photo-1474487548417-781cb71495f3','photo-1464822759023-fed622ff2c3b'],
+ trainView:['photo-1474487548417-781cb71495f3','photo-1500530855697-b586d89ba3ee'],
+ trainSeason:['photo-1470252649378-9c29740c9fa8','photo-1470770841072-f978cf4d019e'],
+ trainMood:['photo-1470252649378-9c29740c9fa8','photo-1519608487953-e999c86e7455']
+};
+
+function hairStylePreview(label){
+ const v=String(label).toLocaleLowerCase();
+ let hair="";
+ if(/glatze|bald|rasier|kahl/.test(v)){
+   hair="";
+ }else if(/pixie/.test(v)){
+   hair='<path d="M92 112 Q78 58 120 40 Q170 14 207 54 Q226 75 211 111 Q198 94 183 91 Q160 104 137 91 Q115 101 92 112Z" fill="#6b4935"/><path d="M96 87 Q115 47 148 48 Q176 42 204 70 Q177 62 157 76 Q133 88 96 87Z" fill="#8a6245"/>';
+ }else if(/bob|kurz/.test(v)){
+   hair='<path d="M78 129 Q62 48 119 27 Q180 4 218 59 Q236 104 215 166 L193 169 L188 92 Q156 112 126 91 L105 170 L82 166Z" fill="#70472f"/>';
+ }else if(/lock|curly|kraus/.test(v)){
+   hair='<path d="M83 127 Q57 40 119 28 Q133 5 158 25 Q186 8 203 41 Q238 54 222 103 Q240 139 212 170 L192 160 L191 91 Q171 108 151 91 Q124 108 105 91 L102 165 L82 165Z" fill="#57351f"/><g fill="#70472f"><circle cx="95" cy="57" r="17"/><circle cx="119" cy="34" r="17"/><circle cx="151" cy="29" r="17"/><circle cx="184" cy="37" r="17"/><circle cx="211" cy="64" r="17"/></g>';
+ }else{
+   hair='<path d="M79 126 Q61 42 119 27 Q180 4 218 59 Q236 104 215 166 L193 169 L188 92 Q156 112 126 91 L105 170 L82 166Z" fill="#49301f"/>';
+ }
+ const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 220"><defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#4c1d95"/><stop offset="1" stop-color="#0f172a"/></linearGradient><linearGradient id="skin" x2="1" y2="1"><stop stop-color="#f2c6a5"/><stop offset="1" stop-color="#c88768"/></linearGradient></defs><rect width="300" height="220" rx="18" fill="url(#bg)"/><circle cx="150" cy="102" r="82" fill="#ffffff" opacity=".06"/><path d="M117 158 Q150 143 183 158 L202 220 H98Z" fill="#1e293b"/><rect x="135" y="143" width="30" height="32" rx="12" fill="url(#skin)"/><path d="M94 91 Q94 49 150 43 Q206 49 206 91 L202 132 Q194 160 150 165 Q106 160 98 132Z" fill="url(#skin)"/><path d="M94 101 Q78 95 86 122 Q92 135 102 129 M206 101 Q222 95 214 122 Q208 135 198 129" fill="#d99a7b"/>${hair}<path d="M124 112 Q135 106 144 112 M157 112 Q166 106 177 112" fill="none" stroke="#51352b" stroke-width="4" stroke-linecap="round"/><path d="M149 116 L145 133 Q150 138 156 133" fill="none" stroke="#a86d59" stroke-width="3" stroke-linecap="round"/><path d="M132 147 Q150 155 168 147" fill="none" stroke="#9b4e4e" stroke-width="3" stroke-linecap="round"/><text x="150" y="205" text-anchor="middle" font-family="Arial" font-size="11" fill="#fff" opacity=".85">${/glatze|bald|rasier|kahl/.test(v)?"GLATZE":/pixie/.test(v)?"PIXIE CUT":/bob|kurz/.test(v)?"KURZER BOB":/lock|curly|kraus/.test(v)?"LOCKEN":"FRISUR"}</text></svg>`;
+ return "data:image/svg+xml;charset=UTF-8,"+encodeURIComponent(svg);
+}
+function svgPreview(label,art){
+ const clean=String(label).replace(/[<>&"]/g,'');
+ const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 250"><defs>
+ <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#35204f"/><stop offset="1" stop-color="#111827"/></linearGradient>
+ <linearGradient id="skin" x2="1" y2="1"><stop stop-color="#f4c9aa"/><stop offset="1" stop-color="#c9876b"/></linearGradient>
+ <linearGradient id="nylon" x2="1" y2="0"><stop stop-color="#f8dfcb" stop-opacity=".72"/><stop offset=".5" stop-color="#fff1e5" stop-opacity=".36"/><stop offset="1" stop-color="#d8ae96" stop-opacity=".72"/></linearGradient>
+ <pattern id="mesh" width="6" height="6" patternUnits="userSpaceOnUse"><path d="M0 0L6 6M6 0L0 6" stroke="#fff" stroke-opacity=".35" stroke-width=".6"/></pattern>
+ </defs><rect width="360" height="250" rx="18" fill="url(#bg)"/>${art}<text x="180" y="235" text-anchor="middle" fill="#fff" font-family="Arial" font-size="12" letter-spacing="1">${clean.toUpperCase().slice(0,38)}</text></svg>`;
+ return 'data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(svg);
+}
+function shoeArt(label){
+ const v=String(label).toLowerCase();
+ if(/barfuß|barefoot|descalzo|pieds nus/.test(v)) return footArt(false,false);
+ if(/sandale|sandal/.test(v)) return '<path d="M135 48Q112 53 106 96L91 183Q88 203 111 207Q180 224 249 198Q265 192 254 169L220 82Q209 50 185 53L170 120L148 117Z" fill="#bd9363" stroke="#f3d3a7" stroke-width="5"/><path d="M108 105Q163 132 218 83M98 155Q164 179 246 149M146 61L171 122L195 58" fill="none" stroke="#f3d3a7" stroke-width="10" stroke-linecap="round"/><path d="M103 198Q180 219 253 190" fill="none" stroke="#4a3024" stroke-width="9"/>';
+ if(/stiefel|boot/.test(v)) return '<path d="M126 43H207L211 151Q218 175 260 184L270 202Q262 215 110 208Q94 203 105 184L130 157Z" fill="#49312d" stroke="#c5a18c" stroke-width="4"/><path d="M130 59H204M130 83H205" stroke="#a77a62" stroke-width="4"/><path d="M105 195Q185 209 267 195" stroke="#171717" stroke-width="11"/>';
+ if(/sneaker|sport/.test(v)) return '<path d="M91 157Q125 153 148 111L178 130Q207 154 248 159Q273 164 274 190Q272 207 244 208H101Q75 202 91 157Z" fill="#e8eaf0" stroke="#aeb8c5" stroke-width="5"/><path d="M147 130L168 157L187 140L205 164" fill="none" stroke="#64748b" stroke-width="6"/><path d="M100 189H266" stroke="#64748b" stroke-width="7"/><path d="M151 144L194 164M159 136L201 157" stroke="#475569" stroke-width="3"/>';
+ if(/pumps|pumps|pumps|pumps|pumps|pumps|pump/.test(v)) return '<path d="M96 157Q132 150 166 105Q182 85 200 105L231 158Q246 174 269 183L270 199Q210 211 112 202Q83 198 96 157Z" fill="#8b3152" stroke="#e8b7c6" stroke-width="4"/><path d="M235 171L257 215L267 214L252 174" fill="#8b3152" stroke="#e8b7c6" stroke-width="3"/><path d="M105 198Q190 211 269 193" stroke="#271722" stroke-width="8"/>';
+ if(/riemchen|strap/.test(v)) return '<path d="M105 161Q141 153 169 112Q184 91 204 110L235 162Q247 178 269 185L268 200Q193 211 111 202Q86 197 105 161Z" fill="#a63d63" stroke="#f1c1d2" stroke-width="4"/><path d="M150 143L183 111L203 147M164 115L180 171M200 111L225 166" fill="none" stroke="#f1c1d2" stroke-width="8" stroke-linecap="round"/><path d="M239 174L258 215L268 214L254 175" fill="#a63d63" stroke="#f1c1d2" stroke-width="3"/>';
+ return '<path d="M94 157Q132 149 165 105Q183 84 203 106L235 160Q250 178 269 184L270 200Q195 212 109 203Q82 198 94 157Z" fill="#a63d63" stroke="#efbfd0" stroke-width="4"/><path d="M103 197Q185 211 269 194" stroke="#261b25" stroke-width="8"/>';
+}
+function footArt(nylon=false,open=false){
+ let leg='<path d="M130 30Q125 75 132 113L139 158Q142 176 160 181L223 190Q245 194 250 181Q252 168 232 162L177 145L171 102Q174 60 169 30Z" fill="url(#skin)" stroke="#d49a7c" stroke-width="2"/>';
+ let toes=''; for(let i=0;i<5;i++){let x=218+i*9, y=180+i*3; toes+=`<ellipse cx="${x}" cy="${y}" rx="8" ry="4.5" fill="url(#skin)" stroke="#c9876b" stroke-width="1"/>`;}
+ let layer=nylon?'<path d="M130 30Q125 75 132 113L139 158Q142 176 160 181L223 190Q245 194 250 181Q252 168 232 162L177 145L171 102Q174 60 169 30Z" fill="url(#nylon)" stroke="#f5dfcf" stroke-width="1.4"/>':'';
+ let mesh=nylon?'<path d="M132 32Q130 105 144 167Q185 205 247 183" fill="none" stroke="url(#mesh)" stroke-width="13"/>':'';
+ let toeOverlay=nylon&&!open?`<path d="M213 179Q238 171 260 188Q255 207 225 203Z" fill="url(#nylon)" stroke="#f5dfcf" stroke-width="1.2"/>`:'';
+ return leg+layer+mesh+toes+toeOverlay;
+}
+function categoryPreviewUrl(categoryId,label,index=0){
+ const v=String(label).toLowerCase();
+ if(categoryId==='hair') return hairStylePreview(label);
+ if(categoryId==='shoes') return svgPreview(label,shoeArt(label));
+ if(/barefoot|feet|footPose|footDetails/i.test(categoryId)) return svgPreview(label,`<g>${footArt(false,false)}</g>`);
+ if(/hosiery/i.test(categoryId)){
+   const open=/open.?toe|offene zehen|sandal.?toe|sandalen.?tauglich/i.test(v);
+   const foot=categoryId==='hosieryFoot'||/fußteil|toe|zehen|foot|spitze|heel|fuß/i.test(v);
+   const leg=foot?footArt(true,open):'<path d="M135 28Q125 92 140 155L149 207H224L210 155Q198 95 204 28Z" fill="url(#skin)"/><path d="M135 28Q125 92 140 155L149 207H224L210 155Q198 95 204 28Z" fill="url(#nylon)" stroke="#f4ddcc" stroke-width="1.4"/><path d="M135 28Q125 92 140 155L149 207H224L210 155Q198 95 204 28Z" fill="url(#mesh)" opacity=".5"/>';
+   return svgPreview(label,`<g>${leg}</g>`);
+ }
+ // Other categories retain their existing mood references; these three critical fashion groups are now semantically drawn.
+ let key=categoryId;
+ if(!CATEGORY_PREVIEW_POOLS[key]){
+   if(/pair|couple|romantic/i.test(key)) key='pose';
+   else if(/film|hollywood/i.test(key)) key='style';
+   else if(/surreal|dimension|mixed|portal|3d/i.test(key)) key='fantasy';
+   else if(/room|architecture|interior/i.test(key)) key='landscape';
+   else if(/paint|artist|painter|art/i.test(key)) key='style';
+   else if(/beauty|glamour/i.test(key)) key='makeup';
+   else key='fantasy';
+ }
+ const pool=CATEGORY_PREVIEW_POOLS[key]||CATEGORY_PREVIEW_POOLS.style;
+ let h=index;for(let i=0;i<label.length;i++)h=(h*31+label.charCodeAt(i))>>>0;
+ return 'https://images.unsplash.com/'+pool[h%pool.length]+'?auto=format&fit=crop&w=640&q=80';
+}
+
 function catById(id){return CATEGORIES.find(c=>c[0]===id)}
 
 function init(){
@@ -1241,7 +1468,18 @@ function renderCategories(){
 function openCategory(id){
  currentCategory=id;const c=catById(id),t=LANGS[currentLanguage];document.getElementById("selectionArea").style.display="block";document.getElementById("selectionTitle").textContent=c[1]+" "+txt(c[3]);document.getElementById("selectionHint").textContent=c[2]?t.multi:t.single;
  const box=document.getElementById("optionsContainer");box.innerHTML="";
- c[4].forEach(opt=>{const e=document.createElement("div");e.className="option"+(isSelected(id,opt)?" active":"");e.textContent=optionText(opt);e.onclick=()=>{toggleOption(id,opt);updateEverything();closeSelection();document.getElementById("categorySearch").value="";renderCategories();setTimeout(()=>document.getElementById("categoryTitle").scrollIntoView({behavior:"smooth",block:"start"}),60)};box.appendChild(e)});
+ if(id.startsWith("film") && FILM_LIBRARY.some(x=>x[0]===id)){
+   const lib=FILM_LIBRARY.find(x=>x[0]===id);const head=document.createElement("div");head.className="film-library-head";head.innerHTML=`<strong>🎬 ${escapeHtml(lib[2])}</strong><span>${lib[4].length} Filmreferenzen · Antippen zum Auswählen · Mehrfachauswahl möglich</span>`;box.appendChild(head);const search=document.createElement("input");search.type="search";search.placeholder="Film suchen …";search.className="film-search";search.style.cssText="width:100%;box-sizing:border-box;padding:12px;border-radius:12px;margin:0 0 10px;border:1px solid var(--border,#555);background:var(--card,#171923);color:inherit";box.appendChild(search);
+   const grid=document.createElement("div");grid.className="film-preview-grid";box.appendChild(grid);
+   c[4].forEach((opt,i)=>{const filmName=FILM_SOURCE_LABELS[opt]||optionText(opt);const e=document.createElement("button");e.type="button";e.className="film-option"+(isSelected(id,opt)?" active":"");e.dataset.filmname=filmName.toLocaleLowerCase();const img=document.createElement("img");img.src=filmPreviewFor(lib[3],filmName,i);img.alt="Stimmungsbild zur Filmreferenz "+filmName;img.loading="lazy";img.onerror=()=>{img.style.display="none";e.classList.add("film-image-fallback")};const shade=document.createElement("span");shade.className="film-option-shade";const body=document.createElement("span");body.className="film-option-copy";const title=document.createElement("span");title.className="film-option-title";title.textContent=filmName;const desc=document.createElement("span");desc.className="film-option-desc";desc.textContent="Filmwelt als Bild- und Lichtreferenz";body.append(title,desc);e.append(img,shade,body);e.onclick=()=>{toggleOption(id,opt);updateEverything();openCategory(id)};grid.appendChild(e)});
+   search.oninput=()=>{const q=search.value.toLocaleLowerCase();grid.querySelectorAll(".film-option").forEach(card=>{card.style.display=card.dataset.filmname.includes(q)?"flex":"none"})};
+ }else{
+   const intro=document.createElement("div");intro.className="visual-library-head";intro.innerHTML=`<strong>✨ Visuelle Auswahl</strong><span>Vorschaubild antippen, um die Option auszuwählen. Mehrfachauswahl bleibt wie bisher möglich.</span>`;box.appendChild(intro);
+   const search=document.createElement("input");search.type="search";search.placeholder="Auswahl suchen …";search.className="visual-search";search.style.cssText="width:100%;box-sizing:border-box;padding:12px;border-radius:12px;margin:0 0 10px;border:1px solid var(--border,#555);background:var(--card,#171923);color:inherit";box.appendChild(search);
+   const grid=document.createElement("div");grid.className="visual-preview-grid";box.appendChild(grid);
+   c[4].forEach((opt,i)=>{const label=optionText(opt);const e=document.createElement("button");e.type="button";e.className="visual-option"+(isSelected(id,opt)?" active":"");e.dataset.optionname=label.toLocaleLowerCase();const img=document.createElement("img");img.src=categoryPreviewUrl(id,label,i);img.alt="Vorschaubild: "+label;img.loading="lazy";img.onerror=()=>{img.style.display="none";e.classList.add("visual-image-fallback")};const shade=document.createElement("span");shade.className="visual-option-shade";const copy=document.createElement("span");copy.className="visual-option-copy";const title=document.createElement("span");title.className="visual-option-title";title.textContent=label;const sub=document.createElement("span");sub.className="visual-option-desc";sub.textContent="Als Bildstil übernehmen";copy.append(title,sub);e.append(img,shade,copy);e.onclick=()=>{toggleOption(id,opt);updateEverything();openCategory(id)};grid.appendChild(e)});
+   search.oninput=()=>{const q=search.value.toLocaleLowerCase();grid.querySelectorAll(".visual-option").forEach(card=>{card.style.display=card.dataset.optionname.includes(q)?"flex":"none"})};
+ }
  setTimeout(()=>document.getElementById("selectionArea").scrollIntoView({behavior:"smooth",block:"start"}),50);
 }
 function toggleOption(id,opt){const c=catById(id);if(c[2]){if(!selectedValues[id])selectedValues[id]=[];const i=selectedValues[id].indexOf(opt);if(i>=0){selectedValues[id].splice(i,1);if(!selectedValues[id].length)delete selectedValues[id]}else selectedValues[id].push(opt)}else{if(selectedValues[id]===opt)delete selectedValues[id];else selectedValues[id]=opt}}
@@ -1323,7 +1561,7 @@ function randomPrompt(){selectedValues={};CATEGORIES.forEach(c=>{if(Math.random(
 function resetAll(){if(!confirm(tr("resetAsk")))return;selectedValues={};document.getElementById("promptOutput").value="";localStorage.removeItem("artstyleCurrentSelection");updateEverything();setStatus(tr("resetDone"))}
 function saveCurrentSelection(){localStorage.setItem("artstyleCurrentSelection",JSON.stringify(selectedValues))}
 function loadCurrentSelection(){try{selectedValues=JSON.parse(localStorage.getItem("artstyleCurrentSelection"))||{}}catch{selectedValues={}}}
-function exportData(){const data={version:"ArtStyle Studio V8.0",language:currentLanguage,currentSelection:selectedValues,savedPrompts:getSavedPrompts()};const b=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="artstyle-studio-backup.json";a.click();URL.revokeObjectURL(u)}
+function exportData(){const data={version:"ArtStyle Studio V10.2",language:currentLanguage,currentSelection:selectedValues,savedPrompts:getSavedPrompts()};const b=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="artstyle-studio-backup.json";a.click();URL.revokeObjectURL(u)}
 function importData(){const i=document.createElement("input");i.type="file";i.accept=".json";i.onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=x=>{try{const d=JSON.parse(x.target.result);selectedValues=d.currentSelection||{};if(d.savedPrompts)localStorage.setItem("artstyleSavedPrompts",JSON.stringify(d.savedPrompts));if(d.language&&LANGS[d.language]){currentLanguage=d.language;document.getElementById("languageSelector").value=currentLanguage}changeLanguage(currentLanguage);updateEverything();renderSavedPrompts();setStatus(tr("importOK"))}catch{alert(tr("importBad"))}};r.readAsText(f)};i.click()}
 function closeSelection(){document.getElementById("selectionArea").style.display="none"}
 init();

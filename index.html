@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ArtStyle Studio V7.2.1 – Dirk Eckert</title>
+<title>ArtStyle Studio V8.0 – Dirk Eckert</title>
 <style>
 :root{
   --bg:#080a10;--bg2:#101524;--card:#151a28;--card2:#20263a;
@@ -79,6 +79,17 @@ main{max-width:1120px}
 .tile-arrow{font-size:12px;font-weight:700;margin-top:auto;padding-top:7px;color:#f2d4a8}
 @media(max-width:430px){.studio-tiles{gap:9px}.studio-tile{min-height:145px;padding:12px}.tile-name{font-size:14px}.tile-desc{font-size:11px}}
 
+
+.director-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:12px 0}
+.director-grid label,.director-label{display:flex;flex-direction:column;gap:7px;font-size:13px;font-weight:700;color:var(--muted)}
+.director-grid select,.director-label+textarea,.director-label+input,.director-grid input,.director-grid textarea{
+ width:100%;padding:12px;border-radius:10px;border:1px solid var(--border);background:#0d1220;color:var(--text);font:inherit;min-width:0
+}
+#directorCustom,#signatureText{width:100%;padding:12px;border-radius:10px;border:1px solid var(--border);background:#0d1220;color:var(--text);font:inherit;margin:8px 0 12px}
+.director-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:10px}
+.director-actions button{flex:1 1 150px}
+@media(max-width:520px){.director-grid{grid-template-columns:1fr}.director-actions button{flex-basis:100%}}
+
 </style>
 </head>
 <body>
@@ -141,6 +152,53 @@ main{max-width:1120px}
 </div>
 <div class="categories" id="categoriesContainer"></div>
 <section id="selectionArea"><div class="selection-header"><h2 id="selectionTitle"></h2><button class="close-selection" onclick="closeSelection()" id="closeButton"></button></div><p class="hint" id="selectionHint"></p><div class="options" id="optionsContainer"></div></section>
+
+<section class="panel" id="directorPanel">
+ <h2>🎬 Kreativ-Regisseur – dein Bildkonzept</h2>
+ <p class="hint">Kombiniere eigene Vorgaben mit den auswählbaren Stilen oder lass dich überraschen.</p>
+ <div class="director-grid">
+  <label>Bildformat
+   <select id="directorFormat"><option value="">Wie bisher / nicht festlegen</option><option>9:16 Hochformat</option><option>4:5 Portrait</option><option>3:4 Portrait</option><option>1:1 Quadrat</option><option>16:9 Querformat</option><option>2:3 Hochformat</option></select>
+  </label>
+  <label>Kamera-Perspektive
+   <select id="directorCamera"><option value="">Automatisch</option><option>Augenhöhe, natürliche Perspektive</option><option>Leichte Untersicht, heroische Wirkung</option><option>Vogelperspektive, Blick von oben</option><option>Halbnahe Portraitaufnahme</option><option>Ganzkörperaufnahme mit vollständig sichtbaren Personen</option><option>Weite cineastische Totale</option><option>Intime Nahaufnahme mit geringer Tiefenschärfe</option></select>
+  </label>
+  <label>Beleuchtung
+   <select id="directorLight"><option value="">Passend zum Motiv</option><option>Weiches diffuses Studiolicht</option><option>Golden Hour mit warmem Gegenlicht</option><option>Dramatisches Filmlicht mit tiefen Schatten</option><option>Neonlicht und nächtliche Reflexionen</option><option>Natürliches Fensterlicht</option><option>Helles High-Key-Licht</option></select>
+  </label>
+  <label>Bildaufbau
+   <select id="directorComposition"><option value="">Intelligent passend auswählen</option><option>Person vollständig von Kopf bis Fuß, nichts abschneiden</option><option>Symmetrische, zentrierte Komposition</option><option>Regel der Drittel, Motiv leicht versetzt</option><option>Editorial-Komposition mit Freiraum</option><option>Vordergrund, Mittelgrund und Hintergrund klar gestaffelt</option><option>Monumentale Filmszene mit weitem Hintergrund</option></select>
+  </label>
+ </div>
+ <label class="director-label" for="directorCustom">Eigene Bildidee / Regieanweisung</label>
+ <textarea id="directorCustom" rows="3" placeholder="Was soll zusätzlich im Bild passieren?"></textarea>
+ <div class="director-actions">
+  <button class="primary" type="button" onclick="buildDirectorPrompt()">✨ Master-Prompt verfeinern</button>
+  <button class="orange" type="button" onclick="surpriseDirector()">🎲 Kreativ überraschen</button>
+  <button class="secondary" type="button" onclick="clearDirector()">↺ Regie zurücksetzen</button>
+ </div>
+</section>
+<section class="panel" id="signaturePanel">
+ <h2>✍️ Logo & Signatur</h2>
+ <p class="hint">Füge deinen Namen, ein Logo oder einen kurzen Schriftzug hinzu und bestimme die Position im Bild.</p>
+ <label class="director-label" for="signatureText">Text / Signatur / Logo-Bezeichnung</label>
+ <input id="signatureText" type="text" maxlength="70" placeholder="z. B. Dirk Eckert oder D.E Media">
+ <div class="director-grid signature-grid">
+  <label>Position
+   <select id="signaturePosition"><option value="right">Rechts</option><option value="center">Mittig</option><option value="left">Links</option></select>
+  </label>
+  <label>Ausrichtung
+   <select id="signatureAlign"><option>Dezent und elegant</option><option>Klein und minimalistisch</option><option>Wie ein hochwertiges Künstler-Wasserzeichen</option><option>Als klares Logo mit guter Lesbarkeit</option><option>Handschriftliche Signatur</option></select>
+  </label>
+  <label>Farbe
+   <select id="signatureColor"><option>Passend zu den Bildfarben</option><option>Weiß</option><option>Gold</option><option>Silber</option><option>Schwarz</option></select>
+  </label>
+  <label>Größe
+   <select id="signatureSize"><option>Dezent klein</option><option>Sehr klein</option><option>Mittel</option></select>
+  </label>
+ </div>
+ <p class="hint">Hinweis: Der Prompt beschreibt die gewünschte Platzierung. Ob ein Bildgenerator Schrift und Logos exakt wiedergibt, hängt vom jeweiligen Generator ab.</p>
+</section>
 <section class="panel"><h2 id="overviewTitle"></h2><div class="selected-list" id="selectedList"></div></section>
 <section class="panel"><h2 id="referenceTitle"></h2><p id="referenceText"></p><input class="file-input" type="file" accept="image/*" onchange="previewImage(event)"><div class="reference-preview" id="referencePreview"><img id="previewImage" alt="Reference"></div></section>
 <section class="panel"><h2 id="promptTitle"></h2><textarea id="promptOutput"></textarea><div class="prompt-info"><span id="editInfo"></span><span id="characterCount"></span></div>
@@ -150,7 +208,7 @@ main{max-width:1120px}
 <button class="secondary" onclick="importData()" id="importButton"></button><button class="danger" onclick="resetAll()" id="resetButton"></button>
 </div><div class="status" id="status"></div></section>
 <section class="panel"><h2 id="libraryTitle"></h2><input class="library-search" id="librarySearch" oninput="renderSavedPrompts()"><div id="savedPrompts"></div></section>
-</main><footer>🎨 ArtStyle Studio V7.2.1 · Creative Worlds · Dirk Eckert</footer>
+</main><footer>🎨 ArtStyle Studio V8.0 · Creative Worlds · Dirk Eckert</footer>
 
 <script>
 const LANGS={
@@ -1119,6 +1177,7 @@ function init(){
   Object.keys(LANGS).forEach(k=>{const o=document.createElement("option");o.value=k;o.textContent=LANGS[k].name;sel.appendChild(o)});
   sel.value=currentLanguage; sel.onchange=e=>changeLanguage(e.target.value);
   loadCurrentSelection(); applyLanguage(); renderCategories(); updateEverything(); renderSavedPrompts();
+  ["directorFormat","directorCamera","directorLight","directorComposition","directorCustom","signatureText","signaturePosition","signatureAlign","signatureColor","signatureSize"].forEach(id=>{const e=document.getElementById(id);if(e)e.addEventListener("change",updatePrompt);if(e&&e.tagName==="TEXTAREA")e.addEventListener("input",updatePrompt);if(e&&e.tagName==="INPUT")e.addEventListener("input",updatePrompt)});
 }
 function changeLanguage(l){currentLanguage=l;localStorage.setItem("artstyleLanguage",l);applyLanguage();renderCategories();renderOverview();updatePrompt();renderSavedPrompts()}
 function applyLanguage(){
@@ -1189,7 +1248,56 @@ function toggleOption(id,opt){const c=catById(id);if(c[2]){if(!selectedValues[id
 function isSelected(id,opt){const v=selectedValues[id];return Array.isArray(v)?v.includes(opt):v===opt}
 function getSelectionCount(id){const v=selectedValues[id];return !v?0:Array.isArray(v)?v.length:1}
 function getParts(){const a=[];CATEGORIES.forEach(c=>{const v=selectedValues[c[0]];if(!v)return;(Array.isArray(v)?v:[v]).forEach(x=>a.push(optionText(x)))});return a}
-function updatePrompt(){const parts=getParts(),out=document.getElementById("promptOutput");out.value=parts.length?tr("promptStart")+parts.join(", ")+". "+tr("quality"):"";updateCharacterCount()}
+function directorParts(){
+ const ids=["directorFormat","directorCamera","directorLight","directorComposition"];
+ const labels=["Bildformat: ","Kamera: ","Beleuchtung: ","Bildaufbau: "];
+ const out=[];
+ ids.forEach((id,i)=>{const v=document.getElementById(id)?.value;if(v)out.push(labels[i]+v)});
+ const custom=document.getElementById("directorCustom")?.value?.trim();if(custom)out.push("Zusätzliche Regieanweisung: "+custom);
+ const sig=document.getElementById("signatureText")?.value?.trim();
+ if(sig){
+  const pos=document.getElementById("signaturePosition")?.value||"right";
+  const posText={right:"rechts",center:"mittig",left:"links"}[pos]||"rechts";
+  const align=document.getElementById("signatureAlign")?.value||"Dezent und elegant";
+  const color=document.getElementById("signatureColor")?.value||"Passend zu den Bildfarben";
+  const size=document.getElementById("signatureSize")?.value||"Dezent klein";
+  out.push("Logo/Signatur mit dem exakten Schriftzug \""+sig+"\", Position: "+posText+", "+align+", Farbe: "+color+", Größe: "+size+". Schriftzug sauber, korrekt geschrieben und gut lesbar integrieren.");
+ }
+ return out;
+}
+function updatePrompt(){
+ const parts=getParts(),extras=directorParts(),out=document.getElementById("promptOutput");
+ const all=parts.concat(extras);
+ out.value=all.length?tr("promptStart")+all.join(", ")+". "+tr("quality"):"";
+ updateCharacterCount();
+}
+function buildDirectorPrompt(){updatePrompt();document.getElementById("promptOutput").scrollIntoView({behavior:"smooth",block:"center"});setStatus("Kreativ-Regie wurde in den Master-Prompt übernommen.")}
+function surpriseDirector(){
+ const formats=["9:16 Hochformat","4:5 Portrait","16:9 Querformat"];
+ const cameras=["Augenhöhe, natürliche Perspektive","Weite cineastische Totale","Ganzkörperaufnahme mit vollständig sichtbaren Personen"];
+ const lights=["Golden Hour mit warmem Gegenlicht","Dramatisches Filmlicht mit tiefen Schatten","Weiches diffuses Studiolicht"];
+ const comps=["Regel der Drittel, Motiv leicht versetzt","Vordergrund, Mittelgrund und Hintergrund klar gestaffelt","Editorial-Komposition mit Freiraum"];
+ const pick=a=>a[Math.floor(Math.random()*a.length)];
+ document.getElementById("directorFormat").value=pick(formats);
+ document.getElementById("directorCamera").value=pick(cameras);
+ document.getElementById("directorLight").value=pick(lights);
+ document.getElementById("directorComposition").value=pick(comps);
+ const group=["people","worlds","dimension","film","pair"];
+ const g=pick(group);setCategoryGroup(g);
+ const pool=CATEGORIES.filter(c=>categoryGroup(c[0])===g);
+ if(pool.length){const c=pick(pool);const opt=pick(c[4]);toggleOption(c[0],opt);}
+ updateEverything();buildDirectorPrompt();setStatus("Überraschungsmix erstellt – du kannst alle Elemente weiter anpassen.");
+}
+function clearDirector(){
+ ["directorFormat","directorCamera","directorLight","directorComposition"].forEach(id=>document.getElementById(id).selectedIndex=0);
+ document.getElementById("directorCustom").value="";
+ document.getElementById("signatureText").value="";
+ document.getElementById("signaturePosition").value="right";
+ document.getElementById("signatureAlign").selectedIndex=0;
+ document.getElementById("signatureColor").selectedIndex=0;
+ document.getElementById("signatureSize").selectedIndex=0;
+ updatePrompt();setStatus("Regie- und Signaturfelder zurückgesetzt.");
+}
 function renderOverview(){const box=document.getElementById("selectedList");box.innerHTML="";let any=false;CATEGORIES.forEach(c=>{const v=selectedValues[c[0]];if(!v)return;any=true;(Array.isArray(v)?v:[v]).forEach(x=>{const d=document.createElement("div");d.className="chip";d.innerHTML="<strong>"+txt(c[3])+":</strong> "+escapeHtml(optionText(x));box.appendChild(d)})});if(!any)box.innerHTML='<div class="empty">'+tr("empty")+"</div>"}
 function updateStats(){let e=0,k=0;Object.values(selectedValues).forEach(v=>{k++;e+=Array.isArray(v)?v.length:1});document.getElementById("selectedCount").textContent=e;document.getElementById("categoryCount").textContent=k;document.getElementById("savedCount").textContent=getSavedPrompts().length}
 function updateEverything(){updatePrompt();renderOverview();renderCategories();updateStats();saveCurrentSelection()}
@@ -1215,7 +1323,7 @@ function randomPrompt(){selectedValues={};CATEGORIES.forEach(c=>{if(Math.random(
 function resetAll(){if(!confirm(tr("resetAsk")))return;selectedValues={};document.getElementById("promptOutput").value="";localStorage.removeItem("artstyleCurrentSelection");updateEverything();setStatus(tr("resetDone"))}
 function saveCurrentSelection(){localStorage.setItem("artstyleCurrentSelection",JSON.stringify(selectedValues))}
 function loadCurrentSelection(){try{selectedValues=JSON.parse(localStorage.getItem("artstyleCurrentSelection"))||{}}catch{selectedValues={}}}
-function exportData(){const data={version:"ArtStyle Studio V7.2.1",language:currentLanguage,currentSelection:selectedValues,savedPrompts:getSavedPrompts()};const b=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="artstyle-studio-backup.json";a.click();URL.revokeObjectURL(u)}
+function exportData(){const data={version:"ArtStyle Studio V8.0",language:currentLanguage,currentSelection:selectedValues,savedPrompts:getSavedPrompts()};const b=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="artstyle-studio-backup.json";a.click();URL.revokeObjectURL(u)}
 function importData(){const i=document.createElement("input");i.type="file";i.accept=".json";i.onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=x=>{try{const d=JSON.parse(x.target.result);selectedValues=d.currentSelection||{};if(d.savedPrompts)localStorage.setItem("artstyleSavedPrompts",JSON.stringify(d.savedPrompts));if(d.language&&LANGS[d.language]){currentLanguage=d.language;document.getElementById("languageSelector").value=currentLanguage}changeLanguage(currentLanguage);updateEverything();renderSavedPrompts();setStatus(tr("importOK"))}catch{alert(tr("importBad"))}};r.readAsText(f)};i.click()}
 function closeSelection(){document.getElementById("selectionArea").style.display="none"}
 init();

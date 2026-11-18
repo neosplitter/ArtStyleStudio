@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ArtStyle Studio V7.1 – Dirk Eckert</title>
+<title>ArtStyle Studio V7.2.1 – Dirk Eckert</title>
 <style>
 :root{
   --bg:#080a10;--bg2:#101524;--card:#151a28;--card2:#20263a;
@@ -71,6 +71,7 @@ main{max-width:1120px}
 .tile-art{background:linear-gradient(145deg,#80543d,#2b1c19)}
 .tile-dimension{background:linear-gradient(145deg,#176b78,#211b38)}
 .tile-film{background:linear-gradient(145deg,#8b3c24,#211521)}
+.tile-pair{background:linear-gradient(145deg,#9b536d,#2b1b32)}
 .tile-photo{background:linear-gradient(145deg,#454957,#1c1e28)}
 .tile-emoji{font-size:28px;line-height:1.1}
 .tile-name{font-weight:800;font-size:16px}
@@ -113,6 +114,7 @@ main{max-width:1120px}
     <button class="studio-tile tile-art" onclick="goToStudio('art')"><span class="tile-emoji">🎨</span><span class="tile-name">Maler & Kunststile</span><span class="tile-desc">Zehn große Künstler und ihre Bildwelten</span><span class="tile-arrow">Auswählen →</span></button>
     <button class="studio-tile tile-dimension" onclick="goToStudio('dimension')"><span class="tile-emoji">🪄</span><span class="tile-name">3D Mixed Media & Dimensionen</span><span class="tile-desc">Bildwelten, die aus Rahmen, Wänden und Portalen brechen</span><span class="tile-arrow">Auswählen →</span></button>
     <button class="studio-tile tile-film" onclick="goToStudio('film')"><span class="tile-emoji">🎬</span><span class="tile-name">Hollywood & Filmwelten</span><span class="tile-desc">Legendäre Kino-Atmosphären und Filmgenres</span><span class="tile-arrow">Auswählen →</span></button>
+    <button class="studio-tile tile-pair" onclick="goToStudio('pair')"><span class="tile-emoji">💞</span><span class="tile-name">Paarbilder & Posen</span><span class="tile-desc">Natürlich, verspielt, elegant und romantisch</span><span class="tile-arrow">Auswählen →</span></button>
   </div>
 </section>
 
@@ -134,6 +136,7 @@ main{max-width:1120px}
     <button type="button" class="tab" data-group="art" onclick="setCategoryGroup('art')">Maler & Kunststile</button>
     <button type="button" class="tab" data-group="dimension" onclick="setCategoryGroup('dimension')">3D Mixed Media</button>
     <button type="button" class="tab" data-group="film" onclick="setCategoryGroup('film')">Hollywood & Filmwelten</button>
+    <button type="button" class="tab" data-group="pair" onclick="setCategoryGroup('pair')">Paarbilder & Posen</button>
   </div>
 </div>
 <div class="categories" id="categoriesContainer"></div>
@@ -147,7 +150,7 @@ main{max-width:1120px}
 <button class="secondary" onclick="importData()" id="importButton"></button><button class="danger" onclick="resetAll()" id="resetButton"></button>
 </div><div class="status" id="status"></div></section>
 <section class="panel"><h2 id="libraryTitle"></h2><input class="library-search" id="librarySearch" oninput="renderSavedPrompts()"><div id="savedPrompts"></div></section>
-</main><footer>🎨 ArtStyle Studio V7.1 · Creative Worlds · Dirk Eckert</footer>
+</main><footer>🎨 ArtStyle Studio V7.2.1 · Creative Worlds · Dirk Eckert</footer>
 
 <script>
 const LANGS={
@@ -1021,7 +1024,94 @@ lordOfTheRingsMiddleEarth:["Monumentale Landschaft Mittelerdes mit uralten Festu
 classicHollywoodDrama:["Klassischer Hollywood-Glamour mit dramatischer Studiobeleuchtung, elegantem Setdesign und großem Leinwandgefühl","Classic Hollywood glamour with dramatic studio lighting, elegant set design and big-screen feeling","Glamour clásico de Hollywood con iluminación dramática","Glamour classique hollywoodien avec éclairage dramatique","سحر هوليوود الكلاسيكي وإضاءة استوديو درامية"]
 });
 
-function optionText(id){if(FILM_SOURCE_LABELS[id])return FILM_SOURCE_LABELS[id]+" — "+((O[id]||[])[IDX[currentLanguage]]||(O[id]||[])[0]||id);if(currentLanguage==="de"&&BEAUTY_DE[id])return BEAUTY_DE[id];const a=O[id]||[];return a[IDX[currentLanguage]]||a[0]||id}
+
+const PAIR_STUDIOS = [
+["pairEveryday","🤝",true,{de:"Natürlich & Alltag",en:"Natural & Everyday",es:"Natural y cotidiano",fr:"Naturel et quotidien",ar:"طبيعي ويومي"},["pairSideBySide","pairWalkingTogether","pairCasualConversation","pairLaughingTogether","pairCoffeeDate","pairLookingAtView"]],
+["pairRomantic","❤️",true,{de:"Romantische Posen",en:"Romantic Poses",es:"Poses románticas",fr:"Poses romantiques",ar:"وضعيات رومانسية"},["pairForeheadTouch","pairGentleHug","pairHandInHand","pairSlowDance","pairSunsetEmbrace","pairNoseToNose"]],
+["pairClose","🫶",true,{de:"Nähe & Zärtlichkeit",en:"Closeness & Tenderness",es:"Cercanía y ternura",fr:"Proximité et tendresse",ar:"قرب وحنان"},["pairHugFromBehind","pairCheekKiss","pairTempleKiss","pairArmsAroundWaist","pairSeatedCuddle","pairHoldingHandsClose"]],
+["pairDynamic","😄",true,{de:"Verspielt & Dynamisch",en:"Playful & Dynamic",es:"Divertido y dinámico",fr:"Ludique et dynamique",ar:"مرح وحيوي"},["pairPlayfulSpin","pairPiggyback","pairRunningTogether","pairDancingPlayful","pairLiftingSpin","pairBackToBack"]],
+["pairElegant","✨",true,{de:"Elegant & Fashion",en:"Elegant & Fashion",es:"Elegante y moda",fr:"Élégant et mode",ar:"أناقة وموضة"},["pairGalaPose","pairEditorialStanding","pairSeatedElegant","pairStaircasePose","pairBlackTiePortrait","pairLuxuryCouple"]],
+["pairCinematic","🎞️",true,{de:"Filmisch & Dramatisch",en:"Cinematic & Dramatic",es:"Cinematográfico y dramático",fr:"Cinématographique et dramatique",ar:"سينمائي ودرامي"},["pairRainRomance","pairWindowSilhouette","pairDramaticDip","pairBeachWalk","pairBacklitEmbrace","pairEpicWideShot"]]
+];
+CATEGORIES.push(...PAIR_STUDIOS);
+const PAIR_SOURCE_LABELS = {
+pairSideBySide:"Paarpose – entspannt nebeneinander",
+pairWalkingTogether:"Paarpose – gemeinsam Hand in Hand gehen",
+pairCasualConversation:"Paarpose – vertrautes Gespräch",
+pairLaughingTogether:"Paarpose – gemeinsam lachen",
+pairCoffeeDate:"Paarpose – gemütliches Café-Date",
+pairLookingAtView:"Paarpose – gemeinsam in die Ferne schauen",
+pairForeheadTouch:"Romantische Pose – Stirn an Stirn",
+pairGentleHug:"Romantische Pose – sanfte Umarmung",
+pairHandInHand:"Romantische Pose – Hände ineinander verschränkt",
+pairSlowDance:"Romantische Pose – enger langsamer Tanz",
+pairSunsetEmbrace:"Romantische Pose – Umarmung im Sonnenuntergang",
+pairNoseToNose:"Romantische Pose – Nasenspitzen berühren sich",
+pairHugFromBehind:"Zärtliche Pose – Umarmung von hinten",
+pairCheekKiss:"Zärtliche Pose – Kuss auf die Wange",
+pairTempleKiss:"Zärtliche Pose – Kuss auf die Schläfe",
+pairArmsAroundWaist:"Zärtliche Pose – Arme um die Taille",
+pairSeatedCuddle:"Zärtliche Pose – eng nebeneinander sitzend",
+pairHoldingHandsClose:"Zärtliche Pose – Hände halten und Blickkontakt",
+pairPlayfulSpin:"Verspielte Pose – schwungvolle Drehung",
+pairPiggyback:"Verspielte Pose – Huckepack",
+pairRunningTogether:"Verspielte Pose – gemeinsam lachend laufen",
+pairDancingPlayful:"Verspielte Pose – spontaner Tanz",
+pairLiftingSpin:"Verspielte Pose – liebevolle Drehung in die Arme",
+pairBackToBack:"Verspielte Pose – Rücken an Rücken",
+pairGalaPose:"Elegante Paarpose – Gala-Auftritt",
+pairEditorialStanding:"Fashion-Paarpose – selbstbewusst nebeneinander",
+pairSeatedElegant:"Elegante Paarpose – stilvoll sitzend",
+pairStaircasePose:"Elegante Paarpose – auf einer Treppe",
+pairBlackTiePortrait:"Elegantes Paarporträt – Black Tie",
+pairLuxuryCouple:"Luxus-Fashion-Paar – Editorial-Stil",
+pairRainRomance:"Filmszene – romantische Begegnung im Regen",
+pairWindowSilhouette:"Filmszene – Paar als Silhouette am Fenster",
+pairDramaticDip:"Filmszene – dramatische Tanz-Verbeugung",
+pairBeachWalk:"Filmszene – gemeinsamer Spaziergang am Strand",
+pairBacklitEmbrace:"Filmszene – Umarmung im Gegenlicht",
+pairEpicWideShot:"Filmszene – Paar in monumentaler Landschaft"
+};
+Object.assign(O, {
+pairSideBySide:["Zwei Personen stehen entspannt nebeneinander, natürliche Körperhaltung, dezentes Lächeln und lockere Nähe","Two people standing comfortably side by side, natural posture, subtle smiles and relaxed closeness","Dos personas de pie una al lado de la otra, postura natural y sonrisas suaves","Deux personnes debout côte à côte, posture naturelle et sourires discrets","شخصان يقفان جنباً إلى جنب بوضعية طبيعية وابتسامة هادئة"],
+pairWalkingTogether:["Ein Paar geht Hand in Hand auf die Kamera zu, natürliche Bewegung und authentische Momentaufnahme","A couple walking hand in hand toward the camera, natural movement and candid moment","Una pareja camina de la mano hacia la cámara, movimiento natural","Un couple marche main dans la main vers la caméra, mouvement naturel","زوجان يسيران ممسكين بأيدي بعضهما نحو الكاميرا"],
+pairCasualConversation:["Ein Paar steht einander zugewandt und unterhält sich vertraut, lockere Gestik und natürliche Mimik","A couple facing each other in relaxed conversation, natural gestures and expressions","Una pareja conversa frente a frente con gestos naturales","Un couple discute face à face avec des gestes naturels","زوجان يتحدثان وجهاً لوجه بإيماءات طبيعية"],
+pairLaughingTogether:["Ein Paar lacht spontan miteinander, lebendige Mimik und ungezwungene Nähe","A couple laughing together spontaneously, lively expressions and relaxed closeness","Una pareja ríe espontáneamente, expresiones vivas","Un couple rit spontanément, expressions vivantes","زوجان يضحكان معاً بعفوية وتعبيرات حيوية"],
+pairCoffeeDate:["Ein Paar sitzt sich an einem kleinen Café-Tisch gegenüber, warme Atmosphäre und vertrauter Blickkontakt","A couple sitting across a small café table, warm atmosphere and familiar eye contact","Pareja sentada frente a frente en una cafetería acogedora","Couple assis face à face à une petite table de café","زوجان يجلسان متقابلين على طاولة مقهى صغيرة"],
+pairLookingAtView:["Ein Paar steht Schulter an Schulter und blickt gemeinsam auf eine schöne Landschaft","A couple standing shoulder to shoulder, looking together at a beautiful landscape","Pareja hombro con hombro contemplando un paisaje","Couple côte à côte contemplant un beau paysage","زوجان يقفان كتفاً إلى كتف وينظران إلى منظر جميل"],
+pairForeheadTouch:["Das Paar steht ganz nah, die Stirnen sanft aneinandergelegt, Augen geschlossen und ruhiger inniger Moment","The couple stands close with foreheads gently touching, eyes closed in a calm intimate moment","La pareja junta suavemente sus frentes con los ojos cerrados","Le couple se tient près, fronts doucement réunis, yeux fermés","يقف الزوجان قريبين وتلامس الجباه بلطف مع إغماض العينين"],
+pairGentleHug:["Eine sanfte gegenseitige Umarmung, entspannte Schultern und liebevoller Gesichtsausdruck","A gentle mutual embrace, relaxed shoulders and affectionate expressions","Un abrazo mutuo y suave, hombros relajados","Une étreinte douce, épaules détendues et expressions affectueuses","عناق متبادل لطيف وأكتاف مسترخية وتعابير محبة"],
+pairHandInHand:["Das Paar hält beide Hände ineinander und sieht sich liebevoll an","The couple holds both hands together and looks at each other affectionately","La pareja se toma de ambas manos y se mira con cariño","Le couple se tient les deux mains et échange un regard tendre","يمسك الزوجان بكلتا اليدين ويتبادلان نظرات حنونة"],
+pairSlowDance:["Das Paar tanzt eng und langsam, eine Hand an der Taille, die andere in der Hand des Partners","The couple slow dancing closely, one hand at the waist and the other holding the partner's hand","La pareja baila lentamente abrazada, una mano en la cintura","Le couple danse lentement, proches l'un de l'autre","يرقص الزوجان ببطء وقرب مع يد حول الخصر"],
+pairSunsetEmbrace:["Das Paar umarmt sich vor einem warmen Sonnenuntergang, Silhouetten und goldenes Gegenlicht","The couple embracing before a warm sunset, silhouettes and golden backlight","La pareja se abraza ante un atardecer cálido","Le couple s'étreint devant un coucher de soleil chaleureux","يعانق الزوجان بعضهما أمام غروب دافئ وإضاءة ذهبية"],
+pairNoseToNose:["Das Paar steht sehr nah und berührt sich sanft mit den Nasenspitzen, zärtlicher Blickkontakt","The couple stands very close, gently touching noses with tender eye contact","La pareja se acerca y se toca suavemente la punta de la nariz","Le couple se rapproche et se touche doucement le bout du nez","يقف الزوجان قريبين ويلامس طرفا أنفيهما بلطف"],
+pairHugFromBehind:["Eine Person umarmt den Partner von hinten um die Taille, beide lächeln entspannt","One person hugs their partner from behind around the waist, both smiling naturally","Una persona abraza a su pareja por detrás rodeando la cintura","Une personne enlace son partenaire par derrière autour de la taille","شخص يعانق شريكه من الخلف حول الخصر"],
+pairCheekKiss:["Ein sanfter Kuss auf die Wange, der Partner lächelt und lehnt sich liebevoll entgegen","A gentle kiss on the cheek, the partner smiles and leans in affectionately","Un beso suave en la mejilla, la otra persona sonríe","Un doux baiser sur la joue, l'autre personne sourit","قبلة لطيفة على الخد مع ابتسامة وميل حنون"],
+pairTempleKiss:["Ein liebevoller Kuss auf die Schläfe, ruhige und vertrauensvolle Paarpose","A loving kiss on the temple, calm and trusting couple pose","Un beso cariñoso en la sien, pose tranquila","Un baiser tendre sur la tempe, pose calme","قبلة محبة على الصدغ ووضعية هادئة"],
+pairArmsAroundWaist:["Beide stehen eng zusammen, die Arme locker umeinander um die Taille gelegt","Both stand close with arms comfortably wrapped around each other's waists","Ambos están cerca con los brazos alrededor de la cintura","Les deux se tiennent proches, bras autour de la taille","يقف الاثنان متقاربين مع تطويق الخصر بالذراعين"],
+pairSeatedCuddle:["Das Paar sitzt eng nebeneinander auf einer Bank, Schultern berühren sich und Hände sind ineinander verschränkt","The couple sits close together on a bench, shoulders touching and hands intertwined","La pareja se sienta junta en un banco, hombros tocándose y manos entrelazadas","Le couple est assis côte à côte sur un banc, épaules jointes et mains entrelacées","يجلس الزوجان متقاربين على مقعد مع تلامس الأكتاف وتشابك الأيدي"],
+pairHoldingHandsClose:["Das Paar hält sich an den Händen und tauscht einen ruhigen, liebevollen Blick aus","The couple holds hands and exchanges a calm affectionate glance","La pareja se toma de las manos e intercambia una mirada afectuosa","Le couple se tient par la main et échange un regard tendre","يمسك الزوجان بأيدي بعضهما ويتبادلان نظرة محبة هادئة"],
+pairPlayfulSpin:["Eine Person dreht den Partner spielerisch an einer Hand herum, beide lachen","One person playfully spins their partner by one hand, both laughing","Una persona hace girar juguetonamente a su pareja de la mano","Une personne fait tourner son partenaire en riant","يدير أحدهما الآخر بمرح من يدهما وكلاهما يضحك"],
+pairPiggyback:["Eine Person trägt den Partner Huckepack, beide lachen ausgelassen","One person gives their partner a piggyback ride, both laughing","Una persona lleva a su pareja a caballito, ambos riendo","Une personne porte son partenaire sur le dos, tous deux rient","يحمل أحدهما الآخر على ظهره ويضحكان"],
+pairRunningTogether:["Das Paar läuft lachend Hand in Hand über einen Weg, dynamische natürliche Bewegung","The couple runs laughing hand in hand along a path, dynamic natural movement","La pareja corre riendo de la mano por un camino","Le couple court en riant main dans la main sur un chemin","يركض الزوجان ضاحكين وممسكين بأيدي بعضهما"],
+pairDancingPlayful:["Das Paar tanzt spontan und ausgelassen, leichte Bewegung und fröhliche Energie","The couple dances spontaneously with joyful energy and lively movement","La pareja baila espontáneamente con energía alegre","Le couple danse spontanément avec une énergie joyeuse","يرقص الزوجان بعفوية وبهجة وحركة مرحة"],
+pairLiftingSpin:["Eine Person hebt den Partner bei einer schwungvollen, sicheren Drehung leicht an, beide lächeln","One person gently lifts their partner during a lively, safe spin, both smiling","Una persona levanta suavemente a su pareja durante un giro","Une personne soulève doucement son partenaire pendant une rotation","يرفع أحدهما شريكه برفق أثناء دوران مرح وآمن"],
+pairBackToBack:["Das Paar steht Rücken an Rücken, Arme locker verschränkt und selbstbewusster Ausdruck","The couple stands back to back with relaxed crossed arms and confident expressions","La pareja posa espalda contra espalda con brazos cruzados","Le couple pose dos à dos, bras croisés et air assuré","يقف الزوجان ظهراً لظهر مع عقد الذراعين وثقة"],
+pairGalaPose:["Das Paar posiert elegant bei einer Gala, aufrechte Haltung, stilvolle Abendgarderobe und dezentes Lächeln","The couple poses elegantly at a gala, upright posture, refined evening wear and subtle smiles","La pareja posa elegantemente en una gala con ropa de noche","Le couple pose élégamment lors d'un gala, tenue de soirée raffinée","يت pose الزوجان بأناقة في حفل بملابس سهرة راقية"],
+pairEditorialStanding:["Mode-Paarporträt, beide stehen leicht versetzt, selbstbewusste Haltung und klare Editorial-Komposition","Fashion couple portrait, both standing slightly offset, confident posture and clean editorial composition","Retrato de moda en pareja, posturas seguras y composición editorial","Portrait de couple mode, postures assurées et composition éditoriale","صورة أزياء للزوجين بوقفة واثقة وتكوين تحريري"],
+pairSeatedElegant:["Das Paar sitzt elegant nebeneinander auf einer stilvollen Couch, aufrechte Haltung und dezente Nähe","The couple sits elegantly side by side on a stylish sofa, upright posture and subtle closeness","La pareja se sienta elegantemente en un sofá con cercanía sutil","Le couple est assis élégamment sur un canapé, proches avec retenue","يجلس الزوجان بأناقة جنباً إلى جنب على أريكة"],
+pairStaircasePose:["Das Paar posiert auf einer breiten Treppe, eine Person etwas höher, beide elegant zur Kamera gedreht","The couple poses on a broad staircase, one person slightly higher, both elegantly turned toward camera","La pareja posa en una escalera amplia, ambos orientados hacia la cámara","Le couple pose sur un large escalier, tous deux tournés vers l'objectif","يت pose الزوجان على درج واسع بوقفة أنيقة"],
+pairBlackTiePortrait:["Klassisches Paarporträt in Smoking und elegantem Abendkleid, stilvolle Studio-Beleuchtung","Classic couple portrait in tuxedo and elegant evening gown, refined studio lighting","Retrato clásico de pareja con esmoquin y vestido de noche","Portrait classique en smoking et robe de soirée","صورة كلاسيكية للزوجين ببدلة رسمية وفستان سهرة"],
+pairLuxuryCouple:["Luxuriöses Fashion-Paarporträt, hochwertige Outfits, elegante Pose und Magazin-Ästhetik","Luxury fashion couple portrait, premium outfits, elegant pose and magazine aesthetic","Retrato de pareja de lujo con ropa premium y estética de revista","Portrait de couple luxe, tenues haut de gamme et esthétique magazine","صورة أزياء فاخرة للزوجين بملابس راقية ووضعية أنيقة"],
+pairRainRomance:["Romantische Filmszene: Das Paar steht im sanften Regen dicht beieinander, cineastisches Gegenlicht","Romantic movie scene: the couple stands close together in gentle rain, cinematic backlight","Escena romántica bajo lluvia suave y contraluz cinematográfico","Scène romantique sous une pluie douce et contre-jour cinéma","مشهد رومانسي تحت مطر خفيف وإضاءة سينمائية خلفية"],
+pairWindowSilhouette:["Das Paar steht als sanfte Silhouette am großen Fenster, weiches Morgenlicht und ruhige Stimmung","The couple stands as a soft silhouette by a large window, gentle morning light and calm mood","La pareja aparece en silueta junto a una gran ventana","Le couple apparaît en silhouette près d'une grande fenêtre","يظهر الزوجان كظلال ناعمة بجانب نافذة كبيرة"],
+pairDramaticDip:["Elegante Tanzpose mit sicherer Rückbeuge, eine Person stützt den Partner, dramatische Bühnenbeleuchtung","Elegant dance pose with a supported safe dip, one partner supporting the other, dramatic stage lighting","Pose de baile elegante con inclinación segura y apoyo","Pose de danse élégante avec une inclinaison soutenue et sûre","وضعية رقص أنيقة مع انحناءة آمنة ودعم واضح"],
+pairBeachWalk:["Das Paar geht barfuß am Ufer entlang, leichte Wellen, Wind und warmes Abendlicht","The couple walks barefoot along the shore, gentle waves, breeze and warm evening light","La pareja camina descalza por la orilla al atardecer","Le couple marche pieds nus sur la plage au coucher du soleil","يمشي الزوجان حفاة على الشاطئ مع أمواج خفيفة وضوء المساء"],
+pairBacklitEmbrace:["Das Paar umarmt sich im starken Gegenlicht, natürliche Silhouette und leuchtender Hintergrund","The couple embraces in strong backlight, natural silhouette and glowing background","La pareja se abraza a contraluz creando una silueta natural","Le couple s'étreint en contre-jour, créant une silhouette naturelle","يعانق الزوجان بعضهما أمام إضاءة خلفية قوية"],
+pairEpicWideShot:["Kleine Paarfigur in einer monumentalen Landschaft, beide stehen eng zusammen und blicken in die Ferne","Small couple figure in a monumental landscape, standing close together and looking into the distance","Pequeña pareja en un paisaje monumental mirando al horizonte","Petit couple dans un paysage monumental, regardant au loin","زوجان صغيران في منظر طبيعي هائل يقفان معاً وينظران إلى الأفق"]
+});
+
+function optionText(id){if(PAIR_SOURCE_LABELS[id])return PAIR_SOURCE_LABELS[id]+" — "+((O[id]||[])[IDX[currentLanguage]]||(O[id]||[])[0]||id);if(FILM_SOURCE_LABELS[id])return FILM_SOURCE_LABELS[id]+" — "+((O[id]||[])[IDX[currentLanguage]]||(O[id]||[])[0]||id);if(currentLanguage==="de"&&BEAUTY_DE[id])return BEAUTY_DE[id];const a=O[id]||[];return a[IDX[currentLanguage]]||a[0]||id}
 function catById(id){return CATEGORIES.find(c=>c[0]===id)}
 
 function init(){
@@ -1064,6 +1154,7 @@ function categoryGroup(id){
  if(id==="painterArt")return "art";
  if(id.startsWith("dimension"))return "dimension";
  if(id.startsWith("film"))return "film";
+ if(id.startsWith("pair"))return "pair";
  return "all";
 }
 function goToStudio(group){
@@ -1124,7 +1215,7 @@ function randomPrompt(){selectedValues={};CATEGORIES.forEach(c=>{if(Math.random(
 function resetAll(){if(!confirm(tr("resetAsk")))return;selectedValues={};document.getElementById("promptOutput").value="";localStorage.removeItem("artstyleCurrentSelection");updateEverything();setStatus(tr("resetDone"))}
 function saveCurrentSelection(){localStorage.setItem("artstyleCurrentSelection",JSON.stringify(selectedValues))}
 function loadCurrentSelection(){try{selectedValues=JSON.parse(localStorage.getItem("artstyleCurrentSelection"))||{}}catch{selectedValues={}}}
-function exportData(){const data={version:"ArtStyle Studio V7.1",language:currentLanguage,currentSelection:selectedValues,savedPrompts:getSavedPrompts()};const b=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="artstyle-studio-backup.json";a.click();URL.revokeObjectURL(u)}
+function exportData(){const data={version:"ArtStyle Studio V7.2.1",language:currentLanguage,currentSelection:selectedValues,savedPrompts:getSavedPrompts()};const b=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="artstyle-studio-backup.json";a.click();URL.revokeObjectURL(u)}
 function importData(){const i=document.createElement("input");i.type="file";i.accept=".json";i.onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=x=>{try{const d=JSON.parse(x.target.result);selectedValues=d.currentSelection||{};if(d.savedPrompts)localStorage.setItem("artstyleSavedPrompts",JSON.stringify(d.savedPrompts));if(d.language&&LANGS[d.language]){currentLanguage=d.language;document.getElementById("languageSelector").value=currentLanguage}changeLanguage(currentLanguage);updateEverything();renderSavedPrompts();setStatus(tr("importOK"))}catch{alert(tr("importBad"))}};r.readAsText(f)};i.click()}
 function closeSelection(){document.getElementById("selectionArea").style.display="none"}
 init();

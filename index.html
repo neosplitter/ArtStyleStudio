@@ -154,8 +154,8 @@ const FILM_PREVIEW_IMAGES = {
 const PREVIEW_CACHE = {};
 
 const PREVIEW_PHOTO_POOLS = {
-  people: [HYBRID_PHOTOS.person, HYBRID_PHOTOS.pose, HYBRID_PHOTOS.realism, "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=82", "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=82"],
-  beauty: [HYBRID_PHOTOS.beauty, HYBRID_PHOTOS.hair, "https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?auto=format&fit=crop&w=900&q=82", "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=900&q=82"],
+  people: ["https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=82", "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=82", "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=900&q=82"],
+  beauty: ["https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=900&q=82", "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=900&q=82", "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=900&q=82"],
   fashion: [HYBRID_PHOTOS.clothing, HYBRID_PHOTOS.hosiery, HYBRID_PHOTOS.shoes, HYBRID_PHOTOS.pose, "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=900&q=82", "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=82"],
   japan: [HYBRID_PHOTOS.japan, HYBRID_PHOTOS.kyotoSunset, HYBRID_PHOTOS.fushimi, HYBRID_PHOTOS.bamboo, HYBRID_PHOTOS.tokyoNight],
   nature: [HYBRID_PHOTOS.landscape, HYBRID_PHOTOS.mountains, HYBRID_PHOTOS.sunsetBeach, HYBRID_PHOTOS.mistForest, HYBRID_PHOTOS.reflectionLake, HYBRID_PHOTOS.winter],
@@ -163,7 +163,11 @@ const PREVIEW_PHOTO_POOLS = {
   art: [HYBRID_PHOTOS.style, "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=900&q=82", "https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=900&q=82"],
   camera: [HYBRID_PHOTOS.camera, "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=900&q=82", "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=82"],
   space: [HYBRID_PHOTOS.space, "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=900&q=82", "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=900&q=82", "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=900&q=82"],
-  train: [HYBRID_PHOTOS.train, "https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=900&q=82", "https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=900&q=82"],
+  train: [
+    "https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=900&q=82",
+    "https://images.unsplash.com/photo-1494783367193-149034c05e8f?auto=format&fit=crop&w=900&q=82",
+    "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=900&q=82"
+  ],
   architecture: [HYBRID_PHOTOS.rooms, "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=900&q=82", "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=82"],
   cinema: [HYBRID_PHOTOS.film, "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=900&q=82", "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=900&q=82"],
   surreal: [HYBRID_PHOTOS.surreal, HYBRID_PHOTOS.dimension, HYBRID_PHOTOS.broken, "https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=900&q=82"],
@@ -345,6 +349,70 @@ function getPreviewImageUrl(catId, optId, label) {
   const key = `${catId}::${optId || "CAT"}`;
   if (PREVIEW_CACHE[key]) return PREVIEW_CACHE[key];
 
+  // V15.5: feste, semantisch passende Vorschaubilder für Person & Beauty.
+  // Verhindert, dass der Hash-Fallback zufällige Motive (z. B. Make-up-Palette
+  // bei Frisuren oder Frauenporträts bei Männeroptionen) auswählt.
+  const PEOPLE_BEAUTY_PREVIEWS = {
+    adultWoman: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=82",
+    adultMan: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=82",
+    elegantWomanPortrait: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=900&q=82",
+    elegantManPortrait: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=82",
+    fashionModel: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=900&q=82",
+    cinematicPortrait: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=900&q=82",
+
+    pixie: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=900&q=82",
+    shortBob: "https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?auto=format&fit=crop&w=900&q=82",
+    shoulder: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=82",
+    longStraight: "https://images.unsplash.com/photo-1512316609839-ce289d3eba0a?auto=format&fit=crop&w=900&q=82",
+    longCurly: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=900&q=82",
+    bald: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=82",
+
+    blonde: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=82",
+    platinum: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=82",
+    brown: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=82",
+    black: "https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?auto=format&fit=crop&w=900&q=82",
+    red: "https://images.unsplash.com/photo-1512316609839-ce289d3eba0a?auto=format&fit=crop&w=900&q=82",
+    gray: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=900&q=82",
+
+    naturalMakeup: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=900&q=82",
+    glamourMakeup: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=900&q=82",
+    eveningMakeup: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=900&q=82",
+    noMakeup: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=900&q=82"
+  };
+  if (PEOPLE_BEAUTY_PREVIEWS[optId]) {
+    PREVIEW_CACHE[key] = PEOPLE_BEAUTY_PREVIEWS[optId];
+    return PREVIEW_CACHE[key];
+  }
+
+  // Korrigierte, eindeutige Vorschaubilder für die Bahn-Kategorien.
+  // Keine generischen Pool-Zufallstreffer (z. B. Lebensmittelbilder) mehr.
+  const TRAIN_CATEGORY_PREVIEWS = {
+    trainType: "https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=900&q=82",
+    trainLandscape: "https://images.unsplash.com/photo-1494783367193-149034c05e8f?auto=format&fit=crop&w=900&q=82",
+    trainRoute: "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=900&q=82",
+    trainView: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=900&q=82",
+    trainSeason: "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=900&q=82",
+    trainMood: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=82",
+    trainVehicles: "https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=900&q=82",
+    trainLocations: "https://images.unsplash.com/photo-1494783367193-149034c05e8f?auto=format&fit=crop&w=900&q=82",
+    trainStructures: "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=900&q=82",
+    trainAtmosphere: "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=900&q=82"
+  };
+  if (TRAIN_CATEGORY_PREVIEWS[catId] && !optId) {
+    PREVIEW_CACHE[key] = TRAIN_CATEGORY_PREVIEWS[catId];
+    return PREVIEW_CACHE[key];
+  }
+  if (String(catId || "").startsWith("train")) {
+    const trainOptions = [
+      "https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=900&q=82",
+      "https://images.unsplash.com/photo-1494783367193-149034c05e8f?auto=format&fit=crop&w=900&q=82",
+      "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=900&q=82"
+    ];
+    const url = trainOptions[hashString(String(optId || label || catId)) % trainOptions.length];
+    PREVIEW_CACHE[key] = url;
+    return url;
+  }
+
   if (HOSIERY_DENIER_PREVIEWS[optId]) { PREVIEW_CACHE[key] = HOSIERY_DENIER_PREVIEWS[optId]; return PREVIEW_CACHE[key]; }
   if (PREVIEW_EXACT[optId]) { PREVIEW_CACHE[key] = PREVIEW_EXACT[optId]; return PREVIEW_CACHE[key]; }
   if (String(catId || "").startsWith("hosiery") && optId) {
@@ -371,10 +439,45 @@ function getPreviewImageUrl(catId, optId, label) {
     return PREVIEW_CACHE[key];
   }
 
-  // Erst den konkreten Unterkategorie-Namen auswerten, danach die Oberkategorie.
-  const family = previewFamily(catId, label) || previewFamily(optId || "", label);
-  const pool = PREVIEW_PHOTO_POOLS[family] || PREVIEW_PHOTO_POOLS.fallback;
-  const seed = hashString(`${catId}::${optId || "CAT"}::${label || ""}`);
+  // V15.6: sichere Kategorie-Zuordnung.
+  // Wichtig: Die Kategorie entscheidet über die Bildfamilie. Der bisherige
+  // Fallback wertete auch den Optionstext aus und konnte dadurch z. B.
+  // "Bauwerke" als Naturmotiv oder Kleidung als beliebiges Produkt einordnen.
+  const SAFE_CATEGORY_FAMILY = {
+    person: "people", hair: "beauty", hairColor: "people", makeup: "beauty",
+    clothing: "fashion", hosiery: "hosiery", shoes: "shoes", pose: "people",
+    japan: "japan", landscape: "nature", africaArt: "africa",
+    style: "art", artists: "art", realism: "people",
+    camera: "camera", lens: "camera", lighting: "lighting", mood: "mood",
+    fantasy: "surreal", format: "art", composition: "camera",
+    adultCreative: "fashion",
+    galaxyScene: "space", spacecraft: "space", spaceCharacters: "space",
+    spaceWorlds: "space", spaceEffects: "space",
+    trainType: "train", trainLandscape: "train", trainRoute: "train",
+    trainView: "train", trainSeason: "train", trainMood: "train"
+  };
+  const family = SAFE_CATEGORY_FAMILY[catId] || "art";
+  const safePools = {
+    ...PREVIEW_PHOTO_POOLS,
+    fashion: [
+      "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=900&q=82",
+      "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=82",
+      "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=900&q=82",
+      "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=900&q=82"
+    ],
+    train: [
+      "https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=900&q=82",
+      "https://images.unsplash.com/photo-1494783367193-149034c05e8f?auto=format&fit=crop&w=900&q=82",
+      "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=900&q=82"
+    ],
+    people: [
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=82",
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=82",
+      "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=900&q=82"
+    ]
+  };
+  const pool = safePools[family] || safePools.art;
+  const seed = hashString(`${catId}::${optId || "CAT"}`);
   const url = pool[seed % pool.length];
   PREVIEW_CACHE[key] = url;
   return url;

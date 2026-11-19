@@ -158,6 +158,14 @@ footer{padding:35px 10px;text-align:center;color:#717a92}.image-source-note{marg
   .studio-tiles{gap:9px}.studio-tile{min-height:145px;padding:12px}.tile-name{font-size:14px}.tile-desc{font-size:11px}
   .stats{gap:7px}.stat{padding:12px 5px}.stat-number{font-size:23px}.stat-label{font-size:11px}
 }
+
+/* V14.0: vereinfachte Navigation */
+.studio-dashboard-v14{margin:18px 0 24px;padding:clamp(16px,3vw,26px);}
+.studio-dashboard-v14 .studio-tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.studio-dashboard-v14 .studio-tile{min-height:132px;padding:16px;}
+.studio-dashboard-v14 .studio-tile-wide{grid-column:1/-1;min-height:104px}
+.studio-dashboard-v14 .tile-desc{line-height:1.4;max-width:54ch}
+@media(max-width:560px){.studio-dashboard-v14 .studio-tiles{grid-template-columns:1fr}.studio-dashboard-v14 .studio-tile,.studio-dashboard-v14 .studio-tile-wide{grid-column:auto;min-height:112px}.studio-dashboard-v14 .tile-desc{font-size:12px}}
 </style>
 </head>
 <body>
@@ -174,27 +182,18 @@ footer{padding:35px 10px;text-align:center;color:#717a92}.image-source-note{marg
  <div class="stat"><div class="stat-number" id="savedCount">0</div><div class="stat-label" id="savedLabel"></div></div>
 </div>
 
-<section class="studio-dashboard" aria-label="Studio-Bereiche">
+<section class="studio-dashboard studio-dashboard-v14" aria-label="Hauptbereiche">
   <div class="dashboard-heading">
-    <span class="dashboard-kicker">DEIN KREATIVBEREICH</span>
-    <h2>Wähle dein Studio</h2>
-    <p>Direkt zu den Themenwelten und Bildstilen.</p>
+    <span class="dashboard-kicker">ARTSTYLE STUDIO</span>
+    <h2>Was möchtest du gestalten?</h2>
+    <p>Wähle einen Bereich. Die passenden Unterkategorien erscheinen darunter.</p>
   </div>
   <div class="studio-tiles">
-    <button class="studio-tile tile-beauty" onclick="goToStudio('people')"><span class="tile-emoji">💄</span><span class="tile-name">Beauty & Glamour</span><span class="tile-desc">Porträts, Make-up, Posen</span><span class="tile-arrow">Auswählen →</span></button>
-    <button class="studio-tile tile-space" onclick="goToStudio('space')"><span class="tile-emoji">🚀</span><span class="tile-name">Galaxie & Star Wars</span><span class="tile-desc">Raumschiffe, Helden, Schlachten</span><span class="tile-arrow">Auswählen →</span></button>
-    <button class="studio-tile tile-trains" onclick="goToStudio('trains')"><span class="tile-emoji">🚂</span><span class="tile-name">Zugwelten</span><span class="tile-desc">Bergbahnen, Züge, Landschaften</span><span class="tile-arrow">Auswählen →</span></button>
-    <button class="studio-tile tile-broken" onclick="goToStudio('broken')"><span class="tile-emoji">💥</span><span class="tile-name">3D-Durchbruch</span><span class="tile-desc">Bildrisse, Portale, Effekte</span><span class="tile-arrow">Auswählen →</span></button>
-    <button class="studio-tile tile-worlds" onclick="goToStudio('worlds')"><span class="tile-emoji">🏯</span><span class="tile-name">Fantasy & Japan</span><span class="tile-desc">Magische Orte und Traumwelten</span><span class="tile-arrow">Auswählen →</span></button>
-    <button class="studio-tile tile-africa" onclick="goToStudio('africa')"><span class="tile-emoji">🌍</span><span class="tile-name">Afrika – Kunst & Welten</span><span class="tile-desc">Porträts, Reliefs, Tierwelt, Savanne</span><span class="tile-arrow">Auswählen →</span></button>
-    <button class="studio-tile tile-photo" onclick="goToStudio('photo')"><span class="tile-emoji">📷</span><span class="tile-name">Foto & Technik</span><span class="tile-desc">Kamera, Objektiv, Licht</span><span class="tile-arrow">Auswählen →</span></button>
-    <button class="studio-tile tile-surreal" onclick="goToStudio('surreal')"><span class="tile-emoji">🌀</span><span class="tile-name">Surreale Bildwelten</span><span class="tile-desc">Traumlogik, Symbole, schwebende Motive</span><span class="tile-arrow">Auswählen →</span></button>
-    <button class="studio-tile tile-rooms" onclick="goToStudio('rooms')"><span class="tile-emoji">🏛️</span><span class="tile-name">Räume & Architektur</span><span class="tile-desc">Interieurs, Hallen, Portale und Räume</span><span class="tile-arrow">Auswählen →</span></button>
-    <button class="studio-tile tile-barefoot" onclick="goToStudio('barefoot')"><span class="tile-emoji">🦶</span><span class="tile-name">Barfuß & Fuß-Fashion</span><span class="tile-desc">Barfuß-Posen, sichtbare Zehen und natürliche Füße</span><span class="tile-arrow">Auswählen →</span></button>
-    <button class="studio-tile tile-art" onclick="goToStudio('art')"><span class="tile-emoji">🎨</span><span class="tile-name">Maler & Kunststile</span><span class="tile-desc">Große Künstler und ihre Bildwelten</span><span class="tile-arrow">Auswählen →</span></button>
-    <button class="studio-tile tile-dimension" onclick="goToStudio('dimension')"><span class="tile-emoji">🪄</span><span class="tile-name">3D Mixed Media & Dimensionen</span><span class="tile-desc">Bildwelten, die aus Rahmen, Wänden und Portalen brechen</span><span class="tile-arrow">Auswählen →</span></button>
-    <button class="studio-tile tile-film" onclick="goToStudio('film')"><span class="tile-emoji">🎬</span><span class="tile-name">Hollywood & Filmwelten</span><span class="tile-desc">Legendäre Kino-Atmosphären und Filmgenres</span><span class="tile-arrow">Auswählen →</span></button>
-    <button class="studio-tile tile-pair" onclick="goToStudio('pair')"><span class="tile-emoji">💞</span><span class="tile-name">Paarbilder & Posen</span><span class="tile-desc">Natürlich, verspielt, elegant und romantisch</span><span class="tile-arrow">Auswählen →</span></button>
+    <button class="studio-tile tile-beauty" onclick="goToStudio('people')"><span class="tile-emoji">👤</span><span class="tile-name">Personen & Fashion</span><span class="tile-desc">Einzelporträts, Paarporträts, Posen, Beauty, Kleidung, Strumpfhosen, Barfuß und Schuhe</span><span class="tile-arrow">Bereich öffnen →</span></button>
+    <button class="studio-tile tile-worlds" onclick="goToStudio('artworlds')"><span class="tile-emoji">🌌</span><span class="tile-name">Kunst & Welten</span><span class="tile-desc">Japan, Afrika, Fantasy, Surrealismus, Architektur, Film, Züge und Science-Fiction</span><span class="tile-arrow">Bereich öffnen →</span></button>
+    <button class="studio-tile tile-photo" onclick="goToStudio('photo')"><span class="tile-emoji">📷</span><span class="tile-name">Kamera & Licht</span><span class="tile-desc">Kamera, Objektiv, Beleuchtung, Perspektive und Bildaufbau</span><span class="tile-arrow">Bereich öffnen →</span></button>
+    <button class="studio-tile tile-broken" onclick="goToStudio('all')"><span class="tile-emoji">✨</span><span class="tile-name">Alle Kategorien</span><span class="tile-desc">Die komplette Auswahl anzeigen und gezielt durchsuchen</span><span class="tile-arrow">Alle anzeigen →</span></button>
+    <button class="studio-tile tile-africa studio-tile-wide" onclick="document.getElementById('promptOutput').scrollIntoView({behavior:'smooth',block:'start'})"><span class="tile-emoji">📝</span><span class="tile-name">Mein Master-Prompt</span><span class="tile-desc">Ergebnis prüfen, Negativ-Prompt bearbeiten, kopieren und speichern</span><span class="tile-arrow">Zum Prompt →</span></button>
   </div>
 </section>
 
@@ -1353,20 +1352,10 @@ const PRESETS=[
 ];
 
 const CATEGORY_GROUPS = {
-  people: ["person","portraitBackground","beautyBackground","hair","hairColor","makeup","clothing","clothingColor","clothingMaterial","clothingDetails","hosiery","hosieryStyle","hosieryDenier","hosieryPattern","hosieryColor","hosieryFoot","shoes","pose","womenPose","menPose","womenClothing","menClothing","beautyStyle","beautyPose","expression","beautyMakeup","beautyLips","beautySkin","beautyFraming","beautyLighting","beautyOutfit","beautyAccessories","adultCreative"],
-  worlds: ["japan","landscape","fantasy","fantasyPortals","mysticalFantasy","floralLuxury","fantasyArchitecture","romanticDream"],
-  africa: ["africaArt"],
-  space: ["galaxyScene","spacecraft","spaceCharacters","spaceWorlds","spaceEffects","spaceCharactersMore","spaceLocations","spaceScenes","spaceWeapons","spaceCamera"],
-  trains: ["trainType","trainLandscape","trainRoute","trainView","trainSeason","trainMood","trainVehicles","trainLocations","trainStructures","trainAtmosphere"],
-  broken: ["brokenReality","brokenRealityMore","brokenEffects","brokenLighting"],
-  photo: ["style","realism","camera","lens","lighting","mood","format","composition","neoAbstractArt","colorExplosion"],
-  surreal: ["surrealDream","surrealSubjects","surrealComposition","surrealNature","surrealMood","surrealTime"],
-  rooms: ["roomTypes","architecture","roomDetails","roomLighting"],
-  barefoot: ["barefootStyle","footPose","barefootBodyPose","feetFraming","feetDetails"],
-  art: ["painterArt"],
-  dimension: ["dimensionPortals","dimensionFrames","dimensionNature","dimensionSculpture","dimensionTexture","dimensionGlitch"],
-  film: ["filmAction","filmEpicRomance","filmSciFi","filmHorror","filmAdventure","filmPostApocalyptic","filmFantasy","filmCinematic"],
-  pair: ["pairType","pairStyle","pairPose","pairFraming","pairSetting"]
+  people: ["person","portraitBackground","beautyBackground","hair","hairColor","makeup","clothing","clothingColor","clothingMaterial","clothingDetails","hosiery","hosieryStyle","hosieryDenier","hosieryPattern","hosieryColor","hosieryFoot","shoes","pose","womenPose","menPose","womenClothing","menClothing","beautyStyle","beautyPose","expression","beautyMakeup","beautyLips","beautySkin","beautyFraming","beautyLighting","beautyOutfit","beautyAccessories","adultCreative","pairType","pairStyle","pairPose","pairFraming","pairSetting","barefootStyle","footPose","barefootBodyPose","feetFraming","feetDetails"],
+  artworlds: ["japan","landscape","fantasy","fantasyPortals","mysticalFantasy","floralLuxury","fantasyArchitecture","romanticDream","africaArt","galaxyScene","spacecraft","spaceCharacters","spaceWorlds","spaceEffects","spaceCharactersMore","spaceLocations","spaceScenes","spaceWeapons","spaceCamera","trainType","trainLandscape","trainRoute","trainView","trainSeason","trainMood","trainVehicles","trainLocations","trainStructures","trainAtmosphere","brokenReality","brokenRealityMore","brokenEffects","brokenLighting","surrealDream","surrealSubjects","surrealComposition","surrealNature","surrealMood","surrealTime","roomTypes","architecture","roomDetails","roomLighting","painterArt","dimensionPortals","dimensionFrames","dimensionNature","dimensionSculpture","dimensionTexture","dimensionGlitch","filmAction","filmEpicRomance","filmSciFi","filmHorror","filmAdventure","filmPostApocalyptic","filmFantasy","filmCinematic","style","realism","mood","format","composition","neoAbstractArt","colorExplosion"],
+  photo: ["camera","lens","lighting","photoTechnique","photoPerspective"],
+  all: null
 };
 
 const FILM_PREVIEW_IMAGES = {

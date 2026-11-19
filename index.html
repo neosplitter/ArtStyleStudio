@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ArtStyle Studio V13.0 – Dirk Eckert</title>
+<title>ArtStyle Studio V14.2 – Dirk Eckert</title>
 <style>
 :root{
   --bg:#080a10;--bg2:#101524;--card:#151a28;--card2:#20263a;
@@ -166,6 +166,16 @@ footer{padding:35px 10px;text-align:center;color:#717a92}.image-source-note{marg
 .studio-dashboard-v14 .studio-tile-wide{grid-column:1/-1;min-height:104px}
 .studio-dashboard-v14 .tile-desc{line-height:1.4;max-width:54ch}
 @media(max-width:560px){.studio-dashboard-v14 .studio-tiles{grid-template-columns:1fr}.studio-dashboard-v14 .studio-tile,.studio-dashboard-v14 .studio-tile-wide{grid-column:auto;min-height:112px}.studio-dashboard-v14 .tile-desc{font-size:12px}}
+
+/* V14.2 – visueller Bildkomponist und intelligenter Auswahl-Check */
+.composer-panel{border:1px solid rgba(167,139,250,.42);background:linear-gradient(135deg,rgba(17,27,48,.97),rgba(37,25,65,.94));}
+.composer-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:14px 0}
+.composer-grid label{display:flex;flex-direction:column;gap:6px;color:var(--muted);font-size:13px}
+.composer-grid select,.composer-grid textarea{width:100%;padding:11px;border:1px solid var(--border);border-radius:10px;background:#101727;color:var(--text);font:inherit}
+.composer-result{margin-top:12px;padding:12px;border-radius:12px;background:rgba(7,12,24,.72);border:1px solid rgba(167,139,250,.28);font-size:13px;line-height:1.5;white-space:pre-line}
+.composer-result:empty{display:none}
+@media(max-width:560px){.composer-grid{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -223,7 +233,39 @@ footer{padding:35px 10px;text-align:center;color:#717a92}.image-source-note{marg
     <button type="button" class="tab" data-group="photo" onclick="setCategoryGroup('photo')">Foto & Technik</button>
     <button type="button" class="tab" data-group="surreal" onclick="setCategoryGroup('surreal')">Surreale Bildwelten</button>
     <button type="button" class="tab" data-group="rooms" onclick="setCategoryGroup('rooms')">Räume & Architektur</button>
-    <button type="button" class="tab" data-group="barefoot" onclick="setCategoryGroup('barefoot')">Barfuß & Fuß-Fashion</button>
+    <button type="button" class="tab" data-group="barefoot" onclick="setCategoryGroup('barefoot')">Barf
+<section class="panel composer-panel" id="visualComposer">
+ <h2>🧭 Visueller Bild-Komponist</h2>
+ <p class="hint">Stelle die Bildszene in wenigen Schritten zusammen. Diese Angaben ergänzen deine Kategorien und werden in den Master-Prompt übernommen.</p>
+ <div class="composer-grid">
+  <label for="composerScene">Umgebung / Hintergrund
+   <select id="composerScene">
+    <option value="">Automatisch passend</option><option>Luxuriöses Beauty-Fotostudio</option><option>Minimalistisches Porträtstudio</option><option>Architektonische Kulisse</option><option>Japanische Landschaft</option><option>Romantischer Garten</option><option>Urbane Stadt bei Nacht</option><option>Surreale Traumlandschaft</option><option>Natürliche Outdoor-Umgebung</option><option>Neutraler heller Hintergrund</option><option>Dunkler cineastischer Hintergrund</option>
+   </select>
+  </label>
+  <label for="composerMood">Bildstimmung
+   <select id="composerMood">
+    <option value="">Automatisch passend</option><option>Elegant und luxuriös</option><option>Romantisch und warm</option><option>Melancholisch und ruhig</option><option>Geheimnisvoll und surreal</option><option>Kraftvoll und dramatisch</option><option>Natürlich und authentisch</option><option>Futuristisch und geheimnisvoll</option>
+   </select>
+  </label>
+  <label for="composerFraming">Bildaufteilung
+   <select id="composerFraming">
+    <option value="">Automatisch passend</option><option>Ganzkörper, Füße vollständig sichtbar</option><option>Halbporträt ab Taille</option><option>Brustporträt</option><option>Enges Gesichtsporträt</option><option>Weite Szene mit Umgebung</option><option>Zwei Personen vollständig sichtbar</option>
+   </select>
+  </label>
+  <label for="composerFocus">Visueller Schwerpunkt
+   <select id="composerFocus">
+    <option value="">Automatisch passend</option><option>Gesicht und Ausdruck</option><option>Kleidung und Materialien</option><option>Pose und Körpersprache</option><option>Person und Umgebung gleichwertig</option><option>Architektur und Atmosphäre</option><option>Stoff- und Nylon-Details</option>
+   </select>
+  </label>
+ </div>
+ <div class="director-actions">
+  <button class="primary" type="button" onclick="analyzeImageConcept()">🔎 Bildkonzept prüfen</button>
+  <button class="secondary" type="button" onclick="clearImageComposer()">↺ Komponist zurücksetzen</button>
+ </div>
+ <div class="composer-result" id="composerResult" aria-live="polite"></div>
+</section>
+uß & Fuß-Fashion</button>
     <button type="button" class="tab" data-group="art" onclick="setCategoryGroup('art')">Maler & Kunststile</button>
     <button type="button" class="tab" data-group="dimension" onclick="setCategoryGroup('dimension')">3D Mixed Media</button>
     <button type="button" class="tab" data-group="film" onclick="setCategoryGroup('film')">Hollywood & Filmwelten</button>
@@ -299,7 +341,7 @@ footer{padding:35px 10px;text-align:center;color:#717a92}.image-source-note{marg
 <button class="secondary" onclick="importData()" id="importButton"></button><button class="danger" onclick="resetAll()" id="resetButton"></button>
 </div><div class="status" id="status"></div></section>
 <section class="panel"><h2 id="libraryTitle"></h2><input class="library-search" id="librarySearch" oninput="renderSavedPrompts()"><div id="savedPrompts"></div></section>
-</main><footer>🎨 ArtStyle Studio V13.0 · Creative Intelligence Studio · Dirk Eckert<div class="image-source-note">Foto-Vorschaubilder: <a href="https://unsplash.com/license" target="_blank" rel="noopener">Unsplash-Lizenz</a>.</div></footer>
+</main><footer>🎨 ArtStyle Studio V14.2 · Visual Composer Edition · Dirk Eckert<div class="image-source-note">Foto-Vorschaubilder: <a href="https://unsplash.com/license" target="_blank" rel="noopener">Unsplash-Lizenz</a>.</div></footer>
 
 <script>
 const LANGS={
@@ -1021,7 +1063,7 @@ const NEW_VISUAL_STUDIOS = [
 ["architecture","🏰",true,{de:"Architektur & Bauformen",en:"Architecture & Structures",es:"Arquitectura y estructuras",fr:"Architecture et structures",ar:"العمارة والهياكل"},["stoneArchway","ornateDoorway","endlessCorridor","floatingStaircase","impossibleArchitecture","gothicWindows","classicalColumns","monumentalFacade"]],
 ["roomDetails","🪞",true,{de:"Fenster, Türen & Raumdetails",en:"Windows, Doors & Room Details",es:"Ventanas, puertas y detalles",fr:"Fenêtres, portes et détails",ar:"النوافذ والأبواب والتفاصيل"},["tallWindows","archedWindow","openPortalDoor","ornateMirror","antiqueFurniture","marbleFloor","velvetCurtains","sculpturalDecor"]],
 ["roomLighting","🕯️",true,{de:"Raumlicht & Materialien",en:"Interior Lighting & Materials",es:"Iluminación y materiales",fr:"Éclairage et matériaux",ar:"إضاءة ومواد داخلية"},["sunbeamsThroughWindow","warmCandlelight","dramaticSideLight","softAmbientGlow","polishedMarble","darkWalnutWood","agedStoneTexture","brushedGoldAccents"]],
-["painterArt","🎨",true,{de:"Große Maler & Kunststile",en:"Great Painters & Art Styles",es:"Grandes pintores y estilos",fr:"Grands peintres et styles",ar:"رسامون عظماء وأساليب فنية"},["daliArt","vanGoghArt","monetArt","picassoArt","leonardoArt","michelangeloArt","rembrandtArt","klimtArt","kahloArt","hokusaiArt","magritteArt"]]
+["painterArt","🎨",true,{de:"Große Maler & Kunststile",en:"Great Painters & Art Styles",es:"Grandes pintores y estilos",fr:"Grands peintres et styles",ar:"رسامون عظماء وأساليب فنية"},["daliArt","deChiricoArt","delvauxArt","ruschaArt","vanGoghArt","monetArt","picassoArt","leonardoArt","michelangeloArt","rembrandtArt","klimtArt","kahloArt","hokusaiArt","magritteArt"]]
 ];
 CATEGORIES.push(...NEW_VISUAL_STUDIOS);
 
@@ -1075,6 +1117,9 @@ fragmentedPagoda:["Japanische Pagode aus versetzten Ebenen, Nebel und linearen F
 });
 
 Object.assign(O, {
+deChiricoArt:["Metaphysische Malerei mit stillen italienischen Plätzen, langen Schatten, arkadischen Bögen, vereinzelten Figuren und rätselhafter, zeitloser Atmosphäre – inspiriert von Giorgio de Chirico","Metaphysical painting with quiet Italian piazzas, long shadows, arcades, solitary figures and an enigmatic timeless atmosphere – inspired by Giorgio de Chirico","Pintura metafísica con plazas italianas silenciosas, sombras largas, arcos y figuras solitarias – inspirada en Giorgio de Chirico","Peinture métaphysique avec places italiennes silencieuses, longues ombres, arcades et figures solitaires – inspirée de Giorgio de Chirico","رسم ميتافيزيقي بساحات إيطالية هادئة وظلال طويلة وأقواس وشخصيات孤ية"],
+delvauxArt:["Poetische surreale Nacht- und Traumwelt mit klassischer Architektur, stillen Straßenzügen, geheimnisvoller Beleuchtung und entrückter Figurenanordnung – inspiriert von Paul Delvaux","Poetic surreal nocturnal dream world with classical architecture, quiet streets, mysterious lighting and enigmatic figure arrangements – inspired by Paul Delvaux","Mundo onírico nocturno y poético con arquitectura clásica, calles silenciosas y figuras enigmáticas – inspirado en Paul Delvaux","Univers nocturne onirique et poétique, architecture classique, rues silencieuses et personnages énigmatiques – inspiré de Paul Delvaux","عالم ليلي حالم وشاعري بهندسة كلاسيكية وشوارع هادئة وشخصيات غامضة"],
+ruschaArt:["Ästhetik der amerikanischen Pop-Art und Konzeptkunst mit klarer Typografie, prägnanten Schriftbildern, weiten kalifornischen Landschaften und reduzierter Farbpalette – inspiriert von Ed Ruscha","American Pop Art and conceptual-art sensibility with crisp typography, striking word imagery, expansive Californian landscapes and a restrained palette – inspired by Ed Ruscha","Estética del pop art y arte conceptual estadounidense con tipografía clara, palabras visuales y paisajes californianos – inspirado en Ed Ruscha","Esthétique du pop art et de l’art conceptuel américain, typographie nette, mots-images et vastes paysages californiens – inspirée d’Ed Ruscha","جماليات فن البوب والفن المفاهيمي الأمريكي مع طباعة واضحة ومناظر كاليفورنيا الواسعة"],
 daliArt:["Surrealistische Traumwelten, schmelzende Formen, präzise gemalte rätselhafte Symbole – inspiriert von Salvador Dalí","Surreal dreamscapes, melting forms and precisely rendered enigmatic symbols – inspired by Salvador Dalí","Mundos oníricos surrealistas, formas derretidas y símbolos enigmáticos – inspirado en Salvador Dalí","Univers oniriques surréalistes, formes fondues et symboles énigmatiques – inspiré de Salvador Dalí","عوالم سريالية حالمة وأشكال ذائبة ورموز غامضة"],
 vanGoghArt:["Ausdrucksstarke Wirbelbewegungen, leuchtende Farben und dynamische Pinselstriche – inspiriert von Vincent van Gogh","Expressive swirling movement, vivid colors and dynamic brushwork – inspired by Vincent van Gogh","Movimiento arremolinado, colores vivos y pinceladas dinámicas – inspirado en Vincent van Gogh","Mouvements tourbillonnants, couleurs vives et coups de pinceau dynamiques – inspiré de Vincent van Gogh","حركة دوامية وألوان زاهية وضربات فرشاة قوية"],
 monetArt:["Impressionistische Lichtstimmung, weiche Farbübergänge und flirrende Naturreflexe – inspiriert von Claude Monet","Impressionist light, soft color transitions and shimmering reflections in nature – inspired by Claude Monet","Luz impresionista, transiciones suaves y reflejos brillantes de la naturaleza – inspirado en Claude Monet","Lumière impressionniste, transitions douces et reflets chatoyants de la nature – inspiré de Claude Monet","ضوء انطباعي وانتقالات لونية ناعمة وانعكاسات طبيعية متلألئة"],
@@ -2260,6 +2305,15 @@ function composeMasterPrompt(){
   const identityLock=document.getElementById("identityLock")?.checked;
   const hasReferenceImage=!!document.getElementById("previewImage")?.getAttribute("src");
   const negative=(document.getElementById("negativePrompt")?.value||"").trim();
+  const scene=document.getElementById("composerScene")?.value||"";
+  const mood=document.getElementById("composerMood")?.value||"";
+  const framing=document.getElementById("composerFraming")?.value||"";
+  const focus=document.getElementById("composerFocus")?.value||"";
+
+  if(scene)extras.push("Umgebung und Hintergrund: "+scene);
+  if(mood)extras.push("Bildstimmung: "+mood);
+  if(framing)extras.push("Bildaufteilung: "+framing);
+  if(focus)extras.push("Visueller Schwerpunkt: "+focus);
 
   if(identityLock && hasReferenceImage)extras.push("Referenz-Gesichtsidentität strikt bewahren: dieselbe Person, unveränderte individuelle Gesichtszüge und Proportionen, keine Retusche, keine Verschönerung, keine Neuinterpretation des Gesichts.");
   if(custom)extras.push("Bildidee / Regieanweisung: "+custom);
@@ -2442,6 +2496,38 @@ function getSignatureLine() {
   return `Signatur / Logo: '${text}' ${posText} platzieren, ${align.toLowerCase()}, Farbe: ${color.toLowerCase()}, Größe: ${size.toLowerCase()}, klar lesbar und harmonisch ins Bild integriert.`;
 }
 
+
+function analyzeImageConcept(){
+  const result=document.getElementById("composerResult");
+  const selectedLabels=[];
+  CATEGORIES.forEach(([id,,,labelObj])=>{
+    const v=selectedValues[id]; if(!v)return;
+    (Array.isArray(v)?v:[v]).forEach(opt=>selectedLabels.push((txt(labelObj)+" "+optionText(opt)).toLowerCase()));
+  });
+  const all=selectedLabels.join(" | ");
+  const notes=[];
+  const hasBarefoot=/barfuß|barfuss|barefoot/.test(all);
+  const hasShoes=/schuh|heels|stiefel|sandalen|sneaker/.test(all);
+  const hasPair=/paar|couple|zwei personen/.test(all);
+  const framing=document.getElementById("composerFraming")?.value||"";
+  const hasFullBody=/ganzkörper|vollständig sichtbar/.test(framing);
+  if(hasBarefoot&&hasShoes)notes.push("⚠️ Barfuß und Schuhe sind gleichzeitig ausgewählt. Entscheide dich für eine Variante oder entferne eine Auswahl.");
+  if(hasPair&&/enges gesichtsporträt|brustporträt/.test(framing.toLowerCase()))notes.push("ℹ️ Bei einem Paarbild kann ein enger Bildausschnitt eine Person abschneiden. Ein gemeinsames Halb- oder Ganzkörperbild wäre geeigneter.");
+  if((hasBarefoot||hasShoes)&&!framing)notes.push("💡 Bei Barfuß- oder Schuhdetails empfiehlt sich „Ganzkörper, Füße vollständig sichtbar“.");
+  if(!document.getElementById("composerScene")?.value)notes.push("💡 Ein konkreter Hintergrund macht das Bildkonzept klarer.");
+  if(!document.getElementById("composerMood")?.value)notes.push("💡 Eine Bildstimmung hilft, Licht und Farbwirkung einheitlich auszurichten.");
+  if(!selectedLabels.length)notes.push("ℹ️ Wähle zuerst ein Motiv oder eine Kategorie aus. Der Komponist ergänzt deine Auswahl.");
+  if(!notes.length)notes.push("✓ Deine bisherigen Angaben wirken stimmig. Der Bildkomponist übernimmt die gewählten Details in den Master-Prompt.");
+  result.textContent=notes.join("\n");
+  const out=document.getElementById("promptOutput");
+  if(out){out.value=composeMasterPrompt();updateCharCount();}
+  showStatus("Bildkonzept geprüft.");
+}
+function clearImageComposer(){
+  ["composerScene","composerMood","composerFraming","composerFocus"].forEach(id=>{const e=document.getElementById(id);if(e)e.selectedIndex=0;});
+  const r=document.getElementById("composerResult");if(r)r.textContent="";
+  updateUI();
+}
 function buildDirectorPrompt() {
   const out=document.getElementById("promptOutput");
   if(!out)return;
@@ -2479,6 +2565,9 @@ function clearDirector() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  ["composerScene","composerMood","composerFraming","composerFocus"].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.addEventListener("change",buildDirectorPrompt);
+  });
   ["directorFormat", "directorCamera", "directorLight", "directorComposition", "signaturePosition", "signatureAlign", "signatureColor", "signatureSize"].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.addEventListener("change", buildDirectorPrompt);

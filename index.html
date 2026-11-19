@@ -176,6 +176,21 @@ footer{padding:35px 10px;text-align:center;color:#717a92}.image-source-note{marg
 .composer-result:empty{display:none}
 @media(max-width:560px){.composer-grid{grid-template-columns:1fr}}
 
+
+/* V14.2.1 – Touch-/Klick-Sicherheit */
+button, .card, .tab, .preset, .visual-option, .film-option,
+.studio-tile, .close-selection, .small-button {
+  pointer-events:auto !important;
+  touch-action: manipulation;
+  cursor:pointer;
+}
+.card-thumb-gradient, .film-option-shade, .card:before, .card:after {
+  pointer-events:none !important;
+}
+#categoriesContainer, #optionsContainer, #categoryTabs, .studio-tiles {
+  position:relative;
+  z-index:2;
+}
 </style>
 </head>
 <body>
@@ -2578,7 +2593,63 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-init();
+// V14.2.1 – robuste Auswahlbedienung: Kategorien bleiben auch dann bedienbar,
+// wenn ein optionales Modul (z.B. Bibliothek oder Stil-Mixer) einen Fehler hat.
+function artstyleSafeBoot(){
+  try { init(); } catch(err) { console.error("Optionaler Startfehler:", err); }
+  try { renderCategories(); } catch(err) { console.error("Kategorie-Rendering:", err); }
+  try { updateUI(); } catch(err) { console.error("Auswahlübersicht:", err); }
+  const container=document.getElementById("categoriesContainer");
+  if(container && !container.children.length){
+    container.innerHTML="";
+    CATEGORIES.forEach(([id,icon,multi,labelObj,opts])=>{
+      const card=document.createElement("button");
+      card.type="button"; card.className="card"; card.style.cursor="pointer";
+      card.innerHTML='<div class="card-body"><div class="card-title"></div></div>';
+      card.querySelector(".card-title").textContent=icon+" "+txt(labelObj);
+      card.addEventListener("click",()=>artstyleSafeOpen(id));
+      container.appendChild(card);
+    });
+  }
+  // Event delegation als zusätzliche Absicherung für Touch-Geräte.
+  document.addEventListener("click",function(ev){
+    const card=ev.target.closest("#categoriesContainer .card");
+    if(card && !card.onclick){
+      const idx=[...container.children].indexOf(card);
+      const visible=CATEGORIES.filter(([id])=>{
+        const allowed=activeCategoryGroup==="all"?null:(CATEGORY_GROUPS[activeCategoryGroup]||[]);
+        return !allowed || allowed.includes(id);
+      });
+      if(visible[idx]) artstyleSafeOpen(visible[idx][0]);
+    }
+  },true);
+}
+function artstyleSafeOpen(id){
+  try { openCategory(id); return; } catch(err) { console.error("Kategorie konnte nicht normal geöffnet werden:",err); }
+  const item=CATEGORIES.find(x=>x[0]===id); if(!item)return;
+  currentCategory=id;
+  const area=document.getElementById("selectionArea");
+  const box=document.getElementById("optionsContainer");
+  if(!area||!box)return;
+  area.style.display="block"; box.innerHTML="";
+  document.getElementById("selectionTitle").textContent=item[1]+" "+txt(item[3]);
+  item[4].forEach(opt=>{
+    const b=document.createElement("button"); b.type="button"; b.className="visual-option";
+    b.textContent=optionText(opt);
+    b.addEventListener("click",()=>{
+      if(item[2]){
+        if(!Array.isArray(selectedValues[id]))selectedValues[id]=[];
+        const a=selectedValues[id],i=a.indexOf(opt); if(i>=0)a.splice(i,1);else a.push(opt);
+        if(!a.length)delete selectedValues[id];
+      }else selectedValues[id]=selectedValues[id]===opt?undefined:opt;
+      try{renderCategories();}catch(e){}
+      try{updateUI();}catch(e){}
+      artstyleSafeOpen(id);
+    });
+    box.appendChild(b);
+  });
+}
+try { artstyleSafeBoot(); } catch(err) { console.error("ArtStyle Auswahlstart:",err); }
 </script>
 </body>
 </html>

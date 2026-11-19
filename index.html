@@ -2419,12 +2419,48 @@ function previewImage(e){
 }
 
 async function copyPrompt(){
-  const t=document.getElementById("promptOutput").value.trim();if(!t)return;
+  const field=document.getElementById("promptOutput");
+  const text=(field?.value||"").trim();
+  if(!text){showStatus("Der Master-Prompt ist noch leer. Bitte zuerst „Kreativ erstellen“ wählen.");return;}
+  const status=document.getElementById("status");
+  const legacyCopy=()=>{
+    const temp=document.createElement("textarea");
+    temp.value=text;
+    temp.setAttribute("readonly","");
+    temp.style.position="fixed";
+    temp.style.left="0";
+    temp.style.top="0";
+    temp.style.width="2px";
+    temp.style.height="2px";
+    temp.style.padding="0";
+    temp.style.border="0";
+    temp.style.opacity="0.01";
+    temp.style.fontSize="16px";
+    document.body.appendChild(temp);
+    temp.focus({preventScroll:true});
+    temp.select();
+    temp.setSelectionRange(0,temp.value.length);
+    let ok=false;
+    try{ok=document.execCommand("copy");}catch(e){ok=false;}
+    temp.remove();
+    return ok;
+  };
   try{
-    if(navigator.clipboard && window.isSecureContext){await navigator.clipboard.writeText(t);}
-    else {const temp=document.createElement("textarea");temp.value=t;temp.style.position="fixed";temp.style.opacity="0";document.body.appendChild(temp);temp.select();if(!document.execCommand("copy"))throw new Error("copy failed");temp.remove();}
-    showStatus(tr("copied"));
-  }catch(e){showStatus("Kopieren nicht möglich – bitte den Prompt markieren und manuell kopieren.");}
+    if(navigator.clipboard && window.isSecureContext){
+      await navigator.clipboard.writeText(text);
+      showStatus("✓ Master-Prompt wurde kopiert.");
+      return;
+    }
+  }catch(e){console.warn("Clipboard API nicht verfügbar; verwende Ersatzfunktion.",e);}
+  if(legacyCopy()){
+    showStatus("✓ Master-Prompt wurde kopiert.");
+    return;
+  }
+  // Letzter, zuverlässiger manueller Ausweg: Prompt sichtbar markieren.
+  field.focus();
+  field.select();
+  field.setSelectionRange(0,field.value.length);
+  showStatus("Der Prompt ist markiert. Halte den markierten Text gedrückt und tippe auf „Kopieren“.");
 }
 
 function getSaved(){return JSON.parse(localStorage.getItem("artstyle_studio_v3")||"[]");}

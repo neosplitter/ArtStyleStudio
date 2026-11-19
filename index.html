@@ -1,8 +1,3 @@
-Hier ist die erweiterte Version von ArtStyle Studio V12.2.
-Was wurde hinzugefügt:
- * Vorschaubilder für alle Hauptkategorien: Jede Kategorie-Karte im Raster zeigt nun oben ein passendes, hochwertiges Stimmungs- oder Motivbild an, sodass du die Bereiche sofort visuell erfassen kannst.
- * Semantische Vorschaubilder für alle Unterkategorien: Anstelle von allgemeinen Platzhalter-Fotos generiert das System jetzt für jede einzelne Unterkategorie und Option (über 600 Einträge – von Haarfarben, Make-up, Kameras, Objektiven, Lichtstimmungen, Raumschiffen, Zügen, Gemäldestilen großer Meister bis hin zu Filmgenres, Paarposen und 3D-Portalen) ein individuell abgestimmtes, gestochen scharfes Vektor-Vorschaubild direkt aus dem Code (ohne Ladezeiten oder fehlerhafte externe Links).
-Kopiere den folgenden Code einfach in deine .html-Datei und öffne sie im Browser:
 <!DOCTYPE html>
 <html lang="de" dir="ltr">
 <head>
@@ -1288,6 +1283,44 @@ const FILM_PREVIEW_IMAGES = {
    ========================================================================= */
 const PREVIEW_CACHE = {};
 
+// Echte, stimmungsvolle Foto-Vorschauen für Kategorien & Szenen (Hybrid-Engine)
+const HYBRID_PHOTOS = {
+  person: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=75",
+  beauty: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=600&q=75",
+  hair: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=600&q=75",
+  clothing: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=600&q=75",
+  hosiery: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=75",
+  shoes: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=600&q=75",
+  barefoot: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=75",
+  pose: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=75",
+  pair: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=600&q=75",
+  japan: "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=600&q=75",
+  landscape: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=75",
+  africaArt: "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=600&q=75",
+  style: "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=600&q=75",
+  realism: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=75",
+  camera: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=600&q=75",
+  lighting: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=75",
+  mood: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&q=75",
+  fantasy: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=75",
+  space: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=600&q=75",
+  train: "https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=600&q=75",
+  surreal: "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=75",
+  broken: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=75",
+  rooms: "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=600&q=75",
+  dimension: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=600&q=75",
+  film: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=75",
+  kyotoSunset: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=600&q=75",
+  fushimi: "https://images.unsplash.com/photo-1478436127897-769e1b3f0f36?auto=format&fit=crop&w=600&q=75",
+  bamboo: "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=600&q=75",
+  tokyoNight: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=600&q=75",
+  mountains: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=75",
+  sunsetBeach: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=75",
+  mistForest: "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=600&q=75",
+  reflectionLake: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=600&q=75",
+  winter: "https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?auto=format&fit=crop&w=600&q=75"
+};
+
 function hashString(str) {
   let h = 2166136261;
   for (let i = 0; i < str.length; i++) {
@@ -1301,213 +1334,150 @@ function escapeXml(unsafe) {
   return String(unsafe || "").replace(/[<>&'"]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;',"'":'&apos;','"':'&quot;'}[c]));
 }
 
-function getThemePalette(catId, optId, label) {
+function getDetailedSpec(catId, optId, label) {
   const s = (catId + " " + optId + " " + label).toLowerCase();
 
-  // Spezifische Farb- und Motiv-Erkennung
-  if (s.includes("blonde") || s.includes("platinum") || s.includes("golden") || s.includes("gold") || s.includes("champagne") || s.includes("honey") || s.includes("klimt")) {
-    return { c1: "#3b2314", c2: "#854d0e", c3: "#facc15", acc: "#fef08a", motif: "gold" };
-  }
-  if (s.includes("red") || s.includes("cherry") || s.includes("burgundy") || s.includes("rose") || s.includes("crimson") || s.includes("sith") || s.includes("volcanic") || s.includes("lava") || s.includes("fire") || s.includes("rosewood")) {
-    return { c1: "#2a0812", c2: "#881337", c3: "#f43f5e", acc: "#fda4af", motif: "ruby" };
-  }
-  if (s.includes("pink") || s.includes("peach") || s.includes("pastel") || s.includes("romantic") || s.includes("pair") || s.includes("blush") || s.includes("mauve") || s.includes("berry")) {
-    return { c1: "#2e1029", c2: "#831843", c3: "#ec4899", acc: "#fbcfe8", motif: "heart" };
-  }
-  if (s.includes("blue") || s.includes("navy") || s.includes("ocean") || s.includes("ice") || s.includes("snow") || s.includes("winter") || s.includes("lake") || s.includes("waterfall") || s.includes("water") || s.includes("cool")) {
-    return { c1: "#09192f", c2: "#1d4ed8", c3: "#38bdf8", acc: "#bae6fd", motif: "wave" };
-  }
-  if (s.includes("green") || s.includes("forest") || s.includes("bamboo") || s.includes("emerald") || s.includes("matrix") || s.includes("borg") || s.includes("pandora") || s.includes("botanical") || s.includes("floral") || s.includes("moss") || s.includes("meadow")) {
-    return { c1: "#072218", c2: "#065f46", c3: "#10b981", acc: "#a7f3d0", motif: "leaf" };
-  }
-  if (s.includes("space") || s.includes("galaxy") || s.includes("star") || s.includes("planet") || s.includes("moon") || s.includes("orbit") || s.includes("trek") || s.includes("droid") || s.includes("laser") || s.includes("nebula")) {
-    return { c1: "#070919", c2: "#312e81", c3: "#818cf8", acc: "#e0e7ff", motif: "space" };
-  }
-  if (s.includes("train") || s.includes("viaduct") || s.includes("railway") || s.includes("track") || s.includes("steam") || s.includes("alpine") || s.includes("matterhorn") || s.includes("mountain") || s.includes("bridge")) {
-    return { c1: "#11222b", c2: "#1e4959", c3: "#ef4444", acc: "#f8fafc", motif: "train" };
-  }
-  if (s.includes("broken") || s.includes("crack") || s.includes("shatter") || s.includes("portal") || s.includes("dimension") || s.includes("glitch") || s.includes("wall") || s.includes("glass")) {
-    return { c1: "#18122b", c2: "#4c1d95", c3: "#06b6d4", acc: "#f59e0b", motif: "portal" };
-  }
-  if (s.includes("africa") || s.includes("savannah") || s.includes("lion") || s.includes("elephant") || s.includes("giraffe") || s.includes("leopard") || s.includes("baobab") || s.includes("sahara") || s.includes("desert")) {
-    return { c1: "#291509", c2: "#9a3412", c3: "#f59e0b", acc: "#fde68a", motif: "africa" };
-  }
-  if (s.includes("japan") || s.includes("kyoto") || s.includes("tokyo") || s.includes("fushimi") || s.includes("hakone") || s.includes("pagoda") || s.includes("hokusai")) {
-    return { c1: "#1f1024", c2: "#9f1239", c3: "#fb7185", acc: "#ffe4e6", motif: "japan" };
-  }
-  if (s.includes("camera") || s.includes("lens") || s.includes("canon") || s.includes("sony") || s.includes("nikon") || s.includes("hasselblad") || s.includes("phase") || s.includes("macro") || s.includes("ar916") || s.includes("ar169") || s.includes("ar11") || s.includes("ar45") || s.includes("ar34") || s.includes("ar23")) {
-    return { c1: "#0f172a", c2: "#334155", c3: "#38bdf8", acc: "#f1f5f9", motif: "camera" };
-  }
-  if (s.includes("hosiery") || s.includes("nylon") || s.includes("denier") || s.includes("fishnet") || s.includes("tights") || s.includes("sheer") || s.includes("lace")) {
-    return { c1: "#1f1622", c2: "#582c4d", c3: "#d6a2ad", acc: "#f3e8ee", motif: "mesh" };
-  }
-  if (s.includes("barefoot") || s.includes("foot") || s.includes("feet") || s.includes("toe") || s.includes("shoes") || s.includes("heels") || s.includes("sandals") || s.includes("boots")) {
-    return { c1: "#261c1a", c2: "#6b4c3b", c3: "#d4a373", acc: "#faedcd", motif: "feet" };
-  }
-  if (s.includes("room") || s.includes("hall") || s.includes("arch") || s.includes("corridor") || s.includes("window") || s.includes("palace") || s.includes("marble") || s.includes("castle") || s.includes("architecture")) {
-    return { c1: "#1c1917", c2: "#57534e", c3: "#d6d3d1", acc: "#fef3c7", motif: "arch" };
-  }
-  if (s.includes("art") || s.includes("painter") || s.includes("dali") || s.includes("gogh") || s.includes("monet") || s.includes("picasso") || s.includes("leonardo") || s.includes("rembrandt") || s.includes("kahlo") || s.includes("magritte") || s.includes("color") || s.includes("pigment") || s.includes("impasto")) {
-    return { c1: "#1e1b4b", c2: "#6d28d9", c3: "#f59e0b", acc: "#34d399", motif: "art" };
-  }
-  if (s.includes("surreal") || s.includes("clock") || s.includes("dream") || s.includes("cloud") || s.includes("float") || s.includes("time") || s.includes("hourglass") || s.includes("mystery")) {
-    return { c1: "#17153b", c2: "#433d8b", c3: "#c8acd6", acc: "#fef08a", motif: "surreal" };
-  }
-  if (s.includes("person") || s.includes("woman") || s.includes("man") || s.includes("beauty") || s.includes("hair") || s.includes("makeup") || s.includes("pose") || s.includes("portrait") || s.includes("skin") || s.includes("lips") || s.includes("clothing") || s.includes("dress") || s.includes("suit")) {
-    return { c1: "#251428", c2: "#6b2158", c3: "#e879f9", acc: "#fae8ff", motif: "portrait" };
+  if (catId === "format" || s.includes("ar916") || s.includes("ar169") || s.includes("ar11") || s.includes("ar45") || s.includes("ar34") || s.includes("ar23")) {
+    let ratio = "16:9", w = 136, h = 76;
+    if (s.includes("916") || s.includes("9:16")) { ratio = "9:16"; w = 58; h = 104; }
+    else if (s.includes("45") || s.includes("4:5")) { ratio = "4:5"; w = 74; h = 92; }
+    else if (s.includes("34") || s.includes("3:4")) { ratio = "3:4"; w = 72; h = 96; }
+    else if (s.includes("23") || s.includes("2:3")) { ratio = "2:3"; w = 66; h = 98; }
+    else if (s.includes("11") || s.includes("1:1")) { ratio = "1:1"; w = 88; h = 88; }
+    return { type: "aspect", ratio, w, h, c1: "#0f172a", c2: "#1e293b", acc: "#38bdf8" };
   }
 
-  return { c1: "#15192b", c2: "#3b2868", c3: "#8b5cf6", acc: "#e9d5ff", motif: "abstract" };
+  if (catId === "hairColor" || catId === "beautyLips" || catId === "hosieryColor") {
+    let swatch = "#8b5cf6", hi = "#ddd6fe", bg1 = "#18181b", bg2 = "#27272a";
+    if (s.includes("platinum") || s.includes("platin") || s.includes("silver") || s.includes("white")) { swatch = "#f1f5f9"; hi = "#ffffff"; }
+    else if (s.includes("blonde") || s.includes("blond") || s.includes("honey") || s.includes("champagne") || s.includes("gold")) { swatch = "#eab308"; hi = "#fef08a"; }
+    else if (s.includes("copper") || s.includes("auburn") || s.includes("ginger")) { swatch = "#c2410c"; hi = "#fdba74"; }
+    else if (s.includes("red") || s.includes("rot") || s.includes("crimson") || s.includes("cherry") || s.includes("burgundy") || s.includes("wine")) { swatch = "#be123c"; hi = "#fda4af"; }
+    else if (s.includes("pink") || s.includes("rose") || s.includes("blush") || s.includes("peach") || s.includes("mauve") || s.includes("berry")) { swatch = "#ec4899"; hi = "#fbcfe8"; }
+    else if (s.includes("nude") || s.includes("beige") || s.includes("caramel") || s.includes("tan") || s.includes("skin")) { swatch = "#d4a373"; hi = "#faedcd"; }
+    else if (s.includes("brown") || s.includes("braun") || s.includes("chestnut") || s.includes("espresso") || s.includes("chocolate")) { swatch = "#5c3a21"; hi = "#a98467"; }
+    else if (s.includes("black") || s.includes("schwarz") || s.includes("jet") || s.includes("dark")) { swatch = "#18181b"; hi = "#52525b"; }
+    else if (s.includes("blue") || s.includes("blau")) { swatch = "#2563eb"; hi = "#93c5fd"; }
+    return { type: catId === "beautyLips" ? "lips" : "swatch", swatch, hi, c1: bg1, c2: bg2, acc: hi };
+  }
+
+  if (catId.startsWith("hosiery")) {
+    let den = 20;
+    if (s.includes("5") || s.includes("8") || s.includes("10") || s.includes("ultra")) den = 10;
+    else if (s.includes("15") || s.includes("20") || s.includes("sheer")) den = 20;
+    else if (s.includes("40") || s.includes("50") || s.includes("semi")) den = 50;
+    else if (s.includes("80") || s.includes("100") || s.includes("opaque")) den = 90;
+    const isNet = s.includes("net") || s.includes("fishnet") || s.includes("lace") || s.includes("pattern") || s.includes("dot");
+    return { type: "hosiery", den, isNet, c1: "#1a1025", c2: "#3b1d4a", acc: "#f5d0fe" };
+  }
+
+  if (catId === "shoes" || s.includes("heel") || s.includes("pump") || s.includes("boot") || s.includes("sandal")) {
+    const isBoot = s.includes("boot") || s.includes("stiefel");
+    const isFlat = s.includes("sneaker") || s.includes("flat") || s.includes("ballet");
+    return { type: "shoe", isBoot, isFlat, c1: "#1f121d", c2: "#4c1d45", acc: "#f472b6" };
+  }
+
+  if (catId === "lens" || catId === "camera" || catId.includes("Camera") || catId.includes("Framing")) {
+    let mm = "85mm";
+    if (s.includes("24")) mm = "24mm";
+    else if (s.includes("35")) mm = "35mm";
+    else if (s.includes("50")) mm = "50mm";
+    else if (s.includes("100")) mm = "100mm";
+    else if (s.includes("135")) mm = "135mm";
+    else if (s.includes("200")) mm = "200mm";
+    else if (s.includes("macro")) mm = "MACRO";
+    else if (s.includes("wide")) mm = "WIDE";
+    else if (s.includes("close")) mm = "CLOSE-UP";
+    return { type: "lens", mm, c1: "#090d16", c2: "#1e293b", acc: "#38bdf8" };
+  }
+
+  if (catId === "lighting" || catId.includes("Lighting")) {
+    let beam = "#fde047";
+    if (s.includes("neon") || s.includes("cyber")) beam = "#e879f9";
+    else if (s.includes("blue") || s.includes("moon") || s.includes("cool")) beam = "#38bdf8";
+    else if (s.includes("sunset") || s.includes("golden") || s.includes("warm") || s.includes("candle")) beam = "#fb923c";
+    return { type: "light", beam, c1: "#090b10", c2: "#1c1917", acc: beam };
+  }
+
+  if (catId === "hair") {
+    let style = "long";
+    if (s.includes("pixie") || s.includes("short")) style = "pixie";
+    else if (s.includes("bob")) style = "bob";
+    else if (s.includes("curly") || s.includes("wave") || s.includes("locken")) style = "curly";
+    else if (s.includes("bun") || s.includes("updo") || s.includes("ponytail")) style = "updo";
+    return { type: "hair", style, c1: "#1e1326", c2: "#4a2559", acc: "#f0abfc" };
+  }
+
+  return null;
 }
 
-function buildMotifSvg(motif, p, seed, catId, optId) {
-  const r1 = (seed % 40) - 20;
-  const r2 = ((seed >> 4) % 30) - 15;
-  switch (motif) {
-    case "space":
+function buildDetailedSvg(spec, seed) {
+  switch (spec.type) {
+    case "aspect":
       return `
-        <circle cx="${230 + r1}" cy="55" r="34" fill="${p.c3}" opacity="0.35"/>
-        <circle cx="${230 + r1}" cy="55" r="22" fill="${p.acc}" opacity="0.85"/>
-        <ellipse cx="${230 + r1}" cy="55" rx="48" ry="10" fill="none" stroke="${p.acc}" stroke-width="2.2" transform="rotate(-18 ${230+r1} 55)" opacity="0.8"/>
-        <polygon points="60,115 145,88 122,126" fill="${p.acc}" opacity="0.9"/>
-        <line x1="145" y1="88" x2="275" y2="62" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="138" y1="102" x2="255" y2="85" stroke="#f43f5e" stroke-width="2" stroke-linecap="round"/>
-        <circle cx="45" cy="35" r="1.8" fill="#fff"/><circle cx="95" cy="24" r="1.4" fill="#fff"/><circle cx="165" cy="30" r="2" fill="#fff"/><circle cx="285" cy="115" r="1.6" fill="#fff"/>
+        <rect x="${160 - spec.w/2}" y="${72 - spec.h/2}" width="${spec.w}" height="${spec.h}" rx="8" fill="#38bdf8" fill-opacity="0.18" stroke="${spec.acc}" stroke-width="3"/>
+        <line x1="${160 - spec.w/6}" y1="${72 - spec.h/2}" x2="${160 - spec.w/6}" y2="${72 + spec.h/2}" stroke="${spec.acc}" stroke-width="1" opacity="0.35"/>
+        <line x1="${160 + spec.w/6}" y1="${72 - spec.h/2}" x2="${160 + spec.w/6}" y2="${72 + spec.h/2}" stroke="${spec.acc}" stroke-width="1" opacity="0.35"/>
+        <text x="160" y="77" font-family="Arial,sans-serif" font-size="16" font-weight="900" fill="#ffffff" text-anchor="middle">${spec.ratio}</text>
       `;
-    case "train":
+    case "swatch":
       return `
-        <polygon points="30,130 95,42 160,130" fill="#1e293b" opacity="0.85"/>
-        <polygon points="115,130 190,28 265,130" fill="#334155" opacity="0.9"/>
-        <polygon points="190,28 168,58 183,54 190,64 198,53 212,58" fill="#f8fafc" opacity="0.95"/>
-        <path d="M0,122 Q160,104 320,122 L320,160 L0,160 Z" fill="#0f172a"/>
-        <rect x="65" y="96" width="175" height="22" rx="6" fill="${p.c3}"/>
-        <rect x="78" y="101" width="24" height="10" rx="2" fill="#e0f2fe"/>
-        <rect x="110" y="101" width="24" height="10" rx="2" fill="#e0f2fe"/>
-        <rect x="142" y="101" width="24" height="10" rx="2" fill="#e0f2fe"/>
-        <rect x="174" y="101" width="24" height="10" rx="2" fill="#e0f2fe"/>
-        <rect x="206" y="101" width="22" height="10" rx="2" fill="#fef08a"/>
-        <line x1="0" y1="121" x2="320" y2="121" stroke="#94a3b8" stroke-width="2.5"/>
+        <circle cx="160" cy="70" r="44" fill="${spec.swatch}" stroke="#ffffff" stroke-width="2.5" stroke-opacity="0.5"/>
+        <path d="M132,52 Q160,34 188,52" fill="none" stroke="${spec.hi}" stroke-width="5" stroke-linecap="round" opacity="0.75"/>
       `;
-    case "portal":
+    case "lips":
       return `
-        <polygon points="160,14 235,80 160,146 85,80" fill="none" stroke="${p.acc}" stroke-width="3" opacity="0.85"/>
-        <circle cx="160" cy="80" r="46" fill="${p.c3}" opacity="0.28"/>
-        <circle cx="160" cy="80" r="32" fill="none" stroke="${p.acc}" stroke-width="2.5" stroke-dasharray="10 6"/>
-        <polygon points="160,44 188,80 160,116 132,80" fill="${p.acc}" opacity="0.85"/>
-        <line x1="55" y1="35" x2="105" y2="62" stroke="${p.acc}" stroke-width="2" opacity="0.7"/>
-        <line x1="265" y1="125" x2="215" y2="98" stroke="${p.acc}" stroke-width="2" opacity="0.7"/>
+        <path d="M108,74 Q134,50 160,62 Q186,50 212,74 Q186,68 160,72 Q134,68 108,74 Z" fill="${spec.swatch}"/>
+        <path d="M108,74 Q160,106 212,74 Q186,72 160,75 Q134,72 108,74 Z" fill="${spec.swatch}"/>
+        <ellipse cx="160" cy="83" rx="18" ry="3.5" fill="#ffffff" opacity="0.55"/>
       `;
-    case "africa":
-      return `
-        <circle cx="160" cy="76" r="44" fill="${p.c3}" opacity="0.88"/>
-        <path d="M0,124 Q160,112 320,124 L320,160 L0,160 Z" fill="#1c0d04"/>
-        <line x1="95" y1="122" x2="95" y2="86" stroke="#1c0d04" stroke-width="6"/>
-        <ellipse cx="95" cy="82" rx="34" ry="10" fill="#1c0d04"/>
-        <ellipse cx="95" cy="76" rx="22" ry="7" fill="#1c0d04"/>
-        <circle cx="235" cy="108" r="14" fill="#1c0d04"/>
-        <circle cx="235" cy="108" r="19" fill="none" stroke="${p.acc}" stroke-width="2" stroke-dasharray="4 4"/>
-      `;
-    case "japan":
-      return `
-        <circle cx="160" cy="72" r="38" fill="${p.c3}" opacity="0.85"/>
-        <path d="M92,58 Q160,46 228,58 L222,66 Q160,56 98,66 Z" fill="#111827"/>
-        <rect x="108" y="76" width="104" height="7" fill="#111827"/>
-        <rect x="118" y="62" width="9" height="68" fill="#111827"/>
-        <rect x="193" y="62" width="9" height="68" fill="#111827"/>
-        <path d="M0,130 Q160,122 320,130 L320,160 L0,160 Z" fill="#090d16"/>
-      `;
-    case "camera":
-      return `
-        <rect x="88" y="34" width="144" height="92" rx="14" fill="none" stroke="${p.acc}" stroke-width="2.5" opacity="0.85"/>
-        <circle cx="160" cy="80" r="32" fill="none" stroke="${p.c3}" stroke-width="3"/>
-        <circle cx="160" cy="80" r="18" fill="${p.c3}" opacity="0.35"/>
-        <circle cx="168" cy="72" r="5" fill="#fff" opacity="0.8"/>
-        <line x1="136" y1="34" x2="136" y2="126" stroke="${p.acc}" stroke-width="1" opacity="0.35"/>
-        <line x1="184" y1="34" x2="184" y2="126" stroke="${p.acc}" stroke-width="1" opacity="0.35"/>
-        <line x1="88" y1="65" x2="232" y2="65" stroke="${p.acc}" stroke-width="1" opacity="0.35"/>
-        <line x1="88" y1="95" x2="232" y2="95" stroke="${p.acc}" stroke-width="1" opacity="0.35"/>
-      `;
-    case "mesh":
+    case "hosiery":
+      const op = Math.min(0.92, Math.max(0.18, spec.den / 100));
       return `
         <defs>
-          <pattern id="net_${seed}" width="18" height="18" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-            <rect width="18" height="18" fill="none" stroke="${p.acc}" stroke-width="1.3" opacity="0.55"/>
+          <pattern id="mesh_${seed}" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <rect width="12" height="12" fill="none" stroke="#f5d0fe" stroke-width="1.2" opacity="0.7"/>
           </pattern>
         </defs>
-        <rect x="35" y="18" width="250" height="124" rx="18" fill="url(#net_${seed})"/>
-        <ellipse cx="160" cy="80" rx="85" ry="42" fill="${p.c3}" opacity="0.22"/>
+        <path d="M118,18 L142,18 L152,132 L128,132 Z" fill="#e6b89c"/>
+        <path d="M118,18 L142,18 L152,132 L128,132 Z" fill="#09090b" fill-opacity="${op}"/>
+        <path d="M178,18 L202,18 L192,132 L168,132 Z" fill="#e6b89c"/>
+        <path d="M178,18 L202,18 L192,132 L168,132 Z" fill="${spec.isNet ? `url(#mesh_${seed})` : '#09090b'}" fill-opacity="${spec.isNet ? 0.9 : op}"/>
+        <line x1="133" y1="22" x2="141" y2="128" stroke="#ffffff" stroke-width="2.5" opacity="0.35"/>
+        <line x1="187" y1="22" x2="179" y2="128" stroke="#ffffff" stroke-width="2.5" opacity="0.35"/>
       `;
-    case "feet":
+    case "shoe":
+      if (spec.isFlat) {
+        return `<path d="M95,102 L225,102 C232,102 232,88 215,84 L175,72 L145,84 L105,80 C95,80 90,94 95,102 Z" fill="${spec.acc}" stroke="#fff" stroke-width="2"/>`;
+      }
       return `
-        <ellipse cx="136" cy="86" rx="18" ry="38" transform="rotate(-10 136 86)" fill="${p.c3}" opacity="0.85"/>
-        <ellipse cx="184" cy="86" rx="18" ry="38" transform="rotate(10 184 86)" fill="${p.acc}" opacity="0.85"/>
-        <circle cx="122" cy="44" r="4.5" fill="${p.acc}"/><circle cx="131" cy="42" r="3.5" fill="${p.acc}"/><circle cx="139" cy="43" r="3.2" fill="${p.acc}"/><circle cx="146" cy="45" r="2.8" fill="${p.acc}"/><circle cx="152" cy="48" r="2.4" fill="${p.acc}"/>
-        <circle cx="198" cy="44" r="4.5" fill="${p.c3}"/><circle cx="189" cy="42" r="3.5" fill="${p.c3}"/><circle cx="181" cy="43" r="3.2" fill="${p.c3}"/><circle cx="174" cy="45" r="2.8" fill="${p.c3}"/><circle cx="168" cy="48" r="2.4" fill="${p.c3}"/>
+        <path d="M108,42 L128,42 L168,94 L222,104 C228,106 226,114 214,114 L156,114 L118,74 L118,114 L108,114 Z" fill="${spec.acc}" stroke="#ffffff" stroke-width="2"/>
       `;
-    case "arch":
+    case "lens":
       return `
-        <path d="M95,145 L95,72 A65,65 0 0,1 225,72 L225,145 Z" fill="none" stroke="${p.acc}" stroke-width="3" opacity="0.85"/>
-        <path d="M115,145 L115,76 A45,45 0 0,1 205,76 L205,145 Z" fill="${p.c3}" opacity="0.25"/>
-        <line x1="70" y1="145" x2="250" y2="145" stroke="${p.acc}" stroke-width="3"/>
-        <circle cx="160" cy="68" r="14" fill="${p.acc}" opacity="0.8"/>
+        <circle cx="160" cy="72" r="46" fill="#0f172a" stroke="#64748b" stroke-width="4"/>
+        <circle cx="160" cy="72" r="35" fill="none" stroke="${spec.acc}" stroke-width="2" stroke-dasharray="6 4"/>
+        <circle cx="160" cy="72" r="24" fill="${spec.acc}" fill-opacity="0.22"/>
+        <text x="160" y="77" font-family="Arial,sans-serif" font-size="13" font-weight="900" fill="#ffffff" text-anchor="middle">${spec.mm}</text>
       `;
-    case "art":
+    case "light":
       return `
-        <path d="M35,115 C85,35 145,135 205,55 C235,20 265,65 285,45" fill="none" stroke="${p.c3}" stroke-width="9" stroke-linecap="round" opacity="0.85"/>
-        <path d="M45,65 C105,125 175,25 265,105" fill="none" stroke="${p.acc}" stroke-width="6" stroke-linecap="round" opacity="0.8"/>
-        <circle cx="${110+r2}" cy="52" r="16" fill="#f43f5e" opacity="0.85"/>
-        <circle cx="${210+r1}" cy="98" r="20" fill="#38bdf8" opacity="0.75"/>
+        <polygon points="160,18 75,132 245,132" fill="${spec.beam}" fill-opacity="0.28"/>
+        <circle cx="160" cy="24" r="12" fill="#ffffff"/>
+        <circle cx="160" cy="96" r="22" fill="#0f172a" stroke="${spec.beam}" stroke-width="2.5"/>
       `;
-    case "surreal":
+    case "hair":
+      const hairPath = spec.style === "pixie"
+        ? "M130,68 C130,34 190,34 190,68 C190,54 130,54 130,68 Z"
+        : spec.style === "bob"
+        ? "M122,92 C122,30 198,30 198,92 L188,92 C188,52 132,52 132,92 Z"
+        : "M116,124 C116,28 204,28 204,124 L188,124 C188,54 132,54 132,124 Z";
       return `
-        <circle cx="160" cy="76" r="42" fill="none" stroke="${p.acc}" stroke-width="2.5"/>
-        <circle cx="160" cy="76" r="32" fill="${p.c3}" opacity="0.25"/>
-        <line x1="160" y1="76" x2="160" y2="52" stroke="${p.acc}" stroke-width="3" stroke-linecap="round"/>
-        <line x1="160" y1="76" x2="180" y2="84" stroke="${p.acc}" stroke-width="2.5" stroke-linecap="round"/>
-        <path d="M65,118 Q160,96 255,118" fill="none" stroke="${p.acc}" stroke-width="2" stroke-dasharray="6 5"/>
-      `;
-    case "heart":
-      return `
-        <circle cx="142" cy="76" r="30" fill="${p.c3}" opacity="0.45"/>
-        <circle cx="178" cy="76" r="30" fill="${p.acc}" opacity="0.45"/>
-        <path d="M160,112 C160,112 118,84 118,62 C118,48 130,40 142,40 C150,40 156,45 160,51 C164,45 170,40 178,40 C190,40 202,48 202,62 C202,84 160,112 160,112 Z" fill="${p.acc}" opacity="0.88"/>
-      `;
-    case "wave":
-      return `
-        <circle cx="220" cy="48" r="22" fill="${p.acc}" opacity="0.85"/>
-        <path d="M0,92 Q80,68 160,92 T320,92 L320,160 L0,160 Z" fill="${p.c3}" opacity="0.55"/>
-        <path d="M0,112 Q80,88 160,112 T320,112 L320,160 L0,160 Z" fill="${p.acc}" opacity="0.45"/>
-      `;
-    case "leaf":
-      return `
-        <path d="M160,126 C110,104 102,52 160,30 C218,52 210,104 160,126 Z" fill="${p.c3}" opacity="0.75"/>
-        <line x1="160" y1="34" x2="160" y2="132" stroke="${p.acc}" stroke-width="2.5"/>
-        <line x1="160" y1="64" x2="136" y2="50" stroke="${p.acc}" stroke-width="2"/>
-        <line x1="160" y1="84" x2="184" y2="68" stroke="${p.acc}" stroke-width="2"/>
-        <line x1="160" y1="102" x2="138" y2="88" stroke="${p.acc}" stroke-width="2"/>
-      `;
-    case "gold":
-      return `
-        <polygon points="160,26 177,62 216,67 187,94 195,132 160,113 125,132 133,94 104,67 143,62" fill="${p.c3}" opacity="0.85"/>
-        <circle cx="160" cy="80" r="52" fill="none" stroke="${p.acc}" stroke-width="1.8" stroke-dasharray="5 5"/>
-      `;
-    case "ruby":
-      return `
-        <polygon points="160,28 206,64 188,126 132,126 114,64" fill="${p.c3}" opacity="0.82"/>
-        <polygon points="160,28 184,64 160,126 136,64" fill="${p.acc}" opacity="0.45"/>
-      `;
-    case "portrait":
-      return `
-        <circle cx="160" cy="60" r="24" fill="${p.acc}" opacity="0.88"/>
-        <path d="M108,136 C112,102 134,90 160,90 C186,90 208,102 212,136 Z" fill="${p.c3}" opacity="0.85"/>
-        <circle cx="160" cy="76" r="52" fill="none" stroke="${p.acc}" stroke-width="1.6" opacity="0.45"/>
+        <circle cx="160" cy="72" r="24" fill="#f1c27d"/>
+        <path d="${hairPath}" fill="#3b1d14" stroke="${spec.acc}" stroke-width="1.5"/>
       `;
     default:
-      return `
-        <circle cx="${125+r1}" cy="76" r="38" fill="${p.c3}" opacity="0.65"/>
-        <circle cx="${195+r2}" cy="84" r="32" fill="${p.acc}" opacity="0.55"/>
-        <rect x="95" y="44" width="130" height="72" rx="18" fill="none" stroke="#fff" stroke-width="1.8" opacity="0.5"/>
-      `;
+      return "";
   }
 }
 
@@ -1515,39 +1485,61 @@ function getPreviewImageUrl(catId, optId, label) {
   const key = `${catId}::${optId || "CAT"}`;
   if (PREVIEW_CACHE[key]) return PREVIEW_CACHE[key];
 
-  // Echte Foto-Vorschau für die großen Filmwelten beibehalten
-  if (optId && FILM_PREVIEW_IMAGES[optId]) {
+  if (optId && typeof FILM_PREVIEW_IMAGES !== "undefined" && FILM_PREVIEW_IMAGES[optId]) {
     PREVIEW_CACHE[key] = FILM_PREVIEW_IMAGES[optId];
     return PREVIEW_CACHE[key];
   }
 
-  const seed = hashString(key + "|" + (label || ""));
-  const p = getThemePalette(catId, optId || "", label || "");
-  const motifSvg = buildMotifSvg(p.motif, p, seed, catId, optId || "");
-  const badgeText = escapeXml((label || optId || catId).slice(0, 26));
+  const spec = getDetailedSpec(catId, optId || "", label || "");
+  if (spec) {
+    const seed = hashString(key);
+    const badgeText = escapeXml((label || optId || catId).slice(0, 26));
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 160" width="320" height="160">
+      <defs>
+        <linearGradient id="g_${seed}" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="${spec.c1}"/>
+          <stop offset="100%" stop-color="${spec.c2}"/>
+        </linearGradient>
+      </defs>
+      <rect width="320" height="160" fill="url(#g_${seed})"/>
+      ${buildDetailedSvg(spec, seed)}
+      <rect x="0" y="132" width="320" height="28" fill="rgba(5,8,15,0.65)"/>
+      <text x="160" y="150" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="bold" fill="#f8fafc" text-anchor="middle">${badgeText}</text>
+    </svg>`;
+    PREVIEW_CACHE[key] = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
+    return PREVIEW_CACHE[key];
+  }
 
+  if (!optId) {
+    if (HYBRID_PHOTOS[catId]) { PREVIEW_CACHE[key] = HYBRID_PHOTOS[catId]; return PREVIEW_CACHE[key]; }
+    const prefix = Object.keys(HYBRID_PHOTOS).find(k => catId.toLowerCase().startsWith(k.toLowerCase()));
+    if (prefix) { PREVIEW_CACHE[key] = HYBRID_PHOTOS[prefix]; return PREVIEW_CACHE[key]; }
+  } else {
+    if (HYBRID_PHOTOS[optId]) { PREVIEW_CACHE[key] = HYBRID_PHOTOS[optId]; return PREVIEW_CACHE[key]; }
+    const catPrefix = Object.keys(HYBRID_PHOTOS).find(k => catId.toLowerCase().startsWith(k.toLowerCase()));
+    if (catPrefix && !optId.startsWith("fallback_")) {
+      PREVIEW_CACHE[key] = HYBRID_PHOTOS[catPrefix];
+      return PREVIEW_CACHE[key];
+    }
+  }
+
+  const seed = hashString(key + "|" + (label || ""));
+  const badgeText = escapeXml((label || optId || catId).slice(0, 26));
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 160" width="320" height="160">
     <defs>
-      <linearGradient id="bg_${seed}" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="${p.c1}"/>
-        <stop offset="55%" stop-color="${p.c2}"/>
-        <stop offset="100%" stop-color="${p.c1}"/>
+      <linearGradient id="fb_${seed}" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#1e1b4b"/>
+        <stop offset="50%" stop-color="#4c1d95"/>
+        <stop offset="100%" stop-color="#0f172a"/>
       </linearGradient>
-      <radialGradient id="glow_${seed}" cx="50%" cy="45%" r="55%">
-        <stop offset="0%" stop-color="${p.c3}" stop-opacity="0.42"/>
-        <stop offset="100%" stop-color="${p.c1}" stop-opacity="0"/>
-      </radialGradient>
     </defs>
-    <rect width="320" height="160" fill="url(#bg_${seed})"/>
-    <rect width="320" height="160" fill="url(#glow_${seed})"/>
-    ${motifSvg}
-    <rect x="0" y="132" width="320" height="28" fill="rgba(5,8,15,0.52)"/>
-    <text x="160" y="150" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="bold" fill="#f8fafc" text-anchor="middle" opacity="0.92">${badgeText}</text>
+    <rect width="320" height="160" fill="url(#fb_${seed})"/>
+    <circle cx="160" cy="68" r="36" fill="#a855f7" fill-opacity="0.35" stroke="#e9d5ff" stroke-width="2"/>
+    <rect x="0" y="132" width="320" height="28" fill="rgba(5,8,15,0.65)"/>
+    <text x="160" y="150" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="bold" fill="#f8fafc" text-anchor="middle">${badgeText}</text>
   </svg>`;
-
-  const uri = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
-  PREVIEW_CACHE[key] = uri;
-  return uri;
+  PREVIEW_CACHE[key] = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
+  return PREVIEW_CACHE[key];
 }
 
 let activeCategoryGroup = "all";
@@ -1641,7 +1633,7 @@ function renderCategories(){
     const val=selectedValues[id];
     const count=Array.isArray(val)?val.length:(val?1:0);
     // Vorschaubild für die Hauptkategorie basierend auf Kategorie + erster Leit-Option
-    const thumbUrl=getPreviewImageUrl(id, opts[0] || "", label);
+    const thumbUrl=getPreviewImageUrl(id, "", label);
 
     const card=document.createElement("div");
     card.className="card"+(count?" has-selection":"");
@@ -1649,7 +1641,7 @@ function renderCategories(){
     card.innerHTML=`
       <span class="selection-badge">${count}</span>
       <div class="card-thumb-wrap">
-        <img class="card-thumb" src="${thumbUrl}" alt="${escapeXml(label)}" loading="lazy">
+        <img class="card-thumb" src="${thumbUrl}" alt="${escapeXml(label)}" loading="lazy" onerror="this.onerror=null;this.src=getPreviewImageUrl('fallback', 'fallback_'+this.alt, this.alt);">
         <div class="card-thumb-gradient"></div>
         <div class="card-icon-badge">${icon}</div>
       </div>
@@ -1740,6 +1732,10 @@ function openCategory(id){
       img.src = getPreviewImageUrl(id, optId, label);
       img.alt = label;
       img.loading = "lazy";
+      img.onerror = () => {
+        img.onerror = null;
+        img.src = getPreviewImageUrl(id, "fallback_" + optId, label);
+      };
 
       const shade = document.createElement("div");
       shade.className = "visual-option-shade";
@@ -1969,4 +1965,3 @@ init();
 </script>
 </body>
 </html>
-

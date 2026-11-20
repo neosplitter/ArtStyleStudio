@@ -466,6 +466,73 @@ button.studio-tile {
 #styleMixerPanel{margin-top:18px}.card{overflow:hidden;border-radius:18px}.card-thumb-wrap{height:155px!important}.card-body{padding:13px!important}.card-title{font-size:15px!important;font-weight:800}.card-description{font-size:12px;line-height:1.45;color:#b8c2d7;margin-top:7px;min-height:52px}.card-open-hint{font-size:11px;color:#c4b5fd;font-weight:700;margin-top:9px}.category-toolbar{padding:15px!important}.category-search{width:100%;padding:13px;border-radius:12px}
 @media(max-width:600px){.v17-home{padding:16px;margin:14px 0;border-radius:18px}.v17-modes{grid-template-columns:1fr;gap:9px}.v17-modes button{min-height:82px;padding:14px}.v17-modes .v17-all{grid-column:auto}.card-thumb-wrap{height:135px!important}.card-description{min-height:0}.v17-tools{flex-direction:column}.v17-tools button{width:100%}}
 
+
+/* V18 CLEAN EXPERIENCE: radically reduced navigation, old controls shown only when needed */
+:root{--v18-accent:#d6b477}
+body.v18-clean{background:#0b0d12}
+body.v18-clean main{max-width:900px;padding:18px 16px 80px}
+body.v18-clean header{padding:22px 16px 14px}
+body.v18-clean header .logo{font-size:30px} body.v18-clean header h1{font-size:27px;margin:5px 0}
+body.v18-clean .hero,body.v18-clean .stats,body.v18-clean .legacy-dashboard,body.v18-clean .v17-home{display:none!important}
+.v18-home{display:block;max-width:850px;margin:12px auto 30px}
+.v18-intro{margin:8px 2px 22px}.v18-kicker{font-size:10px;letter-spacing:2.5px;color:var(--v18-accent);font-weight:800}
+.v18-intro h2{font-size:27px;line-height:1.2;margin:8px 0;color:#f6f3ed}.v18-intro p{font-size:14px;color:#a9acb5;line-height:1.55;margin:0;max-width:560px}
+.v18-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.v18-card{padding:0!important;overflow:hidden;text-align:left;border:1px solid #2b303a!important;border-radius:18px!important;background:#141820!important;color:#f6f3ed!important;min-width:0;box-shadow:0 8px 25px #0004;transition:transform .15s,border-color .15s}
+.v18-card:active{transform:scale(.985)}.v18-card img{width:100%;height:142px;object-fit:cover;display:block;background:#222}
+.v18-card-body{padding:13px 14px 15px}.v18-card strong{display:block;font-size:15px;margin-bottom:5px}.v18-card small{display:block;color:#aeb3bf;font-size:12px;line-height:1.45;font-weight:400}
+.v18-card .v18-arrow{display:block;color:var(--v18-accent);font-size:11px;font-weight:700;margin-top:10px}
+.v18-quick{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}.v18-quick button{border:1px solid #343a46!important;background:#191e28!important;color:#e9e9ed!important;border-radius:13px!important;padding:14px!important;font-size:13px}
+.v18-topnav{display:none;align-items:center;gap:10px;margin:0 0 18px}.v18-topnav button{width:auto!important;border-radius:12px!important;padding:10px 14px!important;background:#202530!important;border:1px solid #3a414e!important;color:#f5f5f5!important}.v18-topnav strong{font-size:17px;color:#f4f1eb}
+body.v18-browse .v18-home,body.v18-prompt .v18-home{display:none}
+body.v18-browse .v18-topnav,body.v18-prompt .v18-topnav,body.v18-generator .v18-topnav{display:flex}
+body.v18-generator main>#directorPanel,body.v18-generator main>#creativeWorldLab,body.v18-generator main>#v16CreativeSuite{display:block!important}
+/* Hide every legacy section until the user deliberately opens its workflow */
+body.v18-clean main>*:not(.v18-home):not(.v18-topnav){display:none!important}
+body.v18-browse main>#categoryTitle,body.v18-browse main>.category-toolbar,body.v18-browse main>#categoriesContainer,body.v18-browse main>#selectionArea{display:block!important}
+body.v18-browse .category-toolbar{padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important}
+body.v18-browse .category-toolbar .wizard-intro,body.v18-browse .category-toolbar .wizard-progress,body.v18-browse .category-toolbar .category-steps,body.v18-browse .category-toolbar .wizard-controls{display:none!important}
+body.v18-browse #categoryTitle{font-size:22px;margin:8px 0 12px}
+body.v18-browse .category-search{width:100%;margin:0 0 15px;border-radius:13px!important;padding:14px!important;background:#171c25!important;border:1px solid #343b48!important;color:#fff!important}
+body.v18-browse #categoriesContainer{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+body.v18-browse #categoriesContainer .card{margin:0!important;min-width:0;border-radius:16px!important;overflow:hidden}
+body.v18-browse #selectionArea{margin-top:18px}
+body.v18-prompt main>.clean-prompt-section{display:block!important}
+body.v18-prompt main>.clean-prompt-section{margin-bottom:16px}
+body.v18-prompt .clean-prompt-section{background:#151a23!important;border:1px solid #303744!important;border-radius:16px!important;padding:16px!important}
+body.v18-prompt .clean-prompt-section h2{font-size:18px}
+body.v18-prompt .clean-prompt-section textarea{width:100%;min-height:150px}
+body.v18-clean footer{display:none}
+@media(max-width:560px){body.v18-clean main{padding:14px 13px 70px}.v18-intro h2{font-size:24px}.v18-grid{gap:11px}.v18-card img{height:118px}.v18-card-body{padding:11px}.v18-card strong{font-size:14px}.v18-card small{font-size:11px}body.v18-browse #categoriesContainer{gap:10px}}
+
+
+/* V19: kurze Startseite und getrennte Ansichtsseiten */
+body.v19-clean{background:#0b0d12}
+body.v19-clean main{max-width:760px;padding:12px 14px 64px}
+body.v19-clean header{padding:16px 12px 10px}
+body.v19-clean header .logo{font-size:25px;margin:2px 0}
+body.v19-clean header h1{font-size:23px}
+body.v19-clean header .name{font-size:14px;margin-top:3px}
+body.v19-clean header .subtitle{display:none}
+body.v19-clean .hero,body.v19-clean .stats,body.v19-clean .legacy-dashboard,body.v19-clean .v17-home{display:none!important}
+body.v19-clean:not(.v19-browse):not(.v19-prompt):not(.v19-generator) main>*:not(.v18-home):not(.v18-topnav){display:none!important}
+.v18-home{max-width:620px;margin:8px auto 20px}
+.v18-intro{margin:8px 2px 15px}.v18-intro h2{font-size:23px;margin:4px 0 0}
+.v18-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.v18-card img{height:105px}.v18-card-body{padding:10px 11px 12px}.v18-card strong{font-size:13px}.v18-card small{display:none}.v18-card .v18-arrow{font-size:10px;margin-top:6px}
+.v18-quick{margin-top:12px}.v18-quick button{padding:11px!important;font-size:12px}
+.v18-topnav{display:none;align-items:center;gap:8px;margin:2px 0 14px}
+body.v19-browse .v18-home,body.v19-prompt .v18-home,body.v19-generator .v18-home{display:none}
+body.v19-browse .v18-topnav,body.v19-prompt .v18-topnav,body.v19-generator .v18-topnav{display:flex}
+body.v19-browse main>#categoryTitle,body.v19-browse main>.category-toolbar,body.v19-browse main>#categoriesContainer,body.v19-browse main>#selectionArea{display:block!important}
+body.v19-browse main>#categoriesContainer{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+body.v19-browse #categoryTitle{font-size:20px;margin:6px 0 10px}
+body.v19-browse .category-toolbar{padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important}
+body.v19-browse .category-toolbar .wizard-intro,body.v19-browse .category-toolbar .wizard-progress,body.v19-browse .category-toolbar .category-steps,body.v19-browse .category-toolbar .wizard-controls{display:none!important}
+body.v19-browse #selectionArea{margin-top:14px}
+body.v19-prompt main>.clean-prompt-section{display:block!important}
+body.v19-generator main>#directorPanel,body.v19-generator main>#creativeWorldLab,body.v19-generator main>#v16CreativeSuite{display:block!important}
+@media(max-width:420px){.v18-card img{height:90px}.v18-grid{gap:8px}.v18-quick{gap:8px}}
 </style>
 
 <style id="artstyle-v15-7-wizard">
@@ -486,19 +553,12 @@ button.studio-tile {
 </header>
 <main>
 <section class="hero"><h2 id="welcomeTitle"></h2><p id="welcomeText"></p></section>
-<section class="v17-home">
- <div class="v17-heading"><span>ARTSTYLE STUDIO · V17.0</span><h2>Was möchtest du erschaffen?</h2><p>Wähle einen Bereich. Jede Kategorie zeigt dir eine Bildvorschau und eine kurze Erklärung.</p></div>
- <div class="v17-modes">
-  <button onclick="setCategoryGroup('personStep')"><b>👤 Personen & Fashion</b><small>Porträts, Styling, Kleidung und Posen</small></button>
-  <button onclick="setCategoryGroup('artistStep')"><b>🖼️ Maler & Kunst</b><small>Künstler, Kunstrichtungen und klassische Bildsprachen</small></button>
-  <button onclick="setCategoryGroup('abstractStep')"><b>🎨 Abstrakt & Mixed Media</b><small>Farben, Texturen und experimentelle Kunst</small></button>
-  <button onclick="setCategoryGroup('surrealStep')"><b>🌌 Surreale Welten</b><small>Traumwelten, Portale und unmögliche Räume</small></button>
-  <button onclick="setCategoryGroup('worldStep')"><b>🌍 Orte & Fantasie</b><small>Landschaften, Architektur, Film und Science-Fiction</small></button>
-  <button onclick="setCategoryGroup('photo')"><b>📷 Foto & Kamera</b><small>Licht, Objektive und Bildgestaltung</small></button>
-  <button class="v17-all" onclick="setCategoryGroup('all')"><b>✨ Alle Kategorien anzeigen</b><small>Die komplette Sammlung durchsuchen</small></button>
- </div>
- <div class="v17-tools"><button class="primary" onclick="document.getElementById('directorPanel').scrollIntoView({behavior:'smooth'})">✨ Kreativ-Generator öffnen</button><button class="secondary" onclick="document.getElementById('promptOutput').scrollIntoView({behavior:'smooth'})">📝 Mein Master-Prompt</button></div>
+<section class="v18-home" id="v18Home">
+ <div class="v18-intro"><span class="v18-kicker">ARTSTYLE STUDIO</span><h2>Was möchtest du gestalten?</h2></div>
+ <div class="v18-grid" id="v18CategoryGrid"></div>
+ <div class="v18-quick"><button type="button" onclick="v19OpenPrompt()">📝 Master-Prompt</button><button type="button" onclick="v19OpenGenerator()">✨ Zufallsidee</button></div>
 </section>
+<div class="v18-topnav" id="v18Topnav"><button type="button" onclick="v19Home()">← Zurück</button><strong id="v18CurrentTitle">Bereich</strong><button type="button" style="margin-left:auto" onclick="v19OpenPrompt()">Prompt</button></div>
 <div class="stats">
  <div class="stat"><div class="stat-number" id="selectedCount">0</div><div class="stat-label" id="selectedLabel"></div></div>
  <div class="stat"><div class="stat-number" id="categoryCount">0</div><div class="stat-label" id="categoryLabel"></div></div>
@@ -731,7 +791,7 @@ button.studio-tile {
 <button class="secondary" onclick="importData()" id="importButton"></button><button class="danger" onclick="resetAll()" id="resetButton"></button>
 </div><div class="status" id="status"></div></section>
 <section class="panel"><h2 id="libraryTitle"></h2><input class="library-search" id="librarySearch" oninput="renderSavedPrompts()"><div id="savedPrompts"></div></section>
-</main><footer>🎨 ArtStyle Studio V17.0 · Creative Workshop Edition · Dirk Eckert<div class="image-source-note">Foto-Vorschaubilder: <a href="https://unsplash.com/license" target="_blank" rel="noopener">Unsplash-Lizenz</a>.</div></footer>
+</main><footer>🎨 ArtStyle Studio V18.0 · Clean Experience · Dirk Eckert<div class="image-source-note">Foto-Vorschaubilder: <a href="https://unsplash.com/license" target="_blank" rel="noopener">Unsplash-Lizenz</a>.</div></footer>
 
 <script>
 const LANGS={
@@ -751,7 +811,7 @@ const CATEGORIES=[
 ["hosiery","🧦",true,{de:"Strumpfhose",en:"Pantyhose",es:"Pantimedias",fr:"Collants",ar:"الجوارب الطويلة"},["nudeNylon","fineTexture","realisticTransparency","continuousCoverage","silkyHighlights","blackSheer"]],
 ["shoes","👠",false,{de:"Schuhe",en:"Shoes",es:"Zapatos",fr:"Chaussures",ar:"الأحذية"},["strapHeels","heels","pumps","boots","sneakers","sandals","barefoot"]],
 ["pose","🧍",true,{de:"Pose",en:"Pose",es:"Pose",fr:"Pose",ar:"الوضعية"},["standingNatural","standingElegant","sitting","walking","confident","cameraTurned"]],
-["japan","🇯🇵",true,{de:"Japan",en:"Japan",es:"Japón",fr:"Japon",ar:"اليابان"},["kyotoSunset","fushimi","bamboo","tokyoNight","matsumoto","hakone","japanFantasyDiorama","japanGoldSculpture","japanMoonTemple"]],
+["🇯🇵",true,{de:"Japan",en:"Japan",es:"Japón",fr:"Japon",ar:"اليابان"},["kyotoSunset","fushimi","bamboo","tokyoNight","matsumoto","hakone","japanFantasyDiorama","japanGoldSculpture","japanMoonTemple"]],
 ["landscape","🏔️",true,{de:"Landschaft",en:"Landscape",es:"Paisaje",fr:"Paysage",ar:"المناظر الطبيعية"},["mountains","sunsetBeach","mistForest","reflectionLake","winter","tropical"]],
 ["africaArt","🌍",true,{de:"Afrika – Kunst & Welten",en:"Africa – Art & Worlds",es:"África – Arte y mundos",fr:"Afrique – Art et mondes",ar:"أفريقيا – الفن والعوالم"},["africanQueen","africanPortrait","africanHeadwrap","africanWarrior","africanRoyalCouple","africanGoldRelief","africanStoneRelief","africanBronzeArt","africanWildlife","lionPortrait","elephantFamily","giraffeSavannah","leopard","savannahSunset","baobabLandscape","victoriaFalls","africanVillage","desertDunes","africanNightSky","africanSpiritArt","africanSymbolicSpiritRelief","africanGoldDreamPortrait"]],
 ["style","🖼️",true,{de:"Bildstil",en:"Image Style",es:"Estilo de imagen",fr:"Style d'image",ar:"نمط الصورة"},["cinematic","fineArt","editorial","neoAbstract","dramatic","dreamlike","luxuryFashionPhoto","hyperDetailed"]],
@@ -768,12 +828,12 @@ const CATEGORIES=[
 ["spaceCharacters","🛡️",true,{de:"Sci-Fi Figuren & Droiden",en:"Sci-Fi Characters & Droids",es:"Personajes y droides",fr:"Personnages et droïdes",ar:"شخصيات وروبوتات خيال علمي"},["armoredSpaceSoldier","battleDroid","robotCompanion","spacePilot","galacticCommander","alienExplorer"]],
 ["spaceWorlds","🪐",true,{de:"Planeten & Welten",en:"Planets & Worlds",es:"Planetas y mundos",fr:"Planètes et mundes",ar:"كواكب وعوالم"},["desertPlanet","icePlanet","volcanicPlanet","oceanPlanet","forestMoon","ringedPlanet"]],
 ["spaceEffects","✨",true,{de:"Weltraum-Effekte",en:"Space Effects",es:"Efectos espaciales",fr:"Effets spatiaux",ar:"مؤثرات فضائية"},["laserBolts","engineGlow","cosmicNebula","cinematicLensFlare","explosionsInDistance","dramaticSpaceLighting"]],
-["trainType","🚆",false,{de:"Zugtyp",en:"Train Type",es:"Tipo de tren",fr:"Type de train",ar:"نوع القطار"},["swissPanoramaTrain","redAlpineExpress","historicSteamTrain","modernIntercity","mountainRailcar","vintageElectricTrain","luxuryTouristTrain"]],
-["trainLandscape","🏔️",true,{de:"Bahnlandschaften",en:"Railway Landscapes",es:"Paisajes ferroviarios",fr:"Paysages ferroviaires",ar:"مناظر السكك الحديدية"},["matterhornAlps","greenAlpineValley","flowerMeadow","pineForest","mountainLake","snowyMountainPass","dramaticCliffs","riversideRailway","alpineVillage"]],
-["trainRoute","🛤️",true,{de:"Strecken & Bauwerke",en:"Routes & Structures",es:"Rutas y estructuras",fr:"Itinéraires et ouvrages",ar:"المسارات والمنشآت"},["stoneViaduct","curvedMountainTrack","lakesideTrack","railwayTunnel","steepMountainLine","historicStation","highMountainBridge","valleyRailway"]],
-["trainView","📷",false,{de:"Zugperspektive",en:"Train Perspective",es:"Perspectiva del tren",fr:"Perspective du train",ar:"منظور القطار"},["frontThreeQuarterTrain","sideViewTrain","distantTrainLandscape","trainFromAbove","trackLevelView","trainApproachingCamera"]],
-["trainSeason","🌦️",false,{de:"Jahreszeit & Wetter",en:"Season & Weather",es:"Estación y clima",fr:"Saison et météo",ar:"الفصل والطقس"},["springAlps","summerAlps","autumnAlps","winterAlps","clearBlueSky","morningMist","goldenSunset","freshSnowfall"]],
-["trainMood","🌅",true,{de:"Licht & Bildstimmung",en:"Light & Atmosphere",es:"Luz y ambiente",fr:"Lumière et ambiance",ar:"الإضاءة والأجواء"},["brightTravelPoster","cinematicGoldenHour","crispDaylight","softCloudLight","moodyMountainAtmosphere","photorealisticTravel"]]
+["🚆",false,{de:"Zugtyp",en:"Train Type",es:"Tipo de tren",fr:"Type de train",ar:"نوع القطار"},["swissPanoramaTrain","redAlpineExpress","historicSteamTrain","modernIntercity","mountainRailcar","vintageElectricTrain","luxuryTouristTrain"]],
+["🏔️",true,{de:"Bahnlandschaften",en:"Railway Landscapes",es:"Paisajes ferroviarios",fr:"Paysages ferroviaires",ar:"مناظر السكك الحديدية"},["matterhornAlps","greenAlpineValley","flowerMeadow","pineForest","mountainLake","snowyMountainPass","dramaticCliffs","riversideRailway","alpineVillage"]],
+["🛤️",true,{de:"Strecken & Bauwerke",en:"Routes & Structures",es:"Rutas y estructuras",fr:"Itinéraires et ouvrages",ar:"المسارات والمنشآت"},["stoneViaduct","curvedMountainTrack","lakesideTrack","railwayTunnel","steepMountainLine","historicStation","highMountainBridge","valleyRailway"]],
+["📷",false,{de:"Zugperspektive",en:"Train Perspective",es:"Perspectiva del tren",fr:"Perspective du train",ar:"منظور القطار"},["frontThreeQuarterTrain","sideViewTrain","distantTrainLandscape","trainFromAbove","trackLevelView","trainApproachingCamera"]],
+["🌦️",false,{de:"Jahreszeit & Wetter",en:"Season & Weather",es:"Estación y clima",fr:"Saison et météo",ar:"الفصل والطقس"},["springAlps","summerAlps","autumnAlps","winterAlps","clearBlueSky","morningMist","goldenSunset","freshSnowfall"]],
+["🌅",true,{de:"Licht & Bildstimmung",en:"Light & Atmosphere",es:"Luz y ambiente",fr:"Lumière et ambiance",ar:"الإضاءة والأجواء"},["brightTravelPoster","cinematicGoldenHour","crispDaylight","softCloudLight","moodyMountainAtmosphere","photorealisticTravel"]]
 ];
 
 const O={africanWarrior:["Afrikanischer Krieger – würdevoll und kraftvoll", "African warrior – dignified and powerful", "Guerrero africano – digno y poderoso", "Guerrier africain – digne et puissant", "محارب أفريقي – مهيب وقوي"],
@@ -1437,10 +1497,10 @@ const CATEGORY_ORDER = [
   "person", "hair", "hairColor", "makeup", "clothing", "hosiery", "shoes", "pose",
   "beautyStyle", "beautyPose", "expression", "beautyMakeup", "beautyLips",
   "beautySkin", "beautyFraming", "beautyLighting", "beautyOutfit", "beautyAccessories",
-  "japan", "landscape", "africaArt", "style", "realism", "camera", "lens", "lighting",
+   "landscape", "africaArt", "style", "realism", "camera", "lens", "lighting",
   "mood", "fantasy", "format", "composition",
   "galaxyScene", "spacecraft", "spaceCharacters", "spaceWorlds", "spaceEffects", "spaceCharactersMore", "spaceLocations", "spaceScenes", "spaceWeapons", "spaceCamera",
-  "trainType", "trainLandscape", "trainRoute", "trainView", "trainSeason", "trainMood", "trainVehicles", "trainLocations", "trainStructures", "trainAtmosphere", "brokenRealityMore", "brokenEffects", "brokenLighting"
+        "trainVehicles", "trainLocations", "trainStructures", "trainAtmosphere", "brokenRealityMore", "brokenEffects", "brokenLighting"
 ];
 
 const NEW_VISUAL_STUDIOS = [
@@ -1846,9 +1906,13 @@ const CATEGORY_GROUPS = {
   artistStep: ["painterArt"],
   abstractStep: ["neoAbstractArt","colorExplosion","style","brokenReality","brokenRealityMore","brokenEffects","brokenLighting","dimensionSculpture","dimensionTexture","dimensionGlitch"],
   surrealStep: ["surrealDream","surrealSubjects","surrealComposition","surrealNature","surrealMood","surrealTime","fantasy","mysticalFantasy","romanticDream","floralLuxury","dimensionPortals","portalForm","portalWorld","portalTransition","portalMaterial","portalWater","portalAtmosphere","portalComposition","dimensionFrames"],
-  worldStep: ["portraitBackground","beautyBackground","japan","landscape","africaArt","galaxyScene","spacecraft","spaceCharacters","spaceWorlds","spaceEffects","trainType","trainLandscape","trainRoute","trainView","trainSeason","trainMood","filmAction","filmEpicRomance","filmSciFi","filmHorror","filmAdventure","filmPostApocalyptic","filmFantasy","filmCinematic","roomTypes","architecture","roomDetails","roomLighting","dimensionNature","fantasyPortals","fantasyArchitecture"],
+  worldStep: ["portraitBackground","beautyBackground","landscape","africaArt","galaxyScene","spacecraft","spaceCharacters","spaceWorlds","spaceEffects","filmAction","filmEpicRomance","filmSciFi","filmHorror","filmAdventure","filmPostApocalyptic","filmFantasy","filmCinematic","roomTypes","architecture","roomDetails","roomLighting","dimensionNature","fantasyPortals","fantasyArchitecture"],
   photo: ["camera","lens","lighting","photoTechnique","photoPerspective","realism","mood"]
 };
+
+// V19: kompakte Bereiche, ohne Japan- und Zugkategorien.
+CATEGORY_GROUPS.artCreative = [...(CATEGORY_GROUPS.abstractStep||[]), ...(CATEGORY_GROUPS.surrealStep||[])];
+CATEGORY_GROUPS.worldPhoto = [...(CATEGORY_GROUPS.worldStep||[]), ...(CATEGORY_GROUPS.photo||[])];
 
 const FILM_PREVIEW_IMAGES = {
   bondElegance: "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=640&q=75",
@@ -2146,7 +2210,7 @@ const CATEGORY_PREVIEW_FAMILY = {
   hosiery:"hosiery", hosieryStyle:"hosiery", hosieryDenier:"hosiery", hosieryPattern:"hosiery", hosieryColor:"hosiery", hosieryFoot:"hosiery",
   shoes:"shoes", pose:"people", beautyStyle:"beauty", beautyPose:"people", expression:"people",
   beautyMakeup:"beauty", beautyLips:"beauty", beautySkin:"beauty", beautyFraming:"people", beautyLighting:"lighting",
-  beautyOutfit:"fashion", beautyAccessories:"beauty", japan:"japan", landscape:"nature", africaArt:"africa",
+  beautyOutfit:"fashion", beautyAccessories:"beauty", landscape:"nature", africaArt:"africa",
   style:"art", realism:"realism", camera:"camera", lens:"camera", lighting:"lighting", mood:"mood",
   fantasy:"surreal", format:"camera", composition:"camera",
   galaxyScene:"space", spacecraft:"space", spaceCharacters:"space", spaceWorlds:"space", spaceEffects:"space",
@@ -2176,7 +2240,7 @@ function previewFamily(catId, label) {
   const name = String(label || "").toLowerCase();
   if (CATEGORY_PREVIEW_FAMILY[rawId] || CATEGORY_PREVIEW_FAMILY[id]) return CATEGORY_PREVIEW_FAMILY[rawId] || CATEGORY_PREVIEW_FAMILY[id];
   const has = (...words) => words.some(w => id.includes(w));
-  if (has("japan","kyoto","tokyo","fushimi")) return "japan";
+  if (has("kyoto","tokyo","fushimi")) return "japan";
   if (has("africa")) return "africa";
   if (has("space","galaxy","star","alien","planet","cosmic")) return "space";
   if (has("train","rail","locomotive")) return "train";
@@ -3303,5 +3367,24 @@ window.addEventListener("load", function(){
   if(strip) strip.scrollLeft=0;
 });
 </script>
+
+<script id="artstyle-v19-navigation">
+(function(){
+ CATEGORY_GROUPS.worldStep=(CATEGORY_GROUPS.worldStep||[]).filter(id=>id!=='japan' && !/train/i.test(id));
+ const groups=[
+  {id:'personStep',title:'Personen & Fashion',desc:'Porträts, Frisuren, Kleidung und Posen',icon:'👤'},
+  {id:'artistStep',title:'Maler & Kunst',desc:'Künstler, Epochen und klassische Malerei',icon:'🖼️'},
+  {id:'artCreative',title:'Abstrakt & Surreal',desc:'Mixed Media, Traumwelten und 3D-Kunst',icon:'🎨'},
+  {id:'worldPhoto',title:'Welten & Fotografie',desc:'Landschaften, Architektur, Film und Kamera',icon:'🌍'}
+ ];
+ window.v19Home=function(){document.body.classList.remove('v19-browse','v19-prompt','v19-generator');const a=document.getElementById('selectionArea');if(a)a.style.display='none';window.scrollTo({top:0,behavior:'smooth'});};
+ window.v19OpenGroup=function(id,title){document.body.classList.remove('v19-prompt','v19-generator');document.body.classList.add('v19-browse');document.getElementById('v18CurrentTitle').textContent=title;const search=document.getElementById('categorySearch');if(search)search.value='';setCategoryGroup(id);document.getElementById('categoryTitle').textContent=title;const a=document.getElementById('selectionArea');if(a)a.style.display='none';window.scrollTo({top:0,behavior:'smooth'});};
+ window.v19OpenPrompt=function(){document.body.classList.remove('v19-browse','v19-generator');document.body.classList.add('v19-prompt');document.getElementById('v18CurrentTitle').textContent='Master-Prompt';window.scrollTo({top:0,behavior:'smooth'});};
+ window.v19OpenGenerator=function(){document.body.classList.remove('v19-browse','v19-prompt');document.body.classList.add('v19-generator');document.getElementById('v18CurrentTitle').textContent='Zufallsidee';const p=document.getElementById('directorPanel');if(p){p.style.display='block';p.scrollIntoView({behavior:'smooth'});}};
+ function renderHome(){const grid=document.getElementById('v18CategoryGrid');if(!grid)return;grid.innerHTML='';groups.forEach(g=>{const ids=CATEGORY_GROUPS[g.id]||[];const first=ids.map(id=>CATEGORIES.find(c=>c[0]===id)).find(Boolean);const image=first?getPreviewImageUrl(first[0],'',g.title):'';const b=document.createElement('button');b.type='button';b.className='v18-card';b.innerHTML='<img loading="lazy" alt="'+g.title+' Vorschau" src="'+String(image).replace(/"/g,'&quot;')+'"><span class="v18-card-body"><strong>'+g.icon+' '+g.title+'</strong><small>'+g.desc+'</small><span class="v18-arrow">Öffnen →</span></span>';b.addEventListener('click',()=>v19OpenGroup(g.id,g.title));grid.appendChild(b);});}
+ document.addEventListener('DOMContentLoaded',function(){document.body.classList.add('v19-clean');['referencePreview','negativePrompt','promptOutput','savedPrompts','signatureText'].forEach(id=>{const el=document.getElementById(id);if(el){const sec=el.closest('section');if(sec)sec.classList.add('clean-prompt-section');}});renderHome();const title=document.getElementById('categoryTitle');if(title)title.textContent='Kategorien';});
+})();
+</script>
 </body>
 </html>
+

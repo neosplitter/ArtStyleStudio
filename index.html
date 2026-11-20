@@ -609,6 +609,65 @@ button.studio-tile {
   <div class="lab-actions"><button type="button" class="primary" onclick="createArtDirectorConcept()">✨ Drei Bildkonzepte entwickeln</button><button type="button" class="secondary" onclick="clearArtDirectorConcept()">Zurücksetzen</button></div>
   <div id="artDirectorResult" class="art-director-result" aria-live="polite">Wähle eine Kreativwelt aus und entwickle daraus drei unterschiedliche Bildideen.</div>
 </section>
+
+<section class="panel v16-suite" id="v16CreativeSuite">
+ <div class="v16-head"><span class="v16-kicker">ARTSTYLE STUDIO · V16.0</span><h2>🚀 Die Kreativwerkstatt</h2><p class="hint">Sieben neue Studios, ein Ideen-Generator und sofort nutzbare Master-Prompts. Alle Ergebnisse kannst du in deinen bestehenden Prompt übernehmen.</p></div>
+ <div class="v16-grid">
+  <button type="button" class="v16-card" onclick="v16Choose('double')"><span>🌓</span><b>Double Exposure Studio</b><small>Porträts, Natur und Galaxien verschmelzen</small></button>
+  <button type="button" class="v16-card" onclick="v16Choose('miniature')"><span>🔮</span><b>Miniatur-Welten</b><small>Ganze Welten in Glas, Flaschen und Objekten</small></button>
+  <button type="button" class="v16-card" onclick="v16Choose('impossible')"><span>🏛️</span><b>Impossible World Designer</b><small>Unmögliche Architektur und Perspektiven</small></button>
+  <button type="button" class="v16-card" onclick="v16Choose('fashion')"><span>👗</span><b>Fashion Editorial Studio</b><small>High-Fashion, Styling und Studiofotografie</small></button>
+  <button type="button" class="v16-card" onclick="v16Choose('materials')"><span>💎</span><b>Material & Texturen Labor</b><small>Resin, Chrom, Gold, Glas und Kristall</small></button>
+  <button type="button" class="v16-card" onclick="v16Choose('cinema')"><span>🎬</span><b>Cinematic Storyboard</b><small>Filmische Szenen und visuelle Erzählungen</small></button>
+  <button type="button" class="v16-card" onclick="v16Choose('artdirector')"><span>🎨</span><b>Art Director Zufallsgenerator</b><small>Überraschende Kombinationen auf Knopfdruck</small></button>
+ </div>
+ <div class="v16-controls">
+  <label>Bildformat<select id="v16Format"><option>9:16 Hochformat</option><option>4:5 Portrait</option><option>3:4 Portrait</option><option>1:1 Quadrat</option><option>16:9 Querformat</option></select></label>
+  <label>Bildstimmung<select id="v16Mood"><option>Cineastisch und atmosphärisch</option><option>Surreal und traumhaft</option><option>Luxuriös und elegant</option><option>Düster und dramatisch</option><option>Farbenfroh und experimentell</option><option>Minimalistisch und edel</option></select></label>
+  <label>Detailgrad<select id="v16Detail"><option>Ultra-detailliert, fotorealistisch</option><option>Hochwertige Fine-Art-Komposition</option><option>Surrealistische 3D-Mixed-Media-Kunst</option><option>Professionelle Editorial-Fotografie</option></select></label>
+ </div>
+ <div class="v16-actions">
+  <button type="button" class="primary" onclick="v16Surprise()">🎲 Überrasche mich</button>
+  <button type="button" class="secondary" onclick="v16ShowTemplates()">📚 Master-Prompt-Vorlagen</button>
+  <button type="button" class="secondary" onclick="v16CopyResult()">📋 Ergebnis kopieren</button>
+ </div>
+ <div id="v16TemplateShelf" class="v16-templates" hidden></div>
+ <div id="v16Result" class="v16-result" aria-live="polite">Wähle ein Studio oder tippe auf „Überrasche mich“, um eine neue Bildidee zu entwickeln.</div>
+ <div class="v16-actions"><button type="button" class="primary" onclick="v16UsePrompt()">⬇ In meinen Master-Prompt übernehmen</button></div>
+</section>
+<style>
+.v16-suite{margin-top:24px;border:1px solid rgba(150,170,210,.25);background:linear-gradient(145deg,rgba(34,42,65,.94),rgba(18,22,36,.98));color:inherit}.v16-kicker{font-size:.72rem;letter-spacing:.16em;color:#a9baff;font-weight:800}.v16-head h2{margin:.4rem 0}.v16-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:18px 0}.v16-card{display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:7px;min-height:125px;padding:15px;border:1px solid rgba(180,195,230,.24);border-radius:14px;background:rgba(255,255,255,.055);color:inherit;cursor:pointer}.v16-card span{font-size:1.7rem}.v16-card b{font-size:.96rem}.v16-card small{opacity:.76;line-height:1.4}.v16-card:active{transform:scale(.98)}.v16-controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:18px 0}.v16-controls label{display:flex;flex-direction:column;gap:6px;font-size:.88rem}.v16-controls select{width:100%;padding:10px;border-radius:9px}.v16-actions{display:flex;flex-wrap:wrap;gap:9px;margin:12px 0}.v16-result{white-space:pre-wrap;line-height:1.55;padding:16px;border:1px solid rgba(170,190,230,.25);border-radius:12px;background:rgba(0,0,0,.18);min-height:80px;overflow-wrap:anywhere}.v16-templates{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:14px 0}.v16-template{padding:12px;border-radius:10px;border:1px solid rgba(170,190,230,.25);background:rgba(255,255,255,.05);color:inherit;text-align:left;cursor:pointer}.v16-template b,.v16-template small{display:block;margin-bottom:6px}@media(max-width:520px){.v16-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.v16-card{min-height:135px;padding:12px}.v16-actions button{flex:1 1 100%}}
+</style>
+<script>
+(()=>{
+ const concepts={
+ double:{title:'Double Exposure – Zwei Welten in einer Seele',prompt:'A breathtaking double-exposure fine-art composition: a dignified cinematic portrait seamlessly blended with a vast atmospheric landscape of ancient forest, distant mountains and a luminous cosmic sky. Delicate transitions between human silhouette and nature, layered depth, subtle film grain, intricate details, balanced visual storytelling.'},
+ miniature:{title:'Miniatur-Welt im Kristall',prompt:'A complete dreamlike miniature world contained inside a flawless transparent crystal sphere, featuring a cascading waterfall, tiny ancient architecture, lush vegetation and atmospheric mountains. Physically believable glass refraction, realistic reflections, intricate miniature craftsmanship, magical cinematic lighting, surreal fine-art 3D composition.'},
+ impossible:{title:'Architektur jenseits der Physik',prompt:'A monumental impossible architectural world with interlocking staircases, gravity-defying bridges, floating arches and an endless perspective. Sophisticated stone, glass and metallic materials, subtle atmospheric haze, mathematically intriguing spatial paradoxes, cinematic scale and ultra-detailed surreal 3D fine art.'},
+ fashion:{title:'Luxury Fashion Editorial',prompt:'An exceptionally polished luxury fashion editorial photograph, confident natural pose, sophisticated couture styling, premium fabric textures, refined accessories, elegant architectural setting, professional magazine art direction, realistic skin texture, flattering but natural studio lighting, 85mm portrait photography.'},
+ materials:{title:'Liquid Gold & Crystal Resin',prompt:'An extraordinary abstract resin-art sculpture combining flowing liquid gold, translucent crystal, polished chrome and fractured glass. Intricate material transitions, realistic caustics and reflections, sculptural depth, elegant controlled composition, dramatic gallery lighting, premium contemporary mixed-media fine art.'},
+ cinema:{title:'Cinematic Story – Der entscheidende Moment',prompt:'A powerful cinematic film still capturing the decisive moment of an epic story. Strong foreground, layered middle distance and atmospheric background, expressive environmental storytelling, realistic practical lighting, volumetric atmosphere, carefully controlled color grading, exceptional production design and widescreen-film realism.'},
+ artdirector:{title:'Surreal Art Director – Portal der Möglichkeiten',prompt:'A spectacular surreal 3D mixed-media artwork in which a monumental glowing dimensional portal opens inside a fractured sculptural surface, revealing an impossible world of floating landscapes, cascading water, crystalline structures and dreamlike architecture. Rich tactile materials, convincing reflections, deep perspective and cinematic light.'}
+ };
+ const templates=[
+  ['Portal aus einer anderen Dimension','A gigantic dimensional portal tears through an ancient stone wall, revealing a luminous impossible landscape, floating islands, waterfalls and distant architecture. Surreal 3D mixed media, cinematic lighting, intricate textures, deep perspective.'],
+  ['Ozean in einer Glaskugel','A miniature ocean world inside a crystal-clear glass sphere, with turquoise waves, tiny cliffs, a lighthouse and a hidden sunset. Photorealistic glass refraction, delicate highlights, premium surreal fine art.'],
+  ['Porträt trifft Galaxie','An elegant portrait blended with a deep-space nebula, stars and distant galaxies, seamless double exposure, sophisticated color harmony, realistic portrait photography and fine-art atmosphere.'],
+  ['Resin Art – Goldener Wasserfall','A sculptural resin-art composition with a flowing golden waterfall, transparent layers, polished stone, liquid chrome and crystal fragments, physically realistic reflections and dramatic gallery lighting.'],
+  ['Fashion – Golden Hour','High-end fashion editorial at golden hour, refined couture, natural confident pose, realistic textile detail, warm rim light, architectural background and professional 85mm photography.'],
+  ['Unmögliche Traumstadt','An impossible dream city with Escher-like staircases, floating bridges, inverted towers and endless vanishing points, monumental cinematic surreal architecture, atmospheric haze and meticulous 3D detail.']
+ ];
+ let current='';
+ const $=id=>document.getElementById(id);
+ function formatPrompt(key){const c=concepts[key];return `${c.title}\n\n${c.prompt}\n\n${$('v16Detail')?.value||'Ultra-detailed'}; ${$('v16Mood')?.value||'cinematic'}; ${$('v16Format')?.value||'9:16 Hochformat'}. Professional composition, coherent color grading, realistic material textures, precise depth and premium visual quality. Preserve the exact identity and facial features of any supplied reference person; do not beautify, retouch or alter the face. If a signature is enabled in the main studio, retain its settings.`}
+ window.v16Choose=key=>{if(!concepts[key])return;current=key;$('v16Result').textContent=formatPrompt(key);};
+ window.v16Surprise=()=>{const keys=Object.keys(concepts);current=keys[Math.floor(Math.random()*keys.length)];const moods=['Cinematic twilight with luminous highlights','Dreamlike golden-hour atmosphere','Dramatic chiaroscuro and deep shadows','Iridescent color accents and soft volumetric haze','Minimal luxury gallery lighting'];$('v16Mood').value=moods[Math.floor(Math.random()*moods.length)];$('v16Result').textContent='🎲 '+formatPrompt(current);};
+ window.v16ShowTemplates=()=>{const box=$('v16TemplateShelf');box.hidden=false;box.innerHTML='';templates.forEach(([name,prompt])=>{const b=document.createElement('button');b.type='button';b.className='v16-template';const strong=document.createElement('b');strong.textContent=name;const small=document.createElement('small');small.textContent=prompt.slice(0,115)+'…';b.append(strong,small);b.addEventListener('click',()=>{$('v16Result').textContent=prompt+'\n\n'+$('v16Detail').value+'; '+$('v16Mood').value+'; '+$('v16Format').value+'. Preserve exact identity of any supplied reference face.';current='';});box.appendChild(b);});};
+ window.v16UsePrompt=()=>{const result=$('v16Result')?.textContent||'';if(!result.trim()||result.startsWith('Wähle ein Studio')){alert('Bitte zuerst eine Bildidee auswählen.');return;}const field=$('promptOutput');if(!field){alert('Das Master-Prompt-Feld wurde nicht gefunden.');return;}field.value=(field.value.trim()?field.value.trim()+'\n\n':'')+result;field.dispatchEvent(new Event('input',{bubbles:true}));if(typeof updateCharCount==='function')updateCharCount();field.scrollIntoView({behavior:'smooth',block:'center'});};
+ window.v16CopyResult=async()=>{const value=$('v16Result')?.textContent||'';if(!value.trim()||value.startsWith('Wähle ein Studio')){alert('Bitte zuerst eine Bildidee auswählen.');return;}const ok=await window.copyTextToClipboard(value);if(typeof showStatus==='function')showStatus(ok?'✅ Kreatividee kopiert.':'Kopieren nicht möglich. Bitte Text markieren und kopieren.');else alert(ok?'Kopiert.':'Kopieren nicht möglich.');};
+})();
+</script>
+
 <section class="panel" id="signaturePanel">
  <h2>✍️ Logo & Signatur</h2>
  <p class="hint">Füge deinen Namen, ein Logo oder einen kurzen Schriftzug hinzu und bestimme die Position im Bild.</p>
@@ -650,7 +709,7 @@ button.studio-tile {
 <button class="secondary" onclick="importData()" id="importButton"></button><button class="danger" onclick="resetAll()" id="resetButton"></button>
 </div><div class="status" id="status"></div></section>
 <section class="panel"><h2 id="libraryTitle"></h2><input class="library-search" id="librarySearch" oninput="renderSavedPrompts()"><div id="savedPrompts"></div></section>
-</main><footer>🎨 ArtStyle Studio V14.2 · Visual Composer Edition · Dirk Eckert<div class="image-source-note">Foto-Vorschaubilder: <a href="https://unsplash.com/license" target="_blank" rel="noopener">Unsplash-Lizenz</a>.</div></footer>
+</main><footer>🎨 ArtStyle Studio V16.0 · Creative Workshop Edition · Dirk Eckert<div class="image-source-note">Foto-Vorschaubilder: <a href="https://unsplash.com/license" target="_blank" rel="noopener">Unsplash-Lizenz</a>.</div></footer>
 
 <script>
 const LANGS={

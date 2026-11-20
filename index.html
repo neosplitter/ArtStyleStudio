@@ -300,7 +300,16 @@ button.studio-tile {
     <button type="button" class="tab" data-group="photo" onclick="setCategoryGroup('photo')">Foto & Technik</button>
     <button type="button" class="tab" data-group="surreal" onclick="setCategoryGroup('surreal')">Surreale Bildwelten</button>
     <button type="button" class="tab" data-group="rooms" onclick="setCategoryGroup('rooms')">Räume & Architektur</button>
-    <button type="button" class="tab" data-group="barefoot" onclick="setCategoryGroup('barefoot')">Barf
+    <button type="button" class="tab" data-group="barefoot" onclick="setCategoryGroup('barefoot')">Barfuß & Fuß-Fashion</button>
+    <button type="button" class="tab" data-group="art" onclick="setCategoryGroup('art')">Maler & Kunststile</button>
+    <button type="button" class="tab" data-group="dimension" onclick="setCategoryGroup('dimension')">3D Mixed Media</button>
+    <button type="button" class="tab" data-group="film" onclick="setCategoryGroup('film')">Hollywood & Filmwelten</button>
+    <button type="button" class="tab" data-group="pair" onclick="setCategoryGroup('pair')">Paarbilder & Posen</button>
+  </div>
+</div>
+<div class="categories" id="categoriesContainer"></div>
+<section id="selectionArea"><div class="selection-header"><h2 id="selectionTitle"></h2><button class="close-selection" onclick="closeSelection()" id="closeButton"></button></div><p class="hint" id="selectionHint"></p><div class="options" id="optionsContainer"></div></section>
+
 <section class="panel composer-panel" id="visualComposer">
  <h2>🧭 Visueller Bild-Komponist</h2>
  <p class="hint">Stelle die Bildszene in wenigen Schritten zusammen. Diese Angaben ergänzen deine Kategorien und werden in den Master-Prompt übernommen.</p>
@@ -332,15 +341,6 @@ button.studio-tile {
  </div>
  <div class="composer-result" id="composerResult" aria-live="polite"></div>
 </section>
-uß & Fuß-Fashion</button>
-    <button type="button" class="tab" data-group="art" onclick="setCategoryGroup('art')">Maler & Kunststile</button>
-    <button type="button" class="tab" data-group="dimension" onclick="setCategoryGroup('dimension')">3D Mixed Media</button>
-    <button type="button" class="tab" data-group="film" onclick="setCategoryGroup('film')">Hollywood & Filmwelten</button>
-    <button type="button" class="tab" data-group="pair" onclick="setCategoryGroup('pair')">Paarbilder & Posen</button>
-  </div>
-</div>
-<div class="categories" id="categoriesContainer"></div>
-<section id="selectionArea"><div class="selection-header"><h2 id="selectionTitle"></h2><button class="close-selection" onclick="closeSelection()" id="closeButton"></button></div><p class="hint" id="selectionHint"></p><div class="options" id="optionsContainer"></div></section>
 
 <section class="panel" id="directorPanel">
  <h2>🎬 Kreativ-Regisseur – dein Bildkonzept</h2>

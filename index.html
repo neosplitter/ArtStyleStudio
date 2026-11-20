@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ArtStyle Studio V15.6 – Surreale 3D-Welten</title>
+<title>ArtStyle Studio V15.7 – Guided Creative Lab</title>
 <style>
 :root{
   --bg:#080a10;--bg2:#101524;--card:#151a28;--card2:#20263a;
@@ -458,6 +458,16 @@ button.studio-tile {
 }
 
 </style>
+
+<style id="artstyle-v15-7-wizard">
+.category-toolbar{padding:18px;border:1px solid rgba(115,160,220,.22);border-radius:20px;background:rgba(12,20,36,.82);}
+.wizard-intro{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:2px 0 10px}.wizard-intro strong{display:block;font-size:19px;color:#fff}.wizard-intro span:not(.wizard-count){display:block;margin-top:4px;color:#aeb6cf;font-size:13px}.wizard-count{flex:0 0 auto;padding:7px 10px;border-radius:20px;background:#242d45;color:#e9ddff;font-size:12px;font-weight:700}.wizard-progress{height:6px;background:#252d43;border-radius:10px;overflow:hidden;margin-bottom:13px}.wizard-progress span{display:block;width:9%;height:100%;border-radius:10px;background:linear-gradient(90deg,#8b5cf6,#ec4899);transition:width .25s ease}
+.category-tabs.category-steps{display:flex;flex-wrap:nowrap;gap:8px;overflow-x:auto;padding:4px 2px 12px;scrollbar-width:thin;scroll-snap-type:x proximity}.category-steps .tab{display:flex;align-items:center;gap:8px;flex:0 0 auto;width:auto;max-width:245px;margin:0;padding:10px 13px;border-radius:13px;background:#182238;border:1px solid #3b4964;color:#dce5f7;font-size:13px;line-height:1.25;white-space:nowrap;box-shadow:none}.category-steps .tab .step-number{display:inline-grid;place-items:center;flex:0 0 25px;width:25px;height:25px;border-radius:50%;background:#303b55;color:#dbeafe;font-weight:800}.category-steps .tab.active{background:linear-gradient(135deg,#6234bb,#9d286e);border-color:#c084fc;color:#fff}.category-steps .tab.completed .step-number{background:#166534;color:#fff}.wizard-controls{display:flex;justify-content:space-between;gap:12px;margin-top:8px}.wizard-controls button{width:auto;min-width:120px;padding:12px 17px;font-size:14px}.wizard-controls button:disabled{opacity:.35;cursor:not-allowed;transform:none}
+.art-director-lab{border-color:rgba(192,132,252,.42);background:linear-gradient(145deg,rgba(20,28,48,.96),rgba(34,22,57,.94))}.lab-kicker{font-size:11px;letter-spacing:2px;font-weight:800;color:#d8a7ff}.lab-heading h2{margin:5px 0 8px}.creative-world-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin-top:18px}.creative-world{display:flex;flex-direction:column;align-items:flex-start;gap:7px;text-align:left;min-height:135px;padding:15px;border:1px solid #3b4964;border-radius:16px;background:linear-gradient(145deg,#1c2941,#111a2d);color:#fff}.creative-world>span{font-size:26px}.creative-world strong{font-size:14px}.creative-world small{font-size:12px;line-height:1.45;color:#b5bfd4;font-weight:400}.creative-world.selected{border:2px solid #c084fc;background:linear-gradient(145deg,#38245f,#251b43);box-shadow:0 0 18px rgba(168,85,247,.2)}.lab-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:15px}.lab-actions button{width:auto}.art-director-result{margin-top:15px;padding:16px;border:1px solid rgba(129,140,248,.35);border-radius:15px;background:rgba(6,12,25,.72);color:#e5e7eb;white-space:pre-wrap;line-height:1.55;font-size:14px}
+@media(max-width:700px){.category-toolbar{padding:13px}.wizard-intro strong{font-size:16px}.wizard-count{font-size:11px}.creative-world-grid{grid-template-columns:1fr 1fr}.creative-world{min-height:145px;padding:12px}.wizard-controls button{min-width:0;flex:1}.category-steps .tab{padding:9px 11px}}
+@media(max-width:390px){.creative-world-grid{grid-template-columns:1fr}}
+</style>
+
 </head>
 <body>
 <header>
@@ -503,22 +513,27 @@ button.studio-tile {
 <h2 class="section-title" id="categoryTitle">Bild Schritt für Schritt gestalten</h2>\n<p class="hint workflow-hint">Beginne mit der Person und gehe Schritt für Schritt weiter. Danach gestaltest du die Bildwelt, wählst Künstler und Kunstrichtungen, kombinierst abstrakte oder surreale Elemente und ergänzt 3D-Mixed-Media. Kamera und Licht kommen zum Schluss.</p>
 <div class="category-toolbar">
   <input id="categorySearch" class="category-search" type="search" placeholder="Bereiche suchen …" oninput="renderCategories()">
+  <div class="wizard-intro">
+    <div><strong id="wizardTitle">Dein Gestaltungsablauf</strong><span id="wizardDescription">Arbeite dich Schritt für Schritt durch dein Bildkonzept.</span></div>
+    <span class="wizard-count" id="wizardCount">Schritt 1 von 11</span>
+  </div>
+  <div class="wizard-progress"><span id="wizardProgress"></span></div>
   <div class="category-tabs category-steps" id="categoryTabs" aria-label="Schritte zur Bildgestaltung">
     <button type="button" class="tab active" data-group="personStep" onclick="setCategoryGroup('personStep')"><span class="step-number">1</span><span>Person</span></button>
-    <button type="button" class="tab" data-group="hairStep" onclick="setCategoryGroup('hairStep')"><span class="step-number">2</span><span>Frisur</span></button>
-    <button type="button" class="tab" data-group="hairColorStep" onclick="setCategoryGroup('hairColorStep')"><span class="step-number">3</span><span>Haarfarbe</span></button>
-    <button type="button" class="tab" data-group="makeupStep" onclick="setCategoryGroup('makeupStep')"><span class="step-number">4</span><span>Make-up</span></button>
-    <button type="button" class="tab" data-group="clothingStep" onclick="setCategoryGroup('clothingStep')"><span class="step-number">5</span><span>Kleidung</span></button>
-    <button type="button" class="tab" data-group="shoesStep" onclick="setCategoryGroup('shoesStep')"><span class="step-number">6</span><span>Schuhe & Details</span></button>
-    <button type="button" class="tab" data-group="poseStep" onclick="setCategoryGroup('poseStep')"><span class="step-number">7</span><span>Pose</span></button>
-    <button type="button" class="tab" data-group="worldStep" onclick="setCategoryGroup('worldStep')"><span class="step-number">8</span><span>Bildwelt</span></button>
-    <button type="button" class="tab" data-group="artistStep" onclick="setCategoryGroup('artistStep')"><span class="step-number">9</span><span>Künstler & Kunstrichtungen</span></button>
-    <button type="button" class="tab" data-group="abstractStep" onclick="setCategoryGroup('abstractStep')"><span class="step-number">10</span><span>Abstrakte Kunst</span></button>
-    <button type="button" class="tab" data-group="surrealStep" onclick="setCategoryGroup('surrealStep')"><span class="step-number">11</span><span>Surrealismus & Traumwelten</span></button>
-    <button type="button" class="tab" data-group="mixedMediaStep" onclick="setCategoryGroup('mixedMediaStep')"><span class="step-number">12</span><span>3D & Mixed Media</span></button>
-    <button type="button" class="tab" data-group="surreal3DStep" onclick="setCategoryGroup('surreal3DStep')"><span class="step-number">13</span><span>Surreale 3D-Welten</span></button>
-    <button type="button" class="tab" data-group="artSpaceStep" onclick="setCategoryGroup('artSpaceStep')"><span class="step-number">14</span><span>Räume, Natur & Materialien</span></button>
-    <button type="button" class="tab" data-group="photo" onclick="setCategoryGroup('photo')"><span class="step-number">15</span><span>Kamera & Licht</span></button>
+    <button type="button" class="tab" data-group="hairStep" onclick="setCategoryGroup('hairStep')"><span class="step-number">2</span><span>Haare & Farbe</span></button>
+    <button type="button" class="tab" data-group="makeupStep" onclick="setCategoryGroup('makeupStep')"><span class="step-number">3</span><span>Make-up</span></button>
+    <button type="button" class="tab" data-group="clothingStep" onclick="setCategoryGroup('clothingStep')"><span class="step-number">4</span><span>Kleidung</span></button>
+    <button type="button" class="tab" data-group="shoesStep" onclick="setCategoryGroup('shoesStep')"><span class="step-number">5</span><span>Schuhe & Accessoires</span></button>
+    <button type="button" class="tab" data-group="poseStep" onclick="setCategoryGroup('poseStep')"><span class="step-number">6</span><span>Pose & Bildaufbau</span></button>
+    <button type="button" class="tab" data-group="artistStep" onclick="setCategoryGroup('artistStep')"><span class="step-number">7</span><span>Künstler & Kunstrichtungen</span></button>
+    <button type="button" class="tab" data-group="abstractStep" onclick="setCategoryGroup('abstractStep')"><span class="step-number">8</span><span>Abstrakt & Mixed Media</span></button>
+    <button type="button" class="tab" data-group="surrealStep" onclick="setCategoryGroup('surrealStep')"><span class="step-number">9</span><span>Surreale 3D-Welten</span></button>
+    <button type="button" class="tab" data-group="worldStep" onclick="setCategoryGroup('worldStep')"><span class="step-number">10</span><span>Umgebung & Bildstimmung</span></button>
+    <button type="button" class="tab" data-group="photo" onclick="setCategoryGroup('photo')"><span class="step-number">11</span><span>Kamera & Licht</span></button>
+  </div>
+  <div class="wizard-controls">
+    <button type="button" class="secondary" id="wizardPrev" onclick="moveWizard(-1)" disabled>← Zurück</button>
+    <button type="button" class="primary" id="wizardNext" onclick="moveWizard(1)">Weiter →</button>
   </div>
 </div>
 <section class="panel composer-panel" id="visualComposer">
@@ -580,11 +595,25 @@ button.studio-tile {
   <button class="secondary" type="button" onclick="clearDirector()">↺ Regie zurücksetzen</button>
  </div>
 </section>
+<section class="panel art-director-lab" id="creativeWorldLab">
+  <div class="lab-heading"><div><span class="lab-kicker">ARTSTYLE CREATIVE LAB</span><h2>✨ Kreativwelten & KI-Kunstregisseur</h2><p class="hint">Entwickle außergewöhnliche Bildideen aus mehreren passenden Bausteinen. Wähle eine Welt und lass daraus ein vollständiges Konzept entstehen.</p></div></div>
+  <div class="creative-world-grid">
+    <button type="button" class="creative-world" onclick="chooseCreativeWorld('objectWorld')"><span>🫙</span><strong>Welten in Objekten</strong><small>Landschaften in Flaschen, Kristallen und Glaskugeln</small></button>
+    <button type="button" class="creative-world" onclick="chooseCreativeWorld('impossibleArchitecture')"><span>🏛️</span><strong>Unmögliche Architektur</strong><small>Schwebende Treppen, Brücken und Traumstädte</small></button>
+    <button type="button" class="creative-world" onclick="chooseCreativeWorld('doubleWorlds')"><span>🪞</span><strong>Surreale Doppelwelten</strong><small>Porträts verschmelzen mit Natur und Galaxien</small></button>
+    <button type="button" class="creative-world" onclick="chooseCreativeWorld('floatingNature')"><span>🌳</span><strong>Schwebende Naturwelten</strong><small>Inseln, Bäume, Wasserfälle und Nebel</small></button>
+    <button type="button" class="creative-world" onclick="chooseCreativeWorld('artBreakout')"><span>🎨</span><strong>Kunst bricht aus dem Bild</strong><small>Zerbrochene Leinwände, fließende Farbe und 3D-Tiefe</small></button>
+    <button type="button" class="creative-world" onclick="chooseCreativeWorld('crystalWorlds')"><span>💎</span><strong>Kristall- & Spiegelwelten</strong><small>Reflexionen, Lichtbrechung und Portale</small></button>
+    <button type="button" class="creative-world" onclick="chooseCreativeWorld('mechanicalDreams')"><span>⚙️</span><strong>Mechanische Traumwelten</strong><small>Zahnräder, Uhrwerke und lebendige Maschinen</small></button>
+  </div>
+  <div class="lab-actions"><button type="button" class="primary" onclick="createArtDirectorConcept()">✨ Drei Bildkonzepte entwickeln</button><button type="button" class="secondary" onclick="clearArtDirectorConcept()">Zurücksetzen</button></div>
+  <div id="artDirectorResult" class="art-director-result" aria-live="polite">Wähle eine Kreativwelt aus und entwickle daraus drei unterschiedliche Bildideen.</div>
+</section>
 <section class="panel" id="signaturePanel">
  <h2>✍️ Logo & Signatur</h2>
  <p class="hint">Füge deinen Namen, ein Logo oder einen kurzen Schriftzug hinzu und bestimme die Position im Bild.</p>
  <label class="director-label" for="signatureText">Text / Signatur / Logo-Bezeichnung</label>
- <input id="signatureText" type="text" maxlength="70" placeholder="z. B. Dirk Eckert oder D.E Media">
+ <input id="signatureText" type="text" maxlength="70" value="Dirk Eckert" placeholder="z. B. Dirk Eckert oder D.E Media">
  <div class="director-grid signature-grid">
   <label>Position
    <select id="signaturePosition"><option value="right">Rechts</option><option value="center">Mittig</option><option value="left">Links</option></select>
@@ -653,7 +682,6 @@ const CATEGORIES=[
 ["fantasy","🌌",true,{de:"Fantasy",en:"Fantasy",es:"Fantasía",fr:"Fantaisie",ar:"الخيال"},["surreal","mystical","magicLight","cinematicFantasy","epic","dreamScene"]],
 ["format","📐",false,{de:"Bildformat",en:"Aspect Ratio",es:"Formato",fr:"Format",ar:"أبعاد الصورة"},["ar916","ar169","ar11","ar45","ar34","ar23"]],
 ["composition","🎬",true,{de:"Komposition",en:"Composition",es:"Composición",fr:"Composition",ar:"التكوين"},["professionalComposition","symmetric","dynamic","eyeLevel","cameraBack","fullBodyFeet"]],
-["adultCreative","🔞",true,{de:"18+ Kreativbereich",en:"18+ Creative Area",es:"Área creativa 18+",fr:"Espace créatif 18+",ar:"منطقة إبداعية +18"},["adultElegant","fashionStudio","seatedStylish","standingGlamour","cinematicFashion","artisticPortrait"]],
 ["galaxyScene","🌌",true,{de:"Galaktische Szenen",en:"Galactic Scenes",es:"Escenas galácticas",fr:"Scènes galactiques",ar:"مشاهد مجرية"},["spaceBattle","fleetFormation","planetOrbit","moonlitGalaxy","deepSpace","spaceStation","asteroidField"]],
 ["spacecraft","🚀",true,{de:"Raumschiffe & Flotten",en:"Spaceships & Fleets",es:"Naves y flotas",fr:"Vaisseaux et flottes",ar:"سفن وأساطيل فضائية"},["triangularStarship","fighterSquadron","sleekStarfighter","massiveDreadnought","cargoShip","orbitalCruiser"]],
 ["spaceCharacters","🛡️",true,{de:"Sci-Fi Figuren & Droiden",en:"Sci-Fi Characters & Droids",es:"Personajes y droides",fr:"Personnages et droïdes",ar:"شخصيات وروبوتات خيال علمي"},["armoredSpaceSoldier","battleDroid","robotCompanion","spacePilot","galacticCommander","alienExplorer"]],
@@ -1329,7 +1357,7 @@ const CATEGORY_ORDER = [
   "beautyStyle", "beautyPose", "expression", "beautyMakeup", "beautyLips",
   "beautySkin", "beautyFraming", "beautyLighting", "beautyOutfit", "beautyAccessories",
   "japan", "landscape", "africaArt", "style", "realism", "camera", "lens", "lighting",
-  "mood", "fantasy", "format", "composition", "adultCreative",
+  "mood", "fantasy", "format", "composition",
   "galaxyScene", "spacecraft", "spaceCharacters", "spaceWorlds", "spaceEffects", "spaceCharactersMore", "spaceLocations", "spaceScenes", "spaceWeapons", "spaceCamera",
   "trainType", "trainLandscape", "trainRoute", "trainView", "trainSeason", "trainMood", "trainVehicles", "trainLocations", "trainStructures", "trainAtmosphere", "brokenRealityMore", "brokenEffects", "brokenLighting"
 ];
@@ -1727,22 +1755,18 @@ const PRESETS=[
 ];
 
 const CATEGORY_GROUPS = {
-  // Schrittfolge für den normalen Porträt-/Fashion-Workflow.
+  // Geführter Ablauf: erst Motiv und Styling, danach die künstlerische Bildsprache.
   personStep: ["person"],
-  hairStep: ["hair"],
-  hairColorStep: ["hairColor"],
+  hairStep: ["hair","hairColor"],
   makeupStep: ["makeup","beautyMakeup","beautyLips","beautySkin"],
   clothingStep: ["clothing","womenClothing","menClothing","clothingColor","clothingMaterial","clothingDetails","beautyOutfit","beautyAccessories"],
   shoesStep: ["shoes","hosiery","hosieryStyle","hosieryDenier","hosieryPattern","hosieryColor","hosieryFoot","barefootStyle","footPose","barefootBodyPose","feetFraming","feetDetails"],
-  poseStep: ["pose","womenPose","menPose","beautyPose","expression","pairType","pairStyle","pairPose","pairFraming","pairSetting"],
-  worldStep: ["portraitBackground","beautyBackground","japan","landscape","africaArt","galaxyScene","spacecraft","spaceCharacters","spaceWorlds","spaceEffects","trainType","trainLandscape","trainRoute","trainView","trainSeason","trainMood","filmAction","filmEpicRomance","filmSciFi","filmHorror","filmAdventure","filmPostApocalyptic","filmFantasy","filmCinematic","format","composition"],
+  poseStep: ["pose","womenPose","menPose","beautyPose","expression","pairType","pairStyle","pairPose","pairFraming","pairSetting","format","composition"],
   artistStep: ["painterArt"],
-  abstractStep: ["neoAbstractArt","colorExplosion","style"],
-  surrealStep: ["surrealDream","surrealSubjects","surrealComposition","surrealNature","surrealMood","surrealTime","fantasy","mysticalFantasy","romanticDream","floralLuxury"],
-  mixedMediaStep: ["brokenReality","brokenRealityMore","brokenEffects","brokenLighting","dimensionFrames","dimensionSculpture","dimensionTexture","dimensionGlitch"],
-  surreal3DStep: ["dimensionPortals","portalForm","portalWorld","portalTransition","portalMaterial","portalWater","portalAtmosphere","portalComposition","dimensionNature"],
-  artSpaceStep: ["roomTypes","architecture","roomDetails","roomLighting","dimensionNature","fantasyPortals","fantasyArchitecture"],
-  photo: ["camera","lens","lighting","photoTechnique","photoPerspective","style","realism","mood"]
+  abstractStep: ["neoAbstractArt","colorExplosion","style","brokenReality","brokenRealityMore","brokenEffects","brokenLighting","dimensionSculpture","dimensionTexture","dimensionGlitch"],
+  surrealStep: ["surrealDream","surrealSubjects","surrealComposition","surrealNature","surrealMood","surrealTime","fantasy","mysticalFantasy","romanticDream","floralLuxury","dimensionPortals","portalForm","portalWorld","portalTransition","portalMaterial","portalWater","portalAtmosphere","portalComposition","dimensionFrames"],
+  worldStep: ["portraitBackground","beautyBackground","japan","landscape","africaArt","galaxyScene","spacecraft","spaceCharacters","spaceWorlds","spaceEffects","trainType","trainLandscape","trainRoute","trainView","trainSeason","trainMood","filmAction","filmEpicRomance","filmSciFi","filmHorror","filmAdventure","filmPostApocalyptic","filmFantasy","filmCinematic","roomTypes","architecture","roomDetails","roomLighting","dimensionNature","fantasyPortals","fantasyArchitecture"],
+  photo: ["camera","lens","lighting","photoTechnique","photoPerspective","realism","mood"]
 };
 
 const FILM_PREVIEW_IMAGES = {
@@ -2043,7 +2067,7 @@ const CATEGORY_PREVIEW_FAMILY = {
   beautyMakeup:"beauty", beautyLips:"beauty", beautySkin:"beauty", beautyFraming:"people", beautyLighting:"lighting",
   beautyOutfit:"fashion", beautyAccessories:"beauty", japan:"japan", landscape:"nature", africaArt:"africa",
   style:"art", realism:"realism", camera:"camera", lens:"camera", lighting:"lighting", mood:"mood",
-  fantasy:"surreal", format:"camera", composition:"camera", adultCreative:"fashion",
+  fantasy:"surreal", format:"camera", composition:"camera",
   galaxyScene:"space", spacecraft:"space", spaceCharacters:"space", spaceWorlds:"space", spaceEffects:"space",
   spaceCharactersMore:"space", spaceLocations:"space", spaceScenes:"space", spaceWeapons:"space", spaceCamera:"space",
   trainType:"train", trainLandscape:"train", trainRoute:"train", trainView:"train", trainSeason:"train", trainMood:"train",
@@ -2452,12 +2476,37 @@ function getPreviewImageUrl(catId, optId, label) {
   return url;
 }
 
+const STUDIO_STEPS = ["personStep","hairStep","makeupStep","clothingStep","shoesStep","poseStep","artistStep","abstractStep","surrealStep","worldStep","photo"];
 let activeCategoryGroup = "personStep";
+function updateWizardControls(){
+  const index = Math.max(0, STUDIO_STEPS.indexOf(activeCategoryGroup));
+  const count = STUDIO_STEPS.length;
+  const countEl=document.getElementById("wizardCount");
+  const bar=document.getElementById("wizardProgress");
+  const prev=document.getElementById("wizardPrev");
+  const next=document.getElementById("wizardNext");
+  if(countEl) countEl.textContent=`Schritt ${index+1} von ${count}`;
+  if(bar) bar.style.width=`${((index+1)/count)*100}%`;
+  if(prev) prev.disabled=index===0;
+  if(next) next.textContent=index===count-1?"Zum Prompt ↓":"Weiter →";
+  document.querySelectorAll("#categoryTabs .tab").forEach(btn=>{
+    btn.classList.toggle("active",btn.dataset.group===activeCategoryGroup);
+    btn.classList.toggle("completed",STUDIO_STEPS.indexOf(btn.dataset.group)>=0 && STUDIO_STEPS.indexOf(btn.dataset.group)<index);
+  });
+}
+function moveWizard(direction){
+  const index=Math.max(0,STUDIO_STEPS.indexOf(activeCategoryGroup));
+  const nextIndex=Math.min(STUDIO_STEPS.length-1,Math.max(0,index+direction));
+  if(direction>0 && index===STUDIO_STEPS.length-1){
+    const target=document.getElementById("promptOutput"); if(target) target.scrollIntoView({behavior:"smooth",block:"center"});
+    return;
+  }
+  setCategoryGroup(STUDIO_STEPS[nextIndex]);
+  const grid=document.getElementById("categoriesContainer"); if(grid) grid.scrollIntoView({behavior:"smooth",block:"start"});
+}
 function setCategoryGroup(group) {
   activeCategoryGroup = group;
-  document.querySelectorAll("#categoryTabs .tab").forEach(btn => {
-    btn.classList.toggle("active", btn.dataset.group === group);
-  });
+  updateWizardControls();
   renderCategories();
   const strip = document.getElementById("categoryTabs");
   if (strip) strip.scrollLeft = 0;
@@ -2572,7 +2621,6 @@ function renderCategories(){
   const query=(document.getElementById("categorySearch")?.value||"").trim().toLowerCase();
   const allowed=activeCategoryGroup==="all"?null:(CATEGORY_GROUPS[activeCategoryGroup]||[]);
   CATEGORIES.forEach(([id,icon,multi,labelObj,opts])=>{
-    if(id === "adultCreative") return;
     if(allowed && !allowed.includes(id))return;
     const label=txt(labelObj);
     const matchesSearch=!query || label.toLowerCase().includes(query) || opts.some(o=>optionText(o).toLowerCase().includes(query));
@@ -2730,7 +2778,6 @@ function toggleOption(catId,optId,multi){
 function composeMasterPrompt(){
   const parts=[];
   CATEGORIES.forEach(([id,,,labelObj])=>{
-    if(id === "adultCreative") return;
     const val=selectedValues[id];
     if(!val||(Array.isArray(val)&&!val.length))return;
     const items=Array.isArray(val)?val:[val];
@@ -2846,13 +2893,49 @@ function previewImage(e){
   r.readAsDataURL(f);
 }
 
-async function copyPrompt(){
-  const t=document.getElementById("promptOutput").value.trim();if(!t)return;
+async function copyTextToClipboard(text){
+  const value=String(text||"");
+  if(!value.trim()) return false;
+  // First try the modern clipboard API (works on HTTPS and supported mobile browsers).
   try{
-    if(navigator.clipboard && window.isSecureContext){await navigator.clipboard.writeText(t);}
-    else {const temp=document.createElement("textarea");temp.value=t;temp.style.position="fixed";temp.style.opacity="0";document.body.appendChild(temp);temp.select();if(!document.execCommand("copy"))throw new Error("copy failed");temp.remove();}
-    showStatus(tr("copied"));
-  }catch(e){showStatus("Kopieren nicht möglich – bitte den Prompt markieren und manuell kopieren.");}
+    if(navigator.clipboard && window.isSecureContext){
+      await navigator.clipboard.writeText(value);
+      return true;
+    }
+  }catch(err){ /* Continue with the compatibility fallback. */ }
+  // Compatibility fallback for Android WebView, file:// and browsers without Clipboard API.
+  let temp;
+  try{
+    temp=document.createElement("textarea");
+    temp.value=value;
+    temp.setAttribute("readonly","");
+    temp.setAttribute("aria-hidden","true");
+    temp.style.position="fixed";
+    temp.style.left="-9999px";
+    temp.style.top="0";
+    temp.style.width="1px";
+    temp.style.height="1px";
+    temp.style.opacity="0.01";
+    document.body.appendChild(temp);
+    temp.focus({preventScroll:true});
+    temp.select();
+    temp.setSelectionRange(0,temp.value.length);
+    const ok=document.execCommand && document.execCommand("copy");
+    if(!ok) throw new Error("Clipboard fallback failed");
+    return true;
+  }catch(err){
+    return false;
+  }finally{
+    if(temp && temp.parentNode) temp.parentNode.removeChild(temp);
+  }
+}
+
+async function copyPrompt(){
+  const field=document.getElementById("promptOutput");
+  const t=field ? field.value.trim() : "";
+  if(!t){showStatus("Bitte zuerst einen Prompt erstellen.");return;}
+  const ok=await copyTextToClipboard(t);
+  showStatus(ok ? tr("copied") : "Kopieren nicht möglich. Bitte den Text im Prompt-Feld lange drücken und manuell kopieren.");
 }
 
 function getSaved(){return JSON.parse(localStorage.getItem("artstyle_studio_v3")||"[]");}
@@ -2880,7 +2963,7 @@ function renderSavedPrompts(){
     const b1=document.createElement("button");b1.className="small-button";b1.textContent=tr("load");
     b1.onclick=()=>{selectedValues=item.values||{};if(document.getElementById("negativePrompt"))document.getElementById("negativePrompt").value=item.negativePrompt||"";if(document.getElementById("identityLock"))document.getElementById("identityLock").checked=item.identityLock!==false;if(item.director){const map={format:"directorFormat",camera:"directorCamera",light:"directorLight",composition:"directorComposition",custom:"directorCustom"};Object.entries(map).forEach(([key,id])=>{const el=document.getElementById(id);if(el)el.value=item.director[key]||"";});}renderCategories();updateUI();document.getElementById("promptOutput").value=item.text;updateCharCount();showStatus(tr("loaded"));};
     const b2=document.createElement("button");b2.className="small-button";b2.textContent=tr("copySmall");
-    b2.onclick=()=>{navigator.clipboard.writeText(item.text);showStatus(tr("copied"));};
+    b2.onclick=async()=>{const ok=await copyTextToClipboard(item.text);showStatus(ok ? tr("copied") : "Kopieren nicht möglich. Bitte den gespeicherten Prompt öffnen und manuell kopieren.");};
     const b3=document.createElement("button");b3.className="small-button";b3.textContent=tr("delete");
     b3.onclick=()=>{setSaved(getSaved().filter(x=>x.id!==item.id));renderSavedPrompts();};
     actions.append(b1,b2,b3);d.appendChild(actions);box.appendChild(d);
@@ -2890,7 +2973,6 @@ function renderSavedPrompts(){
 function randomPrompt(){
   selectedValues={};
   CATEGORIES.forEach(([id,,multi,,opts])=>{
-    if(id === "adultCreative") return;
     if(Math.random()>0.45){
       const pick=opts[Math.floor(Math.random()*opts.length)];
       selectedValues[id]=multi?[pick]:pick;
@@ -2972,6 +3054,38 @@ function clearImageComposer(){
   const r=document.getElementById("composerResult");if(r)r.textContent="";
   updateUI();
 }
+const CREATIVE_WORLD_CONCEPTS = {
+  objectWorld:{title:"Welten in Objekten",ideas:["A complete miniature ocean and waterfall contained inside a transparent glass sphere","A floating forest and sunset landscape emerging from an antique hourglass","A crystal bottle containing a detailed dreamlike mountain world"]},
+  impossibleArchitecture:{title:"Unmögliche Architektur",ideas:["An impossible monumental staircase rising through clouds above a reflective sea","A floating city connected by bridges that bend through impossible perspectives","A colossal stone archway opening into a luminous alternate dimension"]},
+  doubleWorlds:{title:"Surreale Doppelwelten",ideas:["A human silhouette filled with a richly detailed forest, ocean and glowing horizon","A giant eye reflecting an entire dream landscape with waterfalls and distant mountains","A portrait merging seamlessly with a cosmic nebula and botanical forms"]},
+  floatingNature:{title:"Schwebende Naturwelten",ideas:["A floating island with an ancient tree, cascading waterfalls and a mist-covered lake","A suspended river flowing between monumental cliffs into a sea of clouds","A miniature ecosystem balanced on a sculptural stone fragment"]},
+  artBreakout:{title:"Kunst bricht aus dem Bild",ideas:["A cracked painterly canvas bursting into a photorealistic ocean and waterfall","Thick palette-knife paint transforming into birds, waves and sculptural fragments","A framed sunset landscape breaking through a textured three-dimensional surface"]},
+  crystalWorlds:{title:"Kristall- & Spiegelwelten",ideas:["A monumental crystal portal refracting a luminous sunset ocean","Layered mirrored frames reflecting different seasons of one surreal landscape","A transparent glass arch revealing a hidden waterfall world"]},
+  mechanicalDreams:{title:"Mechanische Traumwelten",ideas:["An ancient clockwork tree with intricate brass gears growing above a misty lake","A floating mechanical city powered by giant interlocking gears","A surreal fusion of organic roots, precision machinery and cascading water"]}
+};
+let selectedCreativeWorld="objectWorld";
+function chooseCreativeWorld(key){
+  if(!CREATIVE_WORLD_CONCEPTS[key])return;
+  selectedCreativeWorld=key;
+  document.querySelectorAll(".creative-world").forEach((b)=>b.classList.toggle("selected",b.getAttribute("onclick")?.includes("'"+key+"'")));
+  const box=document.getElementById("artDirectorResult");
+  if(box)box.textContent=CREATIVE_WORLD_CONCEPTS[key].title+" ausgewählt. Klicke auf „Drei Bildkonzepte entwickeln“.";
+}
+function createArtDirectorConcept(){
+  const item=CREATIVE_WORLD_CONCEPTS[selectedCreativeWorld];
+  if(!item)return;
+  const concepts=item.ideas.map((idea,i)=>`${i+1}. ${idea}`).join("\n\n");
+  const result=`${item.title} – drei Bildkonzepte\n\n${concepts}\n\nBildsprache: surrealistische 3D-Mixed-Media-Kunst, unmögliche räumliche Übergänge, plastische Bruchkanten, fein ausgearbeitete Materialtexturen, starke Tiefenwirkung, glaubwürdige Spiegelungen, cineastisches Licht und eine harmonische Farbdramaturgie. Hochwertige, eigenständige Fine-Art-Komposition.\n\nSignatur: kleines elegantes Logo „Dirk Eckert“ unten mittig.`;
+  const box=document.getElementById("artDirectorResult");if(box)box.textContent=result;
+  const out=document.getElementById("promptOutput");if(out){out.value=result;updateCharCount();}
+  showStatus("✨ Drei Bildkonzepte wurden erstellt und in den Master-Prompt übernommen.");
+}
+function clearArtDirectorConcept(){
+  selectedCreativeWorld="objectWorld";
+  document.querySelectorAll(".creative-world").forEach(b=>b.classList.remove("selected"));
+  const box=document.getElementById("artDirectorResult");if(box)box.textContent="Wähle eine Kreativwelt aus und entwickle daraus drei unterschiedliche Bildideen.";
+}
+
 function buildDirectorPrompt() {
   const out=document.getElementById("promptOutput");
   if(!out)return;
@@ -3027,6 +3141,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function artstyleSafeBoot(){
   try { init(); } catch(err) { console.error("Optionaler Startfehler:", err); }
   try { renderCategories(); } catch(err) { console.error("Kategorie-Rendering:", err); }
+  try { updateWizardControls(); } catch(err) { console.error("Wizard-Navigation:", err); }
   try { updateUI(); } catch(err) { console.error("Auswahlübersicht:", err); }
   const container=document.getElementById("categoriesContainer");
   if(container && !container.children.length){

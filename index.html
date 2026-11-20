@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ArtStyle Studio V14.2 – Dirk Eckert</title>
+<title>ArtStyle Studio V15.6 – Surreale 3D-Welten</title>
 <style>
 :root{
   --bg:#080a10;--bg2:#101524;--card:#151a28;--card2:#20263a;
@@ -58,8 +58,8 @@ footer{padding:35px 10px;text-align:center;color:#717a92}.image-source-note{marg
 
 .category-toolbar{display:grid;gap:12px;margin:0 0 18px}
 .category-search{width:100%;padding:15px 16px;border-radius:15px;background:#0b0e16;color:white;border:1px solid #424b64;font-size:16px}
-.category-tabs{display:flex;flex-wrap:wrap;gap:8px;overflow:visible;min-width:0;max-width:100%;padding:2px 0 8px;scrollbar-width:none}
-.category-tabs .tab{display:inline-flex;flex:0 1 auto;align-items:center;justify-content:center;width:auto!important;max-width:100%;min-width:0;margin:0;padding:10px 14px;border-radius:24px;background:#1c2435;border:1px solid #3e4962;color:#dce4f7;font-size:14px;line-height:1.25;white-space:normal;text-align:center}
+.category-tabs{display:flex;gap:8px;overflow-x:auto;padding:2px 0 8px;scrollbar-width:thin}
+.category-tabs .tab{flex:0 0 auto;width:auto;margin:0;padding:11px 15px;border-radius:30px;background:#1c2435;border:1px solid #3e4962;color:#dce4f7;font-size:14px}
 .category-tabs .tab.active{background:linear-gradient(135deg,#6d28d9,#be185d);border-color:#c084fc;color:#fff}
 
 .studio-dashboard{margin:24px 0 30px;padding:22px;border-radius:24px;background:linear-gradient(145deg,rgba(12,24,43,.78),rgba(19,18,42,.72));border:1px solid rgba(111,174,230,.25);box-shadow:0 14px 34px rgba(0,0,0,.22);backdrop-filter:blur(14px)}
@@ -244,38 +244,217 @@ button.studio-tile {
 }
 
 
-/* V15.1 – stärkere Überschreibung älterer Layout-Regeln */
-#categoryTabs.category-tabs{
-  display:flex!important;flex-wrap:wrap!important;overflow:visible!important;
-  width:100%!important;max-width:100%!important;justify-content:flex-start!important;
-  align-items:center!important;gap:8px!important;box-sizing:border-box!important;
+/* V15.2 – mobile layout, contrast and readable navigation */
+#categoryTabs.category-tabs {
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:10px !important;
+  width:100% !important;
+  max-width:100% !important;
+  overflow:visible !important;
+  padding:4px 0 10px !important;
+  box-sizing:border-box !important;
 }
-#categoryTabs .tab{
-  display:inline-flex!important;flex:0 1 auto!important;width:auto!important;
-  max-width:100%!important;min-width:0!important;white-space:normal!important;
-  height:auto!important;min-height:40px!important;padding:9px 13px!important;
-  font-size:14px!important;line-height:1.25!important;text-align:center!important;
+#categoryTabs .tab {
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:100% !important;
+  min-width:0 !important;
+  min-height:54px !important;
+  height:auto !important;
+  padding:12px 10px !important;
+  border-radius:15px !important;
+  border:1px solid #52627d !important;
+  background:#202d43 !important;
+  background-image:linear-gradient(135deg,#263b58,#18243a) !important;
+  color:#f7f9ff !important;
+  -webkit-text-fill-color:#f7f9ff !important;
+  font-size:clamp(13px,3.4vw,16px) !important;
+  font-weight:800 !important;
+  line-height:1.25 !important;
+  white-space:normal !important;
+  text-align:center !important;
+  opacity:1 !important;
+  box-shadow:0 5px 14px rgba(0,0,0,.2) !important;
 }
-.studio-dashboard-v14 .studio-tiles{
-  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+#categoryTabs .tab.active {
+  background:#5632a8 !important;
+  background-image:linear-gradient(135deg,#7040c5,#43256f) !important;
+  border-color:#c4a2ff !important;
+  color:#fff !important;
+  -webkit-text-fill-color:#fff !important;
 }
-.studio-dashboard-v14 .studio-tile-wide{grid-column:1/-1!important}
-@media(max-width:600px){
-  .studio-dashboard-v14 .studio-tiles{grid-template-columns:repeat(2,minmax(0,1fr))!important}
-  .studio-dashboard-v14 .studio-tile{min-width:0!important}
+#selectionArea {
+  box-sizing:border-box !important;
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+  overflow:hidden !important;
+  padding:clamp(12px,3vw,20px) !important;
 }
-/* V15 – übersichtliche Bereiche und sichere mobile Breite */
-html,body{max-width:100%;overflow-x:hidden}
-.category-toolbar,.category-tabs,.categories,.studio-dashboard,.studio-tiles{min-width:0;max-width:100%}
-.category-toolbar{display:flex;flex-direction:column;gap:12px}
-.category-search{width:100%;max-width:100%;box-sizing:border-box}
-@media(max-width:520px){
-  .studio-dashboard{padding:15px}
-  .studio-tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-  .studio-tile{min-width:0;min-height:145px;padding:13px}
-  .studio-tile-wide{grid-column:1/-1}
-  .category-tabs{gap:7px}
-  .category-tabs .tab{font-size:13px;padding:9px 11px}
+.selection-header {
+  display:flex !important;
+  flex-wrap:wrap !important;
+  align-items:center !important;
+  gap:10px !important;
+  min-width:0 !important;
+}
+.selection-header h2 {
+  flex:1 1 180px !important;
+  min-width:0 !important;
+  overflow-wrap:anywhere !important;
+  font-size:clamp(19px,4.5vw,26px) !important;
+}
+.selection-header .close-selection {
+  flex:0 0 auto !important;
+  max-width:100% !important;
+}
+#optionsContainer, .visual-preview-grid, .film-preview-grid {
+  box-sizing:border-box !important;
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+}
+@media(max-width:700px) {
+  .visual-preview-grid, .film-preview-grid {
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:10px !important;
+  }
+  .visual-option, .film-option {
+    min-width:0 !important;
+    min-height:0 !important;
+  }
+  .visual-option img, .film-option img {
+    height:clamp(105px,31vw,155px) !important;
+  }
+  .visual-option-copy, .film-option-copy {
+    min-width:0 !important;
+    overflow-wrap:anywhere !important;
+    padding:9px !important;
+  }
+  .visual-option-title, .film-option .film-option-title {
+    font-size:12px !important;
+    line-height:1.3 !important;
+  }
+  .visual-option-desc, .film-option .film-option-desc {
+    font-size:10px !important;
+    line-height:1.35 !important;
+  }
+}
+
+
+/* V15.3 – strukturelle Reparatur: Composer steht außerhalb der Navigation */
+.category-toolbar { display:block !important; width:100% !important; max-width:100% !important; min-width:0 !important; overflow:visible !important; }
+#categoryTabs.category-tabs {
+ display:flex !important; flex-wrap:wrap !important; align-items:stretch !important;
+ justify-content:flex-start !important; gap:9px !important; width:100% !important;
+ max-width:100% !important; min-width:0 !important; overflow:visible !important;
+ padding:5px 0 12px !important; box-sizing:border-box !important;
+}
+#categoryTabs button.tab, #categoryTabs .tab, #categoryTabs button.tab:not(.active) {
+ appearance:none !important; -webkit-appearance:none !important; display:inline-flex !important;
+ flex:0 1 auto !important; align-items:center !important; justify-content:center !important;
+ width:auto !important; min-width:0 !important; max-width:100% !important;
+ min-height:44px !important; height:auto !important; margin:0 !important;
+ padding:10px 15px !important; border:1px solid #52627d !important; border-radius:13px !important;
+ background:#202d43 !important; background-image:linear-gradient(135deg,#263b58,#18243a) !important;
+ color:#f7f9ff !important; -webkit-text-fill-color:#f7f9ff !important;
+ font-size:14px !important; font-weight:800 !important; line-height:1.25 !important;
+ white-space:normal !important; text-align:center !important; opacity:1 !important;
+ box-shadow:0 4px 12px rgba(0,0,0,.18) !important;
+}
+#categoryTabs button.tab.active, #categoryTabs .tab.active {
+ background:#5632a8 !important; background-image:linear-gradient(135deg,#7040c5,#43256f) !important;
+ border-color:#c4a2ff !important; color:#fff !important; -webkit-text-fill-color:#fff !important;
+}
+#visualComposer.composer-panel {
+ display:block !important; position:relative !important; float:none !important; clear:both !important;
+ width:100% !important; max-width:100% !important; min-width:0 !important; box-sizing:border-box !important;
+ margin:18px 0 22px !important; overflow:visible !important;
+}
+#visualComposer .composer-grid {
+ display:grid !important; grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+ width:100% !important; max-width:100% !important; min-width:0 !important; gap:12px !important;
+}
+#visualComposer .composer-grid label, #visualComposer .composer-grid select { min-width:0 !important; width:100% !important; box-sizing:border-box !important; }
+#visualComposer .director-actions { display:flex !important; flex-wrap:wrap !important; width:100% !important; gap:10px !important; }
+#visualComposer .director-actions button { flex:1 1 180px !important; min-width:0 !important; white-space:normal !important; }
+@media(max-width:900px) { #visualComposer .composer-grid { grid-template-columns:minmax(0,1fr) !important; } }
+@media(max-width:560px) {
+ #categoryTabs button.tab { flex:1 1 calc(50% - 9px) !important; padding:10px 8px !important; font-size:13px !important; }
+ #visualComposer.composer-panel { padding:14px !important; }
+}
+
+
+/* V15.4 – geführter, linearer Gestaltungsablauf */
+#categoryTabs.category-steps {
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:9px !important;
+  width:100% !important;
+  max-width:100% !important;
+  overflow:visible !important;
+  padding:8px 0 14px !important;
+  box-sizing:border-box !important;
+}
+#categoryTabs.category-steps .tab {
+  display:flex !important;
+  flex-direction:row !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  gap:9px !important;
+  min-width:0 !important;
+  min-height:48px !important;
+  padding:9px 11px !important;
+  border-radius:13px !important;
+  border:1px solid #354966 !important;
+  background:#152238 !important;
+  color:#eaf0fa !important;
+  -webkit-text-fill-color:#eaf0fa !important;
+  font-size:14px !important;
+  font-weight:700 !important;
+  line-height:1.2 !important;
+  text-align:left !important;
+  white-space:normal !important;
+  opacity:1 !important;
+}
+#categoryTabs.category-steps .tab.active {
+  background:linear-gradient(135deg,#5834a4,#873f9f) !important;
+  border-color:#c5a2ff !important;
+  color:#fff !important;
+  -webkit-text-fill-color:#fff !important;
+  box-shadow:0 4px 14px rgba(120,70,190,.25) !important;
+}
+#categoryTabs.category-steps .step-number {
+  flex:0 0 26px !important;
+  width:26px !important;
+  height:26px !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  border-radius:50% !important;
+  background:rgba(255,255,255,.12) !important;
+  color:inherit !important;
+  font-size:12px !important;
+  font-weight:800 !important;
+}
+.workflow-hint {
+  margin:4px 0 12px !important;
+  padding:11px 13px !important;
+  border-left:3px solid #9b76e8 !important;
+  background:rgba(95,67,150,.12) !important;
+  border-radius:0 10px 10px 0 !important;
+  font-size:13px !important;
+  line-height:1.45 !important;
+}
+#categoriesContainer {
+  margin-top:8px !important;
+}
+@media(max-width:420px) {
+  #categoryTabs.category-steps { gap:7px !important; }
+  #categoryTabs.category-steps .tab { font-size:12px !important; padding:8px !important; }
+  #categoryTabs.category-steps .step-number { flex-basis:23px !important; width:23px !important; height:23px !important; }
 }
 
 </style>
@@ -301,11 +480,11 @@ html,body{max-width:100%;overflow-x:hidden}
     <p>Wähle einen Bereich. Die passenden Unterkategorien erscheinen darunter.</p>
   </div>
   <div class="studio-tiles">
-    <button class="studio-tile tile-beauty" onclick="goToStudio('people')"><span class="tile-emoji">👤</span><span class="tile-name">Personen & Fashion</span><span class="tile-desc">Porträts, Frisuren, Make-up, Kleidung, Strumpfhosen, Schuhe und Posen</span><span class="tile-arrow">Bereich öffnen →</span></button>
-    <button class="studio-tile tile-worlds" onclick="goToStudio('artworlds')"><span class="tile-emoji">🎨</span><span class="tile-name">Kunst & Welten</span><span class="tile-desc">Maler, Kunststile, Japan, Afrika, Landschaften, Fantasy und surreale Welten</span><span class="tile-arrow">Bereich öffnen →</span></button>
-    <button class="studio-tile tile-space" onclick="goToStudio('film')"><span class="tile-emoji">🚀</span><span class="tile-name">Film & Sci-Fi</span><span class="tile-desc">Galaxien, Raumschiffe, Droiden, Planeten und filmische Szenen</span><span class="tile-arrow">Bereich öffnen →</span></button>
-    <button class="studio-tile tile-photo" onclick="goToStudio('photo')"><span class="tile-emoji">📷</span><span class="tile-name">Foto & Gestaltung</span><span class="tile-desc">Kamera, Objektive, Licht, Realismus, Bildformat und Komposition</span><span class="tile-arrow">Bereich öffnen →</span></button>
-    <button class="studio-tile studio-tile-wide tile-broken" onclick="document.getElementById('promptOutput').scrollIntoView({behavior:'smooth',block:'start'})"><span class="tile-emoji">📝</span><span class="tile-name">Mein Master-Prompt</span><span class="tile-desc">Ergebnis prüfen, bearbeiten, kopieren und speichern</span><span class="tile-arrow">Zum Prompt →</span></button>
+    <button class="studio-tile tile-beauty" onclick="goToStudio('people')"><span class="tile-emoji">👤</span><span class="tile-name">Personen & Fashion</span><span class="tile-desc">Einzelporträts, Paarporträts, Posen, Beauty, Kleidung, Strumpfhosen, Barfuß und Schuhe</span><span class="tile-arrow">Bereich öffnen →</span></button>
+    <button class="studio-tile tile-worlds" onclick="goToStudio('artworlds')"><span class="tile-emoji">🌌</span><span class="tile-name">Kunst & Welten</span><span class="tile-desc">Japan, Afrika, Fantasy, Surrealismus, Architektur, Film, Züge und Science-Fiction</span><span class="tile-arrow">Bereich öffnen →</span></button>
+    <button class="studio-tile tile-photo" onclick="goToStudio('photo')"><span class="tile-emoji">📷</span><span class="tile-name">Kamera & Licht</span><span class="tile-desc">Kamera, Objektiv, Beleuchtung, Perspektive und Bildaufbau</span><span class="tile-arrow">Bereich öffnen →</span></button>
+    <button class="studio-tile tile-broken" onclick="goToStudio('all')"><span class="tile-emoji">✨</span><span class="tile-name">Alle Kategorien</span><span class="tile-desc">Die komplette Auswahl anzeigen und gezielt durchsuchen</span><span class="tile-arrow">Alle anzeigen →</span></button>
+    <button class="studio-tile tile-africa studio-tile-wide" onclick="document.getElementById('promptOutput').scrollIntoView({behavior:'smooth',block:'start'})"><span class="tile-emoji">📝</span><span class="tile-name">Mein Master-Prompt</span><span class="tile-desc">Ergebnis prüfen, Negativ-Prompt bearbeiten, kopieren und speichern</span><span class="tile-arrow">Zum Prompt →</span></button>
   </div>
 </section>
 
@@ -321,19 +500,27 @@ html,body{max-width:100%;overflow-x:hidden}
  </div>
  <div class="director-actions"><button class="primary" type="button" onclick="applyStyleMix()">✨ Stil-Mix übernehmen</button><button class="secondary" type="button" onclick="clearStyleMix()">↺ Mixer leeren</button></div>
 </section>
-<h2 class="section-title" id="categoryTitle"></h2>
+<h2 class="section-title" id="categoryTitle">Bild Schritt für Schritt gestalten</h2>\n<p class="hint workflow-hint">Beginne mit der Person und gehe Schritt für Schritt weiter. Danach gestaltest du die Bildwelt, wählst Künstler und Kunstrichtungen, kombinierst abstrakte oder surreale Elemente und ergänzt 3D-Mixed-Media. Kamera und Licht kommen zum Schluss.</p>
 <div class="category-toolbar">
   <input id="categorySearch" class="category-search" type="search" placeholder="Bereiche suchen …" oninput="renderCategories()">
-  <div class="category-tabs" id="categoryTabs" aria-label="Bereiche filtern">
-    <button type="button" class="tab active" data-group="all" onclick="setCategoryGroup('all')">Alle</button>
-    <button type="button" class="tab" data-group="people" onclick="setCategoryGroup('people')">Personen & Fashion</button>
-    <button type="button" class="tab" data-group="artworlds" onclick="setCategoryGroup('artworlds')">Kunst & Welten</button>
-    <button type="button" class="tab" data-group="film" onclick="setCategoryGroup('film')">Film & Sci-Fi</button>
-    <button type="button" class="tab" data-group="photo" onclick="setCategoryGroup('photo')">Foto & Gestaltung</button>
+  <div class="category-tabs category-steps" id="categoryTabs" aria-label="Schritte zur Bildgestaltung">
+    <button type="button" class="tab active" data-group="personStep" onclick="setCategoryGroup('personStep')"><span class="step-number">1</span><span>Person</span></button>
+    <button type="button" class="tab" data-group="hairStep" onclick="setCategoryGroup('hairStep')"><span class="step-number">2</span><span>Frisur</span></button>
+    <button type="button" class="tab" data-group="hairColorStep" onclick="setCategoryGroup('hairColorStep')"><span class="step-number">3</span><span>Haarfarbe</span></button>
+    <button type="button" class="tab" data-group="makeupStep" onclick="setCategoryGroup('makeupStep')"><span class="step-number">4</span><span>Make-up</span></button>
+    <button type="button" class="tab" data-group="clothingStep" onclick="setCategoryGroup('clothingStep')"><span class="step-number">5</span><span>Kleidung</span></button>
+    <button type="button" class="tab" data-group="shoesStep" onclick="setCategoryGroup('shoesStep')"><span class="step-number">6</span><span>Schuhe & Details</span></button>
+    <button type="button" class="tab" data-group="poseStep" onclick="setCategoryGroup('poseStep')"><span class="step-number">7</span><span>Pose</span></button>
+    <button type="button" class="tab" data-group="worldStep" onclick="setCategoryGroup('worldStep')"><span class="step-number">8</span><span>Bildwelt</span></button>
+    <button type="button" class="tab" data-group="artistStep" onclick="setCategoryGroup('artistStep')"><span class="step-number">9</span><span>Künstler & Kunstrichtungen</span></button>
+    <button type="button" class="tab" data-group="abstractStep" onclick="setCategoryGroup('abstractStep')"><span class="step-number">10</span><span>Abstrakte Kunst</span></button>
+    <button type="button" class="tab" data-group="surrealStep" onclick="setCategoryGroup('surrealStep')"><span class="step-number">11</span><span>Surrealismus & Traumwelten</span></button>
+    <button type="button" class="tab" data-group="mixedMediaStep" onclick="setCategoryGroup('mixedMediaStep')"><span class="step-number">12</span><span>3D & Mixed Media</span></button>
+    <button type="button" class="tab" data-group="surreal3DStep" onclick="setCategoryGroup('surreal3DStep')"><span class="step-number">13</span><span>Surreale 3D-Welten</span></button>
+    <button type="button" class="tab" data-group="artSpaceStep" onclick="setCategoryGroup('artSpaceStep')"><span class="step-number">14</span><span>Räume, Natur & Materialien</span></button>
+    <button type="button" class="tab" data-group="photo" onclick="setCategoryGroup('photo')"><span class="step-number">15</span><span>Kamera & Licht</span></button>
   </div>
 </div>
-<div class="categories" id="categoriesContainer"></div>
-
 <section class="panel composer-panel" id="visualComposer">
  <h2>🧭 Visueller Bild-Komponist</h2>
  <p class="hint">Stelle die Bildszene in wenigen Schritten zusammen. Diese Angaben ergänzen deine Kategorien und werden in den Master-Prompt übernommen.</p>
@@ -365,6 +552,7 @@ html,body{max-width:100%;overflow-x:hidden}
  </div>
  <div class="composer-result" id="composerResult" aria-live="polite"></div>
 </section>
+<div class="categories" id="categoriesContainer"></div>
 <section id="selectionArea"><div class="selection-header"><h2 id="selectionTitle"></h2><button class="close-selection" onclick="closeSelection()" id="closeButton"></button></div><p class="hint" id="selectionHint"></p><div class="options" id="optionsContainer"></div></section>
 
 <section class="panel" id="directorPanel">
@@ -465,7 +653,7 @@ const CATEGORIES=[
 ["fantasy","🌌",true,{de:"Fantasy",en:"Fantasy",es:"Fantasía",fr:"Fantaisie",ar:"الخيال"},["surreal","mystical","magicLight","cinematicFantasy","epic","dreamScene"]],
 ["format","📐",false,{de:"Bildformat",en:"Aspect Ratio",es:"Formato",fr:"Format",ar:"أبعاد الصورة"},["ar916","ar169","ar11","ar45","ar34","ar23"]],
 ["composition","🎬",true,{de:"Komposition",en:"Composition",es:"Composición",fr:"Composition",ar:"التكوين"},["professionalComposition","symmetric","dynamic","eyeLevel","cameraBack","fullBodyFeet"]],
-
+["adultCreative","🔞",true,{de:"18+ Kreativbereich",en:"18+ Creative Area",es:"Área creativa 18+",fr:"Espace créatif 18+",ar:"منطقة إبداعية +18"},["adultElegant","fashionStudio","seatedStylish","standingGlamour","cinematicFashion","artisticPortrait"]],
 ["galaxyScene","🌌",true,{de:"Galaktische Szenen",en:"Galactic Scenes",es:"Escenas galácticas",fr:"Scènes galactiques",ar:"مشاهد مجرية"},["spaceBattle","fleetFormation","planetOrbit","moonlitGalaxy","deepSpace","spaceStation","asteroidField"]],
 ["spacecraft","🚀",true,{de:"Raumschiffe & Flotten",en:"Spaceships & Fleets",es:"Naves y flotas",fr:"Vaisseaux et flottes",ar:"سفن وأساطيل فضائية"},["triangularStarship","fighterSquadron","sleekStarfighter","massiveDreadnought","cargoShip","orbitalCruiser"]],
 ["spaceCharacters","🛡️",true,{de:"Sci-Fi Figuren & Droiden",en:"Sci-Fi Characters & Droids",es:"Personajes y droides",fr:"Personnages et droïdes",ar:"شخصيات وروبوتات خيال علمي"},["armoredSpaceSoldier","battleDroid","robotCompanion","spacePilot","galacticCommander","alienExplorer"]],
@@ -1165,11 +1353,60 @@ const DIMENSION_STUDIOS = [
 ["dimensionNature","🌿",true,{de:"Schwebende Naturwelten",en:"Floating Nature Worlds",es:"Mundos naturales flotantes",fr:"Mondes naturels flottants",ar:"عوالم طبيعية عائمة"},["floatingWaterfallIsland","suspendedRiver","mossyStonePath","floatingForest","moonlitFloatingGarden","waterfallIntoClouds"]],
 ["dimensionSculpture","🗿",true,{de:"Plastische Porträts & Skulpturen",en:"Sculptural Portraits",es:"Retratos escultóricos",fr:"Portraits sculpturaux",ar:"منحوتات فنية"},["botanicalSculpturePortrait","porcelainReliefFace","floralBasRelief","weatheredStoneBust","butterflySculpture","organicClayPortrait"]],
 ["dimensionTexture","🎨",true,{de:"Materialien & Farbexplosion",en:"Textures & Color Explosion",es:"Texturas y color",fr:"Textures et couleurs",ar:"ملمس وألوان"},["thickPaletteKnifeTexture","layeredImpastoPaint","oxidizedMetalTexture","polishedStoneRelief","vibrantPigmentStreams","crackedPlasterTexture"]],
-["dimensionGlitch","🏯",true,{de:"Glitch-Architektur & Linienkunst",en:"Glitch Architecture & Line Art",es:"Arquitectura glitch",fr:"Architecture glitch",ar:"عمارة غليتش"},["japaneseTempleGlitch","verticalPixelStreaks","architecturalLineFragments","vanishingStructure","chromaticMotionTrails","fragmentedPagoda"]]
+["dimensionGlitch","🏯",true,{de:"Glitch-Architektur & Linienkunst",en:"Glitch Architecture & Line Art",es:"Arquitectura glitch",fr:"Architecture glitch",ar:"عمارة غليتش"},["japaneseTempleGlitch","verticalPixelStreaks","architecturalLineFragments","vanishingStructure","chromaticMotionTrails","fragmentedPagoda"]],
+["portalForm","🌀",true,{de:"Form des Portals",en:"Portal Shape",es:"Forma del portal",fr:"Forme du portail",ar:"شكل البوابة"},["circularVortex","brokenOvalArch","monumentalStoneGate","curvedHalfRing","floatingRectangularFrame","spiralDimension"]],
+["portalWorld","🌅",true,{de:"Welt im Portal",en:"World Inside the Portal",es:"Mundo dentro del portal",fr:"Monde dans le portail",ar:"العالم داخل البوابة"},["fieryOceanSunset","waterfallSeascape","mistyMountainValley","enchantedForestRiver","moonlitOcean","floatingIslandWorld"]],
+["portalTransition","✨",true,{de:"Übergang zwischen den Welten",en:"Transition Between Worlds",es:"Transición entre mundos",fr:"Transition entre les mondes",ar:"الانتقال بين العوالم"},["waterFlowingThroughFrame","landscapeBreakingThroughCanvas","realityTearingOpen","liquidLandscapeTransition","lightRaysThroughPortal","worldSpillingIntoForeground"]],
+["portalMaterial","🪨",true,{de:"Oberfläche & Material",en:"Surface & Material",es:"Superficie y material",fr:"Surface et matériau",ar:"السطح والخامة"},["weatheredRockAndPlaster","oxidizedMetalPatina","thickOilPaintImpasto","crackedCeramicSurface","moltenGlassTexture","layeredPigmentRelief"]],
+["portalWater","💧",true,{de:"Wasser, Wasserfälle & Spiegelungen",en:"Waterfalls & Reflections",es:"Cascadas y reflejos",fr:"Cascades et reflets",ar:"الشلالات والانعكاسات"},["waterfallFromPortalRim","waterfallIntoSea","reflectiveShallowWater","cascadingWaterCurtain","circularWaterRipples","suspendedWaterStream"]],
+["portalAtmosphere","☁️",true,{de:"Licht, Wolken & Atmosphäre",en:"Light, Clouds & Atmosphere",es:"Luz, nubes y atmósfera",fr:"Lumière, nuages et atmosphère",ar:"الضوء والسحب والأجواء"},["volumetricClouds","stormyDuskSky","warmSunsetGlow","coolTealMist","dramaticBacklight","floatingParticles"]],
+["portalComposition","🎬",true,{de:"Inszenierung & Perspektive",en:"Staging & Perspective",es:"Escenificación y perspectiva",fr:"Mise en scène et perspective",ar:"التكوين والمنظور"},["monumentalVerticalComposition","lowAnglePortalView","wideDreamscapeWithTinyFigure","strongCentralDepth","foregroundReflection","cinematicNegativeSpace"]]
 ];
 CATEGORIES.push(...DIMENSION_STUDIOS);
 
 Object.assign(O, {
+circularVortex:["Monumentaler kreisförmiger Farbwirbel mit einem Blick in eine andere Welt","Monumental circular color vortex opening onto another world","Vórtice circular monumental que se abre a otro mundo","Vortex circulaire monumental ouvrant sur un autre monde","دوامة لونية دائرية ضخمة تفتح على عالم آخر"],
+brokenOvalArch:["Aufgebrochener ovaler Torbogen mit rauen, plastischen Bruchkanten","Broken oval arch with rough sculptural fractured edges","Arco ovalado roto con bordes esculturales","Arche ovale brisée aux bords sculpturaux","قوس بيضاوي مكسور بحواف نحتية"],
+monumentalStoneGate:["Riesiges verwittertes Steintor mit tiefer räumlicher Öffnung","Huge weathered stone gate with deep dimensional opening","Puerta de piedra enorme y erosionada con abertura profunda","Immense porte de pierre patinée avec ouverture profonde","بوابة حجرية ضخمة متآكلة بفتحة عميقة"],
+curvedHalfRing:["Gebogener halbkreisförmiger Ring aus geschichteten Farb- und Materialflächen","Curved semicircular ring made of layered color and material surfaces","Anillo semicircular curvo de capas de color y material","Anneau semi-circulaire incurvé en couches de couleurs et matières","حلقة نصف دائرية من طبقات الألوان والخامات"],
+floatingRectangularFrame:["Schwebender rechteckiger Rahmen mit dreidimensionaler Tiefe","Floating rectangular frame with three-dimensional depth","Marco rectangular flotante con profundidad tridimensional","Cadre rectangulaire flottant avec profondeur tridimensionnelle","إطار مستطيل عائم بعمق ثلاثي الأبعاد"],
+spiralDimension:["Spiralförmiger Durchbruch, der in eine fremde Dimension führt","Spiral breakthrough leading into another dimension","Abertura en espiral hacia otra dimensión","Ouverture en spirale vers une autre dimension","فتحة حلزونية تقود إلى بُعد آخر"],
+fieryOceanSunset:["Glühend roter Sonnenuntergang über einem ruhigen offenen Meer","Fiery red sunset over a calm open sea","Atardecer rojo intenso sobre un mar tranquilo","Coucher de soleil rouge ardent sur une mer calme","غروب أحمر متوهج فوق بحر هادئ"],
+waterfallSeascape:["Küstenlandschaft mit Wasserfall, der in ein weites Meer stürzt","Coastal landscape with a waterfall plunging into the open sea","Paisaje costero con cascada que cae al mar","Paysage côtier avec cascade plongeant dans la mer","منظر ساحلي مع شلال يصب في البحر"],
+mistyMountainValley:["Nebelverhangenes Tal mit Bergen und goldenem Horizont","Misty mountain valley with a golden horizon","Valle montañoso brumoso con horizonte dorado","Vallée montagneuse brumeuse à l'horizon doré","وادٍ جبلي ضبابي بأفق ذهبي"],
+enchantedForestRiver:["Verwunschener Wald mit geschwungenem Fluss und weichem Nebel","Enchanted forest with winding river and soft mist","Bosque encantado con río serpenteante y niebla suave","Forêt enchantée avec rivière sinueuse et brume légère","غابة ساحرة بنهر متعرج وضباب ناعم"],
+moonlitOcean:["Nächtliches Meer unter großem Mond mit silbernen Lichtreflexen","Night ocean beneath a large moon with silver reflections","Mar nocturno bajo una gran luna con reflejos plateados","Océan nocturne sous une grande lune aux reflets argentés","بحر ليلي تحت قمر كبير وانعكاسات فضية"],
+floatingIslandWorld:["Schwebende Insel mit Bäumen, Felsen, Fluss und Wasserfall","Floating island with trees, rocks, river and waterfall","Isla flotante con árboles, rocas, río y cascada","Île flottante avec arbres, rochers, rivière et cascade","جزيرة عائمة بأشجار وصخور ونهر وشلال"],
+waterFlowingThroughFrame:["Wasser fließt sichtbar durch den Rahmen und stürzt in die Vordergrundszene","Water visibly flows through the frame and falls into the foreground scene","El agua fluye por el marco y cae al primer plano","L'eau traverse le cadre et tombe au premier plan","ماء يتدفق عبر الإطار ويسقط إلى المشهد الأمامي"],
+landscapeBreakingThroughCanvas:["Eine Landschaft bricht plastisch aus der Leinwand in den realen Raum","A landscape physically breaks out of the canvas into real space","Un paisaje sale físicamente del lienzo al espacio real","Un paysage jaillit de la toile dans l'espace réel","منظر طبيعي يخرج مجسماً من اللوحة إلى الفضاء الحقيقي"],
+realityTearingOpen:["Die Wirklichkeit reißt wie eine Oberfläche auf und gibt eine andere Welt frei","Reality tears open like a surface, revealing another world","La realidad se rasga y revela otro mundo","La réalité se déchire et révèle un autre monde","الواقع يتمزق كأنه سطح ليكشف عالماً آخر"],
+liquidLandscapeTransition:["Fließender Übergang, bei dem Landschaft und Rahmen ineinander verschmelzen","Fluid transition where landscape and frame merge into each other","Transición fluida donde paisaje y marco se fusionan","Transition fluide où paysage et cadre fusionnent","انتقال انسيابي تندمج فيه الطبيعة والإطار"],
+lightRaysThroughPortal:["Kräftige Lichtstrahlen dringen aus dem Portal in die Umgebung","Strong rays of light emerge from the portal into the surroundings","Rayos de luz intensos salen del portal","De puissants rayons lumineux sortent du portail","أشعة ضوء قوية تنبعث من البوابة"],
+worldSpillingIntoForeground:["Elemente der inneren Welt treten über die Portalgrenze in den Vordergrund","Elements of the inner world spill beyond the portal into the foreground","Elementos del mundo interior salen al primer plano","Des éléments du monde intérieur débordent au premier plan","عناصر العالم الداخلي تتجاوز حدود البوابة إلى المقدمة"],
+weatheredRockAndPlaster:["Verwitterter Fels und abgeplatzter Putz mit glaubwürdiger rauer Struktur","Weathered rock and flaking plaster with believable rough texture","Roca erosionada y yeso descascarado con textura realista","Roche patinée et plâtre écaillé à texture réaliste","صخر متآكل وجص متقشر بملمس خشن واقعي"],
+oxidizedMetalPatina:["Oxidierte Metallflächen in Türkis, Rostrot und dunklem Blau","Oxidized metal surfaces in turquoise, rust red and deep blue","Metal oxidado en turquesa, rojo óxido y azul oscuro","Surfaces métalliques oxydées en turquoise, rouille et bleu profond","أسطح معدنية مؤكسدة بالفيروزي والأحمر الصدئ والأزرق الداكن"],
+thickOilPaintImpasto:["Dicke Ölfarbe mit sichtbaren Spachtelrillen und plastischem Auftrag","Thick oil paint with visible palette-knife ridges and sculptural impasto","Óleo espeso con marcas de espátula y relieve","Peinture à l'huile épaisse avec traces de couteau et relief","طلاء زيتي كثيف بآثار سكين الرسم وملمس بارز"],
+crackedCeramicSurface:["Gebrochene Keramik mit scharfen Kanten und farbigen Einschlüssen","Fractured ceramic with sharp edges and colored inclusions","Cerámica fracturada con bordes afilados e inclusiones de color","Céramique fracturée aux arêtes vives et inclusions colorées","خزف متشقق بحواف حادة وتضمينات لونية"],
+moltenGlassTexture:["Schmelzendes Glas mit transparenten, fließenden Kanten","Molten glass with transparent flowing edges","Vidrio fundido con bordes transparentes y fluidos","Verre fondu aux bords transparents et fluides","زجاج منصهر بحواف شفافة وانسيابية"],
+layeredPigmentRelief:["Mehrschichtige Pigmentflächen mit fühlbarer Reliefstruktur","Layered pigment surfaces with tactile relief texture","Capas de pigmento con textura en relieve","Couches de pigments avec texture en relief","طبقات صبغية بملمس بارز"],
+waterfallFromPortalRim:["Ein Wasserfall ergießt sich direkt vom unteren Rand des Portals","A waterfall pours directly from the lower rim of the portal","Una cascada cae desde el borde inferior del portal","Une cascade jaillit du bord inférieur du portail","شلال ينساب مباشرة من الحافة السفلية للبوابة"],
+waterfallIntoSea:["Wasser stürzt aus großer Höhe in ein ruhiges Meer","Water plunges from great height into a calm sea","El agua cae desde gran altura a un mar tranquilo","L'eau tombe de très haut dans une mer calme","ماء يهبط من ارتفاع شاهق إلى بحر هادئ"],
+reflectiveShallowWater:["Flaches spiegelndes Wasser im Vordergrund mit klarer Spiegelung des Motivs","Shallow reflective water in the foreground mirroring the scene","Agua poco profunda y reflectante que refleja la escena","Eau peu profonde et réfléchissante miroir de la scène","ماء ضحل عاكس يعكس المشهد"],
+cascadingWaterCurtain:["Breiter transparenter Wasservorhang mit fein ausgearbeiteten Strömungen","Wide transparent curtain of water with finely detailed currents","Cortina ancha de agua transparente con corrientes detalladas","Large rideau d'eau transparent aux courants finement détaillés","ستارة ماء شفافة عريضة بتيارات دقيقة"],
+circularWaterRipples:["Kreisförmige Wellenringe breiten sich unter dem Wasserfall aus","Circular ripple rings spread beneath the waterfall","Ondas circulares se expanden bajo la cascada","Ondes circulaires se propagent sous la cascade","تموجات دائرية تنتشر تحت الشلال"],
+suspendedWaterStream:["Ein Fluss schwebt als durchgehendes Band frei in der Luft","A river floats freely in the air as a continuous ribbon","Un río flota en el aire como una cinta continua","Une rivière flotte dans l'air comme un ruban continu","نهر يطفو في الهواء كشريط متصل"],
+volumetricClouds:["Volumetrische Wolken mit räumlicher Tiefe und weichen Lichtkanten","Volumetric clouds with depth and soft illuminated edges","Nubes volumétricas con profundidad y bordes iluminados","Nuages volumétriques profonds aux contours lumineux","سحب حجمية بعمق وحواف مضيئة"],
+stormyDuskSky:["Dramatischer Dämmerungshimmel mit dunklen Wolken und warmem Horizont","Dramatic dusk sky with dark clouds and a warm horizon","Cielo dramático al anochecer con nubes oscuras","Ciel dramatique au crépuscule avec nuages sombres","سماء شفق درامية بغيوم داكنة وأفق دافئ"],
+warmSunsetGlow:["Warmer goldener Sonnenuntergang mit intensivem orange-rotem Leuchten","Warm golden sunset with intense orange-red glow","Atardecer dorado cálido con resplandor naranja rojizo","Coucher de soleil doré et chaud aux lueurs orange-rouge","توهج غروب ذهبي دافئ وبرتقالي محمر"],
+coolTealMist:["Kühler türkisfarbener Nebel mit sanften Tiefenstaffelungen","Cool teal mist with soft atmospheric depth","Niebla turquesa fría con profundidad atmosférica","Brume turquoise froide avec profondeur atmosphérique","ضباب فيروزي بارد بعمق جوي"],
+dramaticBacklight:["Starkes Gegenlicht zeichnet die Portalform und die Wasserkaskaden nach","Strong backlight outlines the portal shape and cascading water","Contraluz intenso perfila el portal y las cascadas","Contre-jour puissant soulignant le portail et les cascades","إضاءة خلفية قوية تحدد شكل البوابة والشلالات"],
+floatingParticles:["Feine schwebende Partikel und Sprühnebel im Licht","Fine floating particles and water mist in the light","Partículas finas flotantes y bruma de agua a contraluz","Fines particules flottantes et brume d'eau dans la lumière","جزيئات دقيقة عائمة ورذاذ ماء في الضوء"],
+monumentalVerticalComposition:["Monumentale Hochformat-Komposition mit Portal als dominierendem Hauptmotiv","Monumental vertical composition with the portal as the dominant focal subject","Composición vertical monumental con el portal como motivo principal","Composition verticale monumentale avec portail comme sujet principal","تكوين رأسي ضخم والبوابة هي العنصر الرئيسي"],
+lowAnglePortalView:["Leichte Untersicht, die das Portal riesig und imposant wirken lässt","Slight low-angle view making the portal look huge and imposing","Vista ligeramente contrapicada que hace enorme el portal","Légère contre-plongée donnant au portail une présence monumentale","زاوية منخفضة قليلاً تجعل البوابة ضخمة ومهيبة"],
+wideDreamscapeWithTinyFigure:["Weite surreale Landschaft mit einer winzigen menschlichen Figur als Größenmaßstab","Wide surreal landscape with a tiny human figure for scale","Paisaje surrealista amplio con una pequeña figura humana","Vaste paysage surréaliste avec une minuscule silhouette humaine","منظر سريالي واسع مع شخصية بشرية صغيرة لإظهار الحجم"],
+strongCentralDepth:["Starke zentrale Tiefenwirkung mit klarer Blickführung in die andere Welt","Strong central depth with clear visual guidance into the other world","Gran profundidad central que guía la mirada al otro mundo","Profondeur centrale marquée guidant le regard vers l'autre monde","عمق مركزي قوي يوجه النظر إلى العالم الآخر"],
+foregroundReflection:["Spiegelung des gesamten Portals und der Landschaft auf nassem Boden","Reflection of the entire portal and landscape on wet ground","Reflejo de todo el portal y el paisaje en suelo mojado","Reflet du portail et du paysage sur le sol mouillé","انعكاس البوابة والمنظر بالكامل على أرض مبللة"],
+cinematicNegativeSpace:["Großzügiger freier Raum um das Hauptmotiv für eine ruhige monumentale Wirkung","Generous negative space around the main subject for a calm monumental effect","Espacio negativo amplio alrededor del motivo principal","Grand espace négatif autour du sujet principal","مساحة فارغة واسعة حول العنصر الرئيسي"],
 stoneWallPortal:["Aufgebrochene Steinwand mit einer Traumlandschaft dahinter","Broken stone wall revealing a dream landscape","Muro de piedra abierto con paisaje onírico","Mur de pierre ouvert sur un paysage onirique","جدار حجري مفتوح على منظر حالم"],
 rockyPassage:["Zerklüfteter Felsdurchgang mit goldenem Weg in eine andere Welt","Rocky passage with a golden path into another world","Paso rocoso con camino dorado a otro mundo","Passage rocheux avec chemin doré vers un autre monde","ممر صخري بطريق ذهبي إلى عالم آخر"],
 circularWaterfallPortal:["Monumentales rundes Portal mit Wasserfällen und rotem Sonnenuntergang","Monumental circular portal with waterfalls and red sunset","Portal circular monumental con cascadas y atardecer rojo","Portail circulaire monumental avec cascades et coucher de soleil rouge","بوابة دائرية ضخمة مع شلالات وغروب أحمر"],
@@ -1490,11 +1727,22 @@ const PRESETS=[
 ];
 
 const CATEGORY_GROUPS = {
-  people: ["person","hair","hairColor","makeup","clothing","hosiery","shoes","pose"],
-  artworlds: ["japan","landscape","africaArt","style","fantasy","trainType","trainLandscape","trainRoute","trainView","trainSeason","trainMood"],
-  film: ["galaxyScene","spacecraft","spaceCharacters","spaceWorlds","spaceEffects"],
-  photo: ["realism","camera","lens","lighting","mood","format","composition"],
-  all: null
+  // Schrittfolge für den normalen Porträt-/Fashion-Workflow.
+  personStep: ["person"],
+  hairStep: ["hair"],
+  hairColorStep: ["hairColor"],
+  makeupStep: ["makeup","beautyMakeup","beautyLips","beautySkin"],
+  clothingStep: ["clothing","womenClothing","menClothing","clothingColor","clothingMaterial","clothingDetails","beautyOutfit","beautyAccessories"],
+  shoesStep: ["shoes","hosiery","hosieryStyle","hosieryDenier","hosieryPattern","hosieryColor","hosieryFoot","barefootStyle","footPose","barefootBodyPose","feetFraming","feetDetails"],
+  poseStep: ["pose","womenPose","menPose","beautyPose","expression","pairType","pairStyle","pairPose","pairFraming","pairSetting"],
+  worldStep: ["portraitBackground","beautyBackground","japan","landscape","africaArt","galaxyScene","spacecraft","spaceCharacters","spaceWorlds","spaceEffects","trainType","trainLandscape","trainRoute","trainView","trainSeason","trainMood","filmAction","filmEpicRomance","filmSciFi","filmHorror","filmAdventure","filmPostApocalyptic","filmFantasy","filmCinematic","format","composition"],
+  artistStep: ["painterArt"],
+  abstractStep: ["neoAbstractArt","colorExplosion","style"],
+  surrealStep: ["surrealDream","surrealSubjects","surrealComposition","surrealNature","surrealMood","surrealTime","fantasy","mysticalFantasy","romanticDream","floralLuxury"],
+  mixedMediaStep: ["brokenReality","brokenRealityMore","brokenEffects","brokenLighting","dimensionFrames","dimensionSculpture","dimensionTexture","dimensionGlitch"],
+  surreal3DStep: ["dimensionPortals","portalForm","portalWorld","portalTransition","portalMaterial","portalWater","portalAtmosphere","portalComposition","dimensionNature"],
+  artSpaceStep: ["roomTypes","architecture","roomDetails","roomLighting","dimensionNature","fantasyPortals","fantasyArchitecture"],
+  photo: ["camera","lens","lighting","photoTechnique","photoPerspective","style","realism","mood"]
 };
 
 const FILM_PREVIEW_IMAGES = {
@@ -1795,7 +2043,7 @@ const CATEGORY_PREVIEW_FAMILY = {
   beautyMakeup:"beauty", beautyLips:"beauty", beautySkin:"beauty", beautyFraming:"people", beautyLighting:"lighting",
   beautyOutfit:"fashion", beautyAccessories:"beauty", japan:"japan", landscape:"nature", africaArt:"africa",
   style:"art", realism:"realism", camera:"camera", lens:"camera", lighting:"lighting", mood:"mood",
-  fantasy:"surreal", format:"camera", composition:"camera", 
+  fantasy:"surreal", format:"camera", composition:"camera", adultCreative:"fashion",
   galaxyScene:"space", spacecraft:"space", spaceCharacters:"space", spaceWorlds:"space", spaceEffects:"space",
   spaceCharactersMore:"space", spaceLocations:"space", spaceScenes:"space", spaceWeapons:"space", spaceCamera:"space",
   trainType:"train", trainLandscape:"train", trainRoute:"train", trainView:"train", trainSeason:"train", trainMood:"train",
@@ -1810,6 +2058,8 @@ const CATEGORY_PREVIEW_FAMILY = {
   roomTypes:"interiors", architecture:"architecture", roomDetails:"interiors", roomLighting:"lighting",
   painterArt:"art", dimensionPortals:"surreal", dimensionFrames:"surreal", dimensionNature:"nature",
   dimensionSculpture:"art", dimensionTexture:"art", dimensionGlitch:"surreal",
+  portalForm:"surreal", portalWorld:"nature", portalTransition:"surreal", portalMaterial:"art",
+  portalWater:"nature", portalAtmosphere:"lighting", portalComposition:"surreal",
   filmAction:"cinema", filmEpicRomance:"cinema", filmSciFi:"cinema", filmHorror:"cinema",
   filmAdventure:"cinema", filmPostApocalyptic:"cinema", filmFantasy:"cinema", filmCinematic:"cinema",
   pairType:"people", pairStyle:"people", pairPose:"people", pairFraming:"people", pairSetting:"backgrounds"
@@ -2068,9 +2318,104 @@ Object.assign(OPTION_HELP, {
   detailTailoredFit:"Klarer, taillierter Schnitt"
 });
 
+
+/* V15.2 – verbindliche Motivzuordnung statt zufälliger Pool-Bilder */
+const FIXED_PREVIEW_BY_ID = {
+  // Personen: Frau und Mann dürfen nie vertauscht werden.
+  person: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=82",
+  adultWoman: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=82",
+  adultMan: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=82",
+  elegantWomanPortrait: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=900&q=82",
+  elegantManPortrait: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=82",
+  fashionModel: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=900&q=82",
+  cinematicPortrait: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=900&q=82",
+
+  // Frisur, Haarfarbe, Make-up und Mode.
+  hair: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=900&q=82",
+  pixie: "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=900&q=82",
+  shortBob: "https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?auto=format&fit=crop&w=900&q=82",
+  shoulder: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=82",
+  longStraight: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=82",
+  longCurly: "https://images.unsplash.com/photo-1512316609839-ce289d3eba0a?auto=format&fit=crop&w=900&q=82",
+  bald: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=82",
+  hairColor: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=82",
+  blonde: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=82",
+  platinum: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=900&q=82",
+  brown: "https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?auto=format&fit=crop&w=900&q=82",
+  black: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=82",
+  red: "https://images.unsplash.com/photo-1512316609839-ce289d3eba0a?auto=format&fit=crop&w=900&q=82",
+  gray: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=900&q=82",
+  makeup: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=900&q=82",
+  naturalMakeup: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=900&q=82",
+  glamourMakeup: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=900&q=82",
+  eveningMakeup: "https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?auto=format&fit=crop&w=900&q=82",
+  noMakeup: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=82",
+
+  // Kunst: unterschiedliche, echte Kunst-/Mixed-Media-Anmutungen.
+  painterArt: "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=900&q=82",
+  style: "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=900&q=82",
+  daliArt: "https://images.unsplash.com/photo-1577083552431-6e5fd01aa342?auto=format&fit=crop&w=900&q=82",
+  deChiricoArt: "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?auto=format&fit=crop&w=900&q=82",
+  delvauxArt: "https://images.unsplash.com/photo-1579783901586-d88db74b4fe4?auto=format&fit=crop&w=900&q=82",
+  ruschaArt: "https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=900&q=82",
+  kgHobbySurrealArt: "https://images.unsplash.com/photo-1549490349-8643362247b5?auto=format&fit=crop&w=900&q=82",
+  vanGoghArt: "https://images.unsplash.com/photo-1577083552431-6e5fd01aa342?auto=format&fit=crop&w=900&q=82",
+  monetArt: "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=900&q=82",
+  picassoArt: "https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=900&q=82",
+  leonardoArt: "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?auto=format&fit=crop&w=900&q=82",
+  michelangeloArt: "https://images.unsplash.com/photo-1579783901586-d88db74b4fe4?auto=format&fit=crop&w=900&q=82",
+  rembrandtArt: "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=900&q=82",
+  klimtArt: "https://images.unsplash.com/photo-1577083552431-6e5fd01aa342?auto=format&fit=crop&w=900&q=82",
+  kahloArt: "https://images.unsplash.com/photo-1549490349-8643362247b5?auto=format&fit=crop&w=900&q=82",
+  hokusaiArt: "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?auto=format&fit=crop&w=900&q=82",
+  magritteArt: "https://images.unsplash.com/photo-1579783901586-d88db74b4fe4?auto=format&fit=crop&w=900&q=82",
+
+  // 3D-Mixed-Media / Portale / unmögliche Durchbrüche.
+  dimensionPortals: "https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=900&q=82",
+  brokenReality: "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=900&q=82",
+  stoneWallPortal: "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=900&q=82",
+  rockyPassage: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=82",
+  circularWaterfallPortal: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=900&q=82",
+  framedSunset: "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=900&q=82",
+  brokenCanvasWorld: "https://images.unsplash.com/photo-1549490349-8643362247b5?auto=format&fit=crop&w=900&q=82",
+  dimensionalArch: "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=900&q=82",
+
+  // Zugwelt: kein themenfremdes Essen oder generische Modebilder.
+  trainType: "https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=900&q=82",
+  trainLandscape: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=82",
+  trainRoute: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=900&q=82",
+  trainView: "https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=900&q=82",
+  trainSeason: "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=900&q=82",
+  trainMood: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=82",
+  trainVehicles: "https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=900&q=82",
+  trainLocations: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=82",
+  trainStructures: "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=900&q=82",
+  trainAtmosphere: "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=900&q=82",
+
+  // Natur, Afrika, Weltraum, Film und Technik.
+  japan: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=900&q=82",
+  africaArt: "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=900&q=82",
+  landscape: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=82",
+  fantasy: "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=900&q=82",
+  galaxyScene: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=900&q=82",
+  spacecraft: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=900&q=82",
+  spaceCharacters: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=900&q=82",
+  camera: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=900&q=82",
+  lighting: "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=900&q=82",
+  mood: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=900&q=82",
+  architecture: "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=900&q=82"
+};
+
 function getPreviewImageUrl(catId, optId, label) {
   const key = `${catId}::${optId || "CAT"}`;
   if (PREVIEW_CACHE[key]) return PREVIEW_CACHE[key];
+
+  // Erst exakt zum Motiv passende Bilder ausliefern, erst danach alte Pools.
+  const fixedId = optId || catId;
+  if (FIXED_PREVIEW_BY_ID[fixedId]) {
+    PREVIEW_CACHE[key] = FIXED_PREVIEW_BY_ID[fixedId];
+    return PREVIEW_CACHE[key];
+  }
 
   if (HOSIERY_DENIER_PREVIEWS[optId]) { PREVIEW_CACHE[key] = HOSIERY_DENIER_PREVIEWS[optId]; return PREVIEW_CACHE[key]; }
   if (PREVIEW_EXACT[optId]) { PREVIEW_CACHE[key] = PREVIEW_EXACT[optId]; return PREVIEW_CACHE[key]; }
@@ -2107,7 +2452,7 @@ function getPreviewImageUrl(catId, optId, label) {
   return url;
 }
 
-let activeCategoryGroup = "all";
+let activeCategoryGroup = "personStep";
 function setCategoryGroup(group) {
   activeCategoryGroup = group;
   document.querySelectorAll("#categoryTabs .tab").forEach(btn => {
@@ -2227,6 +2572,7 @@ function renderCategories(){
   const query=(document.getElementById("categorySearch")?.value||"").trim().toLowerCase();
   const allowed=activeCategoryGroup==="all"?null:(CATEGORY_GROUPS[activeCategoryGroup]||[]);
   CATEGORIES.forEach(([id,icon,multi,labelObj,opts])=>{
+    if(id === "adultCreative") return;
     if(allowed && !allowed.includes(id))return;
     const label=txt(labelObj);
     const matchesSearch=!query || label.toLowerCase().includes(query) || opts.some(o=>optionText(o).toLowerCase().includes(query));
@@ -2384,6 +2730,7 @@ function toggleOption(catId,optId,multi){
 function composeMasterPrompt(){
   const parts=[];
   CATEGORIES.forEach(([id,,,labelObj])=>{
+    if(id === "adultCreative") return;
     const val=selectedValues[id];
     if(!val||(Array.isArray(val)&&!val.length))return;
     const items=Array.isArray(val)?val:[val];
@@ -2543,6 +2890,7 @@ function renderSavedPrompts(){
 function randomPrompt(){
   selectedValues={};
   CATEGORIES.forEach(([id,,multi,,opts])=>{
+    if(id === "adultCreative") return;
     if(Math.random()>0.45){
       const pick=opts[Math.floor(Math.random()*opts.length)];
       selectedValues[id]=multi?[pick]:pick;

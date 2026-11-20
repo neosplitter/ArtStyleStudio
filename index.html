@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ArtStyle Studio V15.7 – Guided Creative Lab</title>
+<title>ArtStyle Studio V17.0 – Creative Experience</title>
 <style>
 :root{
   --bg:#080a10;--bg2:#101524;--card:#151a28;--card2:#20263a;
@@ -457,6 +457,15 @@ button.studio-tile {
   #categoryTabs.category-steps .step-number { flex-basis:23px !important; width:23px !important; height:23px !important; }
 }
 
+
+/* V17.0 – vereinfachte, mobilfreundliche Oberfläche */
+.v17-home{max-width:1180px;margin:22px auto 28px;padding:22px;border:1px solid rgba(148,163,184,.22);border-radius:24px;background:linear-gradient(145deg,#151b2b,#0d1220);box-shadow:0 16px 45px rgba(0,0,0,.24)}
+.v17-heading span{font-size:11px;letter-spacing:2px;color:#c4a5fd;font-weight:800}.v17-heading h2{margin:7px 0;font-size:clamp(23px,4vw,32px)}.v17-heading p{margin:0;color:#b6bfd2;line-height:1.5}
+.v17-modes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:20px}.v17-modes button{min-width:0;text-align:left;padding:17px;border:1px solid #35415b;border-radius:17px;background:linear-gradient(145deg,#202b43,#141b2b);color:#fff;display:flex;flex-direction:column;gap:7px;min-height:102px}.v17-modes button:active{transform:scale(.985);border-color:#a78bfa}.v17-modes b{font-size:15px}.v17-modes small{font-size:12px;color:#b8c2d7;line-height:1.4}.v17-modes .v17-all{grid-column:1/-1;background:linear-gradient(110deg,#3b2865,#1d3150);border-color:#8062c5}.v17-tools{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}.v17-tools button{flex:1;min-width:180px}
+.legacy-dashboard{display:none!important}.stats{display:none!important}.category-steps,.wizard-intro,.wizard-progress,.wizard-controls{display:none!important}.workflow-hint{display:none!important}
+#styleMixerPanel{margin-top:18px}.card{overflow:hidden;border-radius:18px}.card-thumb-wrap{height:155px!important}.card-body{padding:13px!important}.card-title{font-size:15px!important;font-weight:800}.card-description{font-size:12px;line-height:1.45;color:#b8c2d7;margin-top:7px;min-height:52px}.card-open-hint{font-size:11px;color:#c4b5fd;font-weight:700;margin-top:9px}.category-toolbar{padding:15px!important}.category-search{width:100%;padding:13px;border-radius:12px}
+@media(max-width:600px){.v17-home{padding:16px;margin:14px 0;border-radius:18px}.v17-modes{grid-template-columns:1fr;gap:9px}.v17-modes button{min-height:82px;padding:14px}.v17-modes .v17-all{grid-column:auto}.card-thumb-wrap{height:135px!important}.card-description{min-height:0}.v17-tools{flex-direction:column}.v17-tools button{width:100%}}
+
 </style>
 
 <style id="artstyle-v15-7-wizard">
@@ -477,13 +486,26 @@ button.studio-tile {
 </header>
 <main>
 <section class="hero"><h2 id="welcomeTitle"></h2><p id="welcomeText"></p></section>
+<section class="v17-home">
+ <div class="v17-heading"><span>ARTSTYLE STUDIO · V17.0</span><h2>Was möchtest du erschaffen?</h2><p>Wähle einen Bereich. Jede Kategorie zeigt dir eine Bildvorschau und eine kurze Erklärung.</p></div>
+ <div class="v17-modes">
+  <button onclick="setCategoryGroup('personStep')"><b>👤 Personen & Fashion</b><small>Porträts, Styling, Kleidung und Posen</small></button>
+  <button onclick="setCategoryGroup('artistStep')"><b>🖼️ Maler & Kunst</b><small>Künstler, Kunstrichtungen und klassische Bildsprachen</small></button>
+  <button onclick="setCategoryGroup('abstractStep')"><b>🎨 Abstrakt & Mixed Media</b><small>Farben, Texturen und experimentelle Kunst</small></button>
+  <button onclick="setCategoryGroup('surrealStep')"><b>🌌 Surreale Welten</b><small>Traumwelten, Portale und unmögliche Räume</small></button>
+  <button onclick="setCategoryGroup('worldStep')"><b>🌍 Orte & Fantasie</b><small>Landschaften, Architektur, Film und Science-Fiction</small></button>
+  <button onclick="setCategoryGroup('photo')"><b>📷 Foto & Kamera</b><small>Licht, Objektive und Bildgestaltung</small></button>
+  <button class="v17-all" onclick="setCategoryGroup('all')"><b>✨ Alle Kategorien anzeigen</b><small>Die komplette Sammlung durchsuchen</small></button>
+ </div>
+ <div class="v17-tools"><button class="primary" onclick="document.getElementById('directorPanel').scrollIntoView({behavior:'smooth'})">✨ Kreativ-Generator öffnen</button><button class="secondary" onclick="document.getElementById('promptOutput').scrollIntoView({behavior:'smooth'})">📝 Mein Master-Prompt</button></div>
+</section>
 <div class="stats">
  <div class="stat"><div class="stat-number" id="selectedCount">0</div><div class="stat-label" id="selectedLabel"></div></div>
  <div class="stat"><div class="stat-number" id="categoryCount">0</div><div class="stat-label" id="categoryLabel"></div></div>
  <div class="stat"><div class="stat-number" id="savedCount">0</div><div class="stat-label" id="savedLabel"></div></div>
 </div>
 
-<section class="studio-dashboard studio-dashboard-v14" aria-label="Hauptbereiche">
+<section class="studio-dashboard studio-dashboard-v14 legacy-dashboard" aria-label="Hauptbereiche">
   <div class="dashboard-heading">
     <span class="dashboard-kicker">ARTSTYLE STUDIO</span>
     <h2>Was möchtest du gestalten?</h2>
@@ -510,7 +532,7 @@ button.studio-tile {
  </div>
  <div class="director-actions"><button class="primary" type="button" onclick="applyStyleMix()">✨ Stil-Mix übernehmen</button><button class="secondary" type="button" onclick="clearStyleMix()">↺ Mixer leeren</button></div>
 </section>
-<h2 class="section-title" id="categoryTitle">Bild Schritt für Schritt gestalten</h2>\n<p class="hint workflow-hint">Beginne mit der Person und gehe Schritt für Schritt weiter. Danach gestaltest du die Bildwelt, wählst Künstler und Kunstrichtungen, kombinierst abstrakte oder surreale Elemente und ergänzt 3D-Mixed-Media. Kamera und Licht kommen zum Schluss.</p>
+<h2 class="section-title" id="categoryTitle">Alle Gestaltungskategorien</h2>\n<p class="hint workflow-hint">Wähle oben einen Themenbereich oder suche direkt nach einer Kategorie. Künstler und Kunstrichtungen bleiben vollständig erhalten.</p>
 <div class="category-toolbar">
   <input id="categorySearch" class="category-search" type="search" placeholder="Bereiche suchen …" oninput="renderCategories()">
   <div class="wizard-intro">
@@ -709,7 +731,7 @@ button.studio-tile {
 <button class="secondary" onclick="importData()" id="importButton"></button><button class="danger" onclick="resetAll()" id="resetButton"></button>
 </div><div class="status" id="status"></div></section>
 <section class="panel"><h2 id="libraryTitle"></h2><input class="library-search" id="librarySearch" oninput="renderSavedPrompts()"><div id="savedPrompts"></div></section>
-</main><footer>🎨 ArtStyle Studio V16.0 · Creative Workshop Edition · Dirk Eckert<div class="image-source-note">Foto-Vorschaubilder: <a href="https://unsplash.com/license" target="_blank" rel="noopener">Unsplash-Lizenz</a>.</div></footer>
+</main><footer>🎨 ArtStyle Studio V17.0 · Creative Workshop Edition · Dirk Eckert<div class="image-source-note">Foto-Vorschaubilder: <a href="https://unsplash.com/license" target="_blank" rel="noopener">Unsplash-Lizenz</a>.</div></footer>
 
 <script>
 const LANGS={
@@ -2536,7 +2558,7 @@ function getPreviewImageUrl(catId, optId, label) {
 }
 
 const STUDIO_STEPS = ["personStep","hairStep","makeupStep","clothingStep","shoesStep","poseStep","artistStep","abstractStep","surrealStep","worldStep","photo"];
-let activeCategoryGroup = "personStep";
+let activeCategoryGroup = "all";
 function updateWizardControls(){
   const index = Math.max(0, STUDIO_STEPS.indexOf(activeCategoryGroup));
   const count = STUDIO_STEPS.length;
@@ -2673,6 +2695,27 @@ function renderPresets(){
   });
 }
 
+function categoryDescription(id,label,opts){
+ const descriptions={
+  painterArt:"Entdecke berühmte Maler, klassische Meisterwerke und charakteristische Kunstrichtungen als Inspiration für deine Bildsprache.",
+  neoAbstractArt:"Abstrakte Formen, expressive Farben und moderne Kompositionen für eigenständige Kunstwerke.",
+  colorExplosion:"Kräftige Farbwelten, dynamische Kontraste und ausdrucksstarke Farbkompositionen.",
+  style:"Wähle einen visuellen Stil und bestimme den künstlerischen Charakter deines Bildes.",
+  surrealDream:"Surreale Traumlandschaften, poetische Szenen und ungewöhnliche Bildkombinationen.",
+  dimensionPortals:"Ungewöhnliche Portale, Übergänge und fantastische Räume zwischen verschiedenen Welten.",
+  camera:"Kameraeigenschaften und technische Bildwirkung passend zum gewünschten Ergebnis.",
+  lens:"Brennweite und Objektivcharakter für Perspektive, Schärfentiefe und Bildwirkung.",
+  lighting:"Lichtsetzung von weichem Studio-Licht bis zu dramatischer Kino-Beleuchtung.",
+  japan:"Japanische Landschaften, Architektur und stimmungsvolle Orte als Bildkulisse.",
+  landscape:"Natürliche Landschaften, Jahreszeiten und atmosphärische Szenerien.",
+  architecture:"Architektur, Räume und Bauwerke mit unterschiedlichen Formen und Stimmungen.",
+  person:"Lege fest, welche Person oder welches Motiv im Mittelpunkt steht.",
+  clothing:"Kleidung, Materialien und Details passend zum gewünschten Look.",
+  pose:"Körpersprache, Perspektive und Bildaufbau für eine klare Komposition."
+ };
+ return descriptions[id] || `Gestalte ${label.toLowerCase()} mit passenden Varianten und kombiniere deine Auswahl mit weiteren Kategorien für einen individuellen Master-Prompt.`;
+}
+
 function renderCategories(){
   const c=document.getElementById("categoriesContainer");
   if(!c)return;
@@ -2702,6 +2745,8 @@ function renderCategories(){
       </div>
       <div class="card-body">
         <div class="card-title">${label}</div>
+        <div class="card-description">${categoryDescription(id,label,opts)}</div>
+        <div class="card-open-hint">Auswählen & gestalten →</div>
       </div>
     `;
     card.onclick=()=>openCategory(id);

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ArtStyle Studio V17.0 – Creative Experience</title>
+<title>ArtStyle Studio V22.1 – Luxury Finish</title>
 <style>
 :root{
   --bg:#080a10;--bg2:#101524;--card:#151a28;--card2:#20263a;
@@ -795,6 +795,93 @@ body.v22-story .v22-story-page{display:block!important}
 </section>
 <style>
 .v16-suite{margin-top:24px;border:1px solid rgba(150,170,210,.25);background:linear-gradient(145deg,rgba(34,42,65,.94),rgba(18,22,36,.98));color:inherit}.v16-kicker{font-size:.72rem;letter-spacing:.16em;color:#a9baff;font-weight:800}.v16-head h2{margin:.4rem 0}.v16-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:18px 0}.v16-card{display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:7px;min-height:125px;padding:15px;border:1px solid rgba(180,195,230,.24);border-radius:14px;background:rgba(255,255,255,.055);color:inherit;cursor:pointer}.v16-card span{font-size:1.7rem}.v16-card b{font-size:.96rem}.v16-card small{opacity:.76;line-height:1.4}.v16-card:active{transform:scale(.98)}.v16-controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:18px 0}.v16-controls label{display:flex;flex-direction:column;gap:6px;font-size:.88rem}.v16-controls select{width:100%;padding:10px;border-radius:9px}.v16-actions{display:flex;flex-wrap:wrap;gap:9px;margin:12px 0}.v16-result{white-space:pre-wrap;line-height:1.55;padding:16px;border:1px solid rgba(170,190,230,.25);border-radius:12px;background:rgba(0,0,0,.18);min-height:80px;overflow-wrap:anywhere}.v16-templates{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:14px 0}.v16-template{padding:12px;border-radius:10px;border:1px solid rgba(170,190,230,.25);background:rgba(255,255,255,.05);color:inherit;text-align:left;cursor:pointer}.v16-template b,.v16-template small{display:block;margin-bottom:6px}@media(max-width:520px){.v16-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.v16-card{min-height:135px;padding:12px}.v16-actions button{flex:1 1 100%}}
+
+/* V22.1 LUXURY FINISH — consistent across every studio and composer */
+:root{
+ --bg:#090a0c;--bg2:#111214;--card:#171819;--card2:#202123;
+ --border:rgba(201,176,125,.34);--purple:#b89a63;--pink:#8b7350;
+ --green:#b9a477;--orange:#c6a66d;--red:#9d6660;
+ --text:#f4f0e8;--muted:#b8b0a1;
+}
+html{background:#090a0c}
+body{
+ background:radial-gradient(ellipse at 50% -15%,rgba(184,154,99,.12),transparent 42%),linear-gradient(180deg,#090a0c 0%,#101113 52%,#090a0c 100%)!important;
+ color:#f4f0e8!important;
+}
+h1,h2,h3,.section-title,.selection-header h2{
+ color:#ead9b7!important;letter-spacing:.015em;
+}
+p,.hint,.empty,.card-description{color:#bdb5a7!important}
+.card,.panel,#selectionArea,.composer-panel,#visualComposer.composer-panel,
+.studio-tile,.category-toolbar,.composer-result{
+ background:linear-gradient(145deg,rgba(28,28,27,.98),rgba(16,17,18,.98))!important;
+ border:1px solid rgba(190,162,112,.32)!important;
+ border-radius:20px!important;
+ box-shadow:0 12px 34px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.035)!important;
+}
+.card:hover,.studio-tile:hover{
+ border-color:rgba(218,190,139,.75)!important;
+ box-shadow:0 16px 38px rgba(0,0,0,.42),0 0 0 1px rgba(190,162,112,.12)!important;
+}
+.card-thumb-gradient{background:linear-gradient(180deg,rgba(8,9,10,.02) 20%,rgba(12,12,12,.9) 100%)!important}
+.card-icon-badge{background:rgba(18,18,17,.82)!important;border-color:rgba(201,176,125,.4)!important}
+.card-open-hint,.card-title{color:#ead9b7!important}
+button,.tab,.preset,.close-selection,.small-button{
+ border:1px solid rgba(190,162,112,.28)!important;
+ border-radius:14px!important;
+ color:#f3eee4!important;
+ box-shadow:0 5px 16px rgba(0,0,0,.2);
+}
+button.primary,.primary{
+ background:linear-gradient(115deg,#80683f,#b89a63 52%,#725b37)!important;
+ color:#100f0c!important;border-color:rgba(226,202,157,.6)!important;
+}
+button.green,.green{background:linear-gradient(115deg,#75613e,#b39a69)!important;color:#111!important}
+button.orange,.orange{background:linear-gradient(115deg,#665239,#a88a59)!important;color:#fff!important}
+button.secondary,.secondary,.small-button,.close-selection{
+ background:linear-gradient(145deg,#292827,#171819)!important;
+ border-color:rgba(190,162,112,.32)!important;
+}
+button.danger,.danger{background:linear-gradient(115deg,#633e39,#8b5750)!important}
+button:focus-visible,.card:focus-visible{outline:2px solid #d4bd8c!important;outline-offset:3px}
+select,input,textarea,.language-select,
+.composer-grid select,.composer-grid textarea,
+#visualComposer select,#visualComposer input,#visualComposer textarea{
+ background:#202123!important;color:#f3eee4!important;
+ border:1px solid rgba(190,162,112,.42)!important;
+ border-radius:13px!important;
+ box-shadow:inset 0 1px 3px rgba(0,0,0,.28)!important;
+}
+select:focus,input:focus,textarea:focus{outline:2px solid rgba(190,162,112,.45)!important;outline-offset:1px}
+.composer-panel{
+ background:linear-gradient(145deg,#1c1b19,#111213)!important;
+ border:1px solid rgba(201,176,125,.46)!important;
+ box-shadow:0 16px 40px rgba(0,0,0,.36),inset 0 1px 0 rgba(255,255,255,.04)!important;
+}
+.composer-result{background:#111213!important;color:#eee7da!important}
+#visualComposer label,.composer-grid label{color:#c9bda8!important}
+.chip{background:#272522!important;border-color:rgba(190,162,112,.3)!important;color:#eee7da!important}
+.chip strong{color:#d9bf8c!important}
+.status{color:#d7c398!important}
+#categoryTabs button.tab.active,.tab.active{
+ background:linear-gradient(115deg,#80683f,#b89a63)!important;color:#111!important;
+ border-color:#ddc99f!important;
+}
+#categoryTabs button.tab:not(.active),#categoryTabs .tab:not(.active){
+ background:#1b1c1d!important;color:#d6cbb8!important;border-color:rgba(190,162,112,.25)!important;
+}
+.studio-tile,.v17-modes button,.v18-quick button{
+ background:linear-gradient(145deg,#242321,#151617)!important;
+ border-color:rgba(190,162,112,.34)!important;
+}
+.v17-modes b,.v18-topnav strong{color:#ead9b7!important}
+.v17-modes small{color:#bdb5a7!important}
+hr, .divider{border-color:rgba(190,162,112,.22)!important}
+@media(max-width:600px){
+ .panel,#selectionArea,.composer-panel,#visualComposer.composer-panel{padding:16px!important;border-radius:18px!important}
+ button{min-height:48px}
+}
+
 </style>
 <script>
 (()=>{

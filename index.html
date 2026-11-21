@@ -380,6 +380,8 @@ button.studio-tile {
 #visualComposer .composer-grid label, #visualComposer .composer-grid select { min-width:0 !important; width:100% !important; box-sizing:border-box !important; }
 #visualComposer .director-actions { display:flex !important; flex-wrap:wrap !important; width:100% !important; gap:10px !important; }
 #visualComposer .director-actions button { flex:1 1 180px !important; min-width:0 !important; white-space:normal !important; }
+#composerResult .composer-prompt-preview{margin:12px 0;padding:14px;border:1px solid rgba(205,174,111,.45);border-radius:14px;background:rgba(205,174,111,.07);white-space:pre-wrap;max-height:260px;overflow:auto;font-size:.92em;line-height:1.55}
+#composerResult button{margin-top:10px;width:100%;}
 @media(max-width:900px) { #visualComposer .composer-grid { grid-template-columns:minmax(0,1fr) !important; } }
 @media(max-width:560px) {
  #categoryTabs button.tab { flex:1 1 calc(50% - 9px) !important; padding:10px 8px !important; font-size:13px !important; }
@@ -727,7 +729,7 @@ body.v23-night .v18-home{display:none!important}body.v23-night #nightStudio .v18
  <div class="composer-grid">
   <label for="composerScene">Umgebung / Hintergrund
    <select id="composerScene">
-    <option value="">Automatisch passend</option><option>Luxuriöses Beauty-Fotostudio</option><option>Minimalistisches Porträtstudio</option><option>Architektonische Kulisse</option><option>Japanische Landschaft</option><option>Romantischer Garten</option><option>Urbane Stadt bei Nacht</option><option>Surreale Traumlandschaft</option><option>Natürliche Outdoor-Umgebung</option><option>Neutraler heller Hintergrund</option><option>Dunkler cineastischer Hintergrund</option>
+    <option value="">Automatisch passend</option><option>Luxuriöses Beauty-Fotostudio</option><option>Minimalistisches Porträtstudio</option><option>Architektonische Kulisse</option><option>Romantischer Garten</option><option>Urbane Stadt bei Nacht</option><option>Surreale Traumlandschaft</option><option>Natürliche Outdoor-Umgebung</option><option>Neutraler heller Hintergrund</option><option>Dunkler cineastischer Hintergrund</option>
    </select>
   </label>
   <label for="composerMood">Bildstimmung
@@ -3402,10 +3404,27 @@ function analyzeImageConcept(){
   if(!document.getElementById("composerMood")?.value)notes.push("💡 Eine Bildstimmung hilft, Licht und Farbwirkung einheitlich auszurichten.");
   if(!selectedLabels.length)notes.push("ℹ️ Wähle zuerst ein Motiv oder eine Kategorie aus. Der Komponist ergänzt deine Auswahl.");
   if(!notes.length)notes.push("✓ Deine bisherigen Angaben wirken stimmig. Der Bildkomponist übernimmt die gewählten Details in den Master-Prompt.");
-  result.textContent=notes.join("\n");
   const out=document.getElementById("promptOutput");
-  if(out){out.value=composeMasterPrompt();updateCharCount();}
-  showStatus("Bildkonzept geprüft.");
+  const prompt=composeMasterPrompt();
+  if(out){out.value=prompt;updateCharCount();}
+  result.innerHTML="";
+  const heading=document.createElement("strong");
+  heading.textContent="Dein Bildkonzept ist vorbereitet";
+  result.appendChild(heading);
+  const note=document.createElement("p");
+  note.textContent=notes.join("\n");
+  result.appendChild(note);
+  const preview=document.createElement("p");
+  preview.className="composer-prompt-preview";
+  preview.textContent=prompt;
+  result.appendChild(preview);
+  const go=document.createElement("button");
+  go.type="button"; go.className="primary";
+  go.textContent="📝 Weiter zum Master-Prompt";
+  go.addEventListener("click",()=>{ if(out){out.scrollIntoView({behavior:"smooth",block:"center"});out.focus({preventScroll:true});} });
+  result.appendChild(go);
+  result.scrollIntoView({behavior:"smooth",block:"nearest"});
+  showStatus("Bildkonzept erstellt. Dein Master-Prompt steht bereit.");
 }
 function clearImageComposer(){
   ["composerScene","composerMood","composerFraming","composerFocus"].forEach(id=>{const e=document.getElementById(id);if(e)e.selectedIndex=0;});

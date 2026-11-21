@@ -552,7 +552,47 @@ body.v20-morning .v18-home{display:none!important}body.v20-morning .v18-topnav{d
 .morning-field{display:flex;flex-direction:column;gap:7px;margin:13px 0}.morning-field label{font-size:13px;font-weight:700;color:#e8eaf0}.morning-field select,.morning-field textarea{width:100%;box-sizing:border-box;border:1px solid #394252;border-radius:12px;background:#0f141d;color:#fff;padding:13px;font:inherit;font-size:14px}.morning-field textarea{resize:vertical;min-height:78px}.morning-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.morning-actions button{flex:1;min-width:130px;padding:12px 14px!important;border-radius:12px!important}.morning-result{white-space:pre-wrap;line-height:1.55;font-size:13px;color:#e6e8ed;background:#0c1119;border:1px solid #303948;border-radius:13px;padding:14px;margin-top:15px;min-height:54px}.v18-card.morning-card{border-color:#705b34!important}.v18-card.morning-card .v18-arrow{color:#f2c56c}
 </style>
 
-</head>
+
+<style id="v22-luxury-theme">
+:root{--v22-gold:#d8c18d;--v22-gold2:#a98b55;--v22-ink:#090a0c;--v22-panel:#141518;--v22-line:rgba(216,193,141,.25)}
+body.v19-clean{background:radial-gradient(ellipse at 50% -18%,#29231a 0,#111214 34%,#08090b 76%)!important;color:#f4f0e8!important;font-family:Inter,system-ui,-apple-system,sans-serif}
+body.v19-clean header{max-width:760px;margin:0 auto;padding:24px 18px 12px!important;text-align:center;border-bottom:1px solid var(--v22-line)}
+body.v19-clean header .logo,body.v19-clean header h1{color:#ead9b5!important;letter-spacing:.14em!important;text-transform:uppercase;text-shadow:0 2px 18px #c7a76a22}
+body.v19-clean header .name{color:#bca77c!important;letter-spacing:.22em;font-size:10px!important;text-transform:uppercase}
+body.v19-clean main{max-width:760px!important;padding:14px 16px 70px!important}
+.v18-home{max-width:650px!important;margin:12px auto 28px!important}
+.v18-intro{margin:14px 4px 20px!important;text-align:center}
+.v18-intro .v18-kicker{color:var(--v22-gold)!important;letter-spacing:.28em!important;font-size:9px!important}
+.v18-intro h2{font-family:Georgia,serif!important;font-weight:500!important;font-size:27px!important;letter-spacing:.01em;color:#f5eee1!important}
+.v18-intro p{color:#aaa39a!important;font-size:12px!important}
+.v18-grid{gap:12px!important}
+.v18-card{background:linear-gradient(155deg,#1b1b1c,#101113)!important;border:1px solid var(--v22-line)!important;border-radius:17px!important;box-shadow:0 12px 28px #0007!important;overflow:hidden}
+.v18-card img{height:124px!important;filter:saturate(.82) contrast(1.03)}
+.v18-card-body{padding:12px 13px 14px!important}
+.v18-card strong{color:#ead9b5!important;font-family:Georgia,serif;font-size:15px!important;font-weight:500!important}
+.v18-card small{display:block!important;color:#aaa49a!important;font-size:10px!important;line-height:1.45}
+.v18-card .v18-arrow{color:var(--v22-gold)!important;letter-spacing:.06em;text-transform:uppercase;font-size:9px!important}
+.v18-quick button,.v18-topnav button{background:#171719!important;border:1px solid var(--v22-line)!important;color:#e9dcc0!important;border-radius:12px!important}
+.v18-topnav strong{color:#e8d8b5!important;font-family:Georgia,serif;font-weight:500}
+body.v19-browse #categoriesContainer .card{background:#151619!important;border:1px solid var(--v22-line)!important;border-radius:15px!important;color:#eee!important}
+body.v19-browse #categoryTitle{color:#ead9b5!important;font-family:Georgia,serif;font-weight:500}
+.v22-story-card{grid-column:1/-1!important;display:grid!important;grid-template-columns:38% 1fr!important;min-height:118px}
+.v22-story-card img{height:100%!important;min-height:118px;}
+.v22-story-page{display:none;max-width:650px;margin:10px auto 35px}
+body.v22-story .v18-home,body.v22-story .v18-topnav{display:none!important}
+body.v22-story .v22-story-page{display:block!important}
+.v22-story-page .v22-panel{background:linear-gradient(145deg,#191a1c,#101113);border:1px solid var(--v22-line);border-radius:18px;padding:17px;margin:12px 0;box-shadow:0 12px 28px #0005}
+.v22-story-page h2,.v22-story-page h3{font-family:Georgia,serif;color:#ead9b5;font-weight:500}
+.v22-story-page label{display:block;color:#c9b991;font-size:12px;margin:12px 0 6px}
+.v22-story-page input,.v22-story-page select,.v22-story-page textarea{width:100%;box-sizing:border-box;background:#0e0f11;color:#f2eee7;border:1px solid #514632;border-radius:10px;padding:12px;font:inherit}
+.v22-story-page textarea{min-height:90px}
+.v22-story-page button{background:linear-gradient(135deg,#d8c18d,#a98b55)!important;color:#17130c!important;border:0!important;border-radius:11px!important;padding:12px 16px!important;font-weight:700!important}
+.v22-story-page .secondary{background:#202124!important;color:#e8d8b5!important;border:1px solid var(--v22-line)!important}
+#v22StoryResult{white-space:pre-wrap;line-height:1.55;color:#eee8dc;font-size:13px;min-height:100px;overflow-wrap:anywhere}
+@media(max-width:560px){body.v19-clean header{padding-top:18px!important}.v18-intro h2{font-size:23px!important}.v18-card img{height:108px!important}.v22-story-card{grid-template-columns:34% 1fr!important}}
+</style>
+
+<style id="v22-story-visibility">body.v19-clean.v22-story main>*{display:none!important}body.v19-clean.v22-story main>.v22-story-page{display:block!important}body.v19-clean.v22-story main>.v22-story-page .v18-topnav{display:flex!important}</style></head>
 <body>
 <header>
   <div class="topbar"><select id="languageSelector" class="language-select"></select></div>
@@ -565,6 +605,20 @@ body.v20-morning .v18-home{display:none!important}body.v20-morning .v18-topnav{d
  <div class="v18-intro"><span class="v18-kicker">ARTSTYLE STUDIO</span><h2>Was möchtest du gestalten?</h2></div>
  <div class="v18-grid" id="v18CategoryGrid"></div>
  <div class="v18-quick"><button type="button" onclick="v19OpenPrompt()">📝 Master-Prompt</button><button type="button" onclick="v19OpenGenerator()">✨ Zufallsidee</button></div>
+</section>
+
+<section class="v22-story-page" id="v22StoryPage">
+ <div class="v18-topnav" style="display:flex!important"><button type="button" onclick="v22StoryBack()">← Zurück</button><strong>Storytelling Studio</strong></div>
+ <div class="v22-panel"><div style="color:#d8c18d;font-size:9px;letter-spacing:.25em">YOUR STORY · YOUR SCENE</div><h2>Deine eigene Filmgeschichte</h2><p style="color:#aaa49a;font-size:12px">Erstelle eine zusammenhängende Bildsequenz mit dir als Hauptperson. Jede Szene erhält einen eigenen Prompt.</p>
+ <label>Filmgenre</label><select id="v22Genre"><option value="Action & Abenteuer">Action & Abenteuer</option><option value="Agenten-Thriller">Agenten-Thriller</option><option value="Science-Fiction">Science-Fiction</option><option value="Fantasy">Fantasy</option><option value="Komödie">Komödie</option><option value="Romantik">Romantik</option><option value="Mystery">Mystery</option></select>
+ <label>Worum geht es in deiner Geschichte?</label><textarea id="v22StoryIdea" placeholder="Zum Beispiel: Ich entdecke in einer alten Lagerhalle ein geheimnisvolles Portal …"></textarea>
+ <label>Anzahl der Szenen</label><select id="v22SceneCount"><option>4</option><option>6</option><option>8</option></select>
+ <label>Bildformat</label><select id="v22Format"><option>9:16 Hochformat</option><option>16:9 Querformat</option><option>4:5 Porträt</option><option>1:1 Quadrat</option></select>
+ <label>Hauptperson / Referenzfoto</label><input id="v22Character" value="Die Person aus meinem hochgeladenen Referenzfoto" />
+ <p style="font-size:11px;color:#aaa49a">Bei Verwendung eines Referenzfotos Gesicht, Identität und individuelle Gesichtszüge exakt bewahren. Keine Retusche oder Verschönerung.</p>
+ <button type="button" onclick="v22BuildStory()">Filmsequenz erstellen</button>
+ </div>
+ <div class="v22-panel"><h3>Deine Szenen-Prompts</h3><div id="v22StoryResult">Deine fertigen Szenen erscheinen hier.</div><button class="secondary" type="button" onclick="v22CopyStory()">Alle Szenen kopieren</button></div>
 </section>
 <div class="v18-topnav" id="v18Topnav"><button type="button" onclick="v19Home()">← Zurück</button><strong id="v18CurrentTitle">Bereich</strong><button type="button" style="margin-left:auto" onclick="v19OpenPrompt()">Prompt</button></div>
 <section id="morningStudio" class="morning-studio" aria-label="Guten Morgen Studio">
@@ -3427,6 +3481,27 @@ window.addEventListener("load", function(){
  window.morningCopy=async function(){const t=$('morningResult')?.textContent||'';if(!t||t==='Dein Bildprompt erscheint hier.')return;try{if(navigator.clipboard&&window.isSecureContext)await navigator.clipboard.writeText(t);else{const a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.focus();a.select();const ok=document.execCommand('copy');a.remove();if(!ok)throw Error('Kopieren nicht verfügbar');}const b=document.querySelector('#morningStudio .green');if(b)b.textContent='✓ Kopiert';}catch(e){const result=$('morningResult');if(result)result.textContent=t+'\n\n(Hinweis: Automatisches Kopieren nicht möglich. Text bitte markieren und manuell kopieren.)';}};
  window.v20OpenMorning=window.v20OpenMorning||function(){document.body.classList.remove('v19-browse','v19-prompt','v19-generator');document.body.classList.add('v20-morning');window.scrollTo({top:0,behavior:'smooth'});};
  $('morningType')?.addEventListener('change',sync);$('morningGenerateBtn')?.addEventListener('click',window.morningGenerate);$('morningDailyBtn')?.addEventListener('click',window.morningDaily);sync();
+})();
+</script>
+
+
+<script id="v22-luxury-storytelling">
+(function(){
+ const $=id=>document.getElementById(id);
+ window.v22OpenStory=function(){document.body.classList.remove('v19-browse','v19-prompt','v19-generator','v20-morning');document.body.classList.add('v22-story');window.scrollTo({top:0,behavior:'smooth'});};
+ window.v22StoryBack=function(){document.body.classList.remove('v22-story');window.v19Home&&window.v19Home();};
+ window.v22BuildStory=function(){
+  const genre=$('v22Genre').value,idea=$('v22StoryIdea').value.trim()||'Eine unerwartete Entdeckung verändert den Tag der Hauptperson',count=parseInt($('v22SceneCount').value,10),format=$('v22Format').value,person=$('v22Character').value.trim()||'die Hauptperson aus dem Referenzfoto';
+  const beats=['Einführung: Die Hauptperson wird in ihrer Umgebung gezeigt.','Der Auslöser: Ein überraschendes Ereignis setzt die Geschichte in Gang.','Die erste Entscheidung: Die Hauptperson stellt sich der neuen Situation.','Die Wendung: Ein unerwartetes Hindernis verändert den Plan.','Der Höhepunkt: Die entscheidende Handlung wird filmisch inszeniert.','Die Auflösung: Die Folgen der Entscheidung werden sichtbar.','Der letzte Schritt: Die Hauptperson erreicht einen neuen Abschnitt.','Schlussszene: Ein prägnantes, filmisches Schlussbild.'];
+  const scenes=Array.from({length:count},(_,i)=>'SZENE '+(i+1)+' – '+beats[i]+'\n'+idea+'. '+person+' ist in dieser Szene klar erkennbar. Genre: '+genre+'. Konsistente Kleidung, Frisur, Alter, Gesichtsidentität, Requisiten und Farbgestaltung über alle Szenen hinweg. Eigenständige filmische Komposition, passende Kameraperspektive, glaubwürdige Anatomie, hochwertiges cineastisches Licht.');
+  const all='ERSTELLE EINE ZUSAMMENHÄNGENDE FILMISCHE BILDSEQUENZ\nGenre: '+genre+'\nGeschichte: '+idea+'\nHauptperson: '+person+'\nWICHTIGE KONTINUITÄT: In allen Bildern dieselbe Person, dasselbe Gesicht und dieselbe Identität; Kleidung und Requisiten nur ändern, wenn die Handlung es verlangt. Bei Referenzfoto keine Veränderung, Retusche oder Verschönerung der Gesichtszüge.\nBildformat: '+format+'\n\n'+scenes.join('\n\n')+'\n\nJede Szene als eigenständiges Bild mit klarer zeitlicher Reihenfolge. Keine konkreten geschützten Filmfiguren oder Filmszenen nachahmen.';
+  $('v22StoryResult').textContent=all;
+ };
+ window.v22CopyStory=async function(){const t=$('v22StoryResult')?.textContent||'';if(!t||t.startsWith('Deine fertigen'))return;try{if(navigator.clipboard&&window.isSecureContext)await navigator.clipboard.writeText(t);else{const a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.focus();a.select();if(!document.execCommand('copy'))throw Error('Kopieren nicht verfügbar');a.remove();}const b=document.querySelector('#v22StoryPage .secondary');if(b)b.textContent='✓ Kopiert';}catch(e){$('v22StoryResult').textContent=t+'\n\nKopieren nicht verfügbar: Bitte Text markieren und manuell kopieren.';}};
+ document.addEventListener('DOMContentLoaded',function(){
+  const grid=$('v18CategoryGrid');if(grid&&!grid.querySelector('.v22-story-card')){const b=document.createElement('button');b.type='button';b.className='v18-card v22-story-card';b.innerHTML='<img loading="lazy" alt="Filmische Storytelling Vorschau" src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=700&q=80"><span class="v18-card-body"><strong>🎬 Storytelling Studio</strong><small>Deine eigene Geschichte als zusammenhängende Filmszenen</small><span class="v18-arrow">Geschichte entwickeln →</span></span>';b.addEventListener('click',window.v22OpenStory);grid.appendChild(b);}
+  const intro=document.querySelector('.v18-intro h2');if(intro)intro.textContent='Was möchtest du erschaffen?';
+ });
 })();
 </script>
 

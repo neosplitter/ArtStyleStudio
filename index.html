@@ -269,7 +269,7 @@ button.studio-tile {
   <div class="studio-tiles">
     <button class="studio-tile tile-beauty" onclick="goToStudio('people')"><span class="tile-emoji">👤</span><span class="tile-name">Personen & Fashion</span><span class="tile-desc">Einzelporträts, Paarporträts, Posen, Beauty, Kleidung, Strumpfhosen, Barfuß und Schuhe</span><span class="tile-arrow">Bereich öffnen →</span></button>
     <button class="studio-tile tile-worlds" onclick="goToStudio('artworlds')"><span class="tile-emoji">🌌</span><span class="tile-name">Kunst & Welten</span><span class="tile-desc">Japan, Afrika, Fantasy, Surrealismus, Architektur, Film, Züge und Science-Fiction</span><span class="tile-arrow">Bereich öffnen →</span></button>
-    <button class="studio-tile tile-fantasyportal" onclick="goToStudio('artworlds')"><span class="tile-emoji">🪄</span><span class="tile-name">Fantasy Portal Studio</span><span class="tile-desc">Schwebende Inseln, Steinportale, Wasserfälle und surreale Welten</span><span class="tile-arrow">Bereich öffnen →</span></button>
+    <button class="studio-tile tile-fantasyportal" onclick="goToStudio('portal')"><span class="tile-emoji">🪄</span><span class="tile-name">Fantasy Portal Studio</span><span class="tile-desc">Schwebende Inseln, Steinportale, Wasserfälle und surreale Welten</span><span class="tile-arrow">Bereich öffnen →</span></button>
     <button class="studio-tile tile-photo" onclick="goToStudio('photo')"><span class="tile-emoji">📷</span><span class="tile-name">Kamera & Licht</span><span class="tile-desc">Kamera, Objektiv, Beleuchtung, Perspektive und Bildaufbau</span><span class="tile-arrow">Bereich öffnen →</span></button>
     <button class="studio-tile tile-broken" onclick="goToStudio('all')"><span class="tile-emoji">✨</span><span class="tile-name">Alle Kategorien</span><span class="tile-desc">Die komplette Auswahl anzeigen und gezielt durchsuchen</span><span class="tile-arrow">Alle anzeigen →</span></button>
     <button class="studio-tile tile-africa studio-tile-wide" onclick="document.getElementById('promptOutput').scrollIntoView({behavior:'smooth',block:'start'})"><span class="tile-emoji">📝</span><span class="tile-name">Mein Master-Prompt</span><span class="tile-desc">Ergebnis prüfen, Negativ-Prompt bearbeiten, kopieren und speichern</span><span class="tile-arrow">Zum Prompt →</span></button>
@@ -295,6 +295,7 @@ button.studio-tile {
     <button type="button" class="tab active" data-group="all" onclick="setCategoryGroup('all')">Alle</button>
     <button type="button" class="tab" data-group="people" onclick="setCategoryGroup('people')">Person & Beauty</button>
     <button type="button" class="tab" data-group="worlds" onclick="setCategoryGroup('worlds')">Welten & Fantasy</button>
+    <button type="button" class="tab" data-group="portal" onclick="setCategoryGroup('portal')">🪄 Fantasy Portal</button>
     <button type="button" class="tab" data-group="africa" onclick="setCategoryGroup('africa')">Afrika</button>
     <button type="button" class="tab" data-group="space" onclick="setCategoryGroup('space')">Galaxie</button>
     <button type="button" class="tab" data-group="trains" onclick="setCategoryGroup('trains')">Zugwelten</button>
@@ -302,7 +303,13 @@ button.studio-tile {
     <button type="button" class="tab" data-group="photo" onclick="setCategoryGroup('photo')">Foto & Technik</button>
     <button type="button" class="tab" data-group="surreal" onclick="setCategoryGroup('surreal')">Surreale Bildwelten</button>
     <button type="button" class="tab" data-group="rooms" onclick="setCategoryGroup('rooms')">Räume & Architektur</button>
-    <button type="button" class="tab" data-group="barefoot" onclick="setCategoryGroup('barefoot')">Barf
+    <button type="button" class="tab" data-group="barefoot" onclick="setCategoryGroup('barefoot')">Fuß & Fuß-Fashion</button>
+    <button type="button" class="tab" data-group="art" onclick="setCategoryGroup('art')">Maler & Kunststile</button>
+    <button type="button" class="tab" data-group="dimension" onclick="setCategoryGroup('dimension')">3D Mixed Media</button>
+    <button type="button" class="tab" data-group="film" onclick="setCategoryGroup('film')">Hollywood & Filmwelten</button>
+    <button type="button" class="tab" data-group="pair" onclick="setCategoryGroup('pair')">Paarbilder & Posen</button>
+  </div>
+</div>
 <section class="panel composer-panel" id="visualComposer">
  <h2>🧭 Visueller Bild-Komponist</h2>
  <p class="hint">Stelle die Bildszene in wenigen Schritten zusammen. Diese Angaben ergänzen deine Kategorien und werden in den Master-Prompt übernommen.</p>
@@ -334,13 +341,6 @@ button.studio-tile {
  </div>
  <div class="composer-result" id="composerResult" aria-live="polite"></div>
 </section>
-uß & Fuß-Fashion</button>
-    <button type="button" class="tab" data-group="art" onclick="setCategoryGroup('art')">Maler & Kunststile</button>
-    <button type="button" class="tab" data-group="dimension" onclick="setCategoryGroup('dimension')">3D Mixed Media</button>
-    <button type="button" class="tab" data-group="film" onclick="setCategoryGroup('film')">Hollywood & Filmwelten</button>
-    <button type="button" class="tab" data-group="pair" onclick="setCategoryGroup('pair')">Paarbilder & Posen</button>
-  </div>
-</div>
 <div class="categories" id="categoriesContainer"></div>
 <section id="selectionArea"><div class="selection-header"><h2 id="selectionTitle"></h2><button class="close-selection" onclick="closeSelection()" id="closeButton"></button></div><p class="hint" id="selectionHint"></p><div class="options" id="optionsContainer"></div></section>
 
@@ -1484,6 +1484,7 @@ const PRESETS=[
 
 const CATEGORY_GROUPS = {
   people: ["person","portraitBackground","beautyBackground","hair","hairColor","makeup","clothing","clothingColor","clothingMaterial","clothingDetails","hosiery","hosieryStyle","hosieryDenier","hosieryPattern","hosieryColor","hosieryFoot","shoes","pose","womenPose","menPose","womenClothing","menClothing","beautyStyle","beautyPose","expression","beautyMakeup","beautyLips","beautySkin","beautyFraming","beautyLighting","beautyOutfit","beautyAccessories","adultCreative","pairType","pairStyle","pairPose","pairFraming","pairSetting","barefootStyle","footPose","barefootBodyPose","feetFraming","feetDetails"],
+  portal: ["fantasyPortalStudio"],
   artworlds: ["japan","landscape","fantasy","fantasyPortals","fantasyPortalStudio","mysticalFantasy","floralLuxury","fantasyArchitecture","romanticDream","africaArt","galaxyScene","spacecraft","spaceCharacters","spaceWorlds","spaceEffects","spaceCharactersMore","spaceLocations","spaceScenes","spaceWeapons","spaceCamera","trainType","trainLandscape","trainRoute","trainView","trainSeason","trainMood","trainVehicles","trainLocations","trainStructures","trainAtmosphere","brokenReality","brokenRealityMore","brokenEffects","brokenLighting","surrealDream","surrealSubjects","surrealComposition","surrealNature","surrealMood","surrealTime","roomTypes","architecture","roomDetails","roomLighting","painterArt","dimensionPortals","dimensionFrames","dimensionNature","dimensionSculpture","dimensionTexture","dimensionGlitch","filmAction","filmEpicRomance","filmSciFi","filmHorror","filmAdventure","filmPostApocalyptic","filmFantasy","filmCinematic","style","realism","mood","format","composition","neoAbstractArt","colorExplosion"],
   photo: ["camera","lens","lighting","photoTechnique","photoPerspective"],
   all: null

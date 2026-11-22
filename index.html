@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ArtStyle Studio V24 – Fantasy Portal & ChatGPT Workflow · Dirk Eckert</title>
+<title>ArtStyle Studio V25 – Sculptural Fantasy Studio · Dirk Eckert</title>
 <style>
 :root{
   --bg:#080a10;--bg2:#101524;--card:#151a28;--card2:#20263a;
@@ -269,7 +269,7 @@ button.studio-tile {
   <div class="studio-tiles">
     <button class="studio-tile tile-beauty" onclick="goToStudio('people')"><span class="tile-emoji">👤</span><span class="tile-name">Personen & Fashion</span><span class="tile-desc">Einzelporträts, Paarporträts, Posen, Beauty, Kleidung, Strumpfhosen, Barfuß und Schuhe</span><span class="tile-arrow">Bereich öffnen →</span></button>
     <button class="studio-tile tile-worlds" onclick="goToStudio('artworlds')"><span class="tile-emoji">🌌</span><span class="tile-name">Kunst & Welten</span><span class="tile-desc">Japan, Afrika, Fantasy, Surrealismus, Architektur, Film, Züge und Science-Fiction</span><span class="tile-arrow">Bereich öffnen →</span></button>
-    <button class="studio-tile tile-fantasyportal" onclick="goToStudio('portal')"><span class="tile-emoji">🪄</span><span class="tile-name">Fantasy Portal Studio</span><span class="tile-desc">Schwebende Inseln, Steinportale, Wasserfälle und surreale Welten</span><span class="tile-arrow">Bereich öffnen →</span></button>
+    <button class="studio-tile tile-fantasyportal" onclick="goToStudio('portal')"><span class="tile-emoji">🪄</span><span class="tile-name">Fantasy Portal Studio</span><span class="tile-desc">Skulpturale 3D-Bruchwelten, Miniaturlandschaften und Wasserfälle</span><span class="tile-arrow">Bereich öffnen →</span></button>
     <button class="studio-tile tile-photo" onclick="goToStudio('photo')"><span class="tile-emoji">📷</span><span class="tile-name">Kamera & Licht</span><span class="tile-desc">Kamera, Objektiv, Beleuchtung, Perspektive und Bildaufbau</span><span class="tile-arrow">Bereich öffnen →</span></button>
     <button class="studio-tile tile-broken" onclick="goToStudio('all')"><span class="tile-emoji">✨</span><span class="tile-name">Alle Kategorien</span><span class="tile-desc">Die komplette Auswahl anzeigen und gezielt durchsuchen</span><span class="tile-arrow">Alle anzeigen →</span></button>
     <button class="studio-tile tile-africa studio-tile-wide" onclick="document.getElementById('promptOutput').scrollIntoView({behavior:'smooth',block:'start'})"><span class="tile-emoji">📝</span><span class="tile-name">Mein Master-Prompt</span><span class="tile-desc">Ergebnis prüfen, Negativ-Prompt bearbeiten, kopieren und speichern</span><span class="tile-arrow">Zum Prompt →</span></button>
@@ -310,13 +310,18 @@ button.studio-tile {
     <button type="button" class="tab" data-group="pair" onclick="setCategoryGroup('pair')">Paarbilder & Posen</button>
   </div>
 </div>
+<section class="panel" id="sculpturalStyleLock" style="border:1px solid rgba(216,180,105,.65);background:linear-gradient(135deg,rgba(52,43,31,.92),rgba(19,24,34,.97));box-shadow:0 12px 32px rgba(0,0,0,.22)">
+ <h2 style="color:#f1d49a">🗿 Fester Bildstil – Sculptural Broken Reality</h2>
+ <p class="hint">Dieser Stil ist für das Fantasy Portal Studio fest hinterlegt: eine plastische, freigestellte 3D-Felsformation vor neutral-grauem Studiohintergrund. In der gebrochenen Skulptur liegt eine vollständige Miniaturwelt; Wasserfälle fließen über die Kanten und aus dem Objekt heraus. Surreale Trompe-l’œil-Tiefenwirkung statt gewöhnlichem Fantasy-Hintergrund.</p>
+ <div class="director-actions"><button class="primary" type="button" onclick="setCategoryGroup('portal');document.getElementById('categoriesContainer').scrollIntoView({behavior:'smooth',block:'start'})">🪄 Fantasy Portal Studio öffnen</button><button class="secondary" type="button" onclick="document.getElementById('signaturePanel').scrollIntoView({behavior:'smooth',block:'start'})">✍️ Logo einstellen</button></div>
+</section>
 <section class="panel composer-panel" id="visualComposer">
  <h2>🧭 Visueller Bild-Komponist</h2>
  <p class="hint">Stelle die Bildszene in wenigen Schritten zusammen. Diese Angaben ergänzen deine Kategorien und werden in den Master-Prompt übernommen.</p>
  <div class="composer-grid">
   <label for="composerScene">Umgebung / Hintergrund
    <select id="composerScene">
-    <option value="">Automatisch passend</option><option>Luxuriöses Beauty-Fotostudio</option><option>Minimalistisches Porträtstudio</option><option>Architektonische Kulisse</option><option>Japanische Landschaft</option><option>Romantischer Garten</option><option>Urbane Stadt bei Nacht</option><option>Surreale Traumlandschaft</option><option>Natürliche Outdoor-Umgebung</option><option>Neutraler heller Hintergrund</option><option>Dunkler cineastischer Hintergrund</option>
+    <option value="">Automatisch passend</option><option>Luxuriöses Beauty-Fotostudio</option><option>Minimalistisches Porträtstudio</option><option>Architektonische Kulisse</option><option>Japanische Landschaft</option><option>Romantischer Garten</option><option>Urbane Stadt bei Nacht</option><option>Surreale Traumlandschaft</option><option>Skulpturale 3D-Miniaturwelt vor neutralgrauem Studiohintergrund</option><option>Freigestellte Felsformation mit Wasserfällen</option><option>Natürliche Outdoor-Umgebung</option><option>Neutraler heller Hintergrund</option><option>Dunkler cineastischer Hintergrund</option>
    </select>
   </label>
   <label for="composerMood">Bildstimmung
@@ -373,19 +378,19 @@ button.studio-tile {
  <h2>✍️ Logo & Signatur</h2>
  <p class="hint">Füge deinen Namen, ein Logo oder einen kurzen Schriftzug hinzu und bestimme die Position im Bild.</p>
  <label class="director-label" for="signatureText">Text / Signatur / Logo-Bezeichnung</label>
- <input id="signatureText" type="text" maxlength="70" placeholder="z. B. Dirk Eckert oder D.E Media">
+ <input id="signatureText" type="text" maxlength="70" value="Dirk Eckert" placeholder="z. B. Dirk Eckert oder D.E Media">
  <div class="director-grid signature-grid">
   <label>Position
-   <select id="signaturePosition"><option value="right">Rechts</option><option value="center">Mittig</option><option value="left">Links</option></select>
+   <select id="signaturePosition"><option value="right">Rechts</option><option value="center" selected>Mittig / unten mittig</option><option value="left">Links</option></select>
   </label>
   <label>Ausrichtung
-   <select id="signatureAlign"><option>Dezent und elegant</option><option>Klein und minimalistisch</option><option>Wie ein hochwertiges Künstler-Wasserzeichen</option><option>Als klares Logo mit guter Lesbarkeit</option><option>Handschriftliche Signatur</option></select>
+   <select id="signatureAlign"><option selected>Dezent und elegant</option><option>Klein und minimalistisch</option><option>Wie ein hochwertiges Künstler-Wasserzeichen</option><option>Als klares Logo mit guter Lesbarkeit</option><option>Handschriftliche Signatur</option></select>
   </label>
   <label>Farbe
-   <select id="signatureColor"><option>Passend zu den Bildfarben</option><option>Weiß</option><option>Gold</option><option>Silber</option><option>Schwarz</option></select>
+   <select id="signatureColor"><option>Passend zu den Bildfarben</option><option>Weiß</option><option selected>Gold</option><option>Silber</option><option>Schwarz</option></select>
   </label>
   <label>Größe
-   <select id="signatureSize"><option>Dezent klein</option><option>Sehr klein</option><option>Mittel</option></select>
+   <select id="signatureSize"><option selected>Dezent klein</option><option>Sehr klein</option><option>Mittel</option></select>
   </label>
  </div>
  <p class="hint">Hinweis: Der Prompt beschreibt die gewünschte Platzierung. Ob ein Bildgenerator Schrift und Logos exakt wiedergibt, hängt vom jeweiligen Generator ab.</p>
@@ -417,7 +422,7 @@ button.studio-tile {
 </ol><p class="hint"><strong>Wichtig:</strong> Die Web-App erzeugt selbst keine Bilddatei und benötigt dafür keinen kostenpflichtigen API-Zugang. Die Bildgenerierung erfolgt hier im Chat.</p>
 </section>
 <section class="panel"><h2 id="libraryTitle"></h2><input class="library-search" id="librarySearch" oninput="renderSavedPrompts()"><div id="savedPrompts"></div></section>
-</main><footer>🎨 ArtStyle Studio V24 · Fantasy Portal & ChatGPT Workflow · Dirk Eckert<div class="image-source-note">Foto-Vorschaubilder: <a href="https://unsplash.com/license" target="_blank" rel="noopener">Unsplash-Lizenz</a>.</div></footer>
+</main><footer>🎨 ArtStyle Studio V25 · Sculptural Fantasy Studio · Dirk Eckert<div class="image-source-note">Foto-Vorschaubilder: <a href="https://unsplash.com/license" target="_blank" rel="noopener">Unsplash-Lizenz</a>.</div></footer>
 
 <script>
 const LANGS={
@@ -522,9 +527,24 @@ const CREATIVE_CATEGORIES = [
 ["colorExplosion","🌈",true,{de:"Color Explosion",en:"Color Explosion",es:"Explosión de color",fr:"Explosion de couleurs",ar:"انفجار الألوان"},["vibrantColor","paintSplashes","colorSmoke","rainbowLayers","pigmentBurst"]],
 ["fantasyArchitecture","🏰",true,{de:"Fantasy-Architektur",en:"Fantasy Architecture",es:"Arquitectura fantástica",fr:"Architecture fantastique",ar:"عمارة خيالية"},["impossibleCastle","floatingCity","dreamPalace","gothicFantasy","miniatureVillage"]],
 ["romanticDream","💗",true,{de:"Romantic Dream Art",en:"Romantic Dream Art",es:"Arte de ensueño romántico",fr:"Art de rêve romantique",ar:"فن الأحلام الرومانسية"},["moonlitRomance","rosePetals","softPastels","romanticSilhouette","starlitGarden"]],
-["fantasyPortalStudio","🪄",true,{de:"Fantasy Portal Studio",en:"Fantasy Portal Studio",es:"Estudio de portales fantásticos",fr:"Studio des portails fantastiques",ar:"استوديو البوابات الخيالية"},["floatingIslandWaterfalls","crackedStonePortal","layeredWaterfalls","fierySunsetSky","turquoiseRiver","autumnFantasyTrees","mistyMountainDepth","cinematicPortalDepth"]]
+["fantasyPortalStudio","🪄",true,{de:"Fantasy Portal Studio",en:"Fantasy Portal Studio",es:"Estudio de portales fantásticos",fr:"Studio des portails fantastiques",ar:"استوديو البوابات الخيالية"},["sculpturalFloatingLandform","miniatureWorldInside","fracturedStoneShell","waterfallsOverEdges","waterfallGroundSpill","neutralGreyStudio","surrealTrompeLoeilDepth","dramaticSunsetSphere","layeredMiniatureLandscape","realisticStoneTexture","cinematicSculpturalLighting","dirkEckertLogo"]]
 ];
 CATEGORIES.push(...CREATIVE_CATEGORIES);
+
+Object.assign(O,{
+sculpturalFloatingLandform:["Freigestellte, schwebende Landschaftsskulptur aus massivem Fels","Isolated floating landscape sculpture made of massive rock","Escultura paisajística flotante de roca maciza","Sculpture paysagère flottante en roche massive","منحوتة طبيعية صخرية عائمة"],
+miniatureWorldInside:["Vollständige Miniaturwelt im Inneren der Felsformation","Complete miniature world inside the rock formation","Mundo miniatura completo dentro de la formación rocosa","Monde miniature complet à l’intérieur de la formation rocheuse","عالم مصغر كامل داخل التكوين الصخري"],
+fracturedStoneShell:["Aufgebrochene, organisch geformte Steinschale mit rauen Bruchkanten","Fractured organic stone shell with rough broken edges","Cáscara de piedra fracturada con bordes rugosos","Coque de pierre fracturée aux bords irréguliers","قشرة حجرية متصدعة بحواف خشنة"],
+waterfallsOverEdges:["Mehrere Wasserfälle stürzen über die vorderen Felskanten","Multiple waterfalls cascade over the front rock edges","Varias cascadas caen por los bordes frontales","Plusieurs cascades dévalent les rebords rocheux","شلالات متعددة تتدفق فوق حواف الصخور"],
+waterfallGroundSpill:["Wasser fließt aus dem Objekt heraus auf den Studioboden","Water flows out of the object onto the studio floor","El agua sale del objeto y cae al suelo del estudio","L’eau s’écoule de l’objet sur le sol du studio","الماء ينساب من المجسم إلى أرضية الاستوديو"],
+neutralGreyStudio:["Neutraler grauer Studiohintergrund ohne Landschaftshintergrund","Neutral grey studio background without a scenic backdrop","Fondo gris neutro de estudio sin paisaje","Fond de studio gris neutre sans paysage","خلفية استوديو رمادية محايدة"],
+surrealTrompeLoeilDepth:["Surreale Trompe-l’œil-Illusion mit extremer räumlicher Tiefe","Surreal trompe-l’œil illusion with extreme spatial depth","Ilusión trompe-l’œil surrealista con profundidad espacial extrema","Illusion trompe-l’œil surréaliste avec une profondeur spatiale extrême","خداع بصري سريالي بعمق مكاني هائل"],
+dramaticSunsetSphere:["Gewaltiger orange-goldener Himmelskörper mit dramatischen Wolken","Enormous orange-gold celestial sphere with dramatic clouds","Enorme esfera celeste dorada y naranja con nubes dramáticas","Énorme astre orange doré avec des nuages dramatiques","جرم سماوي ذهبي برتقالي هائل مع غيوم درامية"],
+layeredMiniatureLandscape:["Gestaffelte Miniaturlandschaft mit Bergen, Flüssen und Bäumen","Layered miniature landscape with mountains, rivers and trees","Paisaje en miniatura por capas con montañas, ríos y árboles","Paysage miniature en strates avec montagnes, rivières et arbres","منظر طبيعي مصغر متعدد الطبقات"],
+realisticStoneTexture:["Fotorealistische Risse, Erosion und natürliche Gesteinsstruktur","Photorealistic cracks, erosion and natural rock texture","Grietas, erosión y textura rocosa fotorrealistas","Fissures, érosion et texture rocheuse photoréalistes","شقوق وتعرية وملمس صخري واقعي"],
+cinematicSculpturalLighting:["Cineastisches Licht mit warmem Sonnenlicht und kühlen Schatten","Cinematic lighting with warm sunlight and cool shadows","Iluminación cinematográfica con luz cálida y sombras frías","Éclairage cinématographique avec lumière chaude et ombres froides","إضاءة سينمائية بضوء دافئ وظلال باردة"],
+dirkEckertLogo:["Kleines elegantes Logo Dirk Eckert unten mittig in Gold","Small elegant Dirk Eckert logo at bottom center in gold","Pequeño logotipo elegante Dirk Eckert abajo en el centro, en dorado","Petit logo élégant Dirk Eckert en bas au centre, en or","شعار أنيق صغير Dirk Eckert أسفل المنتصف بالذهبي"]
+});
 
 Object.assign(O,{
 dreamscape:["Surreale Traumlandschaft","Surreal dreamscape","Paisaje onírico surrealista","Paysage onirique surréaliste","منظر حلمي سريالي"],
@@ -2387,8 +2407,8 @@ function composeMasterPrompt(){
   const extras=[];
   const fantasyPortalActive = !!selectedValues.fantasyPortalStudio;
   if(fantasyPortalActive){
-    extras.push("FIXED VISUAL STYLE — DARK ART / MIDJOURNEY-INSPIRED SURREAL 3D BROKEN REALITY: Create a monumental, breathtaking fantasy environment built around a colossal circular portal or fractured ancient stone gateway. The portal must feel physically sculpted and three-dimensional, with massive broken stone slabs, jagged chipped edges, deep cracks, realistic erosion, displaced masonry and dimensional fragments projecting toward the viewer. Build extraordinary spatial depth with clearly separated foreground, midground and distant background; add floating islands, layered waterfalls plunging through impossible architecture, distant mountains, atmospheric valleys and drifting volumetric mist. Use a sophisticated dark-fantasy palette of obsidian, charcoal, deep teal, muted turquoise, cold silver and restrained luminous highlights, with a dramatic cinematic light source cutting through clouds and mist, subtle rim lighting, realistic reflections, fine particles and powerful chiaroscuro. Hyper-detailed physically believable stone, water, rock, atmosphere and surface textures; premium cinematic concept-art finish, intricate environmental storytelling, epic scale, strong visual hierarchy and exceptionally rich depth. The scene must read as a coherent, immersive 3D world — not a flat illustration, not a simple circular frame, and not a generic fantasy wallpaper. Preserve the selected subject and all user-selected scene elements while integrating them naturally into this visual language.");
-    extras.push("COMPOSITION AND QUALITY LOCK: deliberate monumental composition, precise perspective, believable scale relationships, crisp focal architecture, controlled atmospheric perspective, realistic water physics, coherent light direction, detailed but uncluttered silhouette, high-end dark fantasy matte-painting meets photorealistic 3D environment rendering.");
+    extras.push("FIXED VISUAL STYLE — SURREAL SCULPTURAL 3D BROKEN REALITY / TROMPE-L’ŒIL FANTASY DIORAMA: Create a freestanding, physically sculpted landscape object isolated against a clean neutral grey studio background. The main silhouette is a monumental fractured stone landform, broken shell, floating rock sculpture or dimensional opening selected for the scene — NOT a conventional fantasy portal wallpaper. Inside the broken stone structure, reveal a complete miniature world with layered mountains, cliffs, forests, rivers, architecture or the user's chosen subject. The miniature world must feel embedded inside the sculpture and continue across multiple depth levels. Let waterfalls cascade over the front edges of the rock, spill down the outside surface and visibly pour from the bottom of the sculpture onto a subtly reflective studio floor. Emphasize cracked stone cross-sections, chipped edges, eroded strata, moss, roots, tiny trees, intricate miniature terrain and physically convincing water. Use a dramatic oversized sun, moon or luminous sky sphere behind or partly within the sculpture when suitable, with warm amber, orange and gold light balanced by cool teal, turquoise and slate shadows. Strong three-dimensional relief, trompe-l’œil illusion, surreal impossible gravity, refined atmospheric depth, photorealistic material detail and premium cinematic fine-art rendering. Keep the entire sculptural object clearly separated from the plain background, with a grounded contact shadow and visible floor reflection. Preserve the requested subject and scene elements while translating them into this exact sculptural visual language.");
+    extras.push("COMPOSITION LOCK: vertical 9:16 fine-art studio composition by default; centered freestanding sculptural object; full silhouette visible; neutral grey negative space around it; unmistakable miniature world embedded in fractured stone; cascading water crossing the object's boundaries; crisp sculptural edges; coherent perspective; realistic scale; controlled mist; no ordinary landscape wallpaper.");
   }
   const format=document.getElementById("directorFormat")?.value||"";
   const camera=document.getElementById("directorCamera")?.value||"";
@@ -2422,7 +2442,7 @@ function composeMasterPrompt(){
     : (extras.length ? "Erstelle ein hochwertiges Bild mit einer professionellen, stimmigen Bildgestaltung." : "");
 
   if(negative)extras.push("NEGATIVE PROMPT / VERMEIDEN: "+negative);
-  else if(fantasyPortalActive)extras.push("NEGATIVE PROMPT: flat 2D appearance, generic fantasy stock art, toy-like materials, plastic stone, weak depth, muddy details, chaotic composition, inconsistent perspective, duplicated portals, broken geometry without physical logic, low-resolution textures, excessive glow, oversaturated colors, text, watermark, logo artifacts.");
+  else if(fantasyPortalActive)extras.push("NEGATIVE PROMPT: generic fantasy wallpaper, ordinary landscape panorama, conventional circular portal frame, flat 2D illustration, floating island alone without a sculptural base, no neutral studio background, weak trompe-l’œil depth, toy-like materials, plastic stone, muddy textures, chaotic silhouette, inconsistent perspective, fake water, excessive glow, oversaturated colors, text artifacts, watermark artifacts.");
   return [base,...extras].filter(Boolean).join(" ").trim();
 }
 

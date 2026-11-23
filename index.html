@@ -996,7 +996,35 @@ hr, .divider{border-color:rgba(190,162,112,.22)!important}
  window.v16Choose=key=>{if(!concepts[key])return;current=key;$('v16Result').textContent=formatPrompt(key);};
  window.v16Surprise=()=>{const keys=Object.keys(concepts);current=keys[Math.floor(Math.random()*keys.length)];const moods=['Cinematic twilight with luminous highlights','Dreamlike golden-hour atmosphere','Dramatic chiaroscuro and deep shadows','Iridescent color accents and soft volumetric haze','Minimal luxury gallery lighting'];$('v16Mood').value=moods[Math.floor(Math.random()*moods.length)];$('v16Result').textContent='🎲 '+formatPrompt(current);};
  window.v16ShowTemplates=()=>{const box=$('v16TemplateShelf');box.hidden=false;box.innerHTML='';templates.forEach(([name,prompt])=>{const b=document.createElement('button');b.type='button';b.className='v16-template';const strong=document.createElement('b');strong.textContent=name;const small=document.createElement('small');small.textContent=prompt.slice(0,115)+'…';b.append(strong,small);b.addEventListener('click',()=>{$('v16Result').textContent=prompt+'\n\n'+$('v16Detail').value+'; '+$('v16Mood').value+'; '+$('v16Format').value+'. Preserve exact identity of any supplied reference face.';current='';});box.appendChild(b);});};
- window.v16UsePrompt=()=>{const result=$('v16Result')?.textContent||'';if(!result.trim()||result.startsWith('Wähle ein Studio')){alert('Bitte zuerst eine Bildidee auswählen.');return;}const field=$('promptOutput');if(!field){alert('Das Master-Prompt-Feld wurde nicht gefunden.');return;}field.value=(field.value.trim()?field.value.trim()+'\n\n':'')+result;field.dispatchEvent(new Event('input',{bubbles:true}));if(typeof updateCharCount==='function')updateCharCount();field.scrollIntoView({behavior:'smooth',block:'center'});};
+ window.v16UsePrompt=function(){
+  try{
+    const resultEl=document.getElementById('v16Result');
+    const result=(resultEl?.textContent||'').trim();
+    if(!result || result.startsWith('Wähle ein Studio')){
+      if(typeof showStatus==='function') showStatus('Bitte zuerst eine Bildidee auswählen.');
+      else alert('Bitte zuerst eine Bildidee auswählen.');
+      return;
+    }
+    const field=document.getElementById('promptOutput');
+    if(!field){
+      if(typeof showStatus==='function') showStatus('Das Master-Prompt-Feld wurde nicht gefunden.');
+      else alert('Das Master-Prompt-Feld wurde nicht gefunden.');
+      return;
+    }
+    const existing=field.value.trim();
+    field.value=(existing ? existing+'\\n\\n' : '')+result;
+    field.dispatchEvent(new Event('input',{bubbles:true}));
+    field.dispatchEvent(new Event('change',{bubbles:true}));
+    if(typeof updateCharCount==='function') updateCharCount();
+    if(typeof showStatus==='function') showStatus('✓ Kreativ-Prompt wurde in deinen Master-Prompt übernommen.');
+    field.focus({preventScroll:true});
+    field.scrollIntoView({behavior:'smooth',block:'center'});
+  }catch(error){
+    console.error('v16UsePrompt:',error);
+    if(typeof showStatus==='function') showStatus('Fehler beim Übernehmen. Bitte Seite neu laden und erneut versuchen.');
+    else alert('Fehler beim Übernehmen des Prompts.');
+  }
+};
  window.v16CopyResult=async()=>{const value=$('v16Result')?.textContent||'';if(!value.trim()||value.startsWith('Wähle ein Studio')){alert('Bitte zuerst eine Bildidee auswählen.');return;}const ok=await window.copyTextToClipboard(value);if(typeof showStatus==='function')showStatus(ok?'✅ Kreatividee kopiert.':'Kopieren nicht möglich. Bitte Text markieren und kopieren.');else alert(ok?'Kopiert.':'Kopieren nicht möglich.');};
 })();
 </script>

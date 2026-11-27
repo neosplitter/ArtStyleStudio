@@ -660,6 +660,24 @@ body.v23-abstract-mode .v18-home{display:none!important}body.v23-abstract-mode m
 .xmas-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.xmas-actions button{background:linear-gradient(135deg,#e5d0a0,#b58b4c)!important;color:#17130c!important;border:0!important;border-radius:11px;padding:12px;font-weight:700}
 body.xmas-mode .v18-home{display:none!important}body.xmas-mode main>*:not(#xmasStudio){display:none!important}body.xmas-mode main>#xmasStudio{display:block!important}
 @media(max-width:460px){.xmas-grid{grid-template-columns:1fr}.xmas-card{min-height:130px}.xmas-actions{grid-template-columns:1fr}}
+</style><style id="v25-command-center-css">
+.v25-command{position:relative;overflow:hidden;margin:8px 0 22px;padding:22px 18px 16px;border:1px solid rgba(218,184,119,.38);border-radius:22px;background:radial-gradient(ellipse at 85% 0%,rgba(42,91,86,.48),transparent 43%),radial-gradient(ellipse at 5% 100%,rgba(105,67,43,.24),transparent 48%),linear-gradient(145deg,#111b1b,#17171b 55%,#111318);box-shadow:0 20px 50px #0007}
+.v25-eyebrow{font-size:10px;letter-spacing:.24em;color:#d8bb7e;font-weight:800}.v25-command h2{font:500 clamp(25px,6vw,34px)/1.12 Georgia,serif;color:#f3e5c9;margin:12px 0 9px}.v25-command>p{font-size:13px;line-height:1.6;color:#c5c3bc;max-width:650px;margin:0 0 17px}
+.v25-command-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.v25-command-grid button{min-width:0;min-height:112px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:6px;padding:13px!important;text-align:left;border:1px solid rgba(219,190,137,.25)!important;border-radius:15px!important;background:linear-gradient(145deg,#202a2a,#18191e)!important;color:#f2eadb!important}
+.v25-command-grid button:nth-child(2){background:linear-gradient(145deg,#202a36,#1b1b25)!important}.v25-command-grid button:nth-child(3){background:linear-gradient(145deg,#24392d,#1c211d)!important}.v25-command-grid button:nth-child(4){background:linear-gradient(145deg,#332b24,#1d1a1b)!important}
+.v25-command-grid button span{font-size:23px}.v25-command-grid button b{font-size:13px;color:#f0dcae}.v25-command-grid button small{font-size:10px;line-height:1.35;color:#c2c0b8}
+.v25-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:15px;padding-top:13px;border-top:1px solid rgba(218,184,119,.2)}.v25-bottom span{font-size:9px;letter-spacing:.13em;color:#cbb47e}.v25-bottom button{background:linear-gradient(135deg,#e6d1a2,#b28a4d)!important;color:#17130c!important;border:0!important;border-radius:10px;padding:10px 13px;font-size:12px;font-weight:800}
+.v25-mix-tools{display:flex;flex-direction:column;gap:5px;margin:8px 0 14px}.v25-mix-tools button{background:#20251f!important;border:1px solid #7a6948!important;color:#e5d5ae!important;border-radius:9px;padding:9px;font-size:11px}.v25-mix-tools span{font-size:10px;color:#a9a69e}
+@media(max-width:390px){.v25-command{padding:17px 13px}.v25-command-grid{gap:8px}.v25-command-grid button{padding:11px!important}.v25-command-grid button b{font-size:12px}.v25-bottom{align-items:flex-start;flex-direction:column}}
+</style><style id="v25-director-css">
+.v25-director{margin:12px 0 17px;padding:16px;border:1px solid rgba(211,180,117,.34);border-radius:17px;background:linear-gradient(145deg,#1b2221,#15171c 65%,#211c19)}
+.v25-director-head>span{font-size:9px;letter-spacing:.2em;color:#d8bb7e;font-weight:800}.v25-director-head h3{font:500 21px Georgia,serif;color:#f1dfbd;margin:7px 0}.v25-director-head p{font-size:12px;line-height:1.5;color:#bcbab2;margin:0 0 13px}
+.v25-director label{display:block;color:#d9c9a7;font-size:11px;margin:10px 0}.v25-director textarea,.v25-director select{width:100%;box-sizing:border-box;margin-top:6px;padding:11px;border-radius:10px;border:1px solid #5c574b;background:#101418;color:#f5efe3;font:inherit;font-size:13px}
+.v25-director-fields{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}.v25-mix-picks{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}.v25-mix-picks strong{grid-column:1/-1;color:#e7d7b5;font-size:12px}.v25-mix-picks label{display:flex;align-items:center;gap:7px;margin:0;color:#c9c3b7}.v25-mix-picks input{accent-color:#d2b474}
+.v25-director-actions{display:flex;gap:9px}.v25-director-actions button{flex:1;background:linear-gradient(135deg,#e6d1a2,#b28a4d)!important;color:#17130c!important;border:0!important;border-radius:10px;padding:11px;font-weight:800;font-size:12px}.v25-director-actions .v25-clear{background:#25282a!important;color:#e8dfce!important;border:1px solid #5c574b!important}
+#v25DirectorStatus{font-size:10px;color:#b8b1a3;margin-top:10px;line-height:1.4}
+@media(max-width:420px){.v25-director-fields{grid-template-columns:1fr}.v25-mix-picks{grid-template-columns:1fr}.v25-director-actions{flex-direction:column}}
 </style></head>
 <body>
 <header>
@@ -670,7 +688,18 @@ body.xmas-mode .v18-home{display:none!important}body.xmas-mode main>*:not(#xmasS
 <main>
 <section class="hero"><h2 id="welcomeTitle"></h2><p id="welcomeText"></p></section>
 <section class="v18-home" id="v18Home">
- <div class="v18-intro"><span class="v18-kicker">ARTSTYLE STUDIO</span><h2>Was möchtest du gestalten?</h2></div>
+ <section class="v25-command" aria-label="Creative Control Center">
+ <div class="v25-eyebrow">DIRK ECKERT · CREATIVE EDITION</div>
+ <h2>Deine Ideen. Deine Bildwelten.</h2>
+ <p>Ein Studio für alles: Menschen, Kunst, surreale Welten und saisonale Motive. Wähle einen Bereich oder kombiniere mehrere Ideen in einem gemeinsamen Master-Prompt.</p>
+ <div class="v25-command-grid">
+  <button type="button" onclick="v24Open()"><span>🪨</span><b>Surreale 3D-Welten</b><small>Skulpturen · Miniaturwelten · Lichtobjekte</small></button>
+  <button type="button" onclick="v23AbstractOpen()"><span>🌀</span><b>Abstract & Mixed Media</b><small>Glitch · Spachtelkunst · Lichtkunst</small></button>
+  <button type="button" onclick="xmasOpen()"><span>🎄</span><b>Weihnachts-Atelier</b><small>12 festliche Bildideen</small></button>
+  <button type="button" onclick="v23WorldOpen()"><span>✨</span><b>Signature Collection</b><small>Poetische Traumwelten · Originalvorlagen</small></button>
+ </div>
+ <div class="v25-bottom"><span>✦ EIN PROMPT · VIELE STILE</span><button type="button" onclick="v19OpenPrompt()">Master-Prompt öffnen →</button></div>
+</section><div class="v18-intro"><span class="v18-kicker">ARTSTYLE STUDIO</span><h2>Was möchtest du gestalten?</h2></div>
  <div class="v18-grid" id="v18CategoryGrid"></div>
  
  <button type="button" class="v18-card" onclick="v24Open()" style="width:100%;margin:14px 0 0;text-align:left;border:1px solid rgba(219,176,103,.65);background:linear-gradient(145deg,#292217,#12141a);color:#f4e5c8;border-radius:16px;padding:16px"><strong style="display:block;font-size:16px">🪨 Surreale 3D-Welten</strong><small style="display:block;color:#c2b9aa;margin-top:6px">Eigenes Vorlagenatelier · 16 Bildideen mit echten Vorschaubildern und Master-Prompts</small><span style="display:block;color:#e5bd78;margin-top:10px;font-weight:700">Vorlagen öffnen →</span></button>
@@ -1075,7 +1104,27 @@ hr, .divider{border-color:rgba(190,162,112,.22)!important}
 <textarea id="negativePrompt" rows="3" placeholder="z. B. unscharfes Gesicht, zusätzliche Finger, falsche Anatomie, abgeschnittene Füße, künstlich geglättete Haut"></textarea>
 <div class="prompt-tools-note">Tipp: Der Negativ-Prompt ist optional. Manche Bildgeneratoren besitzen dafür ein eigenes Eingabefeld.</div>
 </section>
-<section class="panel"><h2 id="promptTitle"></h2><textarea id="promptOutput"></textarea><div class="prompt-info"><span id="editInfo"></span><span id="characterCount"></span></div>
+<section class="panel"><h2 id="promptTitle"></h2>
+<section class="v25-director">
+ <div class="v25-director-head"><span>✦ CREATIVE DIRECTION</span><h3>Dein persönlicher Bild-Regisseur</h3><p>Beschreibe deine Idee. Der Regisseur verbindet Motiv, Bildsprache, Komposition, Licht und Kamera zu einem einzigen präzisen Bildauftrag.</p></div>
+ <label for="v25Subject">Was soll auf dem Bild zu sehen sein?</label>
+ <textarea id="v25Subject" rows="3" placeholder="z. B. Eine schwebende Felseninsel mit einem Wasserfall, einem alten Torbogen und einem riesigen goldenen Mond …"></textarea>
+ <div class="v25-director-fields">
+  <label>Bildsprache<select id="v25Style"><option value="Surreal Sculptural 3D – freistehendes physisches Diorama, gebrochene Felsstrukturen, Miniaturwelten und echte räumliche Tiefe">Surreale 3D-Skulptur</option><option value="Abstract Art & Mixed Media – expressive Texturen, Materialcollage, Farbflächen und künstlerische Fragmentierung">Abstract & Mixed Media</option><option value="Fine-Art-Fotografie – natürliche Materialien, kontrolliertes Licht, hochwertige fotografische Bildsprache">Fine-Art-Fotografie</option><option value="Cinematic Fantasy – epische Atmosphäre, monumentale Kulissen, volumetrisches Licht und filmische Tiefenwirkung">Cinematic Fantasy</option><option value="Poetischer Minimalismus – klare Komposition, viel Negativraum, reduzierte Farbpalette und stille Bildwirkung">Poetischer Minimalismus</option><option value="Textile Sculptural Art – Berge, Wolken und Formen aus sichtbaren Garnen, Fasern und textilen Strukturen">Textile Sculptural Art</option></select></label>
+  <label>Stimmung<select id="v25Mood"><option>Magisch und geheimnisvoll</option><option>Episch und monumental</option><option>Ruhig und poetisch</option><option>Luxuriös und elegant</option><option>Fröhlich und farbenfroh</option><option>Düster und dramatisch</option><option>Warm und nostalgisch</option></select></label>
+  <label>Perspektive<select id="v25Camera"><option>Vertikale Gesamtansicht mit klarer Tiefenstaffelung</option><option>Weitwinkel, leicht von unten, monumentale Wirkung</option><option>Frontal und symmetrisch, zentrierte Komposition</option><option>Leicht erhöhte Dreiviertelperspektive</option><option>Detailaufnahme mit sichtbarer Materialstruktur</option></select></label>
+  <label>Format<select id="v25Format"><option>9:16 Hochformat</option><option>4:5 Porträt</option><option>3:4 Hochformat</option><option>16:9 Querformat</option><option>1:1 Quadrat</option></select></label>
+ </div>
+ <div class="v25-mix-picks"><strong>Welche Bereiche sollen kombiniert werden?</strong>
+  <label><input type="checkbox" id="v25MixSurreal" checked> Surreale 3D-Welten</label>
+  <label><input type="checkbox" id="v25MixAbstract"> Abstract & Mixed Media</label>
+  <label><input type="checkbox" id="v25MixChristmas"> Weihnachts-Atelier</label>
+  <label><input type="checkbox" id="v25MixSignature"> Signature Collection</label>
+ </div>
+ <div class="v25-director-actions"><button type="button" onclick="v25Direct()">✦ Master-Bildauftrag erstellen</button><button type="button" class="v25-clear" onclick="v25Clear()">Auswahl leeren</button></div>
+ <div id="v25DirectorStatus" aria-live="polite">Dein Bildauftrag erscheint anschließend im Master-Prompt.</div>
+</section>
+<textarea id="promptOutput"></textarea><div class="prompt-info"><span id="editInfo"></span><span id="characterCount"></span></div><div class="v25-mix-tools"><button type="button" onclick="clearStudioMix()">Ausgewählte Studio-Vorlagen aus dem Mix entfernen</button><span id="v25MixStatus">Studio-Vorlagen werden beim Kombinieren gesammelt.</span></div>
 <div class="button-grid">
 <button class="primary" onclick="copyPrompt()" id="copyButton"></button><button class="green" onclick="savePrompt()" id="saveButton"></button>
 <button class="orange" onclick="randomPrompt()" id="randomButton"></button><button class="secondary" onclick="exportData()" id="exportButton"></button>
@@ -3274,6 +3323,9 @@ function composeMasterPrompt(){
   if(identityLock && hasReferenceImage)extras.push("Referenz-Gesichtsidentität strikt bewahren: dieselbe Person, unveränderte individuelle Gesichtszüge und Proportionen, keine Retusche, keine Verschönerung, keine Neuinterpretation des Gesichts.");
   if(custom)extras.push("Bildidee / Regieanweisung: "+custom);
   if(window.v24PromptAddon)extras.push("SURREALE 3D-WELTEN – AUSGEWÄHLTE VORLAGE:\n"+window.v24PromptAddon);
+  if(Array.isArray(window.studioPromptAddons)&&window.studioPromptAddons.length){
+    window.studioPromptAddons.forEach(item=>{if(item&&item.prompt)extras.push(item.title+" – AUSGEWÄHLTE STUDIO-VORLAGE:\\n"+item.prompt);});
+  }
   if(format)extras.push("Bildformat: "+format);
   if(camera)extras.push("Kameraperspektive: "+camera);
   if(light)extras.push("Lichtstimmung: "+light);
@@ -3839,7 +3891,10 @@ window.v24Use=function(){
  if(!t){alert('Bitte zuerst eine Vorlage auswählen.');return;}
  const f=document.getElementById('promptOutput');
  if(!f){alert('Master-Prompt-Feld nicht gefunden.');return;}
- window.v24PromptAddon=t;
+ window.v24PromptAddon="";
+ window.studioPromptAddons=window.studioPromptAddons||[];
+ window.studioPromptAddons=window.studioPromptAddons.filter(x=>x.title!=="Surreale 3D-Welten");
+ window.studioPromptAddons.push({title:"Surreale 3D-Welten",prompt:t});
  f.value=composeMasterPrompt();
  f.dispatchEvent(new Event('input',{bubbles:true}));
  if(typeof updateCharCount==='function')updateCharCount();
@@ -3869,8 +3924,63 @@ window.xmasOpen=function(){document.body.classList.add("xmas-mode");window.scrol
 window.xmasBack=function(){document.body.classList.remove("xmas-mode");if(window.v19Home)window.v19Home();};
 window.xmasSelect=function(i){const x=xmasItems[i],o=document.getElementById("xmasResult");if(!x||!o)return;const p="WEIHNACHTS-MASTER-PROMPT – "+x.title+"\\n\\n"+x.prompt+"\\n\\nUltra-detailed, beautiful Christmas fine-art image, cinematic lighting, rich realistic materials, intricate details, refined composition, vertical portrait 9:16, no unwanted lettering, no watermark.";o.textContent=p;o.dataset.prompt=p;o.scrollIntoView({behavior:"smooth",block:"center"})};
 window.xmasCopy=async function(){const t=document.getElementById("xmasResult")?.dataset.prompt||"";if(!t){alert("Bitte zuerst eine Vorlage auswählen.");return}const ok=await copyTextToClipboard(t);if(!ok)alert("Kopieren nicht möglich. Bitte den Prompt markieren und kopieren.")};
-window.xmasUse=function(){const t=document.getElementById("xmasResult")?.dataset.prompt||"";if(!t){alert("Bitte zuerst eine Vorlage auswählen.");return}const f=document.getElementById("promptOutput");if(!f){alert("Master-Prompt-Feld nicht gefunden.");return}window.v24PromptAddon=t;f.value=composeMasterPrompt();f.dispatchEvent(new Event("input",{bubbles:true}));if(typeof updateCharCount==="function")updateCharCount();if(window.v19OpenPrompt)window.v19OpenPrompt();else f.scrollIntoView({behavior:"smooth",block:"center"})};
+window.xmasUse=function(){const t=document.getElementById("xmasResult")?.dataset.prompt||"";if(!t){alert("Bitte zuerst eine Vorlage auswählen.");return}const f=document.getElementById("promptOutput");if(!f){alert("Master-Prompt-Feld nicht gefunden.");return}window.studioPromptAddons=window.studioPromptAddons||[];
+ window.studioPromptAddons=window.studioPromptAddons.filter(x=>x.title!=="Weihnachts-Atelier");
+ window.studioPromptAddons.push({title:"Weihnachts-Atelier",prompt:t});
+ f.value=composeMasterPrompt();f.dispatchEvent(new Event("input",{bubbles:true}));if(typeof updateCharCount==="function")updateCharCount();if(window.v19OpenPrompt)window.v19OpenPrompt();else f.scrollIntoView({behavior:"smooth",block:"center"})};
 })();
+</script><script id="v25-studio-mix-js">
+window.studioPromptAddons=window.studioPromptAddons||[];
+window.clearStudioMix=function(){
+ window.studioPromptAddons=[];
+ window.v24PromptAddon="";
+ const f=document.getElementById("promptOutput");
+ if(f){f.value=composeMasterPrompt();f.dispatchEvent(new Event("input",{bubbles:true}));}
+ const status=document.getElementById("v25MixStatus");
+ if(status)status.textContent="Studio-Vorlagen wurden aus dem Mix entfernt.";
+};
+</script><script id="v25-director-js">
+window.v25Direct=function(){
+ const val=id=>(document.getElementById(id)?.value||"").trim();
+ const subject=val("v25Subject");
+ if(!subject){const s=document.getElementById("v25DirectorStatus");s.textContent="Bitte beschreibe zuerst dein Bildmotiv.";document.getElementById("v25Subject").focus();return;}
+ const style=val("v25Style"),mood=val("v25Mood"),camera=val("v25Camera"),format=val("v25Format");
+ const parts=[
+ "MASTER-BILDAUFTRAG – ARTSTYLE STUDIO CREATIVE DIRECTOR",
+ "HAUPTMOTIV: "+subject,
+ "BILობSPRACHE: "+style,
+ "BILDSTIMMUNG: "+mood,
+ "KAMERA UND KOMPOSITION: "+camera,
+ "BILDFORMAT: "+format,
+ "GESTALTERISCHE AUSFÜHRUNG: klare visuelle Hierarchie, glaubwürdige räumliche Tiefe, sorgfältig abgestimmte Materialien, fein ausgearbeitete Details, kontrollierte Lichtführung, natürliche Schatten und hochwertige Bildkomposition."
+ ];
+ const hasRef=!!document.getElementById("previewImage")?.getAttribute("src");
+ if(document.getElementById("identityLock")?.checked&&hasRef)parts.push("GESICHTSIDENTITÄT – UNVERÄNDERLICH: Das Gesicht der Referenzperson exakt bewahren. Keine Veränderung, Retusche, Verschönerung, Verjüngung oder Neuinterpretation von Gesichtszügen, Proportionen, Mimik oder individuellen Merkmalen.");
+ const sig=typeof getSignatureLine==="function"?getSignatureLine():"";
+ if(sig)parts.push(sig);
+ parts.push("Keine zufälligen Schriftzüge, keine Wasserzeichen, keine ungewollten Bildränder.");
+ const selected=[];
+ if(document.getElementById("v25MixSurreal")?.checked)selected.push("Surreale 3D-Welten");
+ if(document.getElementById("v25MixAbstract")?.checked)selected.push("Abstract & Mixed Media");
+ if(document.getElementById("v25MixChristmas")?.checked)selected.push("Weihnachts-Atelier");
+ if(document.getElementById("v25MixSignature")?.checked)selected.push("Signature Collection");
+ const brief=parts.join("\n\n");
+ window.v25CreativeBrief=brief;
+ window.studioPromptAddons=window.studioPromptAddons||[];
+ window.studioPromptAddons=window.studioPromptAddons.filter(x=>x.title!=="Creative Director");
+ window.studioPromptAddons.push({title:"Creative Director",prompt:brief+"\n\nKOMBINIERENDE BEREICHE: "+(selected.join(", ")||"Keine zusätzlichen Bereiche ausgewählt")+". Die ausgewählten Stilrichtungen sollen zu einer einzigen harmonischen Bildkomposition verschmelzen, nicht als getrennte Collagen erscheinen."});
+ const f=document.getElementById("promptOutput");
+ if(f){f.value=composeMasterPrompt()+"\n\n"+brief;f.dispatchEvent(new Event("input",{bubbles:true}));}
+ const status=document.getElementById("v25DirectorStatus");
+ if(status)status.textContent="Bildauftrag erstellt. "+(selected.length?("Kombiniert mit: "+selected.join(", ")+". "):"")+"Du kannst ihn jetzt kopieren oder weiter bearbeiten.";
+ if(typeof updateCharCount==="function")updateCharCount();
+ if(f)f.scrollIntoView({behavior:"smooth",block:"center"});
+};
+window.v25Clear=function(){
+ ["v25Subject"].forEach(id=>{const e=document.getElementById(id);if(e)e.value="";});
+ ["v25MixAbstract","v25MixChristmas","v25MixSignature"].forEach(id=>{const e=document.getElementById(id);if(e)e.checked=false;});
+ const s=document.getElementById("v25DirectorStatus");if(s)s.textContent="Regisseur-Auswahl geleert.";
+};
 </script></body>
 </html>
 

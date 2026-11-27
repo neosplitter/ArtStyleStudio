@@ -3522,7 +3522,55 @@ function importData(){
 
 function resetAll(){
   if(!confirm(tr("resetAsk")))return;
-  selectedValues={};window.v24PromptAddon="";closeSelection();renderCategories();updateUI();showStatus(tr("resetDone"));
+
+  // Alle gespeicherten Zusatz-Prompts und temporären Regie-Ergebnisse entfernen.
+  selectedValues={};
+  window.v24PromptAddon="";
+  window.studioPromptAddons=[];
+  window.v25CreativeBrief="";
+  window.v23AbstractPrompt="";
+  window.xmasPromptAddon="";
+
+  // Sämtliche Auswahlfelder der Kreativ-Regie auf ihren Ausgangszustand setzen.
+  ["v25Subject","directorCustom","composerResult","artDirectorResult"].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el){ if("value" in el)el.value=""; else el.textContent=""; }
+  });
+  ["v25Style","v25Mood","v25Camera","v25Format",
+   "directorFormat","directorCamera","directorLight","directorComposition",
+   "composerScene","composerMood","composerFraming","composerFocus"].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.selectedIndex=0;
+  });
+  ["v25MixSurreal","v25MixAbstract","v25MixChristmas","v25MixSignature"].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.checked=false;
+  });
+
+  // Hilfsbereiche und Vorschauen zurücksetzen.
+  if(typeof clearStudioMix==="function")clearStudioMix();
+  if(typeof clearArtDirectorConcept==="function")clearArtDirectorConcept();
+  if(typeof clearImageComposer==="function")clearImageComposer();
+  if(typeof clearDirector==="function")clearDirector();
+  const preview=document.getElementById("previewImage");
+  if(preview)preview.removeAttribute("src");
+  const previewWrap=document.getElementById("referencePreview");
+  if(previewWrap)previewWrap.style.display="none";
+  const upload=document.getElementById("referenceUpload");
+  if(upload)upload.value="";
+
+  closeSelection();
+  renderCategories();
+  updateUI();
+
+  // Wichtig: updateUI() baut sonst einen Basis-Prompt neu auf.
+  const output=document.getElementById("promptOutput");
+  if(output){output.value="";output.dispatchEvent(new Event("input",{bubbles:true}));}
+  const count=document.getElementById("characterCount");
+  if(count)count.textContent="0 Zeichen";
+  const mixStatus=document.getElementById("v25MixStatus");
+  if(mixStatus)mixStatus.textContent="Keine Studio-Vorlagen ausgewählt.";
+  const directorStatus=document.getElementById("v25DirectorStatus");
+  if(directorStatus)directorStatus.textContent="Alle Regie-Eingaben wurden zurückgesetzt.";
+  showStatus(tr("resetDone"));
 }
 
 function showStatus(msg){
@@ -3978,8 +4026,14 @@ window.v25Direct=function(){
 };
 window.v25Clear=function(){
  ["v25Subject"].forEach(id=>{const e=document.getElementById(id);if(e)e.value="";});
- ["v25MixAbstract","v25MixChristmas","v25MixSignature"].forEach(id=>{const e=document.getElementById(id);if(e)e.checked=false;});
- const s=document.getElementById("v25DirectorStatus");if(s)s.textContent="Regisseur-Auswahl geleert.";
+ ["v25Style","v25Mood","v25Camera","v25Format"].forEach(id=>{const e=document.getElementById(id);if(e)e.selectedIndex=0;});
+ ["v25MixSurreal","v25MixAbstract","v25MixChristmas","v25MixSignature"].forEach(id=>{const e=document.getElementById(id);if(e)e.checked=false;});
+ window.v25CreativeBrief="";
+ window.studioPromptAddons=(window.studioPromptAddons||[]).filter(x=>x.title!=="Creative Director");
+ const f=document.getElementById("promptOutput");
+ if(f){f.value=composeMasterPrompt();f.dispatchEvent(new Event("input",{bubbles:true}));}
+ const s=document.getElementById("v25DirectorStatus");if(s)s.textContent="Regisseur-Auswahl und Creative-Director-Zusatz wurden geleert.";
+ if(typeof updateCharCount==="function")updateCharCount();
 };
 </script></body>
 </html>
